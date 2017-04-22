@@ -24,7 +24,7 @@
         oStartInfo.WindowStyle = ProcessWindowStyle.Hidden
         oStartInfo.CreateNoWindow = True
         oProcess.StartInfo = oStartInfo
-        oProcess.StartInfo.Verb = "runas"
+        'oProcess.StartInfo.Verb = "runas"
 
         oProcess.Start()
 
@@ -69,6 +69,13 @@
             My.Computer.FileSystem.RenameFile(filename, "_" & filename)
         End If
     End Sub
+
+    Friend Function CleaningFolder(path As String) As Boolean
+        While System.IO.Directory.GetFiles(path).Length > 0
+            Application.DoEvents()
+        End While
+        Return True
+    End Function
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

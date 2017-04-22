@@ -178,11 +178,17 @@ Module deploy
                     waitingToFinish_download()
                     backup_Everything()
 
+                    ' UNINSTALLING
                     Console.WriteLine(programPath)
                     ChDir(programPath)
                     runInSilent("unins000.exe", , "UNINSTALLLOG.log")
                     ResetDIR()
 
+                    While Not CleaningFolder(programPath)
+                        Application.DoEvents()
+                    End While
+
+                    ' INSTALLING
                     ChDir(mainDIR & "/" & TMP)
                     runInSilent(stable_exefilename, programPath, "INSTALL.log")
                     ResetDIR()
