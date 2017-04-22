@@ -129,6 +129,10 @@ Module deploy
             ' Execute Patch or Install
 
             Dim exe_path As String = programPath & EXEFILE
+            If Not File.Exists(exe_path) Then
+                MsgBox("MISSING EXE" + vbCrLf + "REPORT TO YOUR SYSTEM ADMINISTRATOR NOW", MsgBoxStyle.Critical, "MISSING EXE")
+                End
+            End If
             Dim current_version As Version = GetExeVersion(exe_path)
             ' Version Checker
             Console.WriteLine("Exe Path: " & exe_path)
@@ -173,9 +177,43 @@ Module deploy
                     ' TODO
                     ' PATCHING
                     ' DOWNLOAD FILES AND OVERWRITE
+
+                    url_hash = New Hashtable
                     For Each url As XmlNode In disVersionFiles
                         Console.WriteLine(url.LocalName & " - " & url.InnerText)
+                        url_hash.Add(url.LocalName, GetFilename_URL(url.InnerText))
+                        If Not url.LocalName.Contains("dir") Then
+                            download_File(url.InnerText)
+                            waitingToFinish_download()
+                        End If
                     Next
+
+                    ' CHECKING LOCATION
+                    For Each dlFile As DictionaryEntry In url_hash
+                        If dlFile.Key.ToString.Contains("dir") Then _
+                            Continue For
+
+                        Dim keyCheck As String = dlFile.Key & "-dir"
+                        If url_hash.ContainsKey(keyCheck) Then
+                            Dim tPath As String = url_hash.Keys(keyCheck)
+
+                            If Not Directory.Exists(tPath) Then _
+                                Directory.CreateDirectory(tPath)
+
+                            Dim originalDIR = Directory.GetCurrentDirectory
+                            If File.Exists(programPath & "/" & dlFile.Value) Then _
+                                File.Delete(programPath & "/" & dlFile.Value)
+
+                            File.Move(TMP & "\" & dlFile.Value, programPath & "/" & dlFile.Value)
+                        Else
+                            If File.Exists(programPath & "/" & dlFile.Value) Then _
+                                File.Delete(programPath & "/" & dlFile.Value)
+
+                            File.Move(TMP & "\" & dlFile.Value, programPath & "/" & dlFile.Value)
+                        End If
+                    Next
+
+                    displayStatus("Patch completed.")
                 End If
 
                 ' FOR INSTALL

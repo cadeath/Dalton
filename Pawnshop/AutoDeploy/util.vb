@@ -73,6 +73,10 @@ Module util
         End If
     End Sub
 
+    Friend Function GetFilename_URL(str As String) As String
+        Return str.Split("/")(str.Split("/").Count - 1)
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
