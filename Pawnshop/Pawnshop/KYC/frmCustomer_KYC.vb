@@ -787,15 +787,19 @@ FLNME:
 
     Private Sub btnCamera_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCamera.Click
         If ClientImage.Image Is Nothing Then
+            GoTo nextLineTODO
         Else
             Dim result As DialogResult = MsgBox("Do you want capture again or change the picture?", MsgBoxStyle.YesNo, "Validation")
-            If result = vbNo Then Exit Sub
+            If result = vbNo Then
+                Exit Sub
+            End If
         End If
 
+nextLineTODO:
         If btnCamera.Text = "Open Camera" Then
             Call OpenPreviewWindow()
             btnCamera.Text = "Capture"
-
+            ClientImage.Image = Nothing
         ElseIf btnCamera.Text = "Capture" Then
             Dim Data As IDataObject
             Dim Bmap As Image
