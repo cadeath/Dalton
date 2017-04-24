@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 
 Module util
+
+    Friend Const FILENAME As String = "Aerauxel.ini"
+
     ''' <summary>
     ''' This function has two arguments.
     ''' declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.
@@ -91,6 +94,26 @@ Module util
         Dim lastIdx As Integer = str.LastIndexOf("/")
         Return str.Substring(0, lastIdx)
     End Function
+
+    Friend Sub SystemInitialization()
+        Dim configFile As New IniFile
+
+        If Not File.Exists(FILENAME) Then
+            File.Create(FILENAME).Dispose()
+
+            With configFile
+                .Load(FILENAME)
+                .AddSection("Server").AddKey("Host").Value = deploy.HOST
+                .Save(FILENAME)
+            End With
+        Else
+            configFile.Load(FILENAME)
+
+            With configFile
+                deploy.HOST = .GetSection("Server").GetKey("Host").Value
+            End With
+        End If
+    End Sub
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

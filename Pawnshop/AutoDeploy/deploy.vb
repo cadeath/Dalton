@@ -5,10 +5,10 @@ Imports System.Xml
 
 Module deploy
 
+    Friend HOST As String = "http://192.164.0.118/" 'REMOTE HOST
     Const DATABASE As String = "W3W1LH4CKU.FDB"     'DATABASE NAME
     Const CONFIG As String = "disconfig.xml"        'CONFIG FILE
     Const TMP As String = "tmp"                     'TEMPORARY FOLDER
-    Const HOST As String = "http://192.164.0.118/"  'REMOTE HOST
     Const EXEFILE As String = "/pawnshop.exe"
     Const SYSLOG As String = "syslog.txt"
     Const BACKUPBAT As String = "backup.bat"
@@ -40,6 +40,7 @@ Module deploy
     Private _isReady As Boolean = False
 
     Friend Sub Setup()
+        SystemInitialization()
 
         btnOnHold.Enabled = False
         LoadPath()
