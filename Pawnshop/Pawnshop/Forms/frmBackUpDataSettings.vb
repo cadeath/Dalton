@@ -19,7 +19,7 @@ Public Class frmBackUpDataSettings
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM IS BACKING UP")
             sw.WriteLine("rar a " & txtData.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy W3W1LH4CKU.FDB -hp" _
                          & BranchCode & "MIS") 'Password = MISJUNMAR(uppercase)
-            sw.WriteLine("rar a " & txtCompliance.Text & "\" & mod_system.BranchCode & "_COMP" & ".rar -agMMddyyyy W3W1LH4CKU.FDB -hp" _
+            sw.WriteLine("rar a " & txtCompliance.Text & "\" & mod_system.BranchCode & "_COMP" & ".rar -agMMddyyyy ClientImage -hp" _
                         & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
