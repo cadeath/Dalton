@@ -35,7 +35,7 @@
             FormState(False)
             For Each dr As DataRow In ExpiryCache.Rows
                 Dim pawner As New Client
-                pawner.LoadClient(dr("CLIENTID"))
+                pawner.LoadClient(dr("ID"))
                 Dim principal As Double = dr("PRINCIPAL")
 
                 Dim lv As ListViewItem = lvExpiry.Items.Add(dr("PAWNTICKET"))
