@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
+Imports System.IO
 
 Public Class frmExtractor
     Enum ExtractType As Integer
@@ -421,6 +422,8 @@ Public Class frmExtractor
         oXL.Quit()
         oXL = Nothing
 
+        Generate_HotCode(security.GetFileMD5(verified_url))
+
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -622,5 +625,16 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
+
+    Private Sub Generate_HotCode(ByVal Hash As String)
+        Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+
+        If Not File.Exists(path) Then
+            ' Create a file to write to. 
+            Using sw As StreamWriter = File.CreateText(path & String.Format("\JRNL{0}{1}_HotCode.txt", MonCalendar.SelectionStart.ToString("yyyyMMdd"), BranchCode))
+                sw.WriteLine(Hash)
+            End Using
+        End If
+    End Sub
 
 End Class
