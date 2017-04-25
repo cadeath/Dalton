@@ -45,7 +45,7 @@ Public Class frmCustomer_KYC
         txtSt2.Text = cus.PermanentStreet
         cboBrgy2.Text = cus.PermanentBarangay
         cboCity2.Text = cus.PermanentCity
-        cboProv2.Text = cus.PresentProvince
+        cboProv2.Text = cus.PermanentProvince
         cboZip2.Text = cus.PermanentZipCode
 
         cboGender.Text = IIf(cus.Sex = 1, "Male", "Female")
@@ -569,7 +569,7 @@ FLNME:
         txtSt2.Text = txtSt1.Text
         cboBrgy2.Text = cboBrgy1.Text
         cboCity2.Text = cboCity1.Text
-        cboProv2.Text = cboProv2.Text
+        cboProv2.Text = cboProv1.Text
         cboZip2.Text = cboZip1.Text
     End Sub
 
