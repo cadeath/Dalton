@@ -119,11 +119,24 @@ Module util
         Dim desktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         Dim programPath As String = ""
 
+
         For Each Icon As String In Directory.GetFiles(desktopPath)
             If Icon.ToLower.EndsWith(".lnk") Then
                 Dim lnkPath As String = GetTargetPath(Icon)
-                Dim fileName As String = Icon.Split("\")(Icon.Split("\").Count - 1).Replace("/", "").Replace("\", "")
-                If fileName = deploy.EXEFILE Then
+                Dim fileName As String = lnkPath.Split("\")(lnkPath.Split("\").Count - 1)
+                If fileName = deploy.EXEFILE.Replace("/", "").Replace("\", "") Then
+                    deleteFile(Icon)
+                    Console.WriteLine("Icon deleted - " & Icon)
+                End If
+            End If
+        Next
+
+        desktopPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory)
+        For Each Icon As String In Directory.GetFiles(desktopPath)
+            If Icon.ToLower.EndsWith(".lnk") Then
+                Dim lnkPath As String = GetTargetPath(Icon)
+                Dim fileName As String = lnkPath.Split("\")(lnkPath.Split("\").Count - 1)
+                If fileName = deploy.EXEFILE.Replace("/", "").Replace("\", "") Then
                     deleteFile(Icon)
                     Console.WriteLine("Icon deleted - " & Icon)
                 End If

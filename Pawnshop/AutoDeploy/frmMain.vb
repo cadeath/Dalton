@@ -3,7 +3,6 @@
     Private Sub btnStart_Click(sender As System.Object, e As System.EventArgs) Handles btnStart.Click
         Remove_Shortcut()
 
-        Exit Sub
         ' Initialization
         deploy.pbDownload = pbUpdate
         deploy.lblStatus = lblUpdate
