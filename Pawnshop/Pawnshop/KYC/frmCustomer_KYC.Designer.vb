@@ -93,11 +93,11 @@ Partial Class frmCustomer_KYC
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCamera = New System.Windows.Forms.Button()
         Me.grpCusPic = New System.Windows.Forms.GroupBox()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.ClientImage = New System.Windows.Forms.PictureBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtSuffix = New System.Windows.Forms.TextBox()
         Me.btnHistory = New System.Windows.Forms.Button()
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -806,6 +806,16 @@ Partial Class frmCustomer_KYC
         Me.grpCusPic.TabStop = False
         Me.grpCusPic.Text = "Customer Picture"
         '
+        'btnBrowse
+        '
+        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse.Location = New System.Drawing.Point(134, 151)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(31, 36)
+        Me.btnBrowse.TabIndex = 12
+        Me.btnBrowse.Text = ". . ."
+        Me.btnBrowse.UseVisualStyleBackColor = True
+        '
         'ClientImage
         '
         Me.ClientImage.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -845,16 +855,6 @@ Partial Class frmCustomer_KYC
         Me.btnHistory.TabIndex = 17
         Me.btnHistory.Text = "&History"
         Me.btnHistory.UseVisualStyleBackColor = True
-        '
-        'btnBrowse
-        '
-        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(134, 151)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(31, 36)
-        Me.btnBrowse.TabIndex = 12
-        Me.btnBrowse.Text = ". . ."
-        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'frmCustomer_KYC
         '

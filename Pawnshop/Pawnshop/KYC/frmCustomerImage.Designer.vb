@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmCustImagevb
+Partial Class frmCustomerImage
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,44 +22,46 @@ Partial Class frmCustImagevb
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.dgCustImage = New System.Windows.Forms.DataGridView()
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgCustImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'dgCustImage
+        '
+        Me.dgCustImage.AllowUserToAddRows = False
+        Me.dgCustImage.AllowUserToDeleteRows = False
+        Me.dgCustImage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgCustImage.Location = New System.Drawing.Point(23, 12)
+        Me.dgCustImage.Name = "dgCustImage"
+        Me.dgCustImage.ReadOnly = True
+        Me.dgCustImage.RowHeadersVisible = False
+        Me.dgCustImage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.dgCustImage.Size = New System.Drawing.Size(583, 240)
+        Me.dgCustImage.TabIndex = 0
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(191, 283)
+        Me.btnSelect.Location = New System.Drawing.Point(531, 271)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelect.TabIndex = 0
-        Me.btnSelect.Text = "&Select"
+        Me.btnSelect.TabIndex = 1
+        Me.btnSelect.Text = "&Selelct"
         Me.btnSelect.UseVisualStyleBackColor = True
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 12)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(254, 265)
-        Me.DataGridView1.TabIndex = 1
-        '
-        'frmCustImagevb
+        'frmCustomerImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(550, 318)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.ClientSize = New System.Drawing.Size(624, 306)
         Me.Controls.Add(Me.btnSelect)
-        Me.Name = "frmCustImagevb"
-        Me.Text = "frmCustImagevb"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Controls.Add(Me.dgCustImage)
+        Me.Name = "frmCustomerImage"
+        Me.Text = "frmCustomerImage"
+        CType(Me.dgCustImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
+    Friend WithEvents dgCustImage As System.Windows.Forms.DataGridView
     Friend WithEvents btnSelect As System.Windows.Forms.Button
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
 End Class

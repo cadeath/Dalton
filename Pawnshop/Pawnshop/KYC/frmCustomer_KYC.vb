@@ -20,7 +20,7 @@ Public Class frmCustomer_KYC
     Private notNewPic As Boolean = True
 
     Private Sub frmCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        CACHE_MANAGEMENT()
+        CACHE_MANAGEMENT() : btnBrowse.Visible = False
         ClearFields()
 
         ' ELLIEPOPULATEINFO()
@@ -91,7 +91,7 @@ Public Class frmCustomer_KYC
 
         ClientImage.Image = cus.CPUREIMAGE
 
-        If cus.CImage = "IMGNOTFOUND" Then
+        If cus.CImage = "IMGNOTFOUND" Or cus.CImage = "" Then
             FlName = ""
         Else
             FlName = cus.CImage.Substring(0, cus.CImage.IndexOf("|"c))
@@ -208,6 +208,7 @@ Public Class frmCustomer_KYC
 
         If btnSave.Text = "&Modify" Then
             LockFields(True)
+            btnBrowse.Visible = True
             isNew = False : Exit Sub
         End If
 
@@ -281,7 +282,7 @@ GenerateRandOmString:
         End With
 
         MsgBox("Successfully saved.", MsgBoxStyle.Information, "Save")
-        ClearFields()
+        ClearFields() : btnBrowse.Visible = False
 
         NewCustomer.Load_CustomerByID(NewCustomer.CustomerID)
         frmClientNew.AutoSelect(NewCustomer)
@@ -363,7 +364,7 @@ FLNME:
 
         MsgBox("Successfully updated.", MsgBoxStyle.Information, "Update")
 
-        ClearFields()
+        ClearFields() : btnBrowse.Visible = False
         NewCustomer.Load_CustomerByID(NewCustomer.CustomerID)
         frmClientNew.AutoSelect(NewCustomer)
         Me.Close()
@@ -892,4 +893,8 @@ nextLineTODO:
     End Sub
 
   
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        ClientImage.Image = Nothing
+        frmCustomerImage.Show()
+    End Sub
 End Class
