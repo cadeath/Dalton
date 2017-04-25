@@ -1,6 +1,9 @@
 ﻿Public Class frmMain
 
     Private Sub btnStart_Click(sender As System.Object, e As System.EventArgs) Handles btnStart.Click
+        Remove_Shortcut()
+
+        Exit Sub
         ' Initialization
         deploy.pbDownload = pbUpdate
         deploy.lblStatus = lblUpdate
@@ -26,15 +29,4 @@
         End
     End Sub
 
-    Private Sub DirTest()
-        Dim readValue = _
-            My.Computer.Registry.GetValue( _
-                "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", _
-                "InstallPath", Nothing)
-
-        If readValue = Nothing Then Exit Sub
-        If Not System.IO.Directory.Exists(readValue & "/ESKIE/CIRRUS") Then
-            System.IO.Directory.CreateDirectory(readValue & "/ESKIE/CIRRUS")
-        End If
-    End Sub
 End Class

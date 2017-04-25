@@ -9,7 +9,7 @@ Module deploy
     Const DATABASE As String = "W3W1LH4CKU.FDB"     'DATABASE NAME
     Const CONFIG As String = "disconfig.xml"        'CONFIG FILE
     Const TMP As String = "tmp"                     'TEMPORARY FOLDER
-    Const EXEFILE As String = "/pawnshop.exe"
+    Friend EXEFILE As String = "/pawnshop.exe"
     Const SYSLOG As String = "syslog.txt"
     Const BACKUPBAT As String = "backup.bat"
 

@@ -49,7 +49,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>agt_update_drivers.png.ico</ApplicationIcon>
+    <ApplicationIcon>Antialiasfactory-Jewelry-Stone-Ring.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -128,7 +128,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="agt_update_drivers.png.ico" />
+    <Content Include="Antialiasfactory-Jewelry-Stone-Ring.ico" />
     <Content Include="installer.xml" />
     <Content Include="patch.xml" />
     <Content Include="sample.xml" />

@@ -1,0 +1,4 @@
+Change Log
+Version 1.0.0.1
+ - Add init file for easy host changing
+ - Remove existing Pawnshop Icon in the desktop

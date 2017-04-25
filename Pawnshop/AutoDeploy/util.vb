@@ -115,6 +115,35 @@ Module util
         End If
     End Sub
 
+    Friend Sub Remove_Shortcut()
+        Dim desktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim programPath As String = ""
+
+        For Each Icon As String In Directory.GetFiles(desktopPath)
+            If Icon.ToLower.EndsWith(".lnk") Then
+                Dim lnkPath As String = GetTargetPath(Icon)
+                Dim fileName As String = Icon.Split("\")(Icon.Split("\").Count - 1).Replace("/", "").Replace("\", "")
+                If fileName = deploy.EXEFILE Then
+                    deleteFile(Icon)
+                    Console.WriteLine("Icon deleted - " & Icon)
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub deleteFile(fullPath As String)
+        File.Delete(fullPath)
+    End Sub
+
+    Private Function GetTargetPath(ByVal FileName As String)
+        Dim Obj As Object
+        Obj = CreateObject("WScript.Shell")
+
+        Dim Shortcut As Object
+        Shortcut = Obj.CreateShortcut(FileName)
+        GetTargetPath = Shortcut.TargetPath
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
