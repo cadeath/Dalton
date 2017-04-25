@@ -290,7 +290,6 @@ Public Class Customer
             _cPUREIMAGE = value
         End Set
     End Property
-
 #End Region
 
 #Region "Procedures"
@@ -489,15 +488,17 @@ gOheRE:
                 If ChkFileIntegrity(lastindexof, indexof) Then
                     _cPUREIMAGE = Image.FromFile(indexof)
                 Else
-                    MsgBox("Image file was tampered.", MsgBoxStyle.Critical, "Error")
-                    Exit Sub
+                    MsgBox("Invalid image, Please contact MIS Department.", MsgBoxStyle.Critical, "Error")
+                    AddTimelyLogs("Client Management2", "Hash Code is not equal in the database.")
+                    _CImage = "IMGNOTFOUND"
                 End If
             Else
-                MsgBox("Unable to load image file.", MsgBoxStyle.Critical, "Error")
-                Exit Sub
+                MsgBox("Invalid image, Please contact MIS Department.", MsgBoxStyle.Critical, "Error")
+                AddTimelyLogs("Client Management2", "Random string Already Exists.")
+                _CImage = "IMGNOTFOUND"
             End If
-
         End With
+
 NEXTLINE:
 
         ' Loading Collections

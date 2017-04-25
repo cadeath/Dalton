@@ -417,6 +417,18 @@
     <Compile Include="KYC\KYC migrate\frmClientMigrate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="KYC\KYC migrate\frmCustImagevb.Designer.vb">
+      <DependentUpon>frmCustImagevb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\frmCustImagevb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\frmCustomerImage.Designer.vb">
+      <DependentUpon>frmCustomerImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\frmCustomerImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KYC\KYC migrate\MigrateCustomer.vb" />
     <Compile Include="KYC\KYC migrate\MigrateIdentificationCard.vb" />
     <Compile Include="KYC\KYC migrate\MigratePhoneNumber.vb" />
@@ -1020,6 +1032,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KYC\KYC migrate\frmClientMigrate.resx">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\KYC migrate\frmCustImagevb.resx">
+      <DependentUpon>frmCustImagevb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\KYC migrate\frmCustomerImage.resx">
+      <DependentUpon>frmCustomerImage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layaway\frmAddCustomer.resx">
       <DependentUpon>frmAddCustomer.vb</DependentUpon>

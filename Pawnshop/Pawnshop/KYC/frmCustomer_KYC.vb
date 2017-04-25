@@ -91,7 +91,7 @@ Public Class frmCustomer_KYC
 
         ClientImage.Image = cus.CPUREIMAGE
 
-        If cus.CImage = "" Then
+        If cus.CImage = "IMGNOTFOUND" Then
             FlName = ""
         Else
             FlName = cus.CImage.Substring(0, cus.CImage.IndexOf("|"c))

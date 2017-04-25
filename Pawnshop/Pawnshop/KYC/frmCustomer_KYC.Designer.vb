@@ -97,6 +97,7 @@ Partial Class frmCustomer_KYC
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtSuffix = New System.Windows.Forms.TextBox()
         Me.btnHistory = New System.Windows.Forms.Button()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -786,7 +787,7 @@ Partial Class frmCustomer_KYC
         'btnCamera
         '
         Me.btnCamera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCamera.Location = New System.Drawing.Point(30, 152)
+        Me.btnCamera.Location = New System.Drawing.Point(7, 152)
         Me.btnCamera.Name = "btnCamera"
         Me.btnCamera.Size = New System.Drawing.Size(114, 37)
         Me.btnCamera.TabIndex = 0
@@ -795,11 +796,12 @@ Partial Class frmCustomer_KYC
         '
         'grpCusPic
         '
+        Me.grpCusPic.Controls.Add(Me.btnBrowse)
         Me.grpCusPic.Controls.Add(Me.ClientImage)
         Me.grpCusPic.Controls.Add(Me.btnCamera)
-        Me.grpCusPic.Location = New System.Drawing.Point(724, 98)
+        Me.grpCusPic.Location = New System.Drawing.Point(730, 110)
         Me.grpCusPic.Name = "grpCusPic"
-        Me.grpCusPic.Size = New System.Drawing.Size(171, 201)
+        Me.grpCusPic.Size = New System.Drawing.Size(171, 200)
         Me.grpCusPic.TabIndex = 14
         Me.grpCusPic.TabStop = False
         Me.grpCusPic.Text = "Customer Picture"
@@ -843,6 +845,16 @@ Partial Class frmCustomer_KYC
         Me.btnHistory.TabIndex = 17
         Me.btnHistory.Text = "&History"
         Me.btnHistory.UseVisualStyleBackColor = True
+        '
+        'btnBrowse
+        '
+        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse.Location = New System.Drawing.Point(134, 151)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(31, 36)
+        Me.btnBrowse.TabIndex = 12
+        Me.btnBrowse.Text = ". . ."
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'frmCustomer_KYC
         '
@@ -953,5 +965,6 @@ Partial Class frmCustomer_KYC
     Friend WithEvents txtSuffix As System.Windows.Forms.TextBox
     Friend WithEvents lblAge As System.Windows.Forms.Label
     Friend WithEvents btnHistory As System.Windows.Forms.Button
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
 
 End Class
