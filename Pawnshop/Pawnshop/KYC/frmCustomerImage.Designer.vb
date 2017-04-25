@@ -32,17 +32,17 @@ Partial Class frmCustomerImage
         Me.dgCustImage.AllowUserToAddRows = False
         Me.dgCustImage.AllowUserToDeleteRows = False
         Me.dgCustImage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgCustImage.Location = New System.Drawing.Point(23, 12)
+        Me.dgCustImage.Location = New System.Drawing.Point(12, 12)
         Me.dgCustImage.Name = "dgCustImage"
         Me.dgCustImage.ReadOnly = True
         Me.dgCustImage.RowHeadersVisible = False
         Me.dgCustImage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgCustImage.Size = New System.Drawing.Size(583, 240)
+        Me.dgCustImage.Size = New System.Drawing.Size(222, 372)
         Me.dgCustImage.TabIndex = 0
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(531, 271)
+        Me.btnSelect.Location = New System.Drawing.Point(159, 390)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 23)
         Me.btnSelect.TabIndex = 1
@@ -53,11 +53,11 @@ Partial Class frmCustomerImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(624, 306)
+        Me.ClientSize = New System.Drawing.Size(246, 425)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.dgCustImage)
         Me.Name = "frmCustomerImage"
-        Me.Text = "frmCustomerImage"
+        Me.Text = "Customer Image"
         CType(Me.dgCustImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

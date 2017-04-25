@@ -3,6 +3,8 @@ Imports System.Drawing.Imaging
 
 Public Class frmCustomerImage
     Private SRC As String = Application.StartupPath & "\ClientImage"
+    Dim dgvImageColumn As New DataGridViewImageColumn
+
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
         Dim ms As New MemoryStream
         Dim img As Bitmap
@@ -13,28 +15,32 @@ Public Class frmCustomerImage
     End Sub
 
     Private Sub frmCustomerImage_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        Dim dgvImageColumn As New DataGridViewImageColumn
-
-        dgvImageColumn.HeaderText = "Image"
-        dgvImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom
-
-        dgCustImage.Columns.Add(dgvImageColumn)
-
-        dgCustImage.RowTemplate.Height = 110
-
-        dgCustImage.AllowUserToAddRows = False
-
-        Dim img1 As Image
-
-        For Each LogFile In Directory.GetFiles(SRC)
-            img1 = Image.FromFile(LogFile)
-            dgCustImage.Rows.Add(img1)
-        Next
-
+        AddImage()
     End Sub
 
     Private Sub dgCustImage_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dgCustImage.DoubleClick
         If isEnter(e) Then btnSelect.PerformClick()
+    End Sub
+
+    Private Sub AddImage()
+
+        With dgvImageColumn
+            .HeaderText = "Image"
+            .ImageLayout = DataGridViewImageCellLayout.Zoom
+        End With
+
+        With dgCustImage
+            .Columns.Add(dgvImageColumn)
+            .RowTemplate.Height = 110
+            .AllowUserToAddRows = False
+        End With
+
+        Dim img As Image
+
+        For Each LogFile In Directory.GetFiles(SRC)
+            img = Image.FromFile(LogFile)
+            dgCustImage.Rows.Add(img)
+        Next
+
     End Sub
 End Class

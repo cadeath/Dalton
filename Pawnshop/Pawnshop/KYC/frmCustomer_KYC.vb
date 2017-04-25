@@ -347,6 +347,7 @@ FLNME:
                 .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
             Else
                 .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
+
             End If
 
 
@@ -892,7 +893,6 @@ nextLineTODO:
         frmReport.TopMost = True
     End Sub
 
-  
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         ClientImage.Image = Nothing
         frmCustomerImage.Show()
