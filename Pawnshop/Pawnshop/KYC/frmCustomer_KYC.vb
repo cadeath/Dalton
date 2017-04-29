@@ -897,4 +897,15 @@ nextLineTODO:
         ClientImage.Image = Nothing
         frmCustomerImage.Show()
     End Sub
+
+    Private Sub txtIDNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtIDNum.KeyPress
+        If isEnter(e) Then
+            btnAdd.PerformClick()
+        End If
+    End Sub
+
+    Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
+        ComputeBirthday()
+
+    End Sub
 End Class

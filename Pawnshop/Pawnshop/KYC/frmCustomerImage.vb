@@ -19,7 +19,7 @@ Public Class frmCustomerImage
     End Sub
 
     Private Sub dgCustImage_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dgCustImage.DoubleClick
-        If isEnter(e) Then btnSelect.PerformClick()
+        btnSelect.PerformClick()
     End Sub
 
     Private Sub AddImage()
