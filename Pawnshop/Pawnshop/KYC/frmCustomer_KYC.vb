@@ -844,7 +844,6 @@ nextLineTODO:
     End Sub
 
     Private Sub btnHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistory.Click
-        If Not txtFName.Enabled Then Exit Sub
 
         Dim mySql As String
         mySql = "SELECT C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
