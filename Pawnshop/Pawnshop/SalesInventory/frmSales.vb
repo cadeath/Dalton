@@ -148,6 +148,7 @@ Public Class frmSales
             lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
             ItemAmount = (itm.SalePrice * itm.Quantity)
             lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
+            lv.SubItems.Add(itm.Discount)
         End If
 
         Dim src_idx As String = IIf(TransactionMode = TransType.Auction, itm.Tags, itm.ItemCode)
@@ -429,6 +430,14 @@ Public Class frmSales
                 .Item("SALEPRICE") = itm.SalePrice
                 .Item("ROWTOTAL") = itm.SalePrice * itm.Quantity
                 .Item("UOM") = itm.UnitofMeasure
+
+                If itm.Discount = 0 Then
+                    .Item("Remarks") = ""
+                Else
+                    .Item("Remarks") = "Discount % " & itm.Discount
+                End If
+
+
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
 

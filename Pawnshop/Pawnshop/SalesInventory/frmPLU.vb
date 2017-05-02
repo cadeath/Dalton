@@ -345,4 +345,57 @@
             frmView_Stock.Show()
         End If
     End Sub
+
+    Private Sub btnDiscount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDiscount.Click
+        If lvItem.SelectedItems.Count = 0 Then Exit Sub
+        OTPDiscount_Initialization()
+        Dim idx As Integer = lvItem.SelectedItems(0).Index
+        Dim selected_Itm As New cItemData
+        selected_Itm = queued_IMD.Item(idx)
+
+        If selected_Itm.SalePrice = 0 Then MsgBox("Item " & selected_Itm.ItemCode, MsgBoxStyle.Critical, "No Price") : Exit Sub
+        selected_Itm.Quantity = qtyItm
+
+        If Not OTPDisable Then
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                frmDiscount.LoadItem(selected_Itm)
+            End If
+        Else
+            frmDiscount.LoadItem(selected_Itm)
+        End If
+       
+        frmDiscount.Show()
+        Me.Close()
+
+    End Sub
+
+    Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
+        If lvItem.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvItem.SelectedItems(0).Index
+
+        Dim selected_Itm As New cItemData
+        selected_Itm = queued_IMD.Item(idx)
+
+        selected_Itm.Quantity = qtyItm
+
+        Dim tmp As String = String.Empty '= InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+        While Not IsNumeric(tmp)
+            tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+            If tmp = "" Then Exit Sub
+        End While
+
+        Dim customPrice As Double = CDbl(tmp)
+        selected_Itm.SalePrice = customPrice
+
+        frmSales.AddItem(selected_Itm)
+        frmSales.ClearSearch()
+        Me.Close()
+    End Sub
 End Class

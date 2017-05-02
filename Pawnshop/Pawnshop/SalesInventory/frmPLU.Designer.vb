@@ -38,6 +38,8 @@ Partial Class frmPLU
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.pb_itm = New System.Windows.Forms.ProgressBar()
         Me.btnStock = New System.Windows.Forms.Button()
+        Me.btnDiscount = New System.Windows.Forms.Button()
+        Me.btnCustom = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtCode
@@ -175,12 +177,36 @@ Partial Class frmPLU
         Me.btnStock.Text = "&Stock Card"
         Me.btnStock.UseVisualStyleBackColor = True
         '
+        'btnDiscount
+        '
+        Me.btnDiscount.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDiscount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDiscount.Location = New System.Drawing.Point(553, 396)
+        Me.btnDiscount.Name = "btnDiscount"
+        Me.btnDiscount.Size = New System.Drawing.Size(75, 33)
+        Me.btnDiscount.TabIndex = 11
+        Me.btnDiscount.Text = "&Discount"
+        Me.btnDiscount.UseVisualStyleBackColor = True
+        '
+        'btnCustom
+        '
+        Me.btnCustom.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCustom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCustom.Location = New System.Drawing.Point(472, 396)
+        Me.btnCustom.Name = "btnCustom"
+        Me.btnCustom.Size = New System.Drawing.Size(75, 33)
+        Me.btnCustom.TabIndex = 12
+        Me.btnCustom.Text = "&Custom"
+        Me.btnCustom.UseVisualStyleBackColor = True
+        '
         'frmPLU
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(803, 438)
+        Me.Controls.Add(Me.btnCustom)
+        Me.Controls.Add(Me.btnDiscount)
         Me.Controls.Add(Me.pb_itm)
         Me.Controls.Add(Me.btnStock)
         Me.Controls.Add(Me.btnEdit)
@@ -212,4 +238,6 @@ Partial Class frmPLU
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents pb_itm As System.Windows.Forms.ProgressBar
     Friend WithEvents btnStock As System.Windows.Forms.Button
+    Friend WithEvents btnDiscount As System.Windows.Forms.Button
+    Friend WithEvents btnCustom As System.Windows.Forms.Button
 End Class

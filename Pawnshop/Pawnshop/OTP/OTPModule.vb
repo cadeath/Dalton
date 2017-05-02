@@ -100,4 +100,20 @@ Module OTPModule
         End If
     End Sub
 
+    Friend Sub OTPDiscount_Initialization()
+        If OTPDisable Then Exit Sub
+
+        OtpSettings = New OneTimePassword
+        OtpSettings.AppName = "Dalton - Discount"
+        OtpSettings.SecretCode = "OTPDiscount"
+        OtpSettings.Setup("marzxxx90@gmail.com")
+        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
+
+        If DEV_MODE Then
+            OtpSettings.Setup("eskie@pgc-itdept.org")
+            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
+            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
+        End If
+    End Sub
+
 End Module

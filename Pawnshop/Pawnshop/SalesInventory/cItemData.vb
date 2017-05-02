@@ -209,6 +209,17 @@
         End Set
     End Property
 
+    Private _discount As Integer
+    Public Property Discount() As Integer
+        Get
+            Return _discount
+        End Get
+        Set(ByVal value As Integer)
+            _discount = value
+        End Set
+    End Property
+
+
 #End Region
 
 #Region "Procedures"
