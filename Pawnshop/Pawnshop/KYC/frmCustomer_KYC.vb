@@ -11,18 +11,26 @@ Public Class frmCustomer_KYC
     Private CustomerIDs As New Collections_ID
 
     Private SRC As String = Application.StartupPath & "\ClientImage"
-    Dim FlName As String = "", Ext As String = ".EAM"
+    Friend FlName As String = "", Ext As String = ".EAM"
 
     Private lockForm As Boolean = False, IDX As Integer
     Friend FormOrigin As Form
     Friend SelectedCustomer As Customer 'Holds Customer
     Friend isNew As Boolean = True
-    Private notNewPic As Boolean = True
+    Friend notNewPic As Boolean = True
+    Private KycRequired As Boolean = IIf(GetOption("KYCRequired") = "Yes", True, False)
+
+
 
     Private Sub frmCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT() : btnBrowse.Visible = False
         ClearFields()
 
+        If Not KycRequired Then
+            btnCamera.Visible = False
+        Else
+            btnCamera.Visible = True
+        End If
         ' ELLIEPOPULATEINFO()
         'Populate()
     End Sub
@@ -136,6 +144,37 @@ Public Class frmCustomer_KYC
     Private Function FormVerification() As Boolean
         Dim errMsg As String = "Please fillup the form completely"
 
+        If Not KycRequired Then
+            If txtFName.Text = "" Then txtFName.Focus() : Return False
+            If txtLName.Text = "" Then txtLName.Focus() : Return False
+
+            If RequirementLevel = 2 Then
+                If Trim(cboBrgy1.Text) = "" Or Trim(cboCity1.Text) = "" Or Trim(cboProv1.Text) = "" Then
+                    TabControl1.SelectedTab = tpBasic
+                    MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+                    Return False
+                End If
+
+                If Trim(cboBrgy2.Text) = "" Or Trim(cboCity2.Text) = "" Or Trim(cboProv2.Text) = "" Then
+                    TabControl1.SelectedTab = tpBasic
+                    MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+                    Return False
+                End If
+
+                If cboGender.Text = "" Then cboGender.Focus()
+                MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information") : Return False
+
+                If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
+            End If
+
+             If lvID.Items.Count = 0 Or REQUIRED_ID Then
+                TabControl1.SelectedTab = tpID
+                MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+                Return False
+            End If
+
+            Return True
+        End If
         ' AGE VALIDATION ============================================
         Dim possible_age As Integer = (Now.Year - dtpBday.Value.Year)
 
@@ -208,7 +247,9 @@ Public Class frmCustomer_KYC
 
         If btnSave.Text = "&Modify" Then
             LockFields(True)
-            btnBrowse.Visible = True
+            If KycRequired Then
+                btnBrowse.Visible = True
+            End If
             isNew = False : Exit Sub
         End If
 
@@ -263,18 +304,22 @@ GenerateRandOmString:
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
 
+            If KycRequired Then
+                If Not .FindRanStrIfExists(SRC & "\" & FlName & Ext) Then
+                    GoTo GenerateRandOmString
+                End If
 
-            If Not .FindRanStrIfExists(SRC & "\" & FlName & Ext) Then
-                GoTo GenerateRandOmString
+                ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
+                .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
             End If
 
-            ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
-            .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
-
-            AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
+            If CustomerPhones.Count >= 1 Then
+                AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
+            End If
 
             .CustomersPhone = CustomerPhones
             .CustomersIDs = CustomerIDs
+
 
             If Not .Save() Then
                 Exit Sub
@@ -332,26 +377,30 @@ GenerateRandOmString:
                 .Rank = Customer.RankNumber.High
 
 FLNME:
-            If Not notNewPic Then
-                If Not NewCustomer.FindRanStrIfExists(SRC & "\" & FlName) Then
-                    FlName = FileName() : GoTo FLNME
+            If KycRequired Then
+
+                If Not notNewPic Then
+                    If Not NewCustomer.FindRanStrIfExists(SRC & "\" & FlName) Then
+                        FlName = FileName() : GoTo FLNME
+                    End If
+                End If
+
+                If Not notNewPic Then
+                    ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
+                End If
+
+
+                If Not notNewPic Then
+                    .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
+                Else
+                    .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
                 End If
             End If
 
-            If Not notNewPic Then
-                ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
+NextlineTODO:
+            If CustomerPhones.Count >= 1 Then
+                AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
             End If
-
-
-            If Not notNewPic Then
-                .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
-            Else
-                .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
-
-            End If
-
-
-            AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
 
             .CustomersPhone = CustomerPhones
             .CustomersIDs = CustomerIDs

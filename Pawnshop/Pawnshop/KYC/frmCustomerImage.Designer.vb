@@ -22,6 +22,7 @@ Partial Class frmCustomerImage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCustomerImage))
         Me.dgCustImage = New System.Windows.Forms.DataGridView()
         Me.btnSelect = New System.Windows.Forms.Button()
         CType(Me.dgCustImage, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -36,15 +37,15 @@ Partial Class frmCustomerImage
         Me.dgCustImage.Name = "dgCustImage"
         Me.dgCustImage.ReadOnly = True
         Me.dgCustImage.RowHeadersVisible = False
-        Me.dgCustImage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgCustImage.Size = New System.Drawing.Size(222, 372)
+        Me.dgCustImage.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgCustImage.Size = New System.Drawing.Size(315, 372)
         Me.dgCustImage.TabIndex = 0
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(159, 390)
+        Me.btnSelect.Location = New System.Drawing.Point(233, 390)
         Me.btnSelect.Name = "btnSelect"
-        Me.btnSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelect.Size = New System.Drawing.Size(90, 33)
         Me.btnSelect.TabIndex = 1
         Me.btnSelect.Text = "&Selelct"
         Me.btnSelect.UseVisualStyleBackColor = True
@@ -53,9 +54,10 @@ Partial Class frmCustomerImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(246, 425)
+        Me.ClientSize = New System.Drawing.Size(335, 430)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.dgCustImage)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmCustomerImage"
         Me.Text = "Customer Image"
         CType(Me.dgCustImage, System.ComponentModel.ISupportInitialize).EndInit()
