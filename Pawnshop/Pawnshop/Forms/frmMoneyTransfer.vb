@@ -658,7 +658,7 @@ Public Class frmMoneyTransfer
         txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity, cus.PresentProvince)
 
         For Each id As NewIdentificationCard In cus.CustomersIDs
-            If id.isPrimary > 0 Then
+            If id.isPrimary = True Then
                 txtSenderID.Text = id.IDType
                 txtSenderIDNum.Text = id.IDNumber
             End If
@@ -669,17 +669,17 @@ Public Class frmMoneyTransfer
     End Sub
 
     Friend Sub LoadReceiverInfo(ByVal cus As Customer)
-        txtSender.Text = String.Format("{0} {1}", cus.FirstName, cus.LastName)
-        txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity, cus.PresentProvince)
+        txtReceiver.Text = String.Format("{0} {1}", cus.FirstName, cus.LastName)
+        txtReceiverAddr.Text = String.Format("{0} {1} {2} {3}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity, cus.PresentProvince)
 
         For Each id As NewIdentificationCard In cus.CustomersIDs
-            If id.isPrimary > 0 Then
-                txtSenderID.Text = id.IDType
-                txtSenderIDNum.Text = id.IDNumber
+            If id.isPrimary = True Then
+                txtReceiverID.Text = id.IDType
+                txtReceiverIDNum.Text = id.IDNumber
             End If
         Next
 
-        senderClient = cus
+        receiverClient = cus
         txtReceiver.Focus()
     End Sub
 

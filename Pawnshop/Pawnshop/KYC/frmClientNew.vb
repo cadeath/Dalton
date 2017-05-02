@@ -172,6 +172,7 @@ Public Class frmClientNew
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        frmCustomer_KYC.btnHistory.Visible = False
         frmCustomer_KYC.Show()
     End Sub
 

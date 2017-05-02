@@ -3,7 +3,8 @@ CHANGELOG
 Version 1.5.0.7
  - Add Branch Address in Maintenance
  - Add Menus 1 Date Segrate List
- - Added Journal Entries Block if not close store
+ - Added Journal Entries Block if not close store and release Hot Code in every extract
+ - Added dataset hash in every extract of Journal and Sales
  - Added Daily & Monthly Expiry List
  - Added Monitoring for OPT
  - Added Function for Deleting Wrong Item in Inventory

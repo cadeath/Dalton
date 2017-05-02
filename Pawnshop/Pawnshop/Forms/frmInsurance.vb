@@ -36,6 +36,7 @@
         txtSenderID.Text = ""
         txtSenderIDNum.Text = ""
         txtBirthdate.Text = ""
+        txtAmount.Text = ""
 
         dtpDate.Value = CurrentDate
         dtpExpiry.Enabled = False
