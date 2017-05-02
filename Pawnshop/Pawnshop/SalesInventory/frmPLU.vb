@@ -31,6 +31,8 @@
         ClearField()
         If isLayAway = True Then
             btnStock.Text = "Payments"
+            btnDiscount.Visible = False
+            btnCustom.Visible = False
         End If
     End Sub
 
@@ -101,6 +103,8 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         ElseIf isLayAway Then
+            btnDiscount.Visible = False
+            btnCustom.Visible = False
 
             mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
             If src <> "" Then
