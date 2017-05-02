@@ -36,6 +36,10 @@
     End Sub
 
     Private Sub btnDiscount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDiscount.Click
+
+        Dim NewOtp As New ClassOtp("Discount", diagGeneralOTP.txtPIN.Text, DiscountItm.ItemCode)
+        TransactionVoidSave("Discount", POSuser.UserID, POSuser.UserID, DiscountItm.ItemCode)
+
         With DiscountItm
             .Discount = txtDiscount.Text
             .SalePrice = txtTotal.Text
