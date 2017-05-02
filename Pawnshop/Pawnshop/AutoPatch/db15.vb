@@ -15,6 +15,8 @@
             Modify_ExpiryList()
             Create_CustomerVIEW()
 
+            Add_IsKYCRequired()
+
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
         Catch ex As Exception
@@ -212,4 +214,8 @@
         Console.WriteLine("View Modified")
     End Sub
 
+
+    Private Sub Add_IsKYCRequired()
+        UpdateOptions("KYCRequired", "No")
+    End Sub
 End Module
