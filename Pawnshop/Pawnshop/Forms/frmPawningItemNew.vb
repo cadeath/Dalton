@@ -135,9 +135,16 @@ Public Class frmPawningItemNew
         For Each phne As PhoneNumber In cus.CustomersPhone
             If phne.isPrimary > 0 Then
                 txtContact.Text = phne.PhoneNumber
+                GoTo nextlineTODO
             End If
         Next
-      
+
+        For Each phne As PhoneNumber In cus.CustomersPhone
+            txtContact.Text = phne.PhoneNumber
+            GoTo nextlineTODO
+        Next
+
+nextlineTODO:
         Pawner = New Customer
         Pawner = cus
         txtClassification.Focus()

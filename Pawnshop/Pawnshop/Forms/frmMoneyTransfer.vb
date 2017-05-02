@@ -661,9 +661,17 @@ Public Class frmMoneyTransfer
             If id.isPrimary = True Then
                 txtSenderID.Text = id.IDType
                 txtSenderIDNum.Text = id.IDNumber
+                GoTo NExtLineTODO
             End If
         Next
 
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            txtSenderID.Text = id.IDType
+            txtSenderIDNum.Text = id.IDNumber
+            GoTo NExtLineTODO
+        Next
+
+NExtLineTODO:
         senderClient = cus
         txtReceiver.Focus()
     End Sub
@@ -676,9 +684,17 @@ Public Class frmMoneyTransfer
             If id.isPrimary = True Then
                 txtReceiverID.Text = id.IDType
                 txtReceiverIDNum.Text = id.IDNumber
+                GoTo NExtLineTODO
             End If
         Next
 
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            txtReceiverID.Text = id.IDType
+            txtReceiverIDNum.Text = id.IDNumber
+            GoTo NExtLineTODO
+        Next
+
+NExtLineTODO:
         receiverClient = cus
         txtReceiver.Focus()
     End Sub

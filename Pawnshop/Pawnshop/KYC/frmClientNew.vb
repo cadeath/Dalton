@@ -10,6 +10,8 @@
 
 Public Class frmClientNew
 
+    Private IsKYCRequired As Boolean = IIf(GetOption("KYCRequired") = "Yes", True, False)
+
     Dim fromOtherForm As Boolean = False
     Friend GetCustomer As Customer
     Dim frmOrig As formSwitch.FormName
@@ -242,10 +244,12 @@ Public Class frmClientNew
         GetCustomer = New Customer
         GetCustomer.Load_CustomerByID(idx)
 
-        If GetCustomer.CImage = "" Then
-            MsgBox("This customer's information is required to update.", _
-                   MsgBoxStyle.Information, "Information")
-            btnView.PerformClick() : Exit Sub
+        If IsKYCRequired Then
+            If GetCustomer.CImage = "" Then
+                MsgBox("This customer's information is required to update.", _
+                       MsgBoxStyle.Information, "Information")
+                btnView.PerformClick() : Exit Sub
+            End If
         End If
 
         formSwitch.ReloadFormFromSearch(frmOrig, GetCustomer)

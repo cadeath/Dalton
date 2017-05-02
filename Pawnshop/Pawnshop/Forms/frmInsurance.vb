@@ -89,9 +89,17 @@
             If id.isPrimary > 0 Then
                 txtSenderID.Text = id.IDType
                 txtSenderIDNum.Text = id.IDNumber
+                GoTo nextLineTODO
             End If
         Next
 
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            txtSenderID.Text = id.IDType
+            txtSenderIDNum.Text = id.IDNumber
+            GoTo nextLineTODO
+        Next
+
+nextLineTODO:
         txtBirthdate.Text = cus.Birthday
         Holder = cus
 
