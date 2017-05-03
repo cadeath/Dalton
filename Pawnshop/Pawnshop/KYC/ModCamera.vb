@@ -46,6 +46,20 @@ Module ModCamera
         End If
     End Sub
 
+    Friend Sub OpenForSignature()
+        Dim iHeight As Integer = frmCustomer_KYC.CLientSignature.Height
+        Dim iWidth As Integer = frmCustomer_KYC.CLientSignature.Width
+        hHwnd = capCreateCaptureWindowA(iDevice, WS_VISIBLE Or WS_CHILD, 0, 0, 640, 480, frmCustomer_KYC.CLientSignature.Handle.ToInt32, 0)
+        If SendMessage(hHwnd, WM_Cap_Paki_CONNECT, iDevice, 0) Then
+            SendMessage(hHwnd, WM_Cap_SET_SCALE, True, 0)
+            SendMessage(hHwnd, WM_Cap_SET_PREVIEWRATE, 66, 0)
+            SendMessage(hHwnd, WM_Cap_SET_PREVIEW, True, 0)
+            SetWindowPos(hHwnd, HWND_BOTTOM, 0, 0, frmCustomer_KYC.CLientSignature.Width, frmCustomer_KYC.CLientSignature.Height, SWP_NOMOVE Or SWP_NOZORDER)
+        Else
+            DestroyWindow(hHwnd)
+        End If
+    End Sub
+
     Friend Sub ClosePreviewWindow()
         SendMessage(hHwnd, WM_Cap_Paki_DISCONNECT, iDevice, 0)
         DestroyWindow(hHwnd)

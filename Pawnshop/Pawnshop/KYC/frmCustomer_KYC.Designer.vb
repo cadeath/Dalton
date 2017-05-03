@@ -98,11 +98,16 @@ Partial Class frmCustomer_KYC
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtSuffix = New System.Windows.Forms.TextBox()
         Me.btnHistory = New System.Windows.Forms.Button()
+        Me.grpSignature = New System.Windows.Forms.GroupBox()
+        Me.CLientSignature = New System.Windows.Forms.PictureBox()
+        Me.btnSignature = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
         Me.grpCusPic.SuspendLayout()
         CType(Me.ClientImage, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpSignature.SuspendLayout()
+        CType(Me.CLientSignature, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -272,7 +277,7 @@ Partial Class frmCustomer_KYC
         Me.btnSetPri.Location = New System.Drawing.Point(178, 286)
         Me.btnSetPri.Name = "btnSetPri"
         Me.btnSetPri.Size = New System.Drawing.Size(29, 23)
-        Me.btnSetPri.TabIndex = 15
+        Me.btnSetPri.TabIndex = 16
         Me.btnSetPri.Text = "P"
         Me.btnSetPri.UseVisualStyleBackColor = True
         '
@@ -281,7 +286,7 @@ Partial Class frmCustomer_KYC
         Me.txtWork.Location = New System.Drawing.Point(213, 230)
         Me.txtWork.Name = "txtWork"
         Me.txtWork.Size = New System.Drawing.Size(176, 22)
-        Me.txtWork.TabIndex = 16
+        Me.txtWork.TabIndex = 17
         Me.txtWork.Text = "ELLIE GWAPO"
         '
         'Label18
@@ -301,7 +306,7 @@ Partial Class frmCustomer_KYC
         Me.cboGender.Location = New System.Drawing.Point(479, 230)
         Me.cboGender.Name = "cboGender"
         Me.cboGender.Size = New System.Drawing.Size(121, 24)
-        Me.cboGender.TabIndex = 18
+        Me.cboGender.TabIndex = 19
         '
         'Label25
         '
@@ -327,7 +332,7 @@ Partial Class frmCustomer_KYC
         Me.rbHigh.Location = New System.Drawing.Point(558, 308)
         Me.rbHigh.Name = "rbHigh"
         Me.rbHigh.Size = New System.Drawing.Size(59, 20)
-        Me.rbHigh.TabIndex = 19
+        Me.rbHigh.TabIndex = 22
         Me.rbHigh.TabStop = True
         Me.rbHigh.Text = "HIGH"
         Me.rbHigh.UseVisualStyleBackColor = True
@@ -338,7 +343,7 @@ Partial Class frmCustomer_KYC
         Me.rbNormal.Location = New System.Drawing.Point(481, 308)
         Me.rbNormal.Name = "rbNormal"
         Me.rbNormal.Size = New System.Drawing.Size(83, 20)
-        Me.rbNormal.TabIndex = 18
+        Me.rbNormal.TabIndex = 21
         Me.rbNormal.Text = "NORMAL"
         Me.rbNormal.UseVisualStyleBackColor = True
         '
@@ -349,7 +354,7 @@ Partial Class frmCustomer_KYC
         Me.rbLow.Location = New System.Drawing.Point(425, 307)
         Me.rbLow.Name = "rbLow"
         Me.rbLow.Size = New System.Drawing.Size(56, 20)
-        Me.rbLow.TabIndex = 19
+        Me.rbLow.TabIndex = 20
         Me.rbLow.TabStop = True
         Me.rbLow.Text = "LOW"
         Me.rbLow.UseVisualStyleBackColor = True
@@ -359,7 +364,7 @@ Partial Class frmCustomer_KYC
         Me.txtSrcFund.Location = New System.Drawing.Point(213, 269)
         Me.txtSrcFund.Name = "txtSrcFund"
         Me.txtSrcFund.Size = New System.Drawing.Size(178, 22)
-        Me.txtSrcFund.TabIndex = 17
+        Me.txtSrcFund.TabIndex = 18
         Me.txtSrcFund.Text = "ELLIE GWAPO"
         '
         'Label21
@@ -376,7 +381,7 @@ Partial Class frmCustomer_KYC
         Me.btnNega.Location = New System.Drawing.Point(178, 256)
         Me.btnNega.Name = "btnNega"
         Me.btnNega.Size = New System.Drawing.Size(29, 23)
-        Me.btnNega.TabIndex = 30
+        Me.btnNega.TabIndex = 15
         Me.btnNega.Text = "-"
         Me.btnNega.UseVisualStyleBackColor = True
         '
@@ -767,7 +772,7 @@ Partial Class frmCustomer_KYC
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(810, 443)
+        Me.btnCancel.Location = New System.Drawing.Point(632, 444)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(90, 46)
         Me.btnCancel.TabIndex = 6
@@ -777,7 +782,7 @@ Partial Class frmCustomer_KYC
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(714, 444)
+        Me.btnSave.Location = New System.Drawing.Point(536, 445)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(90, 45)
         Me.btnSave.TabIndex = 5
@@ -786,10 +791,10 @@ Partial Class frmCustomer_KYC
         '
         'btnCamera
         '
-        Me.btnCamera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCamera.Location = New System.Drawing.Point(7, 152)
+        Me.btnCamera.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCamera.Location = New System.Drawing.Point(208, 19)
         Me.btnCamera.Name = "btnCamera"
-        Me.btnCamera.Size = New System.Drawing.Size(114, 37)
+        Me.btnCamera.Size = New System.Drawing.Size(69, 53)
         Me.btnCamera.TabIndex = 0
         Me.btnCamera.Text = "Open Camera"
         Me.btnCamera.UseVisualStyleBackColor = True
@@ -799,19 +804,19 @@ Partial Class frmCustomer_KYC
         Me.grpCusPic.Controls.Add(Me.btnBrowse)
         Me.grpCusPic.Controls.Add(Me.ClientImage)
         Me.grpCusPic.Controls.Add(Me.btnCamera)
-        Me.grpCusPic.Location = New System.Drawing.Point(730, 110)
+        Me.grpCusPic.Location = New System.Drawing.Point(730, 81)
         Me.grpCusPic.Name = "grpCusPic"
-        Me.grpCusPic.Size = New System.Drawing.Size(171, 200)
+        Me.grpCusPic.Size = New System.Drawing.Size(292, 217)
         Me.grpCusPic.TabIndex = 14
         Me.grpCusPic.TabStop = False
-        Me.grpCusPic.Text = "Customer Picture"
+        Me.grpCusPic.Text = "Customer's Picture"
         '
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(134, 151)
+        Me.btnBrowse.Location = New System.Drawing.Point(208, 80)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(31, 36)
+        Me.btnBrowse.Size = New System.Drawing.Size(69, 33)
         Me.btnBrowse.TabIndex = 12
         Me.btnBrowse.Text = ". . ."
         Me.btnBrowse.UseVisualStyleBackColor = True
@@ -822,7 +827,7 @@ Partial Class frmCustomer_KYC
         Me.ClientImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientImage.Location = New System.Drawing.Point(6, 17)
         Me.ClientImage.Name = "ClientImage"
-        Me.ClientImage.Size = New System.Drawing.Size(159, 129)
+        Me.ClientImage.Size = New System.Drawing.Size(192, 192)
         Me.ClientImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.ClientImage.TabIndex = 11
         Me.ClientImage.TabStop = False
@@ -830,9 +835,9 @@ Partial Class frmCustomer_KYC
         'Label26
         '
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(577, 55)
+        Me.Label26.Location = New System.Drawing.Point(610, 53)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(179, 18)
+        Me.Label26.Size = New System.Drawing.Size(119, 18)
         Me.Label26.TabIndex = 16
         Me.Label26.Text = "Suffix"
         Me.Label26.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -852,16 +857,49 @@ Partial Class frmCustomer_KYC
         Me.btnHistory.Location = New System.Drawing.Point(4, 445)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Size = New System.Drawing.Size(90, 45)
-        Me.btnHistory.TabIndex = 17
+        Me.btnHistory.TabIndex = 7
         Me.btnHistory.Text = "&History"
         Me.btnHistory.UseVisualStyleBackColor = True
+        '
+        'grpSignature
+        '
+        Me.grpSignature.Controls.Add(Me.btnSignature)
+        Me.grpSignature.Controls.Add(Me.CLientSignature)
+        Me.grpSignature.Location = New System.Drawing.Point(730, 300)
+        Me.grpSignature.Name = "grpSignature"
+        Me.grpSignature.Size = New System.Drawing.Size(292, 188)
+        Me.grpSignature.TabIndex = 15
+        Me.grpSignature.TabStop = False
+        Me.grpSignature.Text = "Customer's Signature"
+        '
+        'CLientSignature
+        '
+        Me.CLientSignature.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.CLientSignature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.CLientSignature.Location = New System.Drawing.Point(6, 17)
+        Me.CLientSignature.Name = "CLientSignature"
+        Me.CLientSignature.Size = New System.Drawing.Size(279, 120)
+        Me.CLientSignature.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.CLientSignature.TabIndex = 11
+        Me.CLientSignature.TabStop = False
+        '
+        'btnSignature
+        '
+        Me.btnSignature.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSignature.Location = New System.Drawing.Point(6, 143)
+        Me.btnSignature.Name = "btnSignature"
+        Me.btnSignature.Size = New System.Drawing.Size(113, 38)
+        Me.btnSignature.TabIndex = 0
+        Me.btnSignature.Text = "Open Camera"
+        Me.btnSignature.UseVisualStyleBackColor = True
         '
         'frmCustomer_KYC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(907, 493)
+        Me.ClientSize = New System.Drawing.Size(1031, 493)
+        Me.Controls.Add(Me.grpSignature)
         Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.txtSuffix)
@@ -888,6 +926,8 @@ Partial Class frmCustomer_KYC
         Me.tpID.PerformLayout()
         Me.grpCusPic.ResumeLayout(False)
         CType(Me.ClientImage, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpSignature.ResumeLayout(False)
+        CType(Me.CLientSignature, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -966,5 +1006,8 @@ Partial Class frmCustomer_KYC
     Friend WithEvents lblAge As System.Windows.Forms.Label
     Friend WithEvents btnHistory As System.Windows.Forms.Button
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents grpSignature As System.Windows.Forms.GroupBox
+    Friend WithEvents CLientSignature As System.Windows.Forms.PictureBox
+    Friend WithEvents btnSignature As System.Windows.Forms.Button
 
 End Class

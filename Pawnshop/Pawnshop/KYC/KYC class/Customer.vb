@@ -6,6 +6,7 @@
 ''' <remarks></remarks>
 Public Class Customer
     Private SRC As String = Application.StartupPath & "\ClientImage"
+    Private SRCSignature As String = Application.StartupPath & "\Signature"
     Dim indexof As String
     Dim lastindexof As String
 
@@ -290,6 +291,26 @@ Public Class Customer
             _cPUREIMAGE = value
         End Set
     End Property
+
+    Private _CSignature As String
+    Public Property CSignature() As String
+        Get
+            Return _CSignature
+        End Get
+        Set(ByVal value As String)
+            _CSignature = value
+        End Set
+    End Property
+
+    Private _CSignaturePUre As Image
+    Public Property CSignaturePUre As Image
+        Get
+            Return _CSignaturePUre
+        End Get
+        Set(ByVal value As Image)
+            _CSignaturePUre = value
+        End Set
+    End Property
 #End Region
 
 #Region "Procedures"
@@ -332,6 +353,7 @@ Public Class Customer
                 .Item("SRCFUND") = _sourceOfFund
                 .Item("RANK") = _rank
                 .Item("CLIENT_IMG") = _CImage
+                .Item("CLIENT_SIGNATURE") = _CSignature
             End With
             ds.Tables(CUSTOMER_TABLE).Rows.Add(dsNewRow)
         Else
@@ -359,6 +381,7 @@ Public Class Customer
                 .Item("SRCFUND") = _sourceOfFund
                 .Item("RANK") = _rank
                 .Item("CLIENT_IMG") = _CImage
+                .Item("CLIENT_SIGNATURE") = _CSignature
             End With
         End If
         database.SaveEntry(ds, isNew)
@@ -476,13 +499,13 @@ gOheRE:
             _sex = IIf(.Item("GENDER") = "M", 1, 0)
             _sourceOfFund = IIf(IsDBNull(.Item("SRCFUND")), "", .Item("SRCFUND"))
             _rank = IIf(IsDBNull(.Item("RANK")), "", .Item("RANK"))
+            _CSignature = IIf(IsDBNull(.Item("CLIENT_SIGNATURE")), "", .Item("CLIENT_SIGNATURE"))
             _CImage = IIf(IsDBNull(.Item("CLIENT_IMG")), "", .Item("CLIENT_IMG"))
 
             If _CImage = "" Then GoTo NEXTLINE
 
             indexof = SRC & "\" & _CImage.Substring(0, _CImage.IndexOf("|"c))
             lastindexof = _CImage.Substring(_CImage.LastIndexOf("|"c)).Trim("|")
-
 
             If File.Exists(indexof) Then
                 If ChkFileIntegrity(lastindexof, indexof) Then
@@ -497,10 +520,28 @@ gOheRE:
                 AddTimelyLogs("Client Management2", "Random string Already Exists.")
                 _CImage = "IMGNOTFOUND"
             End If
+
+
+NEXTLINE:   If _CSignature = "" Then GoTo COntinues
+            indexof = SRCSignature & "\" & _CSignature.Substring(0, _CSignature.IndexOf("|"c))
+            lastindexof = _CSignature.Substring(_CSignature.LastIndexOf("|"c)).Trim("|")
+
+            If File.Exists(indexof) Then
+                If ChkFileIntegrity(lastindexof, indexof) Then
+                    _CSignaturePUre = Image.FromFile(indexof)
+                Else
+                    MsgBox("Invalid image, Please contact MIS Department.", MsgBoxStyle.Critical, "Error")
+                    AddTimelyLogs("Client Management2", "Hash Code is not equal in the database.")
+                    _CSignature = "IMGNOTFOUND"
+                End If
+            Else
+                MsgBox("Invalid image, Please contact MIS Department.", MsgBoxStyle.Critical, "Error")
+                AddTimelyLogs("Client Management2", "Random string Already Exists.")
+                _CSignature = "IMGNOTFOUND"
+            End If
         End With
 
-NEXTLINE:
-
+COntinues:
         ' Loading Collections
         mySql = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & _id
         mySql &= " ORDER BY PHONEID ASC"
@@ -575,7 +616,19 @@ NEXTLINE:
 
         For Each LogFile In Directory.GetFiles(SRC)
             If LogFile = randstr Then
-                Log_Report(String.Format("FileName already Exists: {0}.", randstr))
+                Log_Report(String.Format("FileName already Exists for customer image: {0}.", randstr))
+                Return False
+            End If
+        Next
+
+        Return True
+    End Function
+
+    Friend Function FndRndmStrSignature(ByVal randstr As String) As Boolean
+
+        For Each LogFile In Directory.GetFiles(SRCSignature)
+            If LogFile = randstr Then
+                Log_Report(String.Format("FileName already Exists for customer signature: {0}.", randstr))
                 Return False
             End If
         Next

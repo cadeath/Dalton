@@ -108,7 +108,8 @@
         mySql &= vbCrLf & "  GENDER VARCHAR(1) DEFAULT 'F' NOT NULL,"
         mySql &= vbCrLf & "  SRCFUND VARCHAR(50),"
         mySql &= vbCrLf & "  RANK SMALLINT DEFAULT '0' NOT NULL,"
-        mySql &= vbCrLf & "  CLIENT_IMG VARCHAR(75));"
+        mySql &= vbCrLf & "  CLIENT_IMG VARCHAR(75),"
+        mySql &= vbCrLf & "  CLIENT_SIGNATURE VARCHAR(75));"
         primaryKey = "ALTER TABLE " & CUSTOMER_TABLE & " ADD PRIMARY KEY (ID);"
 
         Console.WriteLine("Start creating...")

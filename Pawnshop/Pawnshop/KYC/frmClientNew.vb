@@ -58,6 +58,11 @@ Public Class frmClientNew
             End If
         Next
 
+        For Each Ph As PhoneNumber In cus.CustomersPhone
+            lv.SubItems.Add(Ph.PhoneNumber)
+            Exit For
+        Next
+
         lv.ImageKey = "imgMale"
         If cus.Sex = 0 Then
             lv.ImageKey = "imgFemale"
@@ -133,7 +138,8 @@ Public Class frmClientNew
             btnSearch.PerformClick()
         End If
     End Sub
-
+    '''
+    ''' 
     ''' <summary>
     ''' This button will show client information in the client form.
     ''' </summary>
@@ -154,6 +160,7 @@ Public Class frmClientNew
         frmCustomer_KYC.Show()
         frmCustomer_KYC.LoadClientInForm(tmpCus)
     End Sub
+
     ''' <summary>
     ''' doubleclick specific data in the listview and show thier information in the client form.
     ''' </summary>

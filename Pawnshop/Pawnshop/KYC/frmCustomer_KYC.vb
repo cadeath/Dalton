@@ -12,12 +12,15 @@ Public Class frmCustomer_KYC
 
     Private SRC As String = Application.StartupPath & "\ClientImage"
     Friend FlName As String = "", Ext As String = ".EAM"
+    Friend FNameSignature As String = ""
+
+    Private SRCSignature As String = Application.StartupPath & "\Signature"
 
     Private lockForm As Boolean = False, IDX As Integer
     Friend FormOrigin As Form
     Friend SelectedCustomer As Customer 'Holds Customer
     Friend isNew As Boolean = True
-    Friend notNewPic As Boolean = True
+    Friend notNewPic As Boolean = True, notNewSignature As Boolean = True
     Private KycRequired As Boolean = IIf(GetOption("KYCRequired") = "Yes", True, False)
 
 
@@ -28,8 +31,10 @@ Public Class frmCustomer_KYC
 
         If Not KycRequired Then
             btnCamera.Visible = False
+            btnSignature.Visible = False
         Else
             btnCamera.Visible = True
+            btnSignature.Visible = True
         End If
         ' ELLIEPOPULATEINFO()
         'Populate()
@@ -98,13 +103,18 @@ Public Class frmCustomer_KYC
         Next
 
         ClientImage.Image = cus.CPUREIMAGE
-
         If cus.CImage = "IMGNOTFOUND" Or cus.CImage = "" Then
             FlName = ""
         Else
             FlName = cus.CImage.Substring(0, cus.CImage.IndexOf("|"c))
         End If
 
+        CLientSignature.Image = cus.CSignaturePUre
+        If cus.CSignature = "IMGNOTFOUND" Or cus.CSignature = "" Then
+            FNameSignature = ""
+        Else
+            FNameSignature = cus.CSignature.Substring(0, cus.CSignature.IndexOf("|"c))
+        End If
 
         SelectedCustomer = cus
 
@@ -129,6 +139,7 @@ Public Class frmCustomer_KYC
         'tbID
         TabControl1.Enabled = st
         grpCusPic.Enabled = st
+        grpSignature.Enabled = st
 
         If Not st Then
             btnSave.Text = "&Modify"
@@ -240,6 +251,9 @@ Public Class frmCustomer_KYC
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information") : Return False
         End If
 
+        If CLientSignature.Image Is Nothing Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information") : Return False
+        End If
         Return True
     End Function
 
@@ -267,8 +281,9 @@ Public Class frmCustomer_KYC
             Directory.CreateDirectory(SRC)
         End If
 
-GenerateRandOmString:
-        FlName = FileName()
+        If Not Directory.Exists(SRCSignature) Then
+            Directory.CreateDirectory(SRCSignature)
+        End If
 
         Dim NewCustomer As New Customer
 
@@ -304,13 +319,27 @@ GenerateRandOmString:
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
 
+GenerateRandOmString:  ' For Customer's Photo
+            FlName = FileName()
             If KycRequired Then
+
                 If Not .FindRanStrIfExists(SRC & "\" & FlName & Ext) Then
                     GoTo GenerateRandOmString
                 End If
 
                 ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
                 .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
+            End If
+
+GnrteRndmSignature:  'For Customer's Signature
+            FNameSignature = FileName()
+            If KycRequired Then
+                If Not .FndRndmStrSignature(SRCSignature & "\" & FNameSignature & Ext) Then
+                    GoTo GnrteRndmSignature
+                End If
+
+                CLientSignature.Image.Save(String.Format("{0}{1}{2}{3}", SRCSignature, "\", FNameSignature, Ext))
+                .CSignature = String.Format("{0}{1}{2}{3}", FNameSignature, Ext, "|", GetFileMD5(SRCSignature & "\" & FNameSignature & Ext))
             End If
 
             If CustomerPhones.Count >= 1 Then
@@ -339,6 +368,10 @@ GenerateRandOmString:
 
         If Not Directory.Exists(SRC) Then
             Directory.CreateDirectory(SRC)
+        End If
+
+        If Not Directory.Exists(SRCSignature) Then
+            Directory.CreateDirectory(SRCSignature)
         End If
 
         Dim NewCustomer As New Customer
@@ -376,11 +409,10 @@ GenerateRandOmString:
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
 
-FLNME:
+FLNME:      'For Customer's Photo
             If KycRequired Then
-
                 If Not notNewPic Then
-                    If Not NewCustomer.FindRanStrIfExists(SRC & "\" & FlName) Then
+                    If Not NewCustomer.FindRanStrIfExists(SRC & "\" & FlName & Ext) Then
                         FlName = FileName() : GoTo FLNME
                     End If
                 End If
@@ -394,6 +426,28 @@ FLNME:
                     .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
                 Else
                     .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
+                End If
+            End If
+
+continues:
+            'For Customer's Signature
+            If KycRequired Then
+
+                If Not notNewSignature Then
+                    If Not NewCustomer.FndRndmStrSignature(SRCSignature & "\" & FNameSignature & Ext) Then
+                        FNameSignature = FileName() : GoTo continues
+                    End If
+                End If
+
+                If Not notNewSignature Then
+                    CLientSignature.Image.Save(String.Format("{0}{1}{2}{3}", SRCSignature, "\", FNameSignature, Ext))
+                End If
+
+
+                If Not notNewSignature Then
+                    .CSignature = String.Format("{0}{1}{2}{3}", FNameSignature, Ext, "|", GetFileMD5(SRCSignature & "\" & FNameSignature & Ext))
+                Else
+                    .CSignature = String.Format("{0}{1}{2}", FNameSignature, "|", GetFileMD5(SRCSignature & "\" & FNameSignature))
                 End If
             End If
 
@@ -837,6 +891,7 @@ NextlineTODO:
     End Sub
 
     Private Sub btnCamera_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCamera.Click
+        If btnSignature.Text = "Capture" Then Exit Sub
         If ClientImage.Image Is Nothing Then
             GoTo nextLineTODO
         Else
@@ -954,5 +1009,32 @@ nextLineTODO:
 
     Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
         ComputeBirthday()
+    End Sub
+
+   
+    Private Sub btnSignature_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSignature.Click
+        If btnCamera.Text = "Capture" Then
+            Exit Sub
+        End If
+
+        If btnSignature.Text = "Open Camera" Then
+            Call OpenForSignature()
+            btnSignature.Text = "Capture"
+            CLientSignature.Image = Nothing
+        ElseIf btnSignature.Text = "Capture" Then
+            Dim Data As IDataObject
+            Dim Bmap As Image
+            SendMessage(hHwnd, WM_Cap_EDIT_COPY, 0, 0)
+            Data = Clipboard.GetDataObject()
+            If Data.GetDataPresent(GetType(System.Drawing.Bitmap)) Then
+                Bmap = CType(Data.GetData(GetType(System.Drawing.Bitmap)), Image)
+                CLientSignature.Image = Bmap
+                Call ClosePreviewWindow()
+            End If
+            btnSignature.Text = "Open Camera"
+
+            notNewSignature = False : FNameSignature = FileName()
+            Call ClosePreviewWindow()
+        End If
     End Sub
 End Class
