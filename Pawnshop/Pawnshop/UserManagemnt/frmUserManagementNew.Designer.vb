@@ -22,6 +22,7 @@ Partial Class frmUserManagementNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUserManagementNew))
         Me.tbControl = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.lvUserList = New System.Windows.Forms.ListView()
@@ -64,7 +65,6 @@ Partial Class frmUserManagementNew
         Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.Watermark1 = New Pawnshop.watermark()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -500,25 +500,16 @@ Partial Class frmUserManagementNew
         Me.lblStatus.Size = New System.Drawing.Size(65, 17)
         Me.lblStatus.Text = "User Status"
         '
-        'Watermark1
-        '
-        Me.Watermark1.Location = New System.Drawing.Point(57, 473)
-        Me.Watermark1.Name = "Watermark1"
-        Me.Watermark1.Size = New System.Drawing.Size(200, 20)
-        Me.Watermark1.TabIndex = 24
-        Me.Watermark1.WatermarkColor = System.Drawing.Color.Gray
-        Me.Watermark1.WatermarkText = "Default Watermark"
-        '
         'frmUserManagementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(770, 526)
-        Me.Controls.Add(Me.Watermark1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnCancell)
         Me.Controls.Add(Me.btnCreateAccount)
         Me.Controls.Add(Me.tbControl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmUserManagementNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "User Management"
@@ -581,5 +572,4 @@ Partial Class frmUserManagementNew
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Watermark1 As Pawnshop.watermark
 End Class

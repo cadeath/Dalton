@@ -534,11 +534,11 @@
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
-        If UType = "Admin" Then GoTo NExtLine
+        'If UType = "Admin" Then GoTo NExtLine
 
-        If Not AccountRule.HasPrivilege("Usermanagment") Then
-            MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
-        End If
+        'If Not AccountRule.HasPrivilege("Usermanagment") Then
+        '    MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        'End If
 NExtLine:
         frmUserManagementNew.Show()
     End Sub

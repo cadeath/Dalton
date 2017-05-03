@@ -78,6 +78,8 @@
         End If
 
 nextToline:
+
+        AccountRule.LOAD_USER_RULES()
         frmMainnEW.Show()
         frmMainnEW.NotYetLogin(False)
         frmMainnEW.CheckStoreStatus()
@@ -86,7 +88,6 @@ nextToline:
             frmUserInfor.Show()
         End If
 
-        AccountRule.LOAD_USER_RULES()
         Me.Close()
     End Sub
 
