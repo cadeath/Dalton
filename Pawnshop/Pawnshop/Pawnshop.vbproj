@@ -426,6 +426,8 @@
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
+    <Compile Include="Money Transfer\ChargeDetails.vb" />
+    <Compile Include="Money Transfer\ChargeName.vb" />
     <Compile Include="OTP\diagGeneralOTP.Designer.vb">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
     </Compile>
