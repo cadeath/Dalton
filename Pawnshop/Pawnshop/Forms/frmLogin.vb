@@ -1,4 +1,4 @@
-﻿Public Class frmLogin
+﻿Public Class frmLogin1
     Dim drag As Boolean
     Dim mousex As Integer
     Dim mousey As Integer

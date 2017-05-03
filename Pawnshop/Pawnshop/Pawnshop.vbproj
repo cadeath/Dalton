@@ -890,6 +890,42 @@
     </Compile>
     <Compile Include="Modules\IniFileVb.vb" />
     <Compile Include="SMS\smsUtil.vb" />
+    <Compile Include="UserManagemnt\Class\Sys_user.vb" />
+    <Compile Include="UserManagemnt\Class\UserRuleCol.vb" />
+    <Compile Include="UserManagemnt\Class\User_Line_RULES.vb" />
+    <Compile Include="UserManagemnt\Class\User_rule.vb" />
+    <Compile Include="UserManagemnt\frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmMainnEW.Designer.vb">
+      <DependentUpon>frmMainnEW.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmMainnEW.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserInfor.Designer.vb">
+      <DependentUpon>frmUserInfor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserInfor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserManagementNew.Designer.vb">
+      <DependentUpon>frmUserManagementNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserManagementNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\Module\mod_sys.vb" />
+    <Compile Include="UserManagemnt\UserMigrate\Create_Tables.vb" />
+    <Compile Include="UserManagemnt\UserMigrate\PLoading.Designer.vb">
+      <DependentUpon>PLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\UserMigrate\PLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -1357,6 +1393,22 @@
     <EmbeddedResource Include="SMS\frmSMSnotice.resx">
       <DependentUpon>frmSMSnotice.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmMainnEW.resx">
+      <DependentUpon>frmMainnEW.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmUserInfor.resx">
+      <DependentUpon>frmUserInfor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmUserManagementNew.resx">
+      <DependentUpon>frmUserManagementNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\Login.resx" />
+    <EmbeddedResource Include="UserManagemnt\UserMigrate\PLoading.resx">
+      <DependentUpon>PLoading.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -1498,7 +1550,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserManagemnt\User Management Form\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
