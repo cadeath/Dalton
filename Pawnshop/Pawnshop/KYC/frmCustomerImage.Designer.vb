@@ -59,7 +59,7 @@ Partial Class frmCustomerImage
         Me.Controls.Add(Me.dgCustImage)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmCustomerImage"
-        Me.Text = "Customer Image"
+        Me.Text = "Customer Image List"
         CType(Me.dgCustImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
