@@ -434,7 +434,7 @@ Public Class frmSales
                 If itm.Discount = 0 Then
                     .Item("Remarks") = ""
                 Else
-                    .Item("Remarks") = "Discount % " & itm.Discount
+                    .Item("Remarks") = "Discount " & itm.Discount & "%"
                 End If
 
 
