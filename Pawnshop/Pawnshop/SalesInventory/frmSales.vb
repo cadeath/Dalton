@@ -148,6 +148,7 @@ Public Class frmSales
             lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
             ItemAmount = (itm.SalePrice * itm.Quantity)
             lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
+            lv.SubItems.Add(itm.SRP.ToString("#,##0.00"))
             lv.SubItems.Add(itm.Discount)
         End If
 
@@ -432,9 +433,9 @@ Public Class frmSales
                 .Item("UOM") = itm.UnitofMeasure
 
                 If itm.Discount = 0 Then
-                    .Item("Remarks") = ""
+                    .Item("Remarks") = Nothing
                 Else
-                    .Item("Remarks") = "Discount " & itm.Discount & "%"
+                    .Item("Remarks") = "Price " & itm.SRP & " Discounted " & itm.Discount & "%"
                 End If
 
 
@@ -780,7 +781,7 @@ Public Class frmSales
     '    End Try
     'End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmMassDiscount.Show()
         Me.Close()
     End Sub

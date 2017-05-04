@@ -22,7 +22,7 @@ Partial Class frmSales
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GAD 0120", "SAMPLE GAD ITEMS", "3", "1,000", "3,000", "65"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GAD 0120", "SAMPLE GAD ITEMS", "3", "1,000", "3,000", "65"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSales))
         Me.lvSale = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -58,7 +58,7 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -67,11 +67,11 @@ Partial Class frmSales
         Me.lvSale.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvSale.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvSale.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvSale.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSale.FullRowSelect = True
         Me.lvSale.GridLines = True
-        Me.lvSale.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvSale.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvSale.Location = New System.Drawing.Point(12, 38)
         Me.lvSale.Name = "lvSale"
         Me.lvSale.Size = New System.Drawing.Size(574, 341)
@@ -87,12 +87,12 @@ Partial Class frmSales
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 174
+        Me.ColumnHeader2.Width = 130
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Qty"
-        Me.ColumnHeader3.Width = 44
+        Me.ColumnHeader3.Width = 39
         '
         'ColumnHeader4
         '
@@ -106,8 +106,8 @@ Partial Class frmSales
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Discount %"
-        Me.ColumnHeader6.Width = 93
+        Me.ColumnHeader6.Text = "SRP"
+        Me.ColumnHeader6.Width = 74
         '
         'Label1
         '
@@ -348,23 +348,16 @@ Partial Class frmSales
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
         '
-        'Button1
+        'ColumnHeader7
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(760, 168)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(115, 33)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Mass Discount"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.ColumnHeader7.Text = "% Discount"
+        Me.ColumnHeader7.Width = 79
         '
         'frmSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(890, 428)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblNoVat)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
@@ -422,5 +415,5 @@ Partial Class frmSales
     Friend WithEvents tsbtnOut As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbtnLay As System.Windows.Forms.ToolStripButton
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class

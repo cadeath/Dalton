@@ -288,6 +288,8 @@
                 If fromSales Then
                     If isRedeem Then qtyItm = 1
                     selected_Itm.Quantity = qtyItm
+                    selected_Itm.SRP = selected_Itm.SalePrice
+                    selected_Itm.Discount = 0
 
                     If isRedeem = True Then
                         frmSales.AddItem(selected_Itm, True)
@@ -389,6 +391,7 @@
         End If
 
         selected_Itm.Quantity = qtyItm
+        selected_Itm.SRP = price
 
         frmSales.AddItem(selected_Itm)
         frmSales.Show()

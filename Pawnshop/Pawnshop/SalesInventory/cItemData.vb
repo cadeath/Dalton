@@ -219,6 +219,15 @@
         End Set
     End Property
 
+    Private _srp As Double
+    Public Property SRP() As Double
+        Get
+            Return _srp
+        End Get
+        Set(ByVal value As Double)
+            _srp = value
+        End Set
+    End Property
 
 #End Region
 
