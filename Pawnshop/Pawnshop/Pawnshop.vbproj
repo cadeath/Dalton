@@ -299,6 +299,13 @@
     <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Discount\frmMassDiscount.Designer.vb">
+      <DependentUpon>frmMassDiscount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Discount\frmMassDiscount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Discount\ListViewColumnSorter.vb" />
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -940,6 +947,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Discount\frmMassDiscount.resx">
+      <DependentUpon>frmMassDiscount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>

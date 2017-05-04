@@ -341,7 +341,7 @@
         With dr
             _itemID = .Item("ITEMID")
             _itemCode = .Item("ITEMCODE")
-            If _description <> "" Then _description = .Item("DESCRIPTION")
+            If Not IsDBNull(.Item("DESCRIPTION")) Then _description = .Item("DESCRIPTION")
             If Not IsDBNull(.Item("BARCODE")) Then _barCode = .Item("BARCODE")
             _category = .Item("CATEGORIES")
             If Not IsDBNull(.Item("SUBCAT")) Then _subCat = .Item("SUBCAT")
