@@ -2,6 +2,8 @@
 
 Public Class frmMain
 
+    Dim s_USER As New Sys_user
+
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
     Friend doExpiry As Boolean = False
@@ -144,8 +146,8 @@ Public Class frmMain
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canSettings) Then
-            MsgBoxAuthoriation("You don't have access to Settings")
+        If Not AccountRule.HasPrivilege("Settings") Then
+            MsgBoxAuthoriation("You Don't have access to Settings.")
             Exit Sub
         End If
 
@@ -156,28 +158,30 @@ Public Class frmMain
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canUserManage) Then
-            MsgBoxAuthoriation("You don't have access to User Management")
-            Exit Sub
-        End If
+        'If UType = "Admin" Then GoTo NExtLine
 
-        frmUserManagement.Show()
+        'If Not AccountRule.HasPrivilege("Usermanagment") Then
+        '    MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        'End If
+NExtLine:
+        frmUserManagementNew.Show()
     End Sub
 
     Private Sub ExpiryGeneratorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryGeneratorToolStripMenuItem.Click
-        If Not POSuser.canExpiryListGenerate Then
-            MsgBoxAuthoriation("You don't have access to Expiry Generator")
+        If Not AccountRule.HasPrivilege("Expiry Generator") Then
+            MsgBoxAuthoriation("You Don't have access to Expiry Generator.")
             Exit Sub
         End If
         MsgBox("Please be information that this function is obsolete", MsgBoxStyle.Information)
 
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
+
     End Sub
 
     Private Sub JournalEntriesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles JournalEntriesToolStripMenuItem.Click
-        If Not POSuser.canJournalEntryGenerate Then
-            MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
+        If Not AccountRule.HasPrivilege("Journal Entry Generator") Then
+            MsgBoxAuthoriation("You Don't have access to Journal Entry Generator.")
             Exit Sub
         End If
 
@@ -188,8 +192,8 @@ Public Class frmMain
     Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canMoneyTransfer) Then
-            MsgBoxAuthoriation("You don't have access to Money Transfer")
+        If Not AccountRule.HasPrivilege("Money Transfer") Then
+            MsgBoxAuthoriation("You Don't have access to Money Transfer.")
             Exit Sub
         End If
         frmMoneyTransfer.Show()
@@ -198,28 +202,27 @@ Public Class frmMain
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canDollarBuying) Then
-            MsgBoxAuthoriation("You don't have access to Dollar Buying")
+        If Not AccountRule.HasPrivilege("Dollar Buying") Then
+            MsgBoxAuthoriation("You Don't have access to Dollar Buying.")
             Exit Sub
         End If
-        'frmDollorSimple.Show()
         frmmoneyexchange.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canCashInOut) Then
-            MsgBoxAuthoriation("You don't have access to Cash In/Out")
+        If Not AccountRule.HasPrivilege("Cash In/Out") Then
+            MsgBoxAuthoriation("You Don't have access to Cash In/Out.")
             Exit Sub
         End If
-
         frmCashInOut2.Show()
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
-        If Not (POSuser.isSuperUser Or POSuser.canOpenStore) Then
-            MsgBoxAuthoriation("You cannot Open a Store.")
+
+        If Not AccountRule.HasPrivilege("Close Store") Then
+            MsgBoxAuthoriation("You Don't have access to Close Store.")
             Exit Sub
         End If
         frmOpenStore.Show()
@@ -228,8 +231,8 @@ Public Class frmMain
     Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canClientManage) Then
-            MsgBoxAuthoriation("You don't have access to Client Management")
+        If Not AccountRule.HasPrivilege("Client Management") Then
+            MsgBoxAuthoriation("You Don't have access to Client Management.")
             Exit Sub
         End If
         frmClient.Show()
@@ -238,8 +241,8 @@ Public Class frmMain
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canPawn) Then
-            MsgBoxAuthoriation("You don't have access to pawning")
+        If Not AccountRule.HasPrivilege("Pawning") Then
+            MsgBoxAuthoriation("You Don't have access to Pawning.")
             Exit Sub
         End If
         frmPawning.Show()
@@ -261,17 +264,16 @@ Public Class frmMain
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canBorrow) Then
-            MsgBoxAuthoriation("You don't have access to Borrowings")
+        If Not AccountRule.HasPrivilege("Borrowings") Then
+            MsgBoxAuthoriation("You Don't have access to Borrowings.")
             Exit Sub
         End If
-
         frmBorrowing.Show()
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogOutToolStripMenuItem.Click
         If LogOutToolStripMenuItem.Text = "&Login" Then
-            frmLogin1.Show()
+            frmLogin.Show()
         Else
             Dim ans As DialogResult = MsgBox("Do you want to LOGOUT?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Logout")
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -288,7 +290,7 @@ Public Class frmMain
             Next
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
-            frmLogin1.Show()
+            frmLogin.Show()
         End If
     End Sub
 
@@ -299,8 +301,8 @@ Public Class frmMain
     Private Sub btnInsurance_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsurance.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canInsurance) Then
-            MsgBoxAuthoriation("You don't have access to insurance.")
+        If Not AccountRule.HasPrivilege("Insurance") Then
+            MsgBoxAuthoriation("You Don't have access to Insurance.")
             Exit Sub
         End If
         'Insurance show form
@@ -311,37 +313,37 @@ Public Class frmMain
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If DEV_MODE Then dev_Pawning2.Show()
-        If (POSuser.isSuperUser Or Not POSuser.canLayAway) Then
-            MsgBoxAuthoriation("You don't have access to Lay away.")
+
+        If Not AccountRule.HasPrivilege("Lay away") Then
+            MsgBoxAuthoriation("You Don't have access to Lay away.")
             Exit Sub
         End If
+
     End Sub
 
     Private Sub btnPOS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canPOS) Then
-            MsgBoxAuthoriation("You don't have access to POS")
+        If Not AccountRule.HasPrivilege("POS") Then
+            MsgBoxAuthoriation("You Don't have access to POS.")
             Exit Sub
         End If
-
         frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canCashCount) Then
-            MsgBoxAuthoriation("You don't have access to Cash Count")
+        If Not AccountRule.HasPrivilege("Cash Count") Then
+            MsgBoxAuthoriation("You Don't have access to Cash Count.")
             Exit Sub
         End If
-
         frmCashCount.Show()
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canBackup) Then
-            MsgBoxAuthoriation("You don't have access to Backup")
+        If Not AccountRule.HasPrivilege("Backup") Then
+            MsgBoxAuthoriation("You Don't have access to Backup.")
             Exit Sub
         End If
 
@@ -356,8 +358,8 @@ Public Class frmMain
     End Sub
 
     Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canMigrate) Then
-            MsgBoxAuthoriation("You don't have access to the Console")
+        If Not AccountRule.HasPrivilege("Console") Then
+            MsgBoxAuthoriation("You Don't have access to Console.")
             Exit Sub
         End If
         'frmMIS.Show()
@@ -365,10 +367,11 @@ Public Class frmMain
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
-        If Not POSuser.canOpenStore Then
-            MsgBoxAuthoriation("You cannot Close a Store.")
+        If Not AccountRule.HasPrivilege("Close Store") Then
+            MsgBoxAuthoriation("You Don't have access to Close Store.")
             Exit Sub
         End If
+
         frmCashCountV2.Show()
         frmCashCountV2.isClosing = True
     End Sub
@@ -389,8 +392,8 @@ Public Class frmMain
     End Sub
 
     Private Sub RateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RateToolStripMenuItem.Click
-        If Not POSuser.canUpdateRates Then
-            MsgBoxAuthoriation("You cannot update rates.")
+        If Not AccountRule.HasPrivilege("Update Rate") Then
+            MsgBoxAuthoriation("You Don't have access to Update Rates.")
             Exit Sub
         End If
 
@@ -457,7 +460,7 @@ Public Class frmMain
     End Sub
 
     Private Sub BSPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSPReportToolStripMenuItem.Click
-        If Not POSuser.canJournalEntryGenerate Then
+        If Not AccountRule.HasPrivilege("Journal Entry Generator") Then
             MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
             Exit Sub
         End If
@@ -690,5 +693,28 @@ Public Class frmMain
 
     Private Sub SMSNoticeToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem1.Click
         frmSMSInfo.Show()
+    End Sub
+
+    Private Sub tmrForPasswordExpiry_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrForPasswordExpiry.Tick
+        tmrForPasswordExpiry.Stop()
+        bgwForPasswordExpiry.RunWorkerAsync()
+    End Sub
+
+    Private Sub bgwForPasswordExpiry_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwForPasswordExpiry.DoWork
+        tmrForPasswordExpiry.Stop()
+        Dim ms As String
+
+        If Not ifTblExist("TBL_USER_DEFAULT") Then
+            Exit Sub
+        End If
+
+        If s_USER.Get_rem_PassExp = 1 Then
+            ms = s_USER.Get_rem_PassExp & " Day Remaining"
+        ElseIf s_USER.Get_rem_PassExp <= 0 Then
+            ms = " Password Has Been Expired"
+        Else
+            ms = s_USER.Get_rem_PassExp & " Days Remaining"
+        End If
+        lblPasswordExpiry.Text = "Password Expiry: " & ms
     End Sub
 End Class

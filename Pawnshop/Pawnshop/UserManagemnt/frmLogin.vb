@@ -80,9 +80,9 @@
 nextToline:
 
         AccountRule.LOAD_USER_RULES()
-        frmMainnEW.Show()
-        frmMainnEW.NotYetLogin(False)
-        frmMainnEW.CheckStoreStatus()
+        frmMain.Show()
+        frmMain.NotYetLogin(False)
+        frmMain.CheckStoreStatus()
 
         If user_Login.ChkIfUserProfileWasNotUpdate Then
             frmUserInfor.Show()

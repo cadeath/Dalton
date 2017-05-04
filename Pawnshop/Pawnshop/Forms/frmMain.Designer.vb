@@ -116,6 +116,9 @@ Partial Class frmMain
         Me.LayawayListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayawayPaymentReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForfeitLayawayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tmrForPasswordExpiry = New System.Windows.Forms.Timer(Me.components)
+        Me.bgwForPasswordExpiry = New System.ComponentModel.BackgroundWorker()
+        Me.lblPasswordExpiry = New System.Windows.Forms.ToolStripStatusLabel()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -552,7 +555,7 @@ Partial Class frmMain
         'pInfo
         '
         Me.pInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pInfo.Controls.Add(Me.lblMessage)
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
@@ -564,7 +567,7 @@ Partial Class frmMain
         'lblMessage
         '
         Me.lblMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(310, 366)
@@ -690,7 +693,7 @@ Partial Class frmMain
         '
         'statusStrip
         '
-        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers})
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers, Me.lblPasswordExpiry})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
         Me.statusStrip.Size = New System.Drawing.Size(1063, 22)
@@ -759,6 +762,19 @@ Partial Class frmMain
         Me.ForfeitLayawayReportToolStripMenuItem.Name = "ForfeitLayawayReportToolStripMenuItem"
         Me.ForfeitLayawayReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.ForfeitLayawayReportToolStripMenuItem.Text = "Forfeit Layaway Report"
+        '
+        'tmrForPasswordExpiry
+        '
+        Me.tmrForPasswordExpiry.Interval = 1800000
+        '
+        'bgwForPasswordExpiry
+        '
+        '
+        'lblPasswordExpiry
+        '
+        Me.lblPasswordExpiry.Name = "lblPasswordExpiry"
+        Me.lblPasswordExpiry.Size = New System.Drawing.Size(91, 17)
+        Me.lblPasswordExpiry.Text = "Password Expiry"
         '
         'frmMain
         '
@@ -892,6 +908,9 @@ Partial Class frmMain
     Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SMSNoticeToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tmrForPasswordExpiry As System.Windows.Forms.Timer
+    Friend WithEvents bgwForPasswordExpiry As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblPasswordExpiry As System.Windows.Forms.ToolStripStatusLabel
 
 
 
