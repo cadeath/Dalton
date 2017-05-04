@@ -462,8 +462,8 @@
                 ChkInactivateUser.Checked = False
             End If
 
-            If .USERTYPE = "Admin" Then lblUserType.Text = "User Type: " & "Admin"
-            If .USERTYPE = "User" Then lblUserType.Text = "User Type: " & "User"
+            If .USERTYPE = "Admin" Then lblUserType.Text = "User Type: " & .USERTYPE
+            If .USERTYPE = "User" Then lblUserType.Text = "User Type: " & .USERTYPE
 
             txtAddDays.Text = .COUNTER
             txtFailedAttemp.Text = .FAILEDATTEMPNUM
