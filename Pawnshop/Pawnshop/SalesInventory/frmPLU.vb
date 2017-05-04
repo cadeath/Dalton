@@ -352,31 +352,47 @@
 
     Private Sub btnDiscount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDiscount.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
-        OTPDiscount_Initialization()
+        'OTPDiscount_Initialization()
+        'Dim idx As Integer = lvItem.SelectedItems(0).Index
+        'Dim selected_Itm As New cItemData
+        'selected_Itm = queued_IMD.Item(idx)
+
+        'If selected_Itm.SalePrice = 0 Then MsgBox("Item " & selected_Itm.ItemCode, MsgBoxStyle.Critical, "No Price") : Exit Sub
+        'selected_Itm.Quantity = qtyItm
+
+        'If Not OTPDisable Then
+        '    diagGeneralOTP.GeneralOTP = OtpSettings
+        '    diagGeneralOTP.TopMost = True
+        '    diagGeneralOTP.ShowDialog()
+
+        '    If Not diagGeneralOTP.isValid Then
+        '        Exit Sub
+        '    Else
+        '        frmDiscount.LoadItem(selected_Itm)
+        '    End If
+        'Else
+        '    frmDiscount.LoadItem(selected_Itm)
+        'End If
+
         Dim idx As Integer = lvItem.SelectedItems(0).Index
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
 
-        If selected_Itm.SalePrice = 0 Then MsgBox("Item " & selected_Itm.ItemCode, MsgBoxStyle.Critical, "No Price") : Exit Sub
+        Dim price As Double = selected_Itm.SalePrice
+        Dim discount As Integer = selected_Itm.Discount
+        Dim i As Double, subTotal As Double
+
+        If selected_Itm.Discount <> 0 Then
+            i = (Val(discount) / 100)
+            subTotal = Val(price) * i
+            selected_Itm.SalePrice = Val(price) - subTotal
+        End If
+
         selected_Itm.Quantity = qtyItm
 
-        If Not OTPDisable Then
-            diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.TopMost = True
-            diagGeneralOTP.ShowDialog()
-
-            If Not diagGeneralOTP.isValid Then
-                Exit Sub
-            Else
-                frmDiscount.LoadItem(selected_Itm)
-            End If
-        Else
-            frmDiscount.LoadItem(selected_Itm)
-        End If
-       
-        frmDiscount.Show()
+        frmSales.AddItem(selected_Itm)
+        frmSales.Show()
         Me.Close()
-
     End Sub
 
     Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
