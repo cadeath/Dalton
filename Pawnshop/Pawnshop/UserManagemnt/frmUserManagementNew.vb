@@ -20,13 +20,12 @@
         txtUsername.Focus()
         ChkInactivateUser.Visible = False
         lblStatus.Visible = False
+        lblUserType.Visible = False
 
         Load_Privileges(False)
         Load_users()
         Load_ALL_users()
 
-
-       
     End Sub
 
     Private Sub Load_users()
@@ -379,11 +378,23 @@
             If row.Cells(2).Value = "" Then tbControl.SelectedTab = TabPage2 : Return False
         Next
 
+        If lblUserType.Text <> "Admin" Or lblUserType.Text = "" Then
+            If txtAddDays.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtAddDays.Focus() : Return False
+            If txtPasswordAge.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtPasswordAge.Focus() : Return False
+            If txtFailedAttemp.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtFailedAttemp.Focus() : Return False
+        End If
+
         If CHKISEXPIRED.Checked = True Then
             If txtAddDays.Text = "" Then tbControl.SelectedTab = TabPage3 : txtAddDays.Focus() : Return False
         End If
 
-        If txtPasswordAge.Text = "" Then tbControl.SelectedTab = TabPage3 : txtPasswordAge.Focus() : Return False
+        If chkPasswrdAge.Checked = True Then
+            If txtPasswordAge.Text = "" Then tbControl.SelectedTab = TabPage3 : txtPasswordAge.Focus() : Return False
+        End If
+
+        If chkFailedAttemp.Checked = True Then
+            If txtFailedAttemp.Text = "" Then tbControl.SelectedTab = TabPage3 : txtFailedAttemp.Focus() : Return False
+        End If
 
         Return True
     End Function
@@ -435,8 +446,6 @@
                 txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE)
             End If
 
-
-
             If .ISEXPIRED = 1 Then
                 CHKISEXPIRED.Checked = True
             Else
@@ -444,6 +453,7 @@
             End If
 
             lblStatus.Visible = True
+            lblUserType.Visible = True
             If .UserStatus = 0 Then
                 lblStatus.Text = "User Status: Inactive"
                 ChkInactivateUser.Checked = True
@@ -451,6 +461,9 @@
                 lblStatus.Text = "User Status: Active"
                 ChkInactivateUser.Checked = False
             End If
+
+            If .USERTYPE = "Admin" Then lblUserType.Text = "User Type: " & "Admin"
+            If .USERTYPE = "User" Then lblUserType.Text = "User Type: " & "User"
 
             txtAddDays.Text = .COUNTER
             txtFailedAttemp.Text = .FAILEDATTEMPNUM
@@ -502,6 +515,7 @@
 
         dgRulePrivilege.Enabled = True
         lblStatus.Visible = False
+        lblUserType.Visible = False
 
         btnCreateAccount.Text = "&Create Account"
 

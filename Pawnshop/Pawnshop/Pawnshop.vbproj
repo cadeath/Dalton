@@ -1405,7 +1405,6 @@
     <EmbeddedResource Include="UserManagemnt\frmUserManagementNew.resx">
       <DependentUpon>frmUserManagementNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserManagemnt\Login.resx" />
     <EmbeddedResource Include="UserManagemnt\UserMigrate\PLoading.resx">
       <DependentUpon>PLoading.vb</DependentUpon>
     </EmbeddedResource>

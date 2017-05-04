@@ -65,6 +65,7 @@ Partial Class frmUserManagementNew
         Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblUserType = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -487,7 +488,7 @@ Partial Class frmUserManagementNew
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblStatus, Me.lblUserType})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 504)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(770, 22)
@@ -499,6 +500,12 @@ Partial Class frmUserManagementNew
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(65, 17)
         Me.lblStatus.Text = "User Status"
+        '
+        'lblUserType
+        '
+        Me.lblUserType.Name = "lblUserType"
+        Me.lblUserType.Size = New System.Drawing.Size(59, 17)
+        Me.lblUserType.Text = "User Type"
         '
         'frmUserManagementNew
         '
@@ -572,4 +579,5 @@ Partial Class frmUserManagementNew
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents lblUserType As System.Windows.Forms.ToolStripStatusLabel
 End Class
