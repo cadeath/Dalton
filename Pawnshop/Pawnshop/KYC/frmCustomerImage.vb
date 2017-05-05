@@ -37,7 +37,11 @@ Public Class frmCustomerImage
     Private Delegate Sub addBar_callback()
 
     Private Sub AddImage()
-        If Not File.Exists(SRC) Then Exit Sub
+        Dim myDir As DirectoryInfo = New DirectoryInfo(SRC)
+
+        If Not (myDir.EnumerateFiles().Any()) Then
+            Exit Sub
+        End If
 
         Dim hashValue As String
 
