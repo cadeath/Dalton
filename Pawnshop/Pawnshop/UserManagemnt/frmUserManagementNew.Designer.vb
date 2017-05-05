@@ -503,6 +503,7 @@ Partial Class frmUserManagementNew
         '
         'lblUserType
         '
+        Me.lblUserType.BackColor = System.Drawing.Color.IndianRed
         Me.lblUserType.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblUserType.Name = "lblUserType"
         Me.lblUserType.Size = New System.Drawing.Size(59, 17)

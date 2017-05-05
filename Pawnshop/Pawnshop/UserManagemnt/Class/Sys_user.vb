@@ -318,6 +318,12 @@ Public Class Sys_user
 
 #Region "Procedures and Functions"
 
+    ''' <summary>
+    ''' This function will save the user's information in the database.
+    ''' </summary>
+    ''' <param name="ISACCT_EXPIRE"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function add_USER(Optional ByVal ISACCT_EXPIRE As Boolean = True) As Boolean
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -388,6 +394,12 @@ Public Class Sys_user
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will update the user's information in the database.
+    ''' </summary>
+    ''' <param name="ISACCT_EXPIRE"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function Update_USER(Optional ByVal ISACCT_EXPIRE As Boolean = True) As Boolean
         Dim ISPASS_AGE_EXPIRE As Boolean = True
 
@@ -470,6 +482,11 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will update user's information after they login.
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function UserProUpdate() As Boolean
        
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", IDX)
@@ -490,6 +507,13 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will check if password is already taken by other users.
+    ''' </summary>
+    ''' <param name="idx"></param>
+    ''' <param name="passwd"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function Check_Pass_IfExists(ByVal idx As Integer, ByVal passwd As String) As Boolean
 
         mySql = "SELECT * FROM " & subTable & " WHERE USERID  = " & idx & " ORDER BY USER_HISTID"
@@ -564,6 +588,14 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will check if username is already taken by other users.
+    ''' </summary>
+    ''' <param name="uNAME"></param>
+    ''' <param name="isSave"></param>
+    ''' <param name="idx"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function Check_USERNAME_IfExists(ByVal uNAME As String, Optional ByVal isSave As String = "", Optional ByVal idx As Integer = 0) As Boolean
         Dim ds As DataSet
 
@@ -595,12 +627,22 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will return all users from the database
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function dsUSEr() As DataSet
         Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT"
         Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
         Return ds
     End Function
 
+    ''' <summary>
+    ''' This function load user information base on ID
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <remarks></remarks>
     Friend Sub Users(ByVal id As Integer)
         Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE USERID = '" & id & "'"
         Dim ds As DataSet = LoadSQL(mysql, maintable)
@@ -608,6 +650,11 @@ nextLINETODO:
         Load_user_All_Rows(ds.Tables(maintable).Rows(0))
     End Sub
 
+    ''' <summary>
+    ''' This function will load user by row.
+    ''' </summary>
+    ''' <param name="dR"></param>
+    ''' <remarks></remarks>
     Friend Sub Load_user_All_Rows(ByVal dR As DataRow)
         On Error Resume Next
 
@@ -637,6 +684,10 @@ nextLINETODO:
         End With
     End Sub
 
+    ''' <summary>
+    ''' This function will save the privilege of the user in each module either 'Full Access, No Access, Read only'
+    ''' </summary>
+    ''' <remarks></remarks>
     Friend Sub Save_Privilege()
         mySql = "SELECT * FROM " & MAIN_LINE
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
@@ -658,6 +709,11 @@ nextLINETODO:
         database.SaveEntry(ds, True)
     End Sub
 
+    ''' <summary>
+    ''' This function will update the user's privileges
+    ''' </summary>
+    ''' <param name="ul_ID"></param>
+    ''' <remarks></remarks>
     Friend Sub Update_Privilege(ByVal ul_ID As Integer)
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = {0}", ul_ID)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
@@ -686,6 +742,11 @@ nextLINETODO:
 
     End Sub
 
+    ''' <summary>
+    ''' This function will load user privilege by ID
+    ''' </summary>
+    ''' <param name="IDX"></param>
+    ''' <remarks></remarks>
     Friend Sub LOAD_USERLINE_ROWS(ByVal IDX As Integer)
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERID ={0}", IDX)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
@@ -695,6 +756,11 @@ nextLINETODO:
         Next
     End Sub
 
+    ''' <summary>
+    ''' This function load user privilege by row.
+    ''' </summary>
+    ''' <param name="dR"></param>
+    ''' <remarks></remarks>
     Friend Sub Load_userLINE_BY_Rows(ByVal dR As DataRow)
         On Error Resume Next
         With dR
@@ -716,6 +782,16 @@ nextLINETODO:
 #End Region
 
 #Region "Login functions"
+
+    ''' <summary>
+    ''' This function verify if username and password are corect
+    ''' It will return true if account is correct
+    ''' It will return false if account is not correct
+    ''' </summary>
+    ''' <param name="uName"></param>
+    ''' <param name="pWrd"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function LogUser(ByVal uName As String, ByVal pWrd As String) As Boolean
         mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}')" & _
                               "AND USERPASS = '{1}' AND STATUS = 1", uName, EncryptString(pWrd))
@@ -727,6 +803,12 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This Function will verify if username is already exists in the database.
+    ''' </summary>
+    ''' <param name="uName"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function Check_username(ByVal uName As String) As Boolean
         mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}') AND STATUS ='0'", uName)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -738,6 +820,13 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will check if the password reached the maximum days expiration.
+    ''' </summary>
+    ''' <param name="uNAME"></param>
+    ''' <param name="u_PASS"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function CheckPass_Age_Expiration(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
                 "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
@@ -762,6 +851,13 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function check if the account reached the maximum days expiration.
+    ''' </summary>
+    ''' <param name="uNAME"></param>
+    ''' <param name="u_PASS"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function Chk_Account_EXPIRY_COUNTDOWN(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
@@ -789,6 +885,12 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function get the number of failed attemp to enter his/her accounts.
+    ''' </summary>
+    ''' <param name="uNAME"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function GET_FAILED_ATTEMP_NUM(ByVal uNAME As String) As Integer
         mySql = "SELECT * FROM " & maintable & " WHERE UPPER(USERNAME) = UPPER('" & uNAME & "') AND STATUS <> '0'"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -798,6 +900,12 @@ nextLINETODO:
         Return ds.Tables(0).Rows(0).Item("FAILEDATTEMPNUM")
     End Function
 
+    ''' <summary>
+    ''' This function will allow to disable the user's account.
+    ''' </summary>
+    ''' <param name="uNAME"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function LOCK_USER(ByVal uNAME As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE UPPER(USERNAME) = UPPER('" & uNAME & "') AND STATUS <> '0'"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -810,6 +918,14 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function will return to max days expiration if the user 
+    ''' used his/her account within 30 days.
+    ''' </summary>
+    ''' <param name="Uname"></param>
+    ''' <param name="pNAME"></param>
+    ''' <param name="isExpired"></param>
+    ''' <remarks></remarks>
     Friend Sub Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String, Optional ByVal isExpired As Boolean = True)
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(pNAME) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & Uname & "')"
@@ -822,6 +938,12 @@ nextLINETODO:
         database.SaveEntry(ds, False)
     End Sub
 
+    ''' <summary>
+    ''' This function only check if login user is admin.
+    ''' </summary>
+    ''' <param name="uName"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function chECK_If_SuperAdmin(ByVal uName As String) As Boolean
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}')", uName)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -837,6 +959,11 @@ nextLINETODO:
         Return True
     End Function
 
+    ''' <summary>
+    ''' This function get the remaining days password expiration.
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Function Get_rem_PassExp() As Integer
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", IDX)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -846,6 +973,11 @@ nextLINETODO:
         Return Date_Calculation(ds.Tables(0).Rows(0).Item("PASSWORD_AGE"))
     End Function
 
+    ''' <summary>
+    ''' This function check if user's information does'nt updated.
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Function ChkIfUserProfileWasNotUpdate() As Boolean
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", IDX)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
