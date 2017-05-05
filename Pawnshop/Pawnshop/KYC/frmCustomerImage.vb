@@ -37,8 +37,10 @@ Public Class frmCustomerImage
     Private Delegate Sub addBar_callback()
 
     Private Sub AddImage()
+        If Not File.Exists(SRC) Then Exit Sub
+
         Dim hashValue As String
-      
+
         Dim img As Image
         Dim i As Integer = 0
 
@@ -46,6 +48,7 @@ Public Class frmCustomerImage
             dgCustImage.Invoke(New addBar_callback(AddressOf AddImage))
         Else
             For Each imges In Directory.GetFiles(SRC)
+
                 i += 1
                 Dim subString As String = imges.Substring(imges.LastIndexOf("\"c)).Trim("\")
                 hashValue = subString & "|" & GetFileMD5(imges)
