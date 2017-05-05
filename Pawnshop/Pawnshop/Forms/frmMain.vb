@@ -96,6 +96,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        pButton.Location = New Point(450, 160)
         'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
@@ -695,11 +696,6 @@ NExtLine:
         frmSMSInfo.Show()
     End Sub
 
-    Private Sub tmrForPasswordExpiry_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrForPasswordExpiry.Tick
-        tmrForPasswordExpiry.Stop()
-        bgwForPasswordExpiry.RunWorkerAsync()
-    End Sub
-
     Private Sub bgwForPasswordExpiry_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwForPasswordExpiry.DoWork
         tmrForPasswordExpiry.Stop()
         Dim ms As String
@@ -716,5 +712,10 @@ NExtLine:
             ms = s_USER.Get_rem_PassExp & " Days Remaining"
         End If
         lblPasswordExpiry.Text = "Password Expiry: " & ms
+    End Sub
+
+    Private Sub tmrForPasswordExpiry_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrForPasswordExpiry.Tick
+        tmrForPasswordExpiry.Stop()
+        bgwForPasswordExpiry.RunWorkerAsync()
     End Sub
 End Class

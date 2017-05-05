@@ -57,8 +57,6 @@
 
             'For Admin
         Else
-
-            Failed_attemp = user_Login.GET_FAILED_ATTEMP_NUM(uName) 'Get Failed attemp.
             If Not user_Login.LogUser(uName, pName) Then
                 i += 1
                 If i > 3 Then
@@ -72,9 +70,10 @@
             UType = user_Login.USERTYPE
             IDX = user_Login.ID
             FullName = user_Login.FIRSTNAME & " " & user_Login.LASTNAME
-            MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
+            MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), _
+                                 user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
 
-            user_Login.Back_to_max_if_Login(uName, pName) 'Update Back max date
+            ' user_Login.Back_to_max_if_Login(uName, pName) 'Update Back max date
         End If
 
 nextToline:
@@ -83,6 +82,7 @@ nextToline:
         frmMain.Show()
         frmMain.NotYetLogin(False)
         frmMain.CheckStoreStatus()
+        frmMain.tmrForPasswordExpiry.Start()
 
         If user_Login.ChkIfUserProfileWasNotUpdate Then
             frmUserInfor.Show()

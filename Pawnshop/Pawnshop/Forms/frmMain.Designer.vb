@@ -110,15 +110,15 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssOthers = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblPasswordExpiry = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
         Me.LayawayListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayawayPaymentReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForfeitLayawayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tmrForPasswordExpiry = New System.Windows.Forms.Timer(Me.components)
         Me.bgwForPasswordExpiry = New System.ComponentModel.BackgroundWorker()
-        Me.lblPasswordExpiry = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tmrForPasswordExpiry = New System.Windows.Forms.Timer(Me.components)
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -718,6 +718,12 @@ Partial Class frmMain
         Me.tssOthers.Name = "tssOthers"
         Me.tssOthers.Size = New System.Drawing.Size(0, 17)
         '
+        'lblPasswordExpiry
+        '
+        Me.lblPasswordExpiry.Name = "lblPasswordExpiry"
+        Me.lblPasswordExpiry.Size = New System.Drawing.Size(91, 17)
+        Me.lblPasswordExpiry.Text = "Password Expiry"
+        '
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
@@ -763,18 +769,11 @@ Partial Class frmMain
         Me.ForfeitLayawayReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.ForfeitLayawayReportToolStripMenuItem.Text = "Forfeit Layaway Report"
         '
-        'tmrForPasswordExpiry
-        '
-        Me.tmrForPasswordExpiry.Interval = 1800000
-        '
         'bgwForPasswordExpiry
         '
         '
-        'lblPasswordExpiry
+        'tmrForPasswordExpiry
         '
-        Me.lblPasswordExpiry.Name = "lblPasswordExpiry"
-        Me.lblPasswordExpiry.Size = New System.Drawing.Size(91, 17)
-        Me.lblPasswordExpiry.Text = "Password Expiry"
         '
         'frmMain
         '
@@ -908,9 +907,9 @@ Partial Class frmMain
     Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SMSNoticeToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tmrForPasswordExpiry As System.Windows.Forms.Timer
     Friend WithEvents bgwForPasswordExpiry As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblPasswordExpiry As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tmrForPasswordExpiry As System.Windows.Forms.Timer
 
 
 
