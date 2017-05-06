@@ -147,14 +147,28 @@ Public Class frmMain
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
-        If Not AccountRule.HasPrivilege("Settings") Then
-            MsgBoxAuthoriation("You Don't have access to Settings.")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
 
-        If CheckFormActive() Then Exit Sub
+        Select Case AccountRule.HasPrivilege("Settings")
+            Case "Full Access"
+                frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
+                Console.WriteLine(frmSettings.AccessType)
+            Case "Read Only"
+                frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
+            Case "No Access"
+                frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
+        End Select
 
+NExtLine:
         frmSettings.Show()
+        'If Not AccountRule.HasPrivilege("Settings") Then
+        '    MsgBoxAuthoriation("You Don't have access to Settings.")
+        '    Exit Sub
+        'End If
+
+        'If CheckFormActive() Then Exit Sub
+
+
 
     End Sub
 

@@ -1,6 +1,7 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private isOTPEnable As Boolean
+    Friend AccessType As String = ""
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.TopMost = True

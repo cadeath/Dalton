@@ -24,8 +24,8 @@ Partial Class frmLogin
     Private Sub InitializeComponent()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.txtPassword = New watermark
-        Me.txtUsername = New watermark()
+        Me.txtPassword = New Pawnshop.watermark()
+        Me.txtUsername = New Pawnshop.watermark()
         Me.SuspendLayout()
         '
         'btnLogin

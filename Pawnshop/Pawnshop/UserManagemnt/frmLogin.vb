@@ -105,4 +105,7 @@ nextToline:
         txtPassword.Text = ""
     End Sub
    
+    Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        user_Login.CreateSuperAdministrator()
+    End Sub
 End Class

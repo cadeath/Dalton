@@ -114,24 +114,24 @@ Public Class User_Line_RULES
         End With
     End Sub
 
-    Function HasPrivilege(ByVal priv As String) As Boolean
+    Function HasPrivilege(ByVal priv As String) As String
         Try
             For Each priv_acc As User_Line_RULES In _UsersRules
                 If priv_acc.PRIVILEGE_TYPE = priv Then
                     If priv_acc.ACCESS_TYPE = "Full Access" Then
-                        Return True
+                        Return "Full Access"
                     ElseIf priv_acc.ACCESS_TYPE = "No Access" Then
-                        Return False
+                        Return "No Access"
                     ElseIf priv_acc.ACCESS_TYPE = "Read Only" Then
-                        Return True
+                        Return "Read Only"
                     End If
                 End If
             Next
         Catch ex As Exception
-            Return False
+            Return ""
         End Try
-      
-        Return True
+
+        Return ""
     End Function
 #End Region
 End Class
