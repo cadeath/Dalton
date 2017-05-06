@@ -410,22 +410,17 @@ GnrteRndmSignature:  'For Customer's Signature
                 .Rank = Customer.RankNumber.High
 
 FLNME:      'For Customer's Photo
+
             If KycRequired Then
-                If Not notNewPic Then
+                If notNewPic Then
+                    .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
+                Else
                     If Not NewCustomer.FindRanStrIfExists(SRC & "\" & FlName & Ext) Then
                         FlName = FileName() : GoTo FLNME
                     End If
-                End If
 
-                If Not notNewPic Then
                     ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
-                End If
-
-
-                If Not notNewPic Then
                     .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
-                Else
-                    .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
                 End If
             End If
 

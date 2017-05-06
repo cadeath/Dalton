@@ -17,7 +17,6 @@ Public Class frmCustomerImage
         img.Save(ms, ImageFormat.Jpeg)
         frmCustomer_KYC.ClientImage.Image = Image.FromStream(ms)
         frmCustomer_KYC.FlName = dgCustImage.CurrentRow.Cells(2).Value
-        frmCustomer_KYC.notNewPic = False
         Me.Close()
     End Sub
 
@@ -37,11 +36,11 @@ Public Class frmCustomerImage
     Private Delegate Sub addBar_callback()
 
     Private Sub AddImage()
-        Dim myDir As DirectoryInfo = New DirectoryInfo(SRC)
-
-        If Not (myDir.EnumerateFiles().Any()) Then
+        Dim path As String = SRC
+        If Not Directory.Exists(path) Then
             Exit Sub
         End If
+
 
         Dim hashValue As String
 
