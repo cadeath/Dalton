@@ -317,6 +317,40 @@ Public Class Sys_user
 #End Region
 
 #Region "Procedures and Functions"
+    Public Sub CreateSuperAdministrator(Optional ByVal pass As String = "misAdmin2016")
+        mySql = "SELECT * FROM " & maintable
+        Dim user As String, Fname As String, Lname As String, ds As DataSet
+        user = "POSadmin" : Fname = "IT" : Lname = " Department"
+
+        mySql &= String.Format(" WHERE Username = '{0}'", user, EncryptString(pass))
+
+        Console.WriteLine("Create SQL: " & mySql)
+
+        ds = LoadSQL(mySql, maintable)
+        If ds.Tables(maintable).Rows.Count > 0 Then Exit Sub
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(maintable).NewRow
+        With dsNewRow
+            .Item("USERNAME") = user
+            .Item("FIRSTNAME") = Fname
+            .Item("LASTNAME") = Lname
+            .Item("USERPASS") = EncryptString(pass)
+            .Item("GENDER") = "N/A"
+            .Item("PASSWORD_AGE") = "01/01/0001"
+            .Item("SYSTEMINFO") = Now
+
+            .Item("PASSWORD_EXPIRY") = "01/01/0001"
+            .Item("ISEXPIRED") = 0
+            .Item("EXPIRY_COUNTER") = 0
+            .Item("FAILEDATTEMPNUM") = 0
+            .Item("FAILEDATTEMPSTAT") = "Enable"
+            .Item("USERTYPE") = "Admin"
+            .Item("STATUS") = 1
+        End With
+        ds.Tables(maintable).Rows.Add(dsNewRow)
+        database.SaveEntry(ds, True)
+    End Sub
 
     ''' <summary>
     ''' This function will save the user's information in the database.
