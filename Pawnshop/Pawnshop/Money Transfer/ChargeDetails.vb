@@ -76,7 +76,7 @@
 
 #Region "Procedures"
     Friend Sub LoadChargeDetails(ByVal Chr_ID As Integer)
-        Dim mysql As String = "Select * From tblChargeDetails Where Chr_ID = " & Chr_ID
+        Dim mysql As String = "Select * From tblMtDetails Where Chr_ID = " & Chr_ID
         Dim ds As DataSet = LoadSQL(mysql, "tblChargeDetails")
 
         For Each dr In ds.Tables(0).Rows
@@ -85,15 +85,15 @@
 
     End Sub
 
-    Private Sub LoadbyDatarow(ByVal dr As DataRow)
+    Friend Sub LoadbyDatarow(ByVal dr As DataRow)
         With dr
             _id = .Item("ID")
             _chrid = .Item("CHR_ID")
             _amountfrom = .Item("AmountFrom")
             _amountto = .Item("AmountTo")
             _charge = .Item("Charge")
-            _commision = .Item("Commision")
-            _remarks = .Item("Remarks")
+            If Not IsDBNull(.Item("Commision")) Then _commision = .Item("Commision")
+            If Not IsDBNull(.Item("Remarks")) Then _remarks = .Item("Remarks")
         End With
     End Sub
 #End Region
