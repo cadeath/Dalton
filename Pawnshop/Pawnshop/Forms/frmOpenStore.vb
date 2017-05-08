@@ -1,10 +1,12 @@
 ﻿Public Class frmOpenStore
 
     Dim isDisable As Boolean = DEV_MODE
+    Friend AccessType As String = ""
 
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()
 
+        Verification()
         Console.WriteLine("Initial: " & InitialBal)
         Console.WriteLine("Maintain: " & MaintainBal)
     End Sub
@@ -64,5 +66,11 @@
 
         Me.Close()
 
+    End Sub
+
+    Private Sub Verification()
+        If AccessType = "Read Only" Then
+            btnSetup.Enabled = False
+        End If
     End Sub
 End Class

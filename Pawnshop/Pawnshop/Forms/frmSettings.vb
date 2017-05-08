@@ -11,6 +11,7 @@
         ClearFields()
         PrinterSettings()
         isOTPEnable = False
+        verification()
     End Sub
 
     Private Sub PrinterSettings()
@@ -181,5 +182,11 @@
 
     Private Sub txtStockOutNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtStockOutNum.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnUpdate.Enabled = False
+        End If
     End Sub
 End Class

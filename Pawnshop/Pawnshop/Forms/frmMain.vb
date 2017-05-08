@@ -148,27 +148,18 @@ Public Class frmMain
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
         If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
-
         Select Case AccountRule.HasPrivilege("Settings")
             Case "Full Access"
                 frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
-                Console.WriteLine(frmSettings.AccessType)
             Case "Read Only"
                 frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
             Case "No Access"
-                frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
         End Select
 
 NExtLine:
+        Console.WriteLine(frmSettings.AccessType)
         frmSettings.Show()
-        'If Not AccountRule.HasPrivilege("Settings") Then
-        '    MsgBoxAuthoriation("You Don't have access to Settings.")
-        '    Exit Sub
-        'End If
-
-        'If CheckFormActive() Then Exit Sub
-
-
 
     End Sub
 
@@ -235,11 +226,19 @@ NExtLine:
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
+        If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
 
-        If Not AccountRule.HasPrivilege("Close Store") Then
-            MsgBoxAuthoriation("You Don't have access to Close Store.")
-            Exit Sub
-        End If
+        Select Case AccountRule.HasPrivilege("Open Store")
+            Case "Full Access"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Open Store")
+            Case "Read Only"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Open Store")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmSettings.AccessType)
         frmOpenStore.Show()
     End Sub
 
@@ -382,11 +381,19 @@ NExtLine:
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
-        If Not AccountRule.HasPrivilege("Close Store") Then
-            MsgBoxAuthoriation("You Don't have access to Close Store.")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
 
+        Select Case AccountRule.HasPrivilege("Close Store")
+            Case "Full Access"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Close Store")
+            Case "Read Only"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Close Store")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmSettings.AccessType)
         frmCashCountV2.Show()
         frmCashCountV2.isClosing = True
     End Sub
