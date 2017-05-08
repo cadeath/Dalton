@@ -124,8 +124,6 @@ Module deploy
         stablePath = m_nodelist.Item(0).ChildNodes(1).InnerText
         new_version = Version.Parse(m_nodelist.Item(0).Attributes.GetNamedItem("version").Value)
 
-        Console.WriteLine("Latest Version: " & stablePath)
-
         If updateProcedure = Procedure.Idle Then
             ' Execute Patch or Install
 
@@ -142,109 +140,113 @@ Module deploy
             Console.WriteLine("Compare: " & new_version.CompareTo(current_version))
 
             If new_version.CompareTo(current_version) > 0 Then
-                ' Checking Procedure to be executed
-                Dim version_found As Boolean = False
-                Dim DISversions = m_nodelist.Item(0).ChildNodes(0).ChildNodes
-                Dim disVersionFiles As XmlNode = Nothing
+                Dim ans = MsgBox("New Version Found" + vbCrLf + "Do you want to update it?", MsgBoxStyle.YesNo, "New Version Found")
+                If ans = MsgBoxResult.Yes Then
+                    ' Checking Procedure to be executed
+                    Dim version_found As Boolean = False
+                    Dim DISversions = m_nodelist.Item(0).ChildNodes(0).ChildNodes
+                    Dim disVersionFiles As XmlNode = Nothing
 
-                For Each vr As XmlNode In DISversions
-                    Console.WriteLine(String.Format("{0} - {1}", vr.Attributes.GetNamedItem("version").Value, vr.Attributes.GetNamedItem("type").Value))
-                    Dim browse_version As Version = Version.Parse(vr.Attributes.GetNamedItem("version").Value)
-                    If browse_version.CompareTo(current_version) = 0 Then
-                        version_found = True
-                        Select Case vr.Attributes.GetNamedItem("type").Value
-                            Case "patch"
-                                updateProcedure = Procedure.Patch
+                    For Each vr As XmlNode In DISversions
+                        Console.WriteLine(String.Format("{0} - {1}", vr.Attributes.GetNamedItem("version").Value, vr.Attributes.GetNamedItem("type").Value))
+                        Dim browse_version As Version = Version.Parse(vr.Attributes.GetNamedItem("version").Value)
+                        If browse_version.CompareTo(current_version) = 0 Then
+                            version_found = True
+                            Select Case vr.Attributes.GetNamedItem("type").Value
+                                Case "patch"
+                                    updateProcedure = Procedure.Patch
 
-                                Console.WriteLine(vr.ChildNodes(0).LocalName)
-                                disVersionFiles = vr
-                            Case "install"
-                                updateProcedure = Procedure.Installer
-                        End Select
-                        Exit For
+                                    Console.WriteLine(vr.ChildNodes(0).LocalName)
+                                    disVersionFiles = vr
+                                Case "install"
+                                    updateProcedure = Procedure.Installer
+                            End Select
+                            Exit For
+                        End If
+                    Next
+
+                    If Not version_found Then
+                        MsgBox( _
+                            String.Format("VERSION {0} IS NOT FOUND IN THE CONFIGURATION FILE", _
+                                          current_version.ToString) + vbCrLf + "CONTACT YOUR MIS DEPARTMENT", _
+                                      MsgBoxStyle.Critical, "PATCH ERROR")
+                        Exit Sub
                     End If
-                Next
 
-                If Not version_found Then
-                    MsgBox( _
-                        String.Format("VERSION {0} IS NOT FOUND IN THE CONFIGURATION FILE", _
-                                      current_version.ToString) + vbCrLf + "CONTACT YOUR MIS DEPARTMENT", _
-                                  MsgBoxStyle.Critical, "PATCH ERROR")
-                    Exit Sub
+                    ' FOR PATCH
+                    If updateProcedure = Procedure.Patch Then
+                        ' TODO
+                        ' PATCHING
+                        ' DOWNLOAD FILES AND OVERWRITE
+
+                        url_hash = New Hashtable
+                        For Each url As XmlNode In disVersionFiles
+                            Console.WriteLine(url.LocalName & " - " & url.InnerText)
+                            If Not url.LocalName.Contains("dir") Then
+                                url_hash.Add(url.LocalName, GetFilename_URL(url.InnerText))
+                                download_File(url.InnerText)
+                                waitingToFinish_download()
+                            Else
+                                url_hash.Add(url.LocalName, url.InnerText)
+                            End If
+                        Next
+
+                        ' CHECKING LOCATION
+                        For Each dlFile As DictionaryEntry In url_hash
+                            If dlFile.Key.ToString.Contains("dir") Then _
+                                Continue For
+
+                            Dim keyCheck As String = dlFile.Key & "-dir"
+                            If url_hash.ContainsKey(keyCheck) Then
+                                Dim tPath As String = GetValue_Key(url_hash, keyCheck)
+
+                                If Not Directory.Exists(programPath & "/" & PathOnly(tPath)) Then _
+                                    Directory.CreateDirectory(programPath & "/" & PathOnly(tPath))
+
+                                Dim originalDIR = Directory.GetCurrentDirectory
+                                If File.Exists(programPath & "/" & tPath) Then _
+                                    File.Delete(programPath & "/" & tPath)
+
+                                File.Move(TMP & "\" & dlFile.Value, programPath & "/" & tPath)
+                            Else
+                                If File.Exists(programPath & "/" & dlFile.Value) Then _
+                                    File.Delete(programPath & "/" & dlFile.Value)
+
+                                File.Move(TMP & "\" & dlFile.Value, programPath & "/" & dlFile.Value)
+                            End If
+                        Next
+
+                        displayStatus("Patch completed.")
+                    End If
+
+                    ' FOR INSTALL
+                    If updateProcedure = Procedure.Installer Then
+                        Dim stable_exefilename As String = stablePath.Split("/")(stablePath.Split("/").Count - 1)
+
+                        download_File(stablePath)
+
+                        waitingToFinish_download()
+                        backup_Everything()
+
+                        ' UNINSTALLING
+                        displayStatus("Uninstalling...")
+                        ChDir(programPath)
+                        runInSilent("unins000.exe", , programPath & "/UNINSTALLLOG.log")
+                        ResetDIR()
+
+                        waitWhenDone(False)
+
+                        ' INSTALLING
+                        displayStatus("Installing...")
+                        ChDir(mainDIR & "/" & TMP)
+                        runInSilent(stable_exefilename, programPath, "INSTALL.log")
+                        ResetDIR()
+
+                        backup_Everything(True)
+                        updateProcedure = Procedure.Idle
+                    End If
                 End If
 
-                ' FOR PATCH
-                If updateProcedure = Procedure.Patch Then
-                    ' TODO
-                    ' PATCHING
-                    ' DOWNLOAD FILES AND OVERWRITE
-
-                    url_hash = New Hashtable
-                    For Each url As XmlNode In disVersionFiles
-                        Console.WriteLine(url.LocalName & " - " & url.InnerText)
-                        If Not url.LocalName.Contains("dir") Then
-                            url_hash.Add(url.LocalName, GetFilename_URL(url.InnerText))
-                            download_File(url.InnerText)
-                            waitingToFinish_download()
-                        Else
-                            url_hash.Add(url.LocalName, url.InnerText)
-                        End If
-                    Next
-
-                    ' CHECKING LOCATION
-                    For Each dlFile As DictionaryEntry In url_hash
-                        If dlFile.Key.ToString.Contains("dir") Then _
-                            Continue For
-
-                        Dim keyCheck As String = dlFile.Key & "-dir"
-                        If url_hash.ContainsKey(keyCheck) Then
-                            Dim tPath As String = GetValue_Key(url_hash, keyCheck)
-
-                            If Not Directory.Exists(programPath & "/" & PathOnly(tPath)) Then _
-                                Directory.CreateDirectory(programPath & "/" & PathOnly(tPath))
-
-                            Dim originalDIR = Directory.GetCurrentDirectory
-                            If File.Exists(programPath & "/" & tPath) Then _
-                                File.Delete(programPath & "/" & tPath)
-
-                            File.Move(TMP & "\" & dlFile.Value, programPath & "/" & tPath)
-                        Else
-                            If File.Exists(programPath & "/" & dlFile.Value) Then _
-                                File.Delete(programPath & "/" & dlFile.Value)
-
-                            File.Move(TMP & "\" & dlFile.Value, programPath & "/" & dlFile.Value)
-                        End If
-                    Next
-
-                    displayStatus("Patch completed.")
-                End If
-
-                ' FOR INSTALL
-                If updateProcedure = Procedure.Installer Then
-                    Dim stable_exefilename As String = stablePath.Split("/")(stablePath.Split("/").Count - 1)
-
-                    download_File(stablePath)
-
-                    waitingToFinish_download()
-                    backup_Everything()
-
-                    ' UNINSTALLING
-                    displayStatus("Uninstalling...")
-                    ChDir(programPath)
-                    runInSilent("unins000.exe", , programPath & "/UNINSTALLLOG.log")
-                    ResetDIR()
-
-                    waitWhenDone(False)
-
-                    ' INSTALLING
-                    displayStatus("Installing...")
-                    ChDir(mainDIR & "/" & TMP)
-                    runInSilent(stable_exefilename, programPath, "INSTALL.log")
-                    ResetDIR()
-
-                    backup_Everything(True)
-                    updateProcedure = Procedure.Idle
-                End If
             Else
                 Console.WriteLine("SAME VERSION! NO NEW UPATES")
             End If
