@@ -102,7 +102,6 @@ Public Class User_Line_RULES
         Next
     End Sub
 
-
     Public Sub Load_userline(ByVal dr As DataRow)
         With dr
             _USERLINE_ID = .Item("Userline_ID")

@@ -372,15 +372,16 @@
         If txtPassword.Text <> txtPasword1.Text Then MsgBox("Password not matched!", MsgBoxStyle.Exclamation, "Warning") _
            : txtPassword.Focus() : Return False
 
-        If GetCurrentAge(txtBirthday.Text) < 18 Then MsgBox("Age must be 18 and above.", MsgBoxStyle.Exclamation, "Warning") : Return False
-
-        If dgRulePrivilege.Rows.Count = 0 Then Return False
-
-        For Each row As DataGridViewRow In dgRulePrivilege.Rows
-            If row.Cells(2).Value = "" Then tbControl.SelectedTab = TabPage2 : Return False
-        Next
-
         If lblUserType.Text <> "User Type: Admin" Or lblUserType.Text = "" Then
+
+            If GetCurrentAge(txtBirthday.Text) < 18 Then MsgBox("Age must be 18 and above.", MsgBoxStyle.Exclamation, "Warning") : Return False
+
+            If dgRulePrivilege.Rows.Count = 0 Then Return False
+
+            For Each row As DataGridViewRow In dgRulePrivilege.Rows
+                If row.Cells(2).Value = "" Then tbControl.SelectedTab = TabPage2 : Return False
+            Next
+
             If txtAddDays.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtAddDays.Focus() : Return False
             If txtPasswordAge.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtPasswordAge.Focus() : Return False
             If txtFailedAttemp.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtFailedAttemp.Focus() : Return False

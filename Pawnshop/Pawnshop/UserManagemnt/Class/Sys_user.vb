@@ -749,6 +749,7 @@ nextLINETODO:
     ''' <param name="ul_ID"></param>
     ''' <remarks></remarks>
     Friend Sub Update_Privilege(ByVal ul_ID As Integer)
+        If _USERTYPE = "" Then Exit Sub
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = {0}", ul_ID)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
 
@@ -1012,7 +1013,7 @@ nextLINETODO:
     ''' </summary>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Function ChkIfUserProfileWasNotUpdate() As Boolean
+    Function ChkUserUpdate() As Boolean
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", IDX)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 

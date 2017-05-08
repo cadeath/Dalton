@@ -44,6 +44,9 @@
             UType = user_Login.USERTYPE
             IDX = user_Login.ID
             FullName = user_Login.FIRSTNAME & " " & user_Login.LASTNAME
+
+            AccountRule.LOAD_USER_RULES()
+
             MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), _
                                  user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
 
@@ -78,13 +81,12 @@
 
 nextToline:
 
-        AccountRule.LOAD_USER_RULES()
         frmMain.Show()
         frmMain.NotYetLogin(False)
         frmMain.CheckStoreStatus()
         frmMain.tmrForPasswordExpiry.Start()
 
-        If user_Login.ChkIfUserProfileWasNotUpdate Then
+        If user_Login.ChkUserUpdate Then
             frmUserInfor.Show()
         End If
 
@@ -106,6 +108,7 @@ nextToline:
     End Sub
    
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        user_Login = New Sys_user
         user_Login.CreateSuperAdministrator()
     End Sub
 End Class

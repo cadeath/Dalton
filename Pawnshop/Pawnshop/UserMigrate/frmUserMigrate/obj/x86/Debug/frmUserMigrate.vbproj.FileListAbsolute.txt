@@ -1,0 +1,11 @@
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\bin\Debug\privilege.anoisim
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\bin\Debug\W3W1LH4CKU.FDB
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\bin\Debug\frmUserMigrate.exe
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\bin\Debug\frmUserMigrate.pdb
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\bin\Debug\frmUserMigrate.xml
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\obj\x86\Debug\frmUserMigrate.Form1.resources
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\obj\x86\Debug\frmUserMigrate.Resources.resources
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\obj\x86\Debug\frmUserMigrate.vbproj.GenerateResource.Cache
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\obj\x86\Debug\frmUserMigrate.exe
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\obj\x86\Debug\frmUserMigrate.xml
+C:\Users\MISGWAPOHON\Documents\Visual Studio 2010\Projects\frmUserMigrate\frmUserMigrate\obj\x86\Debug\frmUserMigrate.pdb
