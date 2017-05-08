@@ -22,6 +22,7 @@ Public Class frmAdminPanel
     Dim SchemeModify As New InterestScheme
     Private strcode As String
     Private strAppname As String
+    Friend AccessType As String = ""
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
@@ -38,6 +39,7 @@ Public Class frmAdminPanel
         btnRemove.Enabled = False
         btnUpdateScheme.Enabled = False
         btnEdit.Enabled = False
+        verification()
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -59,7 +61,7 @@ Public Class frmAdminPanel
         SelectedItem = Item
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
-       
+        verification()
     End Sub
 
     Friend Sub LoadSpec(ByVal ID As Integer)
@@ -799,6 +801,7 @@ Public Class frmAdminPanel
         txtDescription1.Enabled = False
         btnUpdateScheme.Enabled = False
         btnAdd.Enabled = False
+        verification()
     End Sub
 
 
@@ -969,5 +972,18 @@ Public Class frmAdminPanel
     Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
         If txtQRURL.Text = String.Empty Then Exit Sub
         Clipboard.SetText(txtQRURL.Text)
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnSave.Enabled = False
+            btnUpdate.Enabled = False
+            btnAdd.Enabled = False
+            btnUpdateScheme.Enabled = False
+            btnsavescheme.Enabled = False
+            btnEdit.Enabled = False
+            btnExport.Enabled = False
+            btnGenerate.Enabled = False
+        End If
     End Sub
 End Class

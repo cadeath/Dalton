@@ -882,6 +882,8 @@ Public Class frmPawningItemNew
                 LockFields(1)
                 Authorization()
         End Select
+
+        verification()
     End Sub
 
     Private Sub Authorization()
@@ -1645,4 +1647,12 @@ Public Class frmPawningItemNew
         Next
     End Sub
 
+    Private Sub verification()
+        If frmPawning.AccessType = "Read Only" Then
+            btnRenew.Enabled = False
+            btnRedeem.Enabled = False
+            btnPrint.Enabled = False
+            btnSave.Enabled = False
+        End If
+    End Sub
 End Class

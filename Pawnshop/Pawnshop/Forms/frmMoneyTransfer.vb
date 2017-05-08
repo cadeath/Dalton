@@ -10,7 +10,7 @@ Public Class frmMoneyTransfer
     Dim idME As Integer, idMR As Integer
     Dim basicCharges As Double, commission As Double
     Private MOD_NAME As String = "MONEYTRANSFER"
-
+    Friend AccessType As String = ""
     ' NOTE - ADDING SERVICE
     ' STEP 3 - Add array count
     Private daltonService(16) As MoneyTransferService
@@ -301,6 +301,7 @@ Public Class frmMoneyTransfer
         LoadServices()
         lblWhere.Text = "Send To"
         rbSend.Focus()
+        verification()
         Console.WriteLine("Form LOADED successfully")
     End Sub
 
@@ -865,4 +866,14 @@ Public Class frmMoneyTransfer
         End If
     End Sub
 
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            cboType.Enabled = False
+            btnSearchReceiver.Enabled = False
+            btnSearchSender.Enabled = False
+            rbSend.Enabled = False
+            rbReceive.Enabled = False
+            btnPost.Enabled = False
+        End If
+    End Sub
 End Class

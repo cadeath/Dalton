@@ -1,9 +1,11 @@
 ﻿Public Class frmSMSnotice
     Dim checkSwitch As Boolean = True
     Friend autoStart As Boolean = False
+    Friend AccessType As String = ""
 
     Private Sub frmSMSnotice_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Load_Expiry()
+        verification()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -162,6 +164,11 @@
         diagQuickView_PT.ShowDialog()
     End Sub
 
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnSend.Enabled = False
+        End If
+    End Sub
     Private Sub lvExpiry_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvExpiry.SelectedIndexChanged
 
     End Sub

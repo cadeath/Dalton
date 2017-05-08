@@ -9,7 +9,7 @@
 ' - Auto Search Form
 
 Public Class frmClient
-
+    Friend AccessType As String = ""
     Dim fromOtherForm As Boolean = False
     Friend GetClient As Client
     Dim frmOrig As formSwitch.FormName
@@ -39,6 +39,8 @@ Public Class frmClient
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         End If
+
+        verification()
     End Sub
     ''' <summary>
     ''' this method will set listview columns
@@ -260,6 +262,12 @@ Public Class frmClient
             Else
                 btnView.PerformClick()
             End If
+        End If
+    End Sub
+
+    Private Sub verification()
+        If AccountRule.HasPrivilege("Client Management") = "Read Only" Then
+            btnAdd.Enabled = False
         End If
     End Sub
 

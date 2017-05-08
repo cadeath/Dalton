@@ -1,6 +1,7 @@
 ﻿Public Class frmPawning
 
     Friend isMoreThan100 As Boolean = False
+    Friend AccessType As String = ""
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -37,6 +38,7 @@
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive_v2()
+        verification()
 
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
@@ -446,4 +448,11 @@
         End If
     End Sub
 
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnLoan.Enabled = False
+            btnRedeem.Enabled = False
+            btnRenew.Enabled = False
+        End If
+    End Sub
 End Class

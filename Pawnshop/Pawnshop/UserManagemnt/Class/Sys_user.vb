@@ -749,7 +749,7 @@ nextLINETODO:
     ''' <param name="ul_ID"></param>
     ''' <remarks></remarks>
     Friend Sub Update_Privilege(ByVal ul_ID As Integer)
-        If _USERTYPE = "" Then Exit Sub
+        If ul_ID = 0 Then Exit Sub
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = {0}", ul_ID)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
 

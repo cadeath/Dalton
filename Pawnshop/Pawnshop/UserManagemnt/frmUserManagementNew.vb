@@ -10,6 +10,7 @@
     Dim privilege_chunk As New TextBox
     Dim i As Integer
     Dim tmpID As Integer
+    Friend AccessType As String = ""
 
     Enum MODULES
         LOAD = 0
@@ -25,7 +26,7 @@
         Load_Privileges(False)
         Load_users()
         Load_ALL_users()
-
+        Verification()
     End Sub
 
     Private Sub Load_users()
@@ -283,6 +284,7 @@
         Load_users()
         Load_ALL_users()
         ClearFields("")
+        AccountRule.LOAD_USER_RULES()
         MsgBox("Account successfully updated.", MsgBoxStyle.Information, "Updating Account")
     End Sub
 
@@ -610,10 +612,10 @@
         txtFailedAttemp.Text = ""
     End Sub
 
-  
-
-    Private Sub tbControl_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbControl.SelectedIndexChanged
-
+    Private Sub Verification()
+        If AccessType = "Read Only" Then
+            btnCreateAccount.Enabled = False
+        End If
     End Sub
 
 End Class

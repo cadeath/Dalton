@@ -10,6 +10,8 @@ Public Class frmExtractor
         PTUFile = 3
     End Enum
 
+    Friend accessType As String = ""
+
     Friend FormType As ExtractType = ExtractType.Expiry
 
     Private Sub txtPath_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
@@ -39,6 +41,7 @@ Public Class frmExtractor
 
                 Me.Text &= " - PTU File"
         End Select
+        verification()
     End Sub
 
     ''' <summary>
@@ -656,4 +659,9 @@ Public Class frmExtractor
         End If
     End Sub
 
+    Private Sub verification()
+        If accessType = "Read Only" Then
+            btnExtract.Enabled = False
+        End If
+    End Sub
 End Class

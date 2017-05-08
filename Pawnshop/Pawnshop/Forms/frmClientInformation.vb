@@ -34,6 +34,7 @@ Public Class frmClientInformation
 
         cboCity.Items.AddRange(GetDistinct("Addr_City"))
         cboProv.Items.AddRange(GetDistinct("Addr_Province"))
+        verification()
         'Populate()
     End Sub
     ''' <summary>
@@ -539,4 +540,10 @@ Public Class frmClientInformation
         frmClient.Enabled = True
     End Sub
 
+    Private Sub verification()
+        If AccountRule.HasPrivilege("Client Management") = "Read Only" Then
+            btnSave.Enabled = False
+            btnIDModify.Enabled = False
+        End If
+    End Sub
 End Class

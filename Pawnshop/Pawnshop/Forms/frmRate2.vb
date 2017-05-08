@@ -1,6 +1,6 @@
 ﻿
 Public Class frmRate2
-
+    Friend accessType As String = ""
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
@@ -27,5 +27,15 @@ Public Class frmRate2
         btnUpdate.Enabled = Not st
         btnBrowse.Enabled = Not st
         btnCancel.Enabled = Not st
+    End Sub
+
+    Private Sub verification()
+        If accessType = "Read Only" Then
+            btnUpdate.Enabled = False
+        End If
+    End Sub
+
+    Private Sub frmRate2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        verification()
     End Sub
 End Class
