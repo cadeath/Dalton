@@ -885,8 +885,8 @@ NExtLine:
     End Sub
 
     Private Sub tmrForPasswordExpiry_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrForPasswordExpiry.Tick
-        'tmrForPasswordExpiry.Stop()
-        'bgwForPasswordExpiry.RunWorkerAsync()
+        tmrForPasswordExpiry.Stop()
+        bgwForPasswordExpiry.RunWorkerAsync()
     End Sub
 
 End Class

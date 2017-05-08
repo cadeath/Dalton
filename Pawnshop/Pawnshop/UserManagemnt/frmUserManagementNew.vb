@@ -11,6 +11,7 @@
     Dim i As Integer
     Dim tmpID As Integer
     Friend AccessType As String = ""
+    Dim isLoading As Boolean = False
 
     Enum MODULES
         LOAD = 0
@@ -122,7 +123,7 @@
         ElseIf btnCreateAccount.Text = "&Edit" Then
             btnCreateAccount.Text = "&Update"
             GroupBox2.Enabled = True
-            GroupBox1.Enabled = True
+            GroupBox1.Enabled = True : isLoading = False
             dgRulePrivilege.Enabled = True : Exit Sub
         Else
             update_user()
@@ -412,7 +413,7 @@
 
     Private Sub Populate_to_txtFields()
         Dim user As New Sys_user
-
+        isLoading = True
         With user
             If i = 0 Then
                 .Users(lvUserList.FocusedItem.Text)
@@ -473,7 +474,7 @@
             txtAddDays.Text = .COUNTER
             txtFailedAttemp.Text = .FAILEDATTEMPNUM
 
-            If .FAILEDATTEMPSTAT = "Enable" Then
+            If .FAILEDATTEMPNUM > 0 Then
                 chkFailedAttemp.Checked = True
             Else
                 chkFailedAttemp.Checked = False
@@ -542,6 +543,7 @@
 
 
     Private Sub IS_EXPIRE()
+        If isLoading Then Exit Sub
         If CHKISEXPIRED.Checked = False Then
             txtAddDays.Text = 0
             txtAddDays.Enabled = False : Exit Sub
@@ -595,6 +597,7 @@
     End Sub
 
     Private Sub chkPasswrdAge_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPasswrdAge.CheckedChanged
+        If isLoading Then Exit Sub
         If chkPasswrdAge.Checked = False Then
             txtPasswordAge.Text = 0
             txtPasswordAge.Enabled = False : Exit Sub
@@ -604,6 +607,7 @@
     End Sub
 
     Private Sub chkFailedAttemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkFailedAttemp.CheckedChanged
+        If isLoading Then Exit Sub
         If chkFailedAttemp.Checked = False Then
             txtFailedAttemp.Text = 0
             txtFailedAttemp.Enabled = False : Exit Sub
