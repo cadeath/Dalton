@@ -374,6 +374,7 @@ nextlineTODO:
             For Each currentFormName As String In formNames
                 Application.OpenForms(currentFormName).Close()
             Next
+            lblPasswordExpiry.Text = "Password Expiry"
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
             frmLogin.Show()
