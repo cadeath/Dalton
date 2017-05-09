@@ -144,13 +144,25 @@ Public Class Form1
                     .LastLogin = dr.Item("LastLogin")
                 End If
 
-                .PASSWORD_AGE = "01/01/0001"
-                .ISEXPIRED = 0
+                If dr.Item("Status") = 1 Then
+                    .PASSWORD_AGE = Now.AddDays(90)
+
+                    .PASSWORD_EXPIRY = Now.AddDays(30)
+                    .ISEXPIRED = 1
+                    .COUNTER = 30
+                Else
+                    .PASSWORD_AGE = "01/01/0001"
+
+                    .PASSWORD_EXPIRY = "01/01/0001"
+                    .ISEXPIRED = 0
+                    .COUNTER = 0
+                End If
 
                 If dr.Item("Username") = "POSadmin" Then
                     .USERTYPE = "Admin"
                 Else
                     .FAILEDATTEMPNUM = 3
+                    .FAILEDATTEMPSTAT = "Enable"
                     .USERTYPE = "User"
                 End If
 

@@ -32,15 +32,7 @@ Partial Class frmUserManagementNew
         Me.rbFemale = New System.Windows.Forms.RadioButton()
         Me.rbMale = New System.Windows.Forms.RadioButton()
         Me.txtBirthday = New System.Windows.Forms.DateTimePicker()
-        Me.txtContactnumber = New Pawnshop.watermark()
-        Me.txtEmailaddress = New Pawnshop.watermark()
         Me.chkShowPassword = New System.Windows.Forms.CheckBox()
-        Me.txtPasword1 = New Pawnshop.watermark()
-        Me.txtPassword = New Pawnshop.watermark()
-        Me.txtLastname = New Pawnshop.watermark()
-        Me.txtMiddlename = New Pawnshop.watermark()
-        Me.txtFirstname = New Pawnshop.watermark()
-        Me.txtUsername = New Pawnshop.watermark()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,12 +43,8 @@ Partial Class frmUserManagementNew
         Me.chkFailedAttemp = New System.Windows.Forms.CheckBox()
         Me.chkPasswrdAge = New System.Windows.Forms.CheckBox()
         Me.ChkInactivateUser = New System.Windows.Forms.CheckBox()
-        Me.txtFailedAttemp = New Pawnshop.watermark()
-        Me.txtPasswordAge = New Pawnshop.watermark()
         Me.CHKISEXPIRED = New System.Windows.Forms.CheckBox()
-        Me.txtAddDays = New Pawnshop.watermark()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.txtSearch = New Pawnshop.watermark()
         Me.lvALL_USER_LIST = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -66,6 +54,19 @@ Partial Class frmUserManagementNew
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblUserType = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.txtContactnumber = New Pawnshop.watermark()
+        Me.txtEmailaddress = New Pawnshop.watermark()
+        Me.txtPasword1 = New Pawnshop.watermark()
+        Me.txtPassword = New Pawnshop.watermark()
+        Me.txtLastname = New Pawnshop.watermark()
+        Me.txtMiddlename = New Pawnshop.watermark()
+        Me.txtFirstname = New Pawnshop.watermark()
+        Me.txtUsername = New Pawnshop.watermark()
+        Me.txtFailedAttemp = New Pawnshop.watermark()
+        Me.txtPasswordAge = New Pawnshop.watermark()
+        Me.txtAddDays = New Pawnshop.watermark()
+        Me.txtSearch = New Pawnshop.watermark()
+        Me.chkGetDefaultVal = New System.Windows.Forms.CheckBox()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -178,25 +179,6 @@ Partial Class frmUserManagementNew
         Me.txtBirthday.Size = New System.Drawing.Size(422, 29)
         Me.txtBirthday.TabIndex = 8
         '
-        'txtContactnumber
-        '
-        Me.txtContactnumber.Location = New System.Drawing.Point(6, 241)
-        Me.txtContactnumber.MaxLength = 13
-        Me.txtContactnumber.Name = "txtContactnumber"
-        Me.txtContactnumber.Size = New System.Drawing.Size(422, 29)
-        Me.txtContactnumber.TabIndex = 7
-        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtContactnumber.WatermarkText = "Contact number"
-        '
-        'txtEmailaddress
-        '
-        Me.txtEmailaddress.Location = New System.Drawing.Point(6, 206)
-        Me.txtEmailaddress.Name = "txtEmailaddress"
-        Me.txtEmailaddress.Size = New System.Drawing.Size(422, 29)
-        Me.txtEmailaddress.TabIndex = 6
-        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtEmailaddress.WatermarkText = "Email Address : Ex. yourname@gmail.com"
-        '
         'chkShowPassword
         '
         Me.chkShowPassword.AutoSize = True
@@ -206,62 +188,6 @@ Partial Class frmUserManagementNew
         Me.chkShowPassword.TabIndex = 9
         Me.chkShowPassword.Text = "Show Password"
         Me.chkShowPassword.UseVisualStyleBackColor = True
-        '
-        'txtPasword1
-        '
-        Me.txtPasword1.Location = New System.Drawing.Point(6, 171)
-        Me.txtPasword1.Name = "txtPasword1"
-        Me.txtPasword1.Size = New System.Drawing.Size(243, 29)
-        Me.txtPasword1.TabIndex = 5
-        Me.txtPasword1.UseSystemPasswordChar = True
-        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPasword1.WatermarkText = "Re-enter password"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Location = New System.Drawing.Point(6, 136)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(422, 29)
-        Me.txtPassword.TabIndex = 4
-        Me.txtPassword.UseSystemPasswordChar = True
-        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPassword.WatermarkText = "Password"
-        '
-        'txtLastname
-        '
-        Me.txtLastname.Location = New System.Drawing.Point(6, 98)
-        Me.txtLastname.Name = "txtLastname"
-        Me.txtLastname.Size = New System.Drawing.Size(422, 29)
-        Me.txtLastname.TabIndex = 3
-        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtLastname.WatermarkText = "Lastname"
-        '
-        'txtMiddlename
-        '
-        Me.txtMiddlename.Location = New System.Drawing.Point(224, 63)
-        Me.txtMiddlename.Name = "txtMiddlename"
-        Me.txtMiddlename.Size = New System.Drawing.Size(204, 29)
-        Me.txtMiddlename.TabIndex = 2
-        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtMiddlename.WatermarkText = "Middlename"
-        '
-        'txtFirstname
-        '
-        Me.txtFirstname.Location = New System.Drawing.Point(6, 63)
-        Me.txtFirstname.Name = "txtFirstname"
-        Me.txtFirstname.Size = New System.Drawing.Size(212, 29)
-        Me.txtFirstname.TabIndex = 1
-        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFirstname.WatermarkText = "Firstname"
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Location = New System.Drawing.Point(6, 28)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(422, 29)
-        Me.txtUsername.TabIndex = 0
-        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtUsername.WatermarkText = "Username"
         '
         'TabPage2
         '
@@ -310,6 +236,7 @@ Partial Class frmUserManagementNew
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.chkGetDefaultVal)
         Me.TabPage3.Controls.Add(Me.GroupBox2)
         Me.TabPage3.Location = New System.Drawing.Point(4, 39)
         Me.TabPage3.Name = "TabPage3"
@@ -372,26 +299,6 @@ Partial Class frmUserManagementNew
         Me.ChkInactivateUser.Text = "Inactivate User"
         Me.ChkInactivateUser.UseVisualStyleBackColor = True
         '
-        'txtFailedAttemp
-        '
-        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFailedAttemp.Location = New System.Drawing.Point(9, 200)
-        Me.txtFailedAttemp.Name = "txtFailedAttemp"
-        Me.txtFailedAttemp.Size = New System.Drawing.Size(378, 26)
-        Me.txtFailedAttemp.TabIndex = 5
-        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFailedAttemp.WatermarkText = "Enter # of failed attemp"
-        '
-        'txtPasswordAge
-        '
-        Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPasswordAge.Location = New System.Drawing.Point(6, 139)
-        Me.txtPasswordAge.Name = "txtPasswordAge"
-        Me.txtPasswordAge.Size = New System.Drawing.Size(378, 26)
-        Me.txtPasswordAge.TabIndex = 3
-        Me.txtPasswordAge.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPasswordAge.WatermarkText = "Enter number of days account age expiration"
-        '
         'CHKISEXPIRED
         '
         Me.CHKISEXPIRED.AutoSize = True
@@ -405,16 +312,6 @@ Partial Class frmUserManagementNew
         Me.CHKISEXPIRED.Text = "Is account will expired?"
         Me.CHKISEXPIRED.UseVisualStyleBackColor = True
         '
-        'txtAddDays
-        '
-        Me.txtAddDays.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddDays.Location = New System.Drawing.Point(6, 70)
-        Me.txtAddDays.Name = "txtAddDays"
-        Me.txtAddDays.Size = New System.Drawing.Size(378, 26)
-        Me.txtAddDays.TabIndex = 1
-        Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtAddDays.WatermarkText = "Enter number of days to Inactive user"
-        '
         'TabPage4
         '
         Me.TabPage4.Controls.Add(Me.txtSearch)
@@ -426,15 +323,6 @@ Partial Class frmUserManagementNew
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Find User"
         Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(61, 18)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(657, 22)
-        Me.txtSearch.TabIndex = 0
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
         '
         'lvALL_USER_LIST
         '
@@ -510,6 +398,131 @@ Partial Class frmUserManagementNew
         Me.lblUserType.Text = "User Type"
         Me.lblUserType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtContactnumber
+        '
+        Me.txtContactnumber.Location = New System.Drawing.Point(6, 241)
+        Me.txtContactnumber.MaxLength = 13
+        Me.txtContactnumber.Name = "txtContactnumber"
+        Me.txtContactnumber.Size = New System.Drawing.Size(422, 29)
+        Me.txtContactnumber.TabIndex = 7
+        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtContactnumber.WatermarkText = "Contact number"
+        '
+        'txtEmailaddress
+        '
+        Me.txtEmailaddress.Location = New System.Drawing.Point(6, 206)
+        Me.txtEmailaddress.Name = "txtEmailaddress"
+        Me.txtEmailaddress.Size = New System.Drawing.Size(422, 29)
+        Me.txtEmailaddress.TabIndex = 6
+        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtEmailaddress.WatermarkText = "Email Address : Ex. yourname@gmail.com"
+        '
+        'txtPasword1
+        '
+        Me.txtPasword1.Location = New System.Drawing.Point(6, 171)
+        Me.txtPasword1.Name = "txtPasword1"
+        Me.txtPasword1.Size = New System.Drawing.Size(243, 29)
+        Me.txtPasword1.TabIndex = 5
+        Me.txtPasword1.UseSystemPasswordChar = True
+        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPasword1.WatermarkText = "Re-enter password"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Location = New System.Drawing.Point(6, 136)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(422, 29)
+        Me.txtPassword.TabIndex = 4
+        Me.txtPassword.UseSystemPasswordChar = True
+        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPassword.WatermarkText = "Password"
+        '
+        'txtLastname
+        '
+        Me.txtLastname.Location = New System.Drawing.Point(6, 98)
+        Me.txtLastname.Name = "txtLastname"
+        Me.txtLastname.Size = New System.Drawing.Size(422, 29)
+        Me.txtLastname.TabIndex = 3
+        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtLastname.WatermarkText = "Lastname"
+        '
+        'txtMiddlename
+        '
+        Me.txtMiddlename.Location = New System.Drawing.Point(224, 63)
+        Me.txtMiddlename.Name = "txtMiddlename"
+        Me.txtMiddlename.Size = New System.Drawing.Size(204, 29)
+        Me.txtMiddlename.TabIndex = 2
+        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtMiddlename.WatermarkText = "Middlename"
+        '
+        'txtFirstname
+        '
+        Me.txtFirstname.Location = New System.Drawing.Point(6, 63)
+        Me.txtFirstname.Name = "txtFirstname"
+        Me.txtFirstname.Size = New System.Drawing.Size(212, 29)
+        Me.txtFirstname.TabIndex = 1
+        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFirstname.WatermarkText = "Firstname"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Location = New System.Drawing.Point(6, 28)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(422, 29)
+        Me.txtUsername.TabIndex = 0
+        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtUsername.WatermarkText = "Username"
+        '
+        'txtFailedAttemp
+        '
+        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFailedAttemp.Location = New System.Drawing.Point(9, 200)
+        Me.txtFailedAttemp.Name = "txtFailedAttemp"
+        Me.txtFailedAttemp.Size = New System.Drawing.Size(378, 26)
+        Me.txtFailedAttemp.TabIndex = 5
+        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFailedAttemp.WatermarkText = "Enter # of failed attemp"
+        '
+        'txtPasswordAge
+        '
+        Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPasswordAge.Location = New System.Drawing.Point(6, 139)
+        Me.txtPasswordAge.Name = "txtPasswordAge"
+        Me.txtPasswordAge.Size = New System.Drawing.Size(378, 26)
+        Me.txtPasswordAge.TabIndex = 3
+        Me.txtPasswordAge.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPasswordAge.WatermarkText = "Enter number of days account age expiration"
+        '
+        'txtAddDays
+        '
+        Me.txtAddDays.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddDays.Location = New System.Drawing.Point(6, 70)
+        Me.txtAddDays.Name = "txtAddDays"
+        Me.txtAddDays.Size = New System.Drawing.Size(378, 26)
+        Me.txtAddDays.TabIndex = 1
+        Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtAddDays.WatermarkText = "Enter number of days to Inactive user"
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(61, 18)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(657, 22)
+        Me.txtSearch.TabIndex = 0
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
+        'chkGetDefaultVal
+        '
+        Me.chkGetDefaultVal.AutoSize = True
+        Me.chkGetDefaultVal.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkGetDefaultVal.Location = New System.Drawing.Point(6, 32)
+        Me.chkGetDefaultVal.Name = "chkGetDefaultVal"
+        Me.chkGetDefaultVal.Size = New System.Drawing.Size(154, 20)
+        Me.chkGetDefaultVal.TabIndex = 7
+        Me.chkGetDefaultVal.Text = "Get Default Expiration"
+        Me.chkGetDefaultVal.UseVisualStyleBackColor = True
+        '
         'frmUserManagementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -530,6 +543,7 @@ Partial Class frmUserManagementNew
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
@@ -583,4 +597,5 @@ Partial Class frmUserManagementNew
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents lblUserType As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents chkGetDefaultVal As System.Windows.Forms.CheckBox
 End Class

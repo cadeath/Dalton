@@ -125,12 +125,22 @@ Partial Class frmAdminPanel
         Me.rbUserManagement = New System.Windows.Forms.RadioButton()
         Me.rbVoiding = New System.Windows.Forms.RadioButton()
         Me.rbSettings = New System.Windows.Forms.RadioButton()
+        Me.Tabpage5 = New System.Windows.Forms.TabPage()
+        Me.btnAcctValidation = New System.Windows.Forms.Button()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.txtFailedAttemp = New Pawnshop.watermark()
+        Me.txtPasswordAge = New Pawnshop.watermark()
+        Me.txtAddDays = New Pawnshop.watermark()
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.chkResetUserExpiry = New System.Windows.Forms.CheckBox()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -147,6 +157,8 @@ Partial Class frmAdminPanel
         Me.TabPage4.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
+        Me.Tabpage5.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -260,6 +272,7 @@ Partial Class frmAdminPanel
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.Tabpage5)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
@@ -1174,6 +1187,100 @@ Partial Class frmAdminPanel
         Me.rbSettings.Text = "Settings"
         Me.rbSettings.UseVisualStyleBackColor = True
         '
+        'Tabpage5
+        '
+        Me.Tabpage5.Controls.Add(Me.btnAcctValidation)
+        Me.Tabpage5.Controls.Add(Me.GroupBox9)
+        Me.Tabpage5.Location = New System.Drawing.Point(4, 25)
+        Me.Tabpage5.Name = "Tabpage5"
+        Me.Tabpage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.Tabpage5.Size = New System.Drawing.Size(1143, 433)
+        Me.Tabpage5.TabIndex = 4
+        Me.Tabpage5.Text = "Account Validation"
+        Me.Tabpage5.UseVisualStyleBackColor = True
+        '
+        'btnAcctValidation
+        '
+        Me.btnAcctValidation.Location = New System.Drawing.Point(306, 288)
+        Me.btnAcctValidation.Name = "btnAcctValidation"
+        Me.btnAcctValidation.Size = New System.Drawing.Size(82, 37)
+        Me.btnAcctValidation.TabIndex = 7
+        Me.btnAcctValidation.Text = "&Update"
+        Me.btnAcctValidation.UseVisualStyleBackColor = True
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GroupBox9.Controls.Add(Me.chkResetUserExpiry)
+        Me.GroupBox9.Controls.Add(Me.Label24)
+        Me.GroupBox9.Controls.Add(Me.Label23)
+        Me.GroupBox9.Controls.Add(Me.Label22)
+        Me.GroupBox9.Controls.Add(Me.txtFailedAttemp)
+        Me.GroupBox9.Controls.Add(Me.txtPasswordAge)
+        Me.GroupBox9.Controls.Add(Me.txtAddDays)
+        Me.GroupBox9.Location = New System.Drawing.Point(18, 20)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(370, 262)
+        Me.GroupBox9.TabIndex = 1
+        Me.GroupBox9.TabStop = False
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(8, 186)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(93, 16)
+        Me.Label24.TabIndex = 8
+        Me.Label24.Text = "Failed attempt"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(5, 129)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(140, 16)
+        Me.Label23.TabIndex = 7
+        Me.Label23.Text = "Password days expiry"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(5, 72)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(128, 16)
+        Me.Label22.TabIndex = 6
+        Me.Label22.Text = "Account days expiry"
+        '
+        'txtFailedAttemp
+        '
+        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFailedAttemp.Location = New System.Drawing.Point(8, 212)
+        Me.txtFailedAttemp.Name = "txtFailedAttemp"
+        Me.txtFailedAttemp.Size = New System.Drawing.Size(350, 26)
+        Me.txtFailedAttemp.TabIndex = 5
+        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFailedAttemp.WatermarkText = "Enter # of failed attemp"
+        '
+        'txtPasswordAge
+        '
+        Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPasswordAge.Location = New System.Drawing.Point(5, 151)
+        Me.txtPasswordAge.Name = "txtPasswordAge"
+        Me.txtPasswordAge.Size = New System.Drawing.Size(350, 26)
+        Me.txtPasswordAge.TabIndex = 3
+        Me.txtPasswordAge.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPasswordAge.WatermarkText = "Enter number of days account age expiration"
+        '
+        'txtAddDays
+        '
+        Me.txtAddDays.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddDays.Location = New System.Drawing.Point(5, 96)
+        Me.txtAddDays.Name = "txtAddDays"
+        Me.txtAddDays.Size = New System.Drawing.Size(350, 26)
+        Me.txtAddDays.TabIndex = 1
+        Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtAddDays.WatermarkText = "Enter number of days to Inactive user"
+        '
         'lblModuleName
         '
         Me.lblModuleName.AutoSize = True
@@ -1221,6 +1328,16 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'chkResetUserExpiry
+        '
+        Me.chkResetUserExpiry.AutoSize = True
+        Me.chkResetUserExpiry.Location = New System.Drawing.Point(8, 37)
+        Me.chkResetUserExpiry.Name = "chkResetUserExpiry"
+        Me.chkResetUserExpiry.Size = New System.Drawing.Size(145, 20)
+        Me.chkResetUserExpiry.TabIndex = 10
+        Me.chkResetUserExpiry.Text = "Reset User's Expiry"
+        Me.chkResetUserExpiry.UseVisualStyleBackColor = True
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1257,6 +1374,9 @@ Partial Class frmAdminPanel
         Me.GroupBox8.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
+        Me.Tabpage5.ResumeLayout(False)
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.ResumeLayout(False)
@@ -1378,5 +1498,15 @@ Partial Class frmAdminPanel
     Friend WithEvents txtEmail As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents btnCopy As System.Windows.Forms.Button
+    Friend WithEvents Tabpage5 As System.Windows.Forms.TabPage
+    Friend WithEvents btnAcctValidation As System.Windows.Forms.Button
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents txtFailedAttemp As Pawnshop.watermark
+    Friend WithEvents txtPasswordAge As Pawnshop.watermark
+    Friend WithEvents txtAddDays As Pawnshop.watermark
+    Friend WithEvents chkResetUserExpiry As System.Windows.Forms.CheckBox
 
 End Class

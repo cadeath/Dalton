@@ -40,6 +40,7 @@ Public Class frmAdminPanel
         btnUpdateScheme.Enabled = False
         btnEdit.Enabled = False
         verification()
+        LoadAccntValidation()
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -984,6 +985,28 @@ Public Class frmAdminPanel
             btnEdit.Enabled = False
             btnExport.Enabled = False
             btnGenerate.Enabled = False
+            btnAcctValidation.Enabled = False
         End If
+    End Sub
+
+    Private Sub LoadAccntValidation()
+        txtAddDays.Text = GetOption("AccountExpiry")
+        txtPasswordAge.Text = GetOption("PasswordExpiry")
+        txtFailedAttemp.Text = GetOption("FailedAttempt")
+    End Sub
+
+    Private Sub btnAcctValidation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcctValidation.Click
+        If txtAddDays.Text = "" Or txtPasswordAge.Text = "" Or txtFailedAttemp.Text = "" Then Exit Sub
+        UpdateOptions("AccountExpiry", txtAddDays.Text)
+        UpdateOptions("PasswordExpiry", txtPasswordAge.Text)
+        UpdateOptions("FailedAttempt", txtFailedAttemp.Text)
+
+        Me.Cursor = Cursors.WaitCursor
+        If chkResetUserExpiry.Checked Then
+            usersDateValUpdate.UserVal(txtAddDays.Text, txtPasswordAge.Text, txtFailedAttemp.Text)
+        End If : Me.Cursor = Cursors.Default : chkResetUserExpiry.Checked = False
+
+        LoadAccntValidation()
+        MsgBox("Validation successfully updated.", MsgBoxStyle.Information, "Update")
     End Sub
 End Class

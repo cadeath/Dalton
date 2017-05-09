@@ -371,16 +371,17 @@
             .Item("LASTLOGIN") = Now
 
 
-            .Item("PASSWORD_AGE") = "01/01/0001"
+            .Item("PASSWORD_AGE") = _PASSWORD_AGE
+            '"01/01/0001"
 
             .Item("SYSTEMINFO") = Now
-            .Item("PASSWORD_EXPIRY") = "01/01/0001"
+            .Item("PASSWORD_EXPIRY") = _PASSWORD_EXPIRY
             .Item("ISEXPIRED") = _ISEXPIRED
             .Item("EXPIRY_COUNTER") = _COUNTER
             .Item("FAILEDATTEMPNUM") = _FAILEDATTEMPNUM
             .Item("FAILEDATTEMPSTAT") = _FAILEDATTEMPSTAT
             .Item("USERTYPE") = _USERTYPE
-            .Item("STATUS") = 1
+            .Item("STATUS") = _UserStatus
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
         database.SaveEntry(ds)

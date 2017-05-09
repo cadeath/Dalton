@@ -28,6 +28,7 @@
         Load_users()
         Load_ALL_users()
         Verification()
+        LoadAccntValidation()
     End Sub
 
     Private Sub Load_users()
@@ -622,4 +623,13 @@
         End If
     End Sub
 
+    Private Sub LoadAccntValidation()
+        txtAddDays.Text = GetOption("AccountExpiry")
+        txtPasswordAge.Text = GetOption("PasswordExpiry")
+        txtFailedAttemp.Text = GetOption("FailedAttempt")
+    End Sub
+
+    Private Sub chkGetDefaultVal_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkGetDefaultVal.CheckedChanged
+        LoadAccntValidation()
+    End Sub
 End Class

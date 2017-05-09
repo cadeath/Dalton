@@ -23,6 +23,8 @@ Module autopatch
         ' FOR v1.5
         db13.PatchUp()
 
+        db15.PatchUp()
+
         DBVERSION = GetOption("DBVersion")
     End Sub
 
