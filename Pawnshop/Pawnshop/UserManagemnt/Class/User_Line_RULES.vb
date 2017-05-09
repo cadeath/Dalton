@@ -83,23 +83,24 @@ Public Class User_Line_RULES
         mySql = String.Format("SELECT * FROM " & fillData & " WHERE USERID = '{0}'", IDX)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
 
+        If UType = "Admin" Then Exit Sub
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("Unable to load user privilege.", MsgBoxStyle.Critical, "Error") : Exit Sub
 
-        _UsersRules = New UserRuleCol
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim getUserRule As New User_Line_RULES
-            With getUserRule
-                .USERLINE_ID = dr.Item("Userline_ID")
-                .USERID = dr.Item("UserID")
-                .PRIVILEGE_TYPE = dr.Item("Privilege_Type")
-                .ACCESS_TYPE = dr.Item("Access_type")
-                .DATE_UPDATED_LINE = dr.Item("Date_Updated_line")
-                .DATE_CREATED_LINE = dr.Item("Date_Created_line")
-            End With
-            _UsersRules.Add(getUserRule)
+            _UsersRules = New UserRuleCol
+            For Each dr As DataRow In ds.Tables(0).Rows
+                Dim getUserRule As New User_Line_RULES
+                With getUserRule
+                    .USERLINE_ID = dr.Item("Userline_ID")
+                    .USERID = dr.Item("UserID")
+                    .PRIVILEGE_TYPE = dr.Item("Privilege_Type")
+                    .ACCESS_TYPE = dr.Item("Access_type")
+                    .DATE_UPDATED_LINE = dr.Item("Date_Updated_line")
+                    .DATE_CREATED_LINE = dr.Item("Date_Created_line")
+                End With
+                _UsersRules.Add(getUserRule)
 
-            Load_userline(dr)
-        Next
+                Load_userline(dr)
+            Next
     End Sub
 
     Public Sub Load_userline(ByVal dr As DataRow)

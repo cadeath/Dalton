@@ -405,23 +405,17 @@ NExtLine:
 
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If UType = "Admin" Then dev_Pawning2.AccessType = "Full Access" : GoTo NExtLine
 
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
-
-        If UType = "Admin" Then frmInsurance.AccessType = "Full Access" : GoTo NExtLine
-
-        Select Case AccountRule.HasPrivilege("Insurance")
+        Select Case AccountRule.HasPrivilege("Lay away")
             Case "Full Access"
-                frmInsurance.AccessType = AccountRule.HasPrivilege("Insurance")
             Case "Read Only"
-                frmInsurance.AccessType = AccountRule.HasPrivilege("Insurance")
             Case "No Access"
                 MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
         End Select
 
 NExtLine:
-        Console.WriteLine(frmInsurance.AccessType)
-        frmInsurance.Show()
+         If DEV_MODE Then dev_Pawning2.Show()
     End Sub
 
     Private Sub btnPOS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
@@ -867,6 +861,7 @@ NExtLine:
     End Sub
 
     Private Sub bgwForPasswordExpiry_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwForPasswordExpiry.DoWork
+        If UType = "Admin" Then Exit Sub
         tmrForPasswordExpiry.Stop()
         Dim ms As String
 

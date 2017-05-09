@@ -26,8 +26,19 @@
 
             'for User
             If Not user_Login.LogUser(uName, pName) Then
+                'Username not register
+                If Failed_attemp = 0 Then
+                    i += 1
+                    If i >= 3 Then
+                        MsgBox("You have reached the MAXIMUM logins. This is a recording.", MsgBoxStyle.Critical)
+                        Clearfield()
+                        End
+                    End If
+                    MsgBox("This account doesn't exists!", MsgBoxStyle.Exclamation, "Invalid") : Clearfield() : Exit Sub
+                End If
+
                 i += 1
-                If i > Failed_attemp Then
+                If i >= Failed_attemp Then
 
                     MsgBox("You reached the MAXIMUM logins this is a recording." & vbCrLf & vbCrLf & _
                            "Your account temporarily locked.", MsgBoxStyle.Critical, "Locked")
@@ -38,7 +49,7 @@
                     user_Login.LOCK_USER(uName) 'Inactive the user account.
                     End
                 End If
-                MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Exit Sub
+                MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Clearfield() : Exit Sub
             End If
 
             UType = user_Login.USERTYPE
@@ -62,12 +73,12 @@
         Else
             If Not user_Login.LogUser(uName, pName) Then
                 i += 1
-                If i > 3 Then
+                If i >= 3 Then
                     MsgBox("You have reached the MAXIMUM logins. This is a recording.", MsgBoxStyle.Critical)
                     Clearfield()
                     End
                 End If
-                MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Exit Sub
+                MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Clearfield() : Exit Sub
             End If
 
             UType = user_Login.USERTYPE
@@ -93,7 +104,6 @@ nextToline:
         Me.Close()
     End Sub
 
-
     Private Sub txtPassword_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
         If isEnter(e) Then btnLogin.PerformClick()
     End Sub
@@ -105,6 +115,7 @@ nextToline:
     Private Sub Clearfield()
         txtUsername.Text = ""
         txtPassword.Text = ""
+        txtUsername.Focus()
     End Sub
    
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

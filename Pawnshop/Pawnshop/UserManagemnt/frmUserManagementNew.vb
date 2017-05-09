@@ -42,6 +42,7 @@
         lvUserList.Items.Clear()
         With s_user
             For Each dr As DataRow In ds.Tables(0).Rows
+                If dr.Item("USERTYPE") = "Admin" Then Continue For
                 .Users(dr.Item("USERID"))
                 Dim lv As ListViewItem = lvUserList.Items.Add(.ID)
                 lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
@@ -90,7 +91,6 @@
             End If
 
 
-
             If ds1.Tables(0).Rows.Count = 0 Then
                 dgRulePrivilege.Rows.Add(0, dr.Item("Privilege_Type"))
             Else
@@ -119,6 +119,7 @@
     End Function
 
     Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
+        OTPUser_Initialization()
         If btnCreateAccount.Text = "&Create Account" Then
             Save()
         ElseIf btnCreateAccount.Text = "&Edit" Then
@@ -134,9 +135,23 @@
 
     Private Sub Save()
         If Not IsValid() Then Exit Sub
+        If UType = "Admin" Then GoTo saved
+        If Not OTPDisable Then
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                GoTo Saved
+            End If
+        Else
+            GoTo Saved
+        End If
 
-        Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Saving Account")
-        If result = vbNo Then Exit Sub
+        'Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Saving Account")
+        'If result = vbNo Then Exit Sub
+Saved:
         Dim num As String = txtContactnumber.Text
         num = num.Replace("-", "")
 
@@ -206,9 +221,22 @@
 
     Private Sub update_user()
         If Not IsValid() Then Exit Sub
-
-        Dim result As DialogResult = MsgBox("Do you want update this account?", MsgBoxStyle.YesNo, "Updating Account")
-        If result = vbNo Then Exit Sub
+        If UType = "Admin" Then GoTo UpdateS
+        If Not OTPDisable Then
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                GoTo UpdateS
+            End If
+        Else
+            GoTo UpdateS
+        End If
+        'Dim result As DialogResult = MsgBox("Do you want update this account?", MsgBoxStyle.YesNo, "Updating Account")
+        'If result = vbNo Then Exit Sub
+UpdateS:
         Dim num As String = txtContactnumber.Text
         num = num.Replace("-", "")
 
@@ -572,16 +600,31 @@
         End If
 
         lvALL_USER_LIST.Items.Clear()
-        With s_user
-            For Each dr As DataRow In ds.Tables(0).Rows
-                .Users(dr.Item("USERID"))
-                Dim lv As ListViewItem = lvALL_USER_LIST.Items.Add(.ID)
-                Dim email As String = .EMAIL_ADDRESS
-                lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
-                lv.SubItems.Add(email)
-            Next
-            txtSearch.Text = Nothing
-        End With
+        If UType = "Admin" Then
+            With s_user
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    .Users(dr.Item("USERID"))
+                    Dim lv As ListViewItem = lvALL_USER_LIST.Items.Add(.ID)
+                    Dim email As String = .EMAIL_ADDRESS
+                    lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
+                    lv.SubItems.Add(email)
+                Next
+                txtSearch.Text = Nothing
+            End With
+        Else
+            With s_user
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    If dr.Item("USERTYPE") = "Admin" Then Continue For
+                    .Users(dr.Item("USERID"))
+                    Dim lv As ListViewItem = lvALL_USER_LIST.Items.Add(.ID)
+                    Dim email As String = .EMAIL_ADDRESS
+                    lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
+                    lv.SubItems.Add(email)
+                Next
+                txtSearch.Text = Nothing
+            End With
+        End If
+       
 
     End Sub
 

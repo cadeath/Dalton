@@ -14,9 +14,11 @@
         ClearFields()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+
+        If AccessType = "Read Only" Then
+            btnVoid.Enabled = False
+        End If
+
         verification()
     End Sub
     ''' <summary>

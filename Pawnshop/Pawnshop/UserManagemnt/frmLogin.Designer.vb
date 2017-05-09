@@ -32,7 +32,7 @@ Partial Class frmLogin
         '
         Me.btnLogin.BackColor = System.Drawing.Color.White
         Me.btnLogin.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.Location = New System.Drawing.Point(56, 126)
+        Me.btnLogin.Location = New System.Drawing.Point(58, 121)
         Me.btnLogin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(91, 37)
@@ -44,7 +44,7 @@ Partial Class frmLogin
         '
         Me.btnExit.BackColor = System.Drawing.Color.White
         Me.btnExit.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExit.Location = New System.Drawing.Point(167, 126)
+        Me.btnExit.Location = New System.Drawing.Point(169, 121)
         Me.btnExit.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(91, 37)
@@ -55,7 +55,7 @@ Partial Class frmLogin
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(40, 80)
+        Me.txtPassword.Location = New System.Drawing.Point(42, 75)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(243, 26)
         Me.txtPassword.TabIndex = 1
@@ -66,7 +66,7 @@ Partial Class frmLogin
         'txtUsername
         '
         Me.txtUsername.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUsername.Location = New System.Drawing.Point(40, 42)
+        Me.txtUsername.Location = New System.Drawing.Point(42, 37)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(243, 26)
         Me.txtUsername.TabIndex = 0
@@ -78,11 +78,12 @@ Partial Class frmLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
-        Me.ClientSize = New System.Drawing.Size(313, 199)
+        Me.ClientSize = New System.Drawing.Size(308, 188)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUsername)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmLogin"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"
