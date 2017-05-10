@@ -2,7 +2,8 @@
 
 
 Public Class Sys_user
-
+    Friend SYSTEM_USERID As Integer = 0
+    Friend tmpPassword As String = ""
     Private maintable As String = "tbl_user_default"
     Private subTable As String = "tbluser_history"
     Private MAIN_LINE As String = "TBL_USERLINE"
@@ -388,7 +389,7 @@ Public Class Sys_user
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
-            .Item("ENCODERID") = IIf(IDX <> 0, IDX, 0)
+            .Item("ENCODERID") = IIf(SystemUser.ID <> 0, SystemUser.ID, 0)
             .Item("LASTLOGIN") = Now
 
             If PASSWORD_AGE_COUNT = 0 Then
@@ -472,7 +473,7 @@ nextLINETODO:
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
-            .Item("ENCODERID") = IIf(IDX <> 0, IDX, 0)
+            .Item("ENCODERID") = IIf(SystemUser.ID <> 0, SystemUser.ID, 0)
             .Item("LASTLOGIN") = Now
 
             If PASSWORD_AGE_COUNT = 0 Then
@@ -523,7 +524,7 @@ nextLINETODO:
     ''' <remarks></remarks>
     Friend Function UserProUpdate() As Boolean
        
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", IDX)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", UserIDX)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)
@@ -1000,7 +1001,7 @@ nextLINETODO:
     ''' <returns></returns>
     ''' <remarks></remarks>
     Function Get_rem_PassExp() As Integer
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", IDX)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", UserIDX)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(0).Rows.Count = 0 Then Return 0
@@ -1014,7 +1015,7 @@ nextLINETODO:
     ''' <returns></returns>
     ''' <remarks></remarks>
     Function ChkUserUpdate() As Boolean
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", IDX)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID ={0}", UserIDX)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)

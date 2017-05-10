@@ -80,7 +80,7 @@ Public Class User_Line_RULES
 
 #Region "FUNCTIONS AND PROCEDURES"
     Friend Sub LOAD_USER_RULES()
-        mySql = String.Format("SELECT * FROM " & fillData & " WHERE USERID = '{0}'", IDX)
+        mySql = String.Format("SELECT * FROM " & fillData & " WHERE USERID = '{0}'", UserIDX)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
 
         If UType = "Admin" Then Exit Sub

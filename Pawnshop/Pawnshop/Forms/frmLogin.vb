@@ -176,8 +176,9 @@
                 MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Clearfield() : Exit Sub
             End If
 
+            SystemUser = user_Login
             UType = user_Login.USERTYPE
-            IDX = user_Login.ID
+            UserIDX = user_Login.ID
             FullName = user_Login.FIRSTNAME & " " & user_Login.LASTNAME
 
             AccountRule.LOAD_USER_RULES()
@@ -205,8 +206,9 @@
                 MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Clearfield() : Exit Sub
             End If
 
+            SystemUser = user_Login
             UType = user_Login.USERTYPE
-            IDX = user_Login.ID
+            UserIDX = user_Login.ID
             FullName = user_Login.FIRSTNAME & " " & user_Login.LASTNAME
             MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), _
                                  user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))

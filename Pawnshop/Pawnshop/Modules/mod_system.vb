@@ -48,6 +48,17 @@ Module mod_system
     Friend TBLINT_HASH As String = ""
     Friend PAWN_JE As Boolean = False
     Friend DBVERSION As String = ""
+
+
+    Public PASSWORD_AGE_COUNT As Integer = 0
+    Public PASSWORD_EXPIRY_COUNT As Integer = 0
+
+    Public SystemUser As New Sys_user
+    Public UType As String = ""
+    Public FullName As String = ""
+
+    Public UserIDX As Integer = SystemUser.ID
+    Public AccountRule As New User_Line_RULES
 #End Region
 
 #Region "Store"
@@ -652,6 +663,32 @@ Module mod_system
             End If
         Next
     End Sub
+
+    Function UppercaseFirstLetter(ByVal val As String) As String
+        ' Test for nothing or empty.
+        If String.IsNullOrEmpty(val) Then
+            Return val
+        End If
+
+        ' Convert to character array.
+        Dim array() As Char = val.ToCharArray
+
+        ' Uppercase first character.
+        array(0) = Char.ToUpper(array(0))
+
+        ' Return new string.
+        Return New String(array)
+    End Function
+
+    Function Date_Calculation(ByVal EXPIRATE_DATE As Date) As Integer
+        Dim ValidDate As Date = CDate(EXPIRATE_DATE)
+        Dim date1 As New System.DateTime(ValidDate.Year, ValidDate.Month, ValidDate.Day)
+
+        Dim Diff1 As System.TimeSpan = date1.Subtract(Now)
+
+        Dim TotRemDays = (Int(Diff1.TotalDays))
+        Return TotRemDays
+    End Function
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

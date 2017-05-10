@@ -5,7 +5,7 @@
         Dim num As String = txtContactnumber.Text
         num = num.Replace("-", "")
 
-        With selected_USEr
+        With SystemUser
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
@@ -18,7 +18,7 @@
         End With
 
         MsgBox("Profile successfully updated.", MsgBoxStyle.Information, "Update")
-        frmMainnEW.NotYetLogin() : frmLogin.Show()
+        frmMainnEW.NotYetLogin() : frmLogin1.Show()
         Me.Close()
     End Sub
 
