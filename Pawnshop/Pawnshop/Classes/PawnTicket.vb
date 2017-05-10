@@ -399,7 +399,7 @@ Public Class PawnTicket
                 .Item("RedeemDue") = _redeemDue
                 .Item("Status") = _status
                 .Item("SystemInfo") = Now
-                .Item("EncoderID") = UserID
+                .Item("EncoderID") = UserIDX
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
@@ -438,7 +438,7 @@ Public Class PawnTicket
                 .Item("RedeemDue") = _redeemDue
                 .Item("Status") = _status
                 .Item("SystemInfo") = Now
-                .Item("EncoderID") = UserID
+                .Item("EncoderID") = UserIDX
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
@@ -642,7 +642,7 @@ Public Class PawnTicket
                 Dim ds As DataSet = LoadSQL(mysql)
                 Dim tmpEncoderID As Integer
                 tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                TransactionVoidSave(ModNAME, tmpEncoderID, SystemUser.ID)
                 RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
                 Exit Sub
@@ -688,7 +688,7 @@ Public Class PawnTicket
                 Dim ds2 As DataSet = LoadSQL(mysql2)
                 Dim tmpEncoderID As Integer
                 tmpEncoderID = ds2.Tables(0).Rows(0).Item("ENCODERID")
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                TransactionVoidSave(ModNAME, tmpEncoderID, SystemUser.ID)
 
                 RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
@@ -699,7 +699,7 @@ Public Class PawnTicket
                 Dim ds As DataSet = LoadSQL(mysql)
                 Dim tmpEncoderID As Integer
                 tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                TransactionVoidSave(ModNAME, tmpEncoderID, SystemUser.ID)
 
 
                 RemoveJournal(PtransID, , ModNAME)

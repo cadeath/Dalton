@@ -84,7 +84,7 @@
             .Amount = txtAmount.Text
             .Remarks = txtParticulars.Text
             .Status = "C" 'Credit
-            .EncoderID = UserID
+            .EncoderID = UserIDX
 
             .SaveBorrowings()
             AddRefNum()
@@ -199,7 +199,7 @@
             .Amount = Amount
             .Remarks = Remarks
             .Status = "D"
-            .EncoderID = UserID
+            .EncoderID = UserIDX
 
             .SaveBorrowings()
 

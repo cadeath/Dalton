@@ -248,7 +248,7 @@
                     .Item("Denomination") = deno
                     .Item("Cnt") = denoCnt
                     .Item("Total") = denoValue
-                    .Item("EncoderID") = UserID
+                    .Item("EncoderID") = UserIDX
                     .Item("SystemTime") = Now
                     .Item("Status") = CashCountStatus
                     .Item("MoneyType") = denoType.ToUpper
@@ -286,7 +286,7 @@
             .Item("Customer") = "One-Time Customer"
             .Item("DOCDATE") = CurrentDate
             .Item("DOCTOTAL") = TotalVal
-            .Item("USERID") = POSuser.UserID
+            .Item("USERID") = SystemUser.ID
         End With
         ds.Tables("Doc").Rows.Add(dsNewRow)
         SaveEntry(ds)

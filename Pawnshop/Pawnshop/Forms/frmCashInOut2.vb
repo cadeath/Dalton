@@ -369,7 +369,7 @@
             .Transaction = transName
             .Amount = txtAmt.Text
             .Particulars = txtParticulars.Text
-            .EncoderID = UserID
+            .EncoderID = UserIDX
             .Status = True
         End With
 

@@ -33,8 +33,8 @@ Public Class frmReport
             If hasUser Then
                 Dim myPara As New ReportParameter
                 myPara.Name = "txtUsername"
-                If POSuser.UserName Is Nothing Then POSuser.UserName = "Sample Eskie"
-                myPara.Values.Add(POSuser.UserName)
+                If SystemUser.USERNAME Is Nothing Then SystemUser.USERNAME = "Sample Eskie"
+                myPara.Values.Add(SystemUser.USERNAME)
                 rv_display.LocalReport.SetParameters(New ReportParameter() {myPara})
             End If
 
@@ -84,8 +84,8 @@ Public Class frmReport
                 If hasUser Then
                     Dim myPara As New ReportParameter
                     myPara.Name = "txtUsername"
-                    If POSuser.UserName Is Nothing Then POSuser.UserName = "Sample Eskie"
-                    myPara.Values.Add(POSuser.UserName)
+                    If SystemUser.USERNAME Is Nothing Then SystemUser.USERNAME = "Sample Eskie"
+                    myPara.Values.Add(SystemUser.USERNAME)
                     .LocalReport.SetParameters(New ReportParameter() {myPara})
                 End If
 

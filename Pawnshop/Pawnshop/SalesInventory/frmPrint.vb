@@ -168,7 +168,7 @@ Public Class frmPrint
         Else
             TransactionName = "RECALL"
         End If
-        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+        TransactionVoidSave(TransactionName, EncoderID, SystemUser.ID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
             ds.Clear()
             mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
             ds = LoadSQL(mysql, "Doclines")

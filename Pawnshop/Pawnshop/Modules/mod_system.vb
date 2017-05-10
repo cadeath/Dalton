@@ -59,6 +59,8 @@ Module mod_system
 
     Public UserIDX As Integer = SystemUser.ID
     Public AccountRule As New User_Line_RULES
+    Public tmpID As Integer = 0
+    Public tmpPassword As String = ""
 #End Region
 
 #Region "Store"
@@ -101,7 +103,7 @@ Module mod_system
             '.Item("CashCount")'No CashCount on OPENING
             .Item("Status") = 1
             .Item("SystemInfo") = Now
-            .Item("Openner") = UserID
+            .Item("Openner") = UserIDX
         End With
         ds.Tables(storeDB).Rows.Add(dsNewRow)
 
@@ -221,7 +223,7 @@ Module mod_system
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
                 .Item("Status") = 0
-                .Item("Closer") = POSuser.UserID
+                .Item("Closer") = SystemUser.ID
             End With
 
             database.SaveEntry(ds, False)

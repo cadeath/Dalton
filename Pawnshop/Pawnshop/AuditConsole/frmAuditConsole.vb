@@ -114,7 +114,7 @@ Public Class frmAuditConsole
                 .Item("MOP") = "S"
                 .Item("CUSTOMER") = "01"
                 .Item("DOCDATE") = CurrentDate
-                .Item("USERID") = POSuser.UserID
+                .Item("USERID") = SystemUser.ID
                 .Item("REMARKS") = "Adjust"
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)

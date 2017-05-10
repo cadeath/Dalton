@@ -492,7 +492,7 @@ Public Class frmMoneyTransfer
             .NetAmount = txtNetAmount.Text
             .Location = cboLocation.Text
             .Status = "A" 'Active
-            .EncoderID = UserID
+            .EncoderID = UserIDX
             .Bracket = strBracket
             .Save()
             Select Case cboType.Text

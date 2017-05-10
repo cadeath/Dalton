@@ -266,7 +266,7 @@
                     .Item("Denomination") = deno
                     .Item("Cnt") = denoCnt
                     .Item("Total") = denoValue
-                    .Item("EncoderID") = UserID
+                    .Item("EncoderID") = UserIDX
                     .Item("SystemTime") = Now
                     .Item("Status") = 1
                     .Item("MoneyType") = denoType

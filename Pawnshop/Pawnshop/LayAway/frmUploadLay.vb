@@ -85,7 +85,7 @@ unloadObj:
                 .Price = lv.SubItems(3).Text
                 .Balance = lv.SubItems(4).Text
                 .CustomerID = lv.SubItems(5).Text
-                .Encoder = UserID
+                .Encoder = UserIDX
                 .SaveLayAway()
                 .ItemOnLayMode(lv.SubItems(0).Text)
             End With

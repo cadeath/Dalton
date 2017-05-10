@@ -159,7 +159,7 @@
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
             .Client = Holder
-            .EncoderID = POSuser.UserID
+            .EncoderID = SystemUser.ID
 
             .SaveInsurance()
 

@@ -11,9 +11,12 @@
         txtSearch.Focus()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If frmMoneyTransfer.AccessType = "Full Access" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
+
     End Sub
 
     Private Sub ClearField()

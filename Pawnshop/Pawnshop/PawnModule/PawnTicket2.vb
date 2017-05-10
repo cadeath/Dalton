@@ -517,7 +517,7 @@ Public Class PawnTicket2
             .Item("PAWNTICKET") = _ticket
             .Item("CLIENTID") = _pawner.ID
             .Item("SMS_MSG") = msg
-            .Item("SENT_BY") = POSuser.UserID
+            .Item("SENT_BY") = SystemUser.ID
             .Item("REMARKS") = req
             .Item("CREATED_AT") = Now
         End With
@@ -565,7 +565,7 @@ Public Class PawnTicket2
                 database.SaveEntry(ds, False)
 
                 Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagGeneralOTP.txtPIN.Text, "PT# " & PawnTicket)
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID, "PT# " & PawnTicket)
+                TransactionVoidSave(ModNAME, tmpEncoderID, SystemUser.ID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
                 Exit Sub
@@ -574,7 +574,7 @@ Public Class PawnTicket2
                 Dim ds As DataSet = LoadSQL(mysql)
 
                 Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagGeneralOTP.txtPIN.Text, "PT# " & PawnTicket)
-                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
+                TransactionVoidSave(ModNAME, EncoderID, SystemUser.ID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
 
@@ -600,7 +600,7 @@ Public Class PawnTicket2
                     ChangeStatus("V")
                 End If
                 Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagGeneralOTP.txtPIN.Text, "PT# " & PawnTicket)
-                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
+                TransactionVoidSave(ModNAME, EncoderID, SystemUser.ID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
             End If
@@ -717,8 +717,8 @@ Public Class PawnTicket2
     End Function
 
     Private Function GetUsername(ByVal id As Integer) As String
-        Dim loadAppraiser As New ComputerUser
-        loadAppraiser.LoadUser(id)
+        Dim loadAppraiser As New Sys_user
+        loadAppraiser.Users(id)
 
         Return loadAppraiser.UserName
     End Function

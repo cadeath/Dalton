@@ -56,7 +56,7 @@
                 With dsNewRow
                     .Item("PIN") = PIN
                     .Item("Mod_name") = ModName
-                    .Item("USERID") = POSuser.UserID
+                    .Item("USERID") = SystemUser.ID
                     .Item("Remarks") = Remarks
                 End With
                 ds.Tables(fillData).Rows.Add(dsNewRow)
@@ -71,7 +71,7 @@
             With dsNewRow
                 .Item("PIN") = PIN
                 .Item("Mod_name") = ModName
-                .Item("USERID") = POSuser.UserID
+                .Item("USERID") = SystemUser.ID
                 .Item("Remarks") = Remarks
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)

@@ -179,7 +179,7 @@
         Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
 
         Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagGeneralOTP.txtPIN.Text, "CashIn/OutID# " & id)
-        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
+        TransactionVoidSave(lblCategory.Text, tmpCIO, SystemUser.ID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)

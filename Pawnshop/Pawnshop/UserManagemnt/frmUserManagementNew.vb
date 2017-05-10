@@ -161,7 +161,7 @@ Saved:
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
 
-            .tmpPassword = EncryptString(txtPassword.Text)
+            tmpPassword = EncryptString(txtPassword.Text)
 
             .USERPASS = txtPassword.Text
             .EMAIL_ADDRESS = txtEmailaddress.Text
@@ -252,7 +252,7 @@ UpdateS:
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
 
             If txtPassword.Text <> "" Then
-                .tmpPassword = EncryptString(txtPassword.Text)
+                tmpPassword = EncryptString(txtPassword.Text)
             End If
 
             .USERPASS = txtPassword.Text
@@ -510,8 +510,8 @@ UpdateS:
             End If
 
             'Global variable
-            .SYSTEM_USERID = .ID
-            .tmpPassword = .USERPASS
+            tmpID = .ID
+            tmpPassword = .USERPASS
 
             dgRulePrivilege.Rows.Clear()
             .LOAD_USERLINE_ROWS(.ID)

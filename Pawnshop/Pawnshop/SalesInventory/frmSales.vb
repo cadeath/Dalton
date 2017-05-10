@@ -394,7 +394,7 @@ Public Class frmSales
             .Item("VATRATE") = VAT
             .Item("VATTOTAL") = DOC_VATTOTAL
             .Item("DOCTOTAL") = DOC_TOTAL
-            .Item("USERID") = POSuser.UserID
+            .Item("USERID") = SystemUser.ID
             If Remarks <> "" Then .Item("REMARKS") = Remarks
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)

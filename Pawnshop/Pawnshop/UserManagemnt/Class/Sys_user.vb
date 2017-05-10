@@ -2,8 +2,7 @@
 
 
 Public Class Sys_user
-    Friend SYSTEM_USERID As Integer = 0
-    Friend tmpPassword As String = ""
+ 
     Private maintable As String = "tbl_user_default"
     Private subTable As String = "tbluser_history"
     Private MAIN_LINE As String = "TBL_USERLINE"
@@ -758,7 +757,7 @@ nextLINETODO:
             Dim dsnewrow As DataRow
             dsnewrow = ds.Tables(MAIN_LINE).NewRow
             With dsnewrow
-                .Item("USERID") = SYSTEM_USERID
+                .Item("USERID") = tmpID
                 .Item("PRIVILEGE_TYPE") = _PRIVILEGE_TYPE
                 .Item("ACCESS_TYPE") = _ACCESSTYPE
                 .Item("DATE_CREATED_LINE") = Now.ToShortDateString

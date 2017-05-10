@@ -36,7 +36,7 @@
                 If Not hasCustomer Then .Item("HASCUSTOMER") = 0
                 'Added in db 1.0.12
                 .Item("AMOUNT") = Amount
-                .Item("USERID") = POSuser.UserID
+                .Item("USERID") = SystemUser.ID
                 .Item("TRANSID") = transid
             End With
             ds.Tables(TBL).Rows.Add(dsNewRow)

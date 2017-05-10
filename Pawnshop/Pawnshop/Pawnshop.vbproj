@@ -920,7 +920,6 @@
     <Compile Include="UserManagemnt\frmUserManagementNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserManagemnt\Module\mod_sys.vb" />
     <Compile Include="UserManagemnt\UserMigrate\Create_Tables.vb" />
     <Compile Include="UserManagemnt\UserMigrate\frmaddPrivilege.Designer.vb">
       <DependentUpon>frmaddPrivilege.vb</DependentUpon>
@@ -1560,9 +1559,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserManagemnt\User Management Form\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
