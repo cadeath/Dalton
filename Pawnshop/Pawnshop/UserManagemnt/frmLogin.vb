@@ -122,4 +122,8 @@ nextToline:
         user_Login = New Sys_user
         user_Login.CreateSuperAdministrator()
     End Sub
+
+    Private Sub btnCLose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCLose.Click
+        End
+    End Sub
 End Class

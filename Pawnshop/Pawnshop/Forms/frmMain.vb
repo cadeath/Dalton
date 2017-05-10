@@ -359,7 +359,7 @@ nextlineTODO:
 
     Private Sub LogOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogOutToolStripMenuItem.Click
         If LogOutToolStripMenuItem.Text = "&Login" Then
-            frmLogin.Show()
+            frmLogin1.Show()
         Else
             Dim ans As DialogResult = MsgBox("Do you want to LOGOUT?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Logout")
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -367,7 +367,7 @@ nextlineTODO:
             POSuser = Nothing
             Dim formNames As New List(Of String)
             For Each Form In My.Application.OpenForms
-                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin" Then
+                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin1" Then
                     formNames.Add(Form.Name)
                 End If
             Next
@@ -377,7 +377,7 @@ nextlineTODO:
             lblPasswordExpiry.Text = "Password Expiry"
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
-            frmLogin.Show()
+            frmLogin1.Show()
         End If
     End Sub
 

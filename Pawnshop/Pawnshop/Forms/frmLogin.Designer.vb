@@ -89,10 +89,11 @@ Partial Class frmLogin1
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(209, 24)
         Me.txtPassword.TabIndex = 1
+        Me.txtPassword.UseSystemPasswordChar = True
         Me.txtPassword.WatermarkColor = System.Drawing.Color.Gainsboro
         Me.txtPassword.WatermarkText = "Password"
         '
-        'frmLogin
+        'frmLogin1
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -107,7 +108,7 @@ Partial Class frmLogin1
         Me.Controls.Add(Me.pbHeader)
         Me.Controls.Add(Me.pbClose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "frmLogin"
+        Me.Name = "frmLogin1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmLogin"
         CType(Me.pbClose, System.ComponentModel.ISupportInitialize).EndInit()
