@@ -370,14 +370,14 @@ UpdateS:
                 If txtPassword.Text <> txtPasword1.Text Then MsgBox("Password not matched!", MsgBoxStyle.Exclamation, "Warning") _
         : txtPassword.Focus() : Return False
 
-                If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", _
+                If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 character or above combinations.", _
                MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
             End If
         Else
 
             If txtPassword.Text = "" Then txtPassword.Focus() : Return False
             If txtPasword1.Text = "" Then txtPasword1.Focus() : Return False
-            If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", _
+            If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 character or above combinations.", _
                 MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
 
             If txtPassword.Text <> txtPasword1.Text Then MsgBox("Password not matched!", MsgBoxStyle.Exclamation, "Warning") _

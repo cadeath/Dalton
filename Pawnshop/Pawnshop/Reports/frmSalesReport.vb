@@ -108,7 +108,7 @@
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
-        addParameter.Add("txtUsername", POSuser.UserName)
+        addParameter.Add("txtUsername", SystemUser.USERNAME)
 
         frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()
@@ -139,7 +139,7 @@
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
         addParameter.Add("branchName", branchName)
-        addParameter.Add("txtUsername", POSuser.UserName)
+        addParameter.Add("txtUsername", SystemUser.USERNAME)
 
         frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()

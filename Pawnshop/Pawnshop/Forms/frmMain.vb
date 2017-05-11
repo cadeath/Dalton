@@ -628,7 +628,7 @@ NExtLine:
     End Sub
 
     Private Sub ChangePasswordToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangePasswordToolStrip.Click
-        frmChangePassword.Show()
+        frmChangePasswordNew.Show()
     End Sub
 
     Private Sub AuditConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click

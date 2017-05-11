@@ -359,7 +359,7 @@ Public Class Sys_user
     ''' <returns></returns>
     ''' <remarks></remarks>
     Friend Function add_USER(Optional ByVal ISACCT_EXPIRE As Boolean = True) As Boolean
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", Encrypt(_USERPASS))
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
 
@@ -382,7 +382,7 @@ Public Class Sys_user
             .Item("FIRSTNAME") = _FIRSTNAME
             .Item("MIDDLENAME") = _MIDDLENAME
             .Item("LASTNAME") = _LASTNAME
-            .Item("USERPASS") = EncryptString(_USERPASS)
+            .Item("USERPASS") = Encrypt(_USERPASS)
             .Item("EMAIL_ADDRESS") = _EMAIL_ADDRESS
             .Item("CONTACTNO") = _CONTACTNO
             .Item("BIRTHDAY") = _BIRTHDAY
@@ -452,7 +452,7 @@ Public Class Sys_user
         If _USERPASS = "" Then
             Passwd_update = False : GoTo nextLINETODO
         Else
-            If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
+            If Not Check_Pass_IfExists(_ID, Encrypt(_USERPASS)) Then
                 MsgBox("The password you've entered is already taken." & vbCrLf & _
                        "Please try again.", MsgBoxStyle.Critical, "Validate") : Return False
             End If
@@ -466,7 +466,7 @@ nextLINETODO:
             .Item("FIRSTNAME") = _FIRSTNAME
             .Item("MIDDLENAME") = _MIDDLENAME
             .Item("LASTNAME") = _LASTNAME
-            .Item("USERPASS") = IIf(Passwd_update, EncryptString(_USERPASS), tmpPassword)
+            .Item("USERPASS") = IIf(Passwd_update, Encrypt(_USERPASS), tmpPassword)
             .Item("EMAIL_ADDRESS") = _EMAIL_ADDRESS
             .Item("CONTACTNO") = _CONTACTNO
             .Item("BIRTHDAY") = _BIRTHDAY
@@ -491,12 +491,12 @@ nextLINETODO:
         End With
         database.SaveEntry(ds, False)
 
-        mySql = String.Format("SELECT * FROM " & subTable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
+        mySql = String.Format("SELECT * FROM " & subTable & " WHERE USERPASS = '{0}'", Encrypt(_USERPASS))
         Dim ds1 As DataSet = LoadSQL(mySql, subTable)
 
         If ds1.Tables(0).Rows.Count > 0 Then
             With ds1.Tables(0).Rows(0)
-                .Item("USERPASS") = EncryptString(_USERPASS)
+                .Item("USERPASS") = Encrypt(_USERPASS)
                 .Item("DATE_CREATED") = Now
             End With
             database.SaveEntry(ds1, False)
@@ -506,7 +506,7 @@ nextLINETODO:
             dr = ds1.Tables(subTable).NewRow
             With dr
                 .Item("USERID") = _ID
-                .Item("USERPASS") = EncryptString(_USERPASS)
+                .Item("USERPASS") = Encrypt(_USERPASS)
                 .Item("DATE_CREATED") = Now
             End With
             ds1.Tables(subTable).Rows.Add(dr)
@@ -829,9 +829,9 @@ nextLINETODO:
     ''' <remarks></remarks>
     Friend Function LogUser(ByVal uName As String, ByVal pWrd As String) As Boolean
         mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}')" & _
-                              "AND USERPASS = '{1}' AND STATUS = 1", uName, EncryptString(pWrd))
+                              "AND USERPASS = '{1}' AND STATUS = 1", uName, Encrypt(pWrd))
         Dim ds As DataSet = LoadSQL(mySql, maintable)
-
+        Console.WriteLine(Encrypt(pWrd))
         If ds.Tables(0).Rows.Count = 0 Then Return False
 
         Users(ds.Tables(0).Rows(0).Item("USERID"))
@@ -863,7 +863,7 @@ nextLINETODO:
     ''' <returns></returns>
     ''' <remarks></remarks>
     Friend Function CheckPass_Age_Expiration(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
-        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
+        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & Encrypt(u_PASS) & "'" & _
                 "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
@@ -894,7 +894,7 @@ nextLINETODO:
     ''' <returns></returns>
     ''' <remarks></remarks>
     Friend Function Chk_Account_EXPIRY_COUNTDOWN(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
-        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
+        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & Encrypt(u_PASS) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
@@ -1024,6 +1024,45 @@ nextLINETODO:
         End With
 
         Return False
+    End Function
+
+    Friend Function ChangePassword(ByVal newPass As String) As Boolean
+        If Not Check_Pass_IfExists(UserIDX, Encrypt(newPass)) Then
+            MsgBox("The password you've entered is already taken." & vbCrLf & _
+                    "Please try again.", MsgBoxStyle.Critical, "Validate") : Return False
+            Return False
+        End If
+
+        mySql = "SELECT * FROM " & maintable & " WHERE USERID = " & UserIDX
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("Userpass") = Encrypt(newPass)
+            database.SaveEntry(ds, False)
+        End With
+
+        mySql = String.Format("SELECT * FROM " & subTable & " WHERE USERPASS = '{0}'", Encrypt(newPass))
+        Dim ds1 As DataSet = LoadSQL(mySql, subTable)
+
+        If ds1.Tables(0).Rows.Count > 0 Then
+            With ds1.Tables(0).Rows(0)
+                .Item("USERPASS") = Encrypt(newPass)
+                .Item("DATE_CREATED") = Now
+            End With
+            database.SaveEntry(ds1, False)
+
+        Else
+            Dim dr As DataRow
+            dr = ds1.Tables(subTable).NewRow
+            With dr
+                .Item("USERID") = UserIDX
+                .Item("USERPASS") = Encrypt(newPass)
+                .Item("DATE_CREATED") = Now
+            End With
+            ds1.Tables(subTable).Rows.Add(dr)
+            database.SaveEntry(ds1)
+        End If
+        Return True
     End Function
 #End Region
 End Class
