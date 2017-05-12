@@ -90,7 +90,7 @@ Module smsUtil
         For Each phne As PhoneNumber In cl.CustomersPhone
             If phne.isPrimary = True Then
                 c1 = validate_cp(phne.PhoneNumber)
-                If c1 <> "INVALID" Then
+                If c1 <> "INV-" & phne.PhoneNumber Then
                     Return String.Format("{0}", c1)
                 End If
             End If
