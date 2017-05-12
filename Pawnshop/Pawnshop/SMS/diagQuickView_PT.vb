@@ -51,6 +51,9 @@
                 End If
             Next
 
+            For Each phne As PhoneNumber In .Pawner.CustomersPhone
+                txtNumber.Text = phne.PhoneNumber : Exit For
+            Next
         End With
 
     End Sub

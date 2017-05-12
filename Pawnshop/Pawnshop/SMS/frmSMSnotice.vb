@@ -34,8 +34,8 @@
             If autoStart Then Me.Hide()
             FormState(False)
             For Each dr As DataRow In ExpiryCache.Rows
-                Dim pawner As New Client
-                pawner.LoadClient(dr("ID"))
+                Dim pawner As New Customer
+                pawner.Load_CustomerByID(dr("ID"))
                 Dim principal As Double = dr("PRINCIPAL")
 
                 Dim lv As ListViewItem = lvExpiry.Items.Add(dr("PAWNTICKET"))
@@ -65,11 +65,23 @@
             Exit Sub
         End If
 
-        Dim id As Integer = ExpiryCache.Rows(idx).Item("clientID")
-        Dim cl As New Client
-        cl.LoadClient(id)
-        cl.Cellphone1 = updatedNumber(0)
-        cl.ModifyClient()
+        Dim id As Integer = ExpiryCache.Rows(idx).Item("ID")
+        Dim cl As New Customer
+        cl.Load_CustomerByID(id)
+
+        'For Each phne As PhoneNumber In cl.CustomersPhone
+        '    c1 = validate_cp(phne.PhoneNumber)
+        '    If c1 = "INVALID" Then
+        '        Return String.Format("{0}", c1)
+        '    End If
+
+        '    If c1 <> "INVALID" Then
+        '        Return c1
+        '    End If
+        'Next
+
+        'cl.Cellphone1 = updatedNumber(0)
+        'cl.ModifyClient()
         lvExpiry.Items(idx).SubItems(2).Text = cleanup_contact(cl)
 
         MsgBox("Number Updated", MsgBoxStyle.Information)
