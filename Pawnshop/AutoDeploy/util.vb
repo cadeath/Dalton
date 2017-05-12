@@ -3,7 +3,6 @@
 Module util
 
     Friend Const FILENAME As String = "Aerauxel.ini"
-    Friend Const EXENAME As String = "pawnshop.exe"
 
     ''' <summary>
     ''' This function has two arguments.
@@ -143,12 +142,6 @@ Module util
                 End If
             End If
         Next
-
-        If CheckIfRunning(EXENAME) Then
-            Dim ans = MsgBox("System is Running" + vbCrLf + "Do you want to close it?", MsgBoxStyle.YesNo, "DIS is Running")
-            If ans = MsgBoxResult.No Then End
-            KillExe(EXENAME)
-        End If
     End Sub
 
     Private Sub deleteFile(fullPath As String)
@@ -164,29 +157,6 @@ Module util
         GetTargetPath = Shortcut.TargetPath
     End Function
 
-
-    Private p() As Process
-    Friend Function CheckIfRunning(processName As String) As Boolean
-        p = Process.GetProcessesByName(processName)
-        If p.Count > 0 Then
-            ' Process is running
-            Return True
-        Else
-            ' Process is not running
-            Return False
-        End If
-    End Function
-
-    Friend Sub KillExe(processName As String)
-        For Each pn As Process In System.Diagnostics.Process.GetProcessesByName(processName)
-            Try
-                pn.Kill()
-                pn.WaitForExit()
-            Catch ex As Exception
-                MsgBox(ex.ToString, MsgBoxStyle.OkOnly, "Failed to terminate")
-            End Try
-        Next
-    End Sub
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
