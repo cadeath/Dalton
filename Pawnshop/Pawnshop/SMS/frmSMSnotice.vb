@@ -69,20 +69,10 @@
         Dim cl As New Customer
         cl.Load_CustomerByID(id)
 
-        'For Each phne As PhoneNumber In cl.CustomersPhone
-        '    c1 = validate_cp(phne.PhoneNumber)
-        '    If c1 = "INVALID" Then
-        '        Return String.Format("{0}", c1)
-        '    End If
-
-        '    If c1 <> "INVALID" Then
-        '        Return c1
-        '    End If
-        'Next
-
+        cl.UpdatePhone(updatedNumber(0))
         'cl.Cellphone1 = updatedNumber(0)
         'cl.ModifyClient()
-        lvExpiry.Items(idx).SubItems(2).Text = cleanup_contact(cl)
+        lvExpiry.Items(idx).SubItems(2).Text = Indcleanup_contact(updatedNumber(0))
 
         MsgBox("Number Updated", MsgBoxStyle.Information)
     End Sub

@@ -21,7 +21,9 @@
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         Me.DialogResult = Windows.Forms.DialogResult.OK
-        update_contact = txtNewNumber.Text
+
+        Dim cl As String = txtNewNumber.Text.Replace("-", "")
+        update_contact = cl
 
         Me.Close()
     End Sub

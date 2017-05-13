@@ -93,12 +93,13 @@ Module smsUtil
                 If c1 <> "INV-" & phne.PhoneNumber Then
                     Return String.Format("{0}", c1)
                 End If
+
             End If
         Next
 
         For Each phne As PhoneNumber In cl.CustomersPhone
             c1 = validate_cp(phne.PhoneNumber)
-            If c1 = "INVALID" Then
+            If c1 <> "INV-" & phne.PhoneNumber Then
                 Return String.Format("{0}", c1)
             End If
 
@@ -106,16 +107,6 @@ Module smsUtil
                 Return c1
             End If
         Next
-
-
-        If c1 = "INVALID" Then
-            Return String.Format("{0}", c1)
-        End If
-
-        If c1 <> "INVALID" Then
-            Return c1
-        End If
-
         'If c1 <> "INVALID" Then
         '    Return c1
         'End If
@@ -139,6 +130,19 @@ Module smsUtil
         'End If
 
         Return "INVALID"
+    End Function
+
+    'Individual CleanUp
+    Friend Function Indcleanup_contact(ByVal ph As String) As String
+        Dim c1 As String
+
+        'Validate Contact Numbers
+        c1 = validate_cp(ph)
+        If c1 <> "INV-" & ph Then
+            Return String.Format("{0}", c1)
+        End If
+
+        Return "INV-" & ph
     End Function
 
     Private Function validate_cp(ByVal str As String) As String

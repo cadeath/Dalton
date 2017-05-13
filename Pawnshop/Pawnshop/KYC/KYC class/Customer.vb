@@ -646,6 +646,17 @@ COntinues:
         End If
         Return True
     End Function
+
+    Friend Sub UpdatePhone(ByVal ph As String)
+        Dim mysql As String = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & _id
+        Dim ds As DataSet = LoadSQL(mysql, CUSTOMER_PHONE)
+
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+        ds.Tables(0).Rows(0).Item("PhoneNumber") = ph
+        ds.Tables(0).Rows(0).Item("Isprimary") = 1
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 
 End Class
