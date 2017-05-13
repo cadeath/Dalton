@@ -70,8 +70,6 @@
         cl.Load_CustomerByID(id)
 
         cl.UpdatePhone(updatedNumber(0))
-        'cl.Cellphone1 = updatedNumber(0)
-        'cl.ModifyClient()
         lvExpiry.Items(idx).SubItems(2).Text = Indcleanup_contact(updatedNumber(0))
 
         MsgBox("Number Updated", MsgBoxStyle.Information)
