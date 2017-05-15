@@ -34,12 +34,12 @@ Public Class DollarEntry
         End Set
     End Property
 
-    Private _customer As Client
-    Public Property Customer() As Client
+    Private _customer As Customer
+    Public Property Customer() As Customer
         Get
             Return _customer
         End Get
-        Set(ByVal value As Client)
+        Set(ByVal value As Customer)
             _customer = value
         End Set
     End Property
@@ -133,8 +133,8 @@ Public Class DollarEntry
             _transDate = .Item("TransDate")
             _pesoRate = .Item("PesoRate")
             If Not IsDBNull(.Item("ClientID")) Then
-                Dim tmpClient As New Client
-                tmpClient.LoadClient(.Item("ClientID"))
+                Dim tmpClient As New Customer
+                tmpClient.Load_CustomerByID(.Item("ClientID"))
                 _customer = tmpClient
                 _fullName = String.Format("{0} {1}", tmpClient.FirstName, tmpClient.LastName)
             End If
@@ -160,7 +160,7 @@ Public Class DollarEntry
             .Item("TransDate") = _transDate
             .Item("PesoRate") = _pesoRate
             If Not _customer Is Nothing Then
-                .Item("ClientID") = _customer.ID
+                .Item("ClientID") = _customer.CustomerID
                 .Item("FullName") = String.Format("{0} {1}", _customer.FirstName, _customer.LastName)
             End If
             .Item("Denomination") = _denomination
