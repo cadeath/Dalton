@@ -41,18 +41,13 @@ Partial Class frmAdminPanel
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cboSchemename = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtPrintLayout = New Pawnshop.watermark()
         Me.rbNo = New System.Windows.Forms.RadioButton()
         Me.rbYes = New System.Windows.Forms.RadioButton()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtDescription = New Pawnshop.watermark()
-        Me.txtCategory = New Pawnshop.watermark()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtClassification = New Pawnshop.watermark()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.txtSearch = New Pawnshop.watermark()
         Me.dgSpecs = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -82,26 +77,18 @@ Partial Class frmAdminPanel
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnSearchScheme = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.txtDayTo = New Pawnshop.watermark()
-        Me.txtRemarks = New Pawnshop.watermark()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtPenalty = New Pawnshop.watermark()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtInterest = New Pawnshop.watermark()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtDayFrom = New Pawnshop.watermark()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.txtSchemeName = New Pawnshop.watermark()
-        Me.txtDescription1 = New Pawnshop.watermark()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.txtsearchscheme = New Pawnshop.watermark()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.lblModname = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -131,6 +118,20 @@ Partial Class frmAdminPanel
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.txtPrintLayout = New Pawnshop.watermark()
+        Me.txtDescription = New Pawnshop.watermark()
+        Me.txtCategory = New Pawnshop.watermark()
+        Me.txtClassification = New Pawnshop.watermark()
+        Me.txtSearch = New Pawnshop.watermark()
+        Me.txtDayTo = New Pawnshop.watermark()
+        Me.txtRemarks = New Pawnshop.watermark()
+        Me.txtPenalty = New Pawnshop.watermark()
+        Me.txtInterest = New Pawnshop.watermark()
+        Me.txtDayFrom = New Pawnshop.watermark()
+        Me.txtSchemeName = New Pawnshop.watermark()
+        Me.txtDescription1 = New Pawnshop.watermark()
+        Me.txtsearchscheme = New Pawnshop.watermark()
+        Me.rbCustomPrice = New System.Windows.Forms.RadioButton()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -342,17 +343,6 @@ Partial Class frmAdminPanel
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Print Layout"
         '
-        'txtPrintLayout
-        '
-        Me.txtPrintLayout.BackColor = System.Drawing.Color.White
-        Me.txtPrintLayout.Location = New System.Drawing.Point(113, 204)
-        Me.txtPrintLayout.Multiline = True
-        Me.txtPrintLayout.Name = "txtPrintLayout"
-        Me.txtPrintLayout.Size = New System.Drawing.Size(228, 91)
-        Me.txtPrintLayout.TabIndex = 9
-        Me.txtPrintLayout.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPrintLayout.WatermarkText = "[Classname][Specs]"
-        '
         'rbNo
         '
         Me.rbNo.AutoSize = True
@@ -393,27 +383,6 @@ Partial Class frmAdminPanel
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Description"
         '
-        'txtDescription
-        '
-        Me.txtDescription.BackColor = System.Drawing.Color.White
-        Me.txtDescription.Location = New System.Drawing.Point(113, 79)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(228, 92)
-        Me.txtDescription.TabIndex = 4
-        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDescription.WatermarkText = "Description"
-        '
-        'txtCategory
-        '
-        Me.txtCategory.BackColor = System.Drawing.Color.White
-        Me.txtCategory.Location = New System.Drawing.Point(113, 51)
-        Me.txtCategory.Name = "txtCategory"
-        Me.txtCategory.Size = New System.Drawing.Size(228, 22)
-        Me.txtCategory.TabIndex = 3
-        Me.txtCategory.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtCategory.WatermarkText = "Category"
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -422,16 +391,6 @@ Partial Class frmAdminPanel
         Me.Label1.Size = New System.Drawing.Size(80, 16)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Clasification"
-        '
-        'txtClassification
-        '
-        Me.txtClassification.BackColor = System.Drawing.Color.White
-        Me.txtClassification.Location = New System.Drawing.Point(113, 24)
-        Me.txtClassification.Name = "txtClassification"
-        Me.txtClassification.Size = New System.Drawing.Size(228, 22)
-        Me.txtClassification.TabIndex = 0
-        Me.txtClassification.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtClassification.WatermarkText = "Clasification"
         '
         'GroupBox1
         '
@@ -452,15 +411,6 @@ Partial Class frmAdminPanel
         Me.btnSearch.TabIndex = 8
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(9, 21)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(1023, 22)
-        Me.txtSearch.TabIndex = 0
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
         '
         'dgSpecs
         '
@@ -742,25 +692,6 @@ Partial Class frmAdminPanel
         Me.GroupBox5.TabIndex = 1
         Me.GroupBox5.TabStop = False
         '
-        'txtDayTo
-        '
-        Me.txtDayTo.Location = New System.Drawing.Point(319, 15)
-        Me.txtDayTo.Name = "txtDayTo"
-        Me.txtDayTo.Size = New System.Drawing.Size(426, 22)
-        Me.txtDayTo.TabIndex = 1
-        Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDayTo.WatermarkText = "Day To"
-        '
-        'txtRemarks
-        '
-        Me.txtRemarks.Location = New System.Drawing.Point(497, 50)
-        Me.txtRemarks.Multiline = True
-        Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(248, 60)
-        Me.txtRemarks.TabIndex = 4
-        Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtRemarks.WatermarkText = "Remarks"
-        '
         'Label14
         '
         Me.Label14.AutoSize = True
@@ -779,15 +710,6 @@ Partial Class frmAdminPanel
         Me.Label9.TabIndex = 24
         Me.Label9.Text = "Remarks"
         '
-        'txtPenalty
-        '
-        Me.txtPenalty.Location = New System.Drawing.Point(319, 54)
-        Me.txtPenalty.Name = "txtPenalty"
-        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
-        Me.txtPenalty.TabIndex = 3
-        Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPenalty.WatermarkText = "Penalty"
-        '
         'Label13
         '
         Me.Label13.AutoSize = True
@@ -796,15 +718,6 @@ Partial Class frmAdminPanel
         Me.Label13.Size = New System.Drawing.Size(53, 16)
         Me.Label13.TabIndex = 20
         Me.Label13.Text = "Day To"
-        '
-        'txtInterest
-        '
-        Me.txtInterest.Location = New System.Drawing.Point(86, 54)
-        Me.txtInterest.Name = "txtInterest"
-        Me.txtInterest.Size = New System.Drawing.Size(171, 22)
-        Me.txtInterest.TabIndex = 2
-        Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtInterest.WatermarkText = "Interest"
         '
         'Label12
         '
@@ -824,15 +737,6 @@ Partial Class frmAdminPanel
         Me.Label11.TabIndex = 23
         Me.Label11.Text = "Penalty"
         '
-        'txtDayFrom
-        '
-        Me.txtDayFrom.Location = New System.Drawing.Point(86, 19)
-        Me.txtDayFrom.Name = "txtDayFrom"
-        Me.txtDayFrom.Size = New System.Drawing.Size(171, 22)
-        Me.txtDayFrom.TabIndex = 0
-        Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDayFrom.WatermarkText = "Day From"
-        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.txtSchemeName)
@@ -844,25 +748,6 @@ Partial Class frmAdminPanel
         Me.GroupBox4.Size = New System.Drawing.Size(373, 121)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
-        '
-        'txtSchemeName
-        '
-        Me.txtSchemeName.Location = New System.Drawing.Point(112, 21)
-        Me.txtSchemeName.Name = "txtSchemeName"
-        Me.txtSchemeName.Size = New System.Drawing.Size(250, 22)
-        Me.txtSchemeName.TabIndex = 0
-        Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSchemeName.WatermarkText = "Scheme Name"
-        '
-        'txtDescription1
-        '
-        Me.txtDescription1.Location = New System.Drawing.Point(112, 58)
-        Me.txtDescription1.Multiline = True
-        Me.txtDescription1.Name = "txtDescription1"
-        Me.txtDescription1.Size = New System.Drawing.Size(250, 52)
-        Me.txtDescription1.TabIndex = 1
-        Me.txtDescription1.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDescription1.WatermarkText = "Description"
         '
         'Label10
         '
@@ -916,16 +801,6 @@ Partial Class frmAdminPanel
         Me.Label18.Size = New System.Drawing.Size(53, 16)
         Me.Label18.TabIndex = 27
         Me.Label18.Text = "Update"
-        '
-        'txtsearchscheme
-        '
-        Me.txtsearchscheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtsearchscheme.Location = New System.Drawing.Point(67, 13)
-        Me.txtsearchscheme.Name = "txtsearchscheme"
-        Me.txtsearchscheme.Size = New System.Drawing.Size(971, 22)
-        Me.txtsearchscheme.TabIndex = 6
-        Me.txtsearchscheme.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtsearchscheme.WatermarkText = "Search . . ."
         '
         'TabPage2
         '
@@ -1009,7 +884,7 @@ Partial Class frmAdminPanel
         Me.GroupBox8.Controls.Add(Me.Label21)
         Me.GroupBox8.Location = New System.Drawing.Point(193, 3)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(477, 167)
+        Me.GroupBox8.Size = New System.Drawing.Size(477, 186)
         Me.GroupBox8.TabIndex = 12
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "One-Time Password"
@@ -1068,7 +943,7 @@ Partial Class frmAdminPanel
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(389, 111)
+        Me.btnGenerate.Location = New System.Drawing.Point(389, 134)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(82, 44)
         Me.btnGenerate.TabIndex = 2
@@ -1095,6 +970,7 @@ Partial Class frmAdminPanel
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.rbCustomPrice)
         Me.GroupBox7.Controls.Add(Me.rbInventory)
         Me.GroupBox7.Controls.Add(Me.rbPullout)
         Me.GroupBox7.Controls.Add(Me.rbStockout)
@@ -1103,7 +979,7 @@ Partial Class frmAdminPanel
         Me.GroupBox7.Controls.Add(Me.rbSettings)
         Me.GroupBox7.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(184, 167)
+        Me.GroupBox7.Size = New System.Drawing.Size(184, 186)
         Me.GroupBox7.TabIndex = 11
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "OTP Module"
@@ -1220,6 +1096,143 @@ Partial Class frmAdminPanel
         '
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
+        '
+        'txtPrintLayout
+        '
+        Me.txtPrintLayout.BackColor = System.Drawing.Color.White
+        Me.txtPrintLayout.Location = New System.Drawing.Point(113, 204)
+        Me.txtPrintLayout.Multiline = True
+        Me.txtPrintLayout.Name = "txtPrintLayout"
+        Me.txtPrintLayout.Size = New System.Drawing.Size(228, 91)
+        Me.txtPrintLayout.TabIndex = 9
+        Me.txtPrintLayout.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPrintLayout.WatermarkText = "[Classname][Specs]"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.BackColor = System.Drawing.Color.White
+        Me.txtDescription.Location = New System.Drawing.Point(113, 79)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(228, 92)
+        Me.txtDescription.TabIndex = 4
+        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDescription.WatermarkText = "Description"
+        '
+        'txtCategory
+        '
+        Me.txtCategory.BackColor = System.Drawing.Color.White
+        Me.txtCategory.Location = New System.Drawing.Point(113, 51)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(228, 22)
+        Me.txtCategory.TabIndex = 3
+        Me.txtCategory.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtCategory.WatermarkText = "Category"
+        '
+        'txtClassification
+        '
+        Me.txtClassification.BackColor = System.Drawing.Color.White
+        Me.txtClassification.Location = New System.Drawing.Point(113, 24)
+        Me.txtClassification.Name = "txtClassification"
+        Me.txtClassification.Size = New System.Drawing.Size(228, 22)
+        Me.txtClassification.TabIndex = 0
+        Me.txtClassification.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtClassification.WatermarkText = "Clasification"
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(9, 21)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(1023, 22)
+        Me.txtSearch.TabIndex = 0
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
+        'txtDayTo
+        '
+        Me.txtDayTo.Location = New System.Drawing.Point(319, 15)
+        Me.txtDayTo.Name = "txtDayTo"
+        Me.txtDayTo.Size = New System.Drawing.Size(426, 22)
+        Me.txtDayTo.TabIndex = 1
+        Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDayTo.WatermarkText = "Day To"
+        '
+        'txtRemarks
+        '
+        Me.txtRemarks.Location = New System.Drawing.Point(497, 50)
+        Me.txtRemarks.Multiline = True
+        Me.txtRemarks.Name = "txtRemarks"
+        Me.txtRemarks.Size = New System.Drawing.Size(248, 60)
+        Me.txtRemarks.TabIndex = 4
+        Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtRemarks.WatermarkText = "Remarks"
+        '
+        'txtPenalty
+        '
+        Me.txtPenalty.Location = New System.Drawing.Point(319, 54)
+        Me.txtPenalty.Name = "txtPenalty"
+        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
+        Me.txtPenalty.TabIndex = 3
+        Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPenalty.WatermarkText = "Penalty"
+        '
+        'txtInterest
+        '
+        Me.txtInterest.Location = New System.Drawing.Point(86, 54)
+        Me.txtInterest.Name = "txtInterest"
+        Me.txtInterest.Size = New System.Drawing.Size(171, 22)
+        Me.txtInterest.TabIndex = 2
+        Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtInterest.WatermarkText = "Interest"
+        '
+        'txtDayFrom
+        '
+        Me.txtDayFrom.Location = New System.Drawing.Point(86, 19)
+        Me.txtDayFrom.Name = "txtDayFrom"
+        Me.txtDayFrom.Size = New System.Drawing.Size(171, 22)
+        Me.txtDayFrom.TabIndex = 0
+        Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDayFrom.WatermarkText = "Day From"
+        '
+        'txtSchemeName
+        '
+        Me.txtSchemeName.Location = New System.Drawing.Point(112, 21)
+        Me.txtSchemeName.Name = "txtSchemeName"
+        Me.txtSchemeName.Size = New System.Drawing.Size(250, 22)
+        Me.txtSchemeName.TabIndex = 0
+        Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSchemeName.WatermarkText = "Scheme Name"
+        '
+        'txtDescription1
+        '
+        Me.txtDescription1.Location = New System.Drawing.Point(112, 58)
+        Me.txtDescription1.Multiline = True
+        Me.txtDescription1.Name = "txtDescription1"
+        Me.txtDescription1.Size = New System.Drawing.Size(250, 52)
+        Me.txtDescription1.TabIndex = 1
+        Me.txtDescription1.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDescription1.WatermarkText = "Description"
+        '
+        'txtsearchscheme
+        '
+        Me.txtsearchscheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtsearchscheme.Location = New System.Drawing.Point(67, 13)
+        Me.txtsearchscheme.Name = "txtsearchscheme"
+        Me.txtsearchscheme.Size = New System.Drawing.Size(971, 22)
+        Me.txtsearchscheme.TabIndex = 6
+        Me.txtsearchscheme.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtsearchscheme.WatermarkText = "Search . . ."
+        '
+        'rbCustomPrice
+        '
+        Me.rbCustomPrice.AutoSize = True
+        Me.rbCustomPrice.Location = New System.Drawing.Point(6, 160)
+        Me.rbCustomPrice.Name = "rbCustomPrice"
+        Me.rbCustomPrice.Size = New System.Drawing.Size(105, 20)
+        Me.rbCustomPrice.TabIndex = 13
+        Me.rbCustomPrice.TabStop = True
+        Me.rbCustomPrice.Text = "Custom Price"
+        Me.rbCustomPrice.UseVisualStyleBackColor = True
         '
         'frmAdminPanel
         '
@@ -1378,5 +1391,6 @@ Partial Class frmAdminPanel
     Friend WithEvents txtEmail As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents btnCopy As System.Windows.Forms.Button
+    Friend WithEvents rbCustomPrice As System.Windows.Forms.RadioButton
 
 End Class

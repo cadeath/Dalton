@@ -237,7 +237,6 @@
         Dim hasSelected As Boolean = False
 
         If selected_Itm.OnLayAway = False Then
-
             If selected_Itm.SalePrice = 0 Or isRedeem Then
 
                 For Each AddedItems As ListViewItem In frmSales.lvSale.Items
@@ -249,6 +248,22 @@
                 Next
 
                 If hasSelected = False Then
+
+                    OTPCustomPrice_Initialization()
+
+                    If Not OTPDisable Then
+                        diagGeneralOTP.GeneralOTP = OtpSettings
+                        diagGeneralOTP.TopMost = True
+                        diagGeneralOTP.ShowDialog()
+                        If Not diagGeneralOTP.isValid Then
+                            Exit Sub
+                        Else
+                            GoTo NextLineTODO
+                        End If
+                    Else
+                        GoTo NextLineTODO
+                    End If
+NextLineTODO:
                     Dim tmp As String = String.Empty
                     'InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                     While Not IsNumeric(tmp)
@@ -261,6 +276,20 @@
                     LayAmount = customPrice
                 Else
                     If isRedeem Then
+
+                        If Not OTPDisable Then
+                            diagGeneralOTP.GeneralOTP = OtpSettings
+                            diagGeneralOTP.TopMost = True
+                            diagGeneralOTP.ShowDialog()
+                            If Not diagGeneralOTP.isValid Then
+                                Exit Sub
+                            Else
+                                GoTo NextLineTODO1
+                            End If
+                        Else
+                            GoTo NextLineTODO1
+                        End If
+NextLineTODO1:
                         Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                         While Not IsNumeric(tmp)
                             tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
@@ -277,6 +306,21 @@
 
             Dim UnitPrice As Double = 0
             If fromInventory Then
+
+                If Not OTPDisable Then
+                    diagGeneralOTP.GeneralOTP = OtpSettings
+                    diagGeneralOTP.TopMost = True
+                    diagGeneralOTP.ShowDialog()
+                    If Not diagGeneralOTP.isValid Then
+                        Exit Sub
+                    Else
+                        GoTo NextLineTODO2
+                    End If
+                Else
+                    GoTo NextLineTODO2
+                End If
+NextLineTODO2:
+
                 UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
             End If
 
@@ -284,6 +328,9 @@
                 frmLayAway.Show()
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True
+
+                Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                ", Custom Price:" & selected_Itm.SalePrice)
             Else
                 If fromSales Then
                     If isRedeem Then qtyItm = 1
@@ -297,6 +344,8 @@
                         frmSales.AddItem(selected_Itm)
                     End If
                     frmSales.ClearSearch()
+                    Dim NewOtp As New ClassOtp("Cash Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                  ", Custom Price:" & selected_Itm.SalePrice)
                 End If
             End If
         Else
@@ -400,7 +449,22 @@
 
     Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
+        OTPCustomPrice_Initialization()
 
+        If Not OTPDisable Then
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                GoTo NextLineTODO
+            End If
+        Else
+            GoTo NextLineTODO
+        End If
+
+NextLineTODO:
         Dim idx As Integer = lvItem.SelectedItems(0).Index
 
         Dim selected_Itm As New cItemData
@@ -417,8 +481,12 @@
         Dim customPrice As Double = CDbl(tmp)
         selected_Itm.SalePrice = customPrice
 
+        Dim NewOtp As New ClassOtp("Cash Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                   ", Custom Price:" & selected_Itm.SalePrice)
         frmSales.AddItem(selected_Itm)
         frmSales.ClearSearch()
         Me.Close()
     End Sub
+
+
 End Class

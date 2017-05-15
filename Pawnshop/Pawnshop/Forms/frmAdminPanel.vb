@@ -943,6 +943,9 @@ Public Class frmAdminPanel
             strcode = "OTPVoiding"
             strAppname = "Dalton - OTP Voiding"
 
+        ElseIf rbCustomPrice.Checked = True Then
+            strcode = "OTPCustomerPrice"
+            strAppname = "Dalton - Custom Price"
         End If
         If strcode = String.Empty OrElse strAppname = String.Empty Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
         SetOTP(txtEmail.Text, strAppname, strcode)
