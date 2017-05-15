@@ -101,8 +101,8 @@
         createMTView &= vbCrLf & "	TBLMONEYTRANSFER MT	"
         createMTView &= vbCrLf & "	INNER JOIN KYC_CUSTOMERS C	"
         createMTView &= vbCrLf & "	ON  MT.SENDERID = C.ID	"
-        createMTView &= vbCrLf & "	INNER JOIN TBLCLIENT R	"
-        createMTView &= vbCrLf & "	ON  MT.RECEIVERID = R.CLIENTID	"
+        createMTView &= vbCrLf & "	INNER JOIN KYC_CUSTOMERS R	"
+        createMTView &= vbCrLf & "	ON  MT.RECEIVERID = R.ID	"
         createMTView &= vbCrLf & "	WHERE "
         createMTView &= vbCrLf & "	Status = 'A';"
 
