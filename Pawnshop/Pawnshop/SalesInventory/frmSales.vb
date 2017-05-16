@@ -25,7 +25,6 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
-
     'Friend LayCustomer As Integer
     'Friend LayItemCode As String
     'Friend LayCost As Integer

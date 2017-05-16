@@ -2,11 +2,13 @@
 
     Private qtyItm As Double = 1
     Private queued_IMD As New CollectionItemData
+    Private Modname As String = ""
 
     Private fromSales As Boolean = True
     Private fromInventory As Boolean = False
     Private isRedeem As Boolean = False
     Friend isLayAway As Boolean = False
+    Friend isCustomPrice As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -258,9 +260,11 @@
                         If Not diagGeneralOTP.isValid Then
                             Exit Sub
                         Else
+                            isCustomPrice = True
                             GoTo NextLineTODO
                         End If
                     Else
+                        isCustomPrice = True
                         GoTo NextLineTODO
                     End If
 NextLineTODO:
@@ -284,9 +288,11 @@ NextLineTODO:
                             If Not diagGeneralOTP.isValid Then
                                 Exit Sub
                             Else
+                                isCustomPrice = True
                                 GoTo NextLineTODO1
                             End If
                         Else
+                            isCustomPrice = True
                             GoTo NextLineTODO1
                         End If
 NextLineTODO1:
@@ -314,9 +320,11 @@ NextLineTODO1:
                     If Not diagGeneralOTP.isValid Then
                         Exit Sub
                     Else
+                        isCustomPrice = True
                         GoTo NextLineTODO2
                     End If
                 Else
+                    isCustomPrice = True
                     GoTo NextLineTODO2
                 End If
 NextLineTODO2:
@@ -328,9 +336,10 @@ NextLineTODO2:
                 frmLayAway.Show()
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True
-
-                Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
-                                ", Custom Price:" & selected_Itm.SalePrice)
+                If isCustomPrice Then
+                    Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                    ", Custom Price:" & selected_Itm.SalePrice)
+                End If
             Else
                 If fromSales Then
                     If isRedeem Then qtyItm = 1
@@ -344,13 +353,23 @@ NextLineTODO2:
                         frmSales.AddItem(selected_Itm)
                     End If
                     frmSales.ClearSearch()
-                    Dim NewOtp As New ClassOtp("Cash Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
-                                  ", Custom Price:" & selected_Itm.SalePrice)
+
+                    If isCustomPrice Then
+                        Select Case frmSales.TransactionMode
+                            Case frmSales.TransType.Returns : Modname = "Returns"
+                            Case frmSales.TransType.Cash : Modname = "Cash"
+                            Case frmSales.TransType.Check : Modname = "Check"
+                            Case frmSales.TransType.Auction : Modname = "Auction"
+                            Case frmSales.TransType.StockOut : Modname = "Stockout"
+                        End Select
+                        Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                      ", Custom Price:" & selected_Itm.SalePrice)
+                    End If
                 End If
-            End If
+                End If
         Else
-            frmLayAway.Show()
-            frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
+                frmLayAway.Show()
+                frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
         End If
         Me.Close()
     End Sub
@@ -481,8 +500,16 @@ NextLineTODO:
         Dim customPrice As Double = CDbl(tmp)
         selected_Itm.SalePrice = customPrice
 
-        Dim NewOtp As New ClassOtp("Cash Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+        Select Case frmSales.TransactionMode
+            Case frmSales.TransType.Returns : Modname = "Returns"
+            Case frmSales.TransType.Cash : Modname = "Cash"
+            Case frmSales.TransType.Check : Modname = "Check"
+            Case frmSales.TransType.Auction : Modname = "Auction"
+            Case frmSales.TransType.StockOut : Modname = "Stockout"
+        End Select
+        Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
                                    ", Custom Price:" & selected_Itm.SalePrice)
+
         frmSales.AddItem(selected_Itm)
         frmSales.ClearSearch()
         Me.Close()
