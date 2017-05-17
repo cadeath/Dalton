@@ -250,7 +250,7 @@
                 Next
 
                 If hasSelected = False Then
-
+                    If frmSales.TransType.StockOut Then GoTo NextLineTODO
                     OTPCustomPrice_Initialization()
 
                     If Not OTPDisable Then
@@ -280,7 +280,7 @@ NextLineTODO:
                     LayAmount = customPrice
                 Else
                     If isRedeem Then
-
+                        If frmSales.TransType.StockOut Then GoTo NextLineTODO1
                         If Not OTPDisable Then
                             diagGeneralOTP.GeneralOTP = OtpSettings
                             diagGeneralOTP.TopMost = True
@@ -312,7 +312,7 @@ NextLineTODO1:
 
             Dim UnitPrice As Double = 0
             If fromInventory Then
-
+                If frmSales.TransType.StockOut Then GoTo NextLineTODO2
                 If Not OTPDisable Then
                     diagGeneralOTP.GeneralOTP = OtpSettings
                     diagGeneralOTP.TopMost = True
@@ -336,9 +336,11 @@ NextLineTODO2:
                 frmLayAway.Show()
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True
-                If isCustomPrice Then
-                    Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
-                                    ", Custom Price:" & selected_Itm.SalePrice)
+                If Not OTPDisable Then
+                    If isCustomPrice Then
+                        Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                        ", Custom Price:" & selected_Itm.SalePrice)
+                    End If
                 End If
             Else
                 If fromSales Then
@@ -354,22 +356,25 @@ NextLineTODO2:
                     End If
                     frmSales.ClearSearch()
 
-                    If isCustomPrice Then
-                        Select Case frmSales.TransactionMode
-                            Case frmSales.TransType.Returns : Modname = "Returns"
-                            Case frmSales.TransType.Cash : Modname = "Cash"
-                            Case frmSales.TransType.Check : Modname = "Check"
-                            Case frmSales.TransType.Auction : Modname = "Auction"
-                            Case frmSales.TransType.StockOut : Modname = "Stockout"
-                        End Select
-                        Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
-                                      ", Custom Price:" & selected_Itm.SalePrice)
+                    If frmSales.TransType.StockOut Then GoTo stockout
+                    If Not OTPDisable Then
+                        If isCustomPrice Then
+                            Select Case frmSales.TransactionMode
+                                Case frmSales.TransType.Returns : Modname = "Returns"
+                                Case frmSales.TransType.Cash : Modname = "Cash"
+                                Case frmSales.TransType.Check : Modname = "Check"
+                                Case frmSales.TransType.Auction : Modname = "Auction"
+                            End Select
+                            Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                          ", Custom Price:" & selected_Itm.SalePrice)
+                        End If
                     End If
+stockout:
                 End If
-                End If
+            End If
         Else
-                frmLayAway.Show()
-                frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
+            frmLayAway.Show()
+            frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
         End If
         Me.Close()
     End Sub
@@ -468,6 +473,8 @@ NextLineTODO2:
 
     Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
+
+        If frmSales.TransType.StockOut Then GoTo NextLineTODO
         OTPCustomPrice_Initialization()
 
         If Not OTPDisable Then
@@ -500,16 +507,16 @@ NextLineTODO:
         Dim customPrice As Double = CDbl(tmp)
         selected_Itm.SalePrice = customPrice
 
-        Select Case frmSales.TransactionMode
-            Case frmSales.TransType.Returns : Modname = "Returns"
-            Case frmSales.TransType.Cash : Modname = "Cash"
-            Case frmSales.TransType.Check : Modname = "Check"
-            Case frmSales.TransType.Auction : Modname = "Auction"
-            Case frmSales.TransType.StockOut : Modname = "Stockout"
-        End Select
-        Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
-                                   ", Custom Price:" & selected_Itm.SalePrice)
-
+        If Not OTPDisable Then
+            Select Case frmSales.TransactionMode
+                Case frmSales.TransType.Returns : Modname = "Returns"
+                Case frmSales.TransType.Cash : Modname = "Cash"
+                Case frmSales.TransType.Check : Modname = "Check"
+                Case frmSales.TransType.Auction : Modname = "Auction"
+            End Select
+            Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                       ", Custom Price:" & selected_Itm.SalePrice)
+        End If
         frmSales.AddItem(selected_Itm)
         frmSales.ClearSearch()
         Me.Close()
