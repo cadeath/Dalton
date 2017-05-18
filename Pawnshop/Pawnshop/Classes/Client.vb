@@ -39,6 +39,7 @@ Public Class Client
     Private _idType As String = String.Empty
     Private _idNum As String = String.Empty
     Private _remarks As String = String.Empty
+    Private _IsDumper As Boolean
 
     'Database
     Private fillData As String = "tblClient"
@@ -215,6 +216,15 @@ Public Class Client
             Return _remarks
         End Get
     End Property
+
+    Public Property IsDumper As Boolean
+        Set(ByVal value As Boolean)
+            _IsDumper = value
+        End Set
+        Get
+            Return _IsDumper
+        End Get
+    End Property
 #End Region
 
     Public Sub SaveClient()
@@ -241,6 +251,7 @@ Public Class Client
             .Item("Phone2") = _cp2
             .Item("Phone3") = _phone
             .Item("Phone_Others") = _otherNum
+            .Item("IsDumper") = If(_IsDumper, 1, 0)
         End With
 
         database.SaveEntry(ds, False)
@@ -277,6 +288,7 @@ Public Class Client
             .Item("Phone2") = _cp2
             .Item("Phone3") = _phone
             .Item("Phone_Others") = _otherNum
+            .Item("IsDumper") = If(_IsDumper, 1, 0)
         End With
         da.Update(ds, fillData)
 
@@ -307,6 +319,7 @@ Public Class Client
             .Item("Phone2") = _cp2
             .Item("Phone3") = _phone
             .Item("Phone_Others") = _otherNum
+            .Item("IsDumper") = If(_IsDumper, 1, 0)
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
@@ -360,6 +373,13 @@ Public Class Client
             _idType = IIf(IsDBNull(.Item("IDType")), "", .Item("IDType"))
             _idNum = IIf(IsDBNull(.Item("RefNum")), "", .Item("RefNum"))
             _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
+
+            If Not IsDBNull(.Item("IsDumper")) Then
+                If .Item("IsDumper") = 1 Then
+                    _IsDumper = True
+                Else : _IsDumper = False : End If
+            Else : _IsDumper = False : End If
+
         End With
     End Sub
 
@@ -389,6 +409,11 @@ Public Class Client
             _idType = IIf(IsDBNull(.Item("IDType")), "", .Item("IDType"))
             _idNum = IIf(IsDBNull(.Item("RefNum")), "", .Item("RefNum"))
             _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
+            If Not IsDBNull(.Item("IsDumper")) Then
+                If .Item("IsDumper") = 1 Then
+                    _IsDumper = True
+                Else : _IsDumper = False : End If
+            Else : _IsDumper = False : End If
         End With
     End Sub
 
@@ -413,7 +438,11 @@ Public Class Client
             _cp2 = .Item("Phone2").ToString
             _phone = .Item("Phone3").ToString
             _otherNum = .Item("Phone_Others").ToString
-
+            If Not IsDBNull(.Item("IsDumper")) Then
+                If .Item("IsDumper") = 1 Then
+                    _IsDumper = True
+                Else : _IsDumper = False : End If
+            Else : _IsDumper = False : End If
         End With
         Console.WriteLine("[LoadClientByRow] Client information Loaded.")
     End Sub
@@ -439,4 +468,19 @@ Public Class Client
 
         Return str
     End Function
+
+    Friend Function tagDumper(ByVal cltid As Integer) As Boolean
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM " & fillData & " WHERE ClientID = " & cltid
+        ds = LoadSQL(mySql, fillData)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        With ds.Tables(0).Rows(0)
+            .Item("ISDUMPER") = 1
+        End With
+        database.SaveEntry(ds, False)
+        Return True
+    End Function
+
 End Class

@@ -20,7 +20,7 @@ Public Class frmClient
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
+        'Me.TopMost = True
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -54,6 +54,8 @@ Public Class frmClient
         If cl.Sex = 0 Then
             lv.ImageKey = "imgFemale"
         End If
+        If cl.IsDumper = True Then lv.BackColor = Color.YellowGreen
+
     End Sub
     ''' <summary>
     ''' this method will clear the textbox and the listview items.
@@ -238,6 +240,9 @@ Public Class frmClient
         GetClient = New Client
         GetClient.LoadClient(idx)
 
+        If GetClient.IsDumper = True Then MsgBox("You are informed that this client belongs to dumper list " & vbCrLf & _
+            "just ask assistance to the Administrator if you don't know about this!", MsgBoxStyle.Exclamation, "Notification")
+
         formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
         Me.Close()
@@ -265,5 +270,17 @@ Public Class frmClient
 
     Private Sub lvClient_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvClient.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub btnDumper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDumper.Click
+        If lvClient.SelectedItems.Count = 0 Then Exit Sub
+        Dim msg As DialogResult = MsgBox("Do you really want to tag this client as dumper?", MsgBoxStyle.YesNo, "Tag")
+        If msg = vbNo Then Exit Sub
+
+        GetClient = New Client
+
+        If Not GetClient.tagDumper(lvClient.FocusedItem.Text) Then Exit Sub
+
+        MsgBox("Successfully tagged", MsgBoxStyle.Information, "Tag")
     End Sub
 End Class

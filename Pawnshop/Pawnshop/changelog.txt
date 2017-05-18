@@ -34,6 +34,9 @@ Version 1.5.0.7
  - Change Inventory Merchandise Sap Account
  - Can ReSend Failed Sending
  - fix SMS notification cannot view not enough specs
+ - Drop View View_CLient
+ - Create View View_Client
+ - Client Module
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES

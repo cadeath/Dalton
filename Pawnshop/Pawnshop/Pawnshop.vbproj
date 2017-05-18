@@ -178,6 +178,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
@@ -209,6 +210,7 @@
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
+    <Compile Include="Classes\Dumper.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
     <Compile Include="Classes\ItemClass.vb" />
