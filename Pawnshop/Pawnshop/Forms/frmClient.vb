@@ -280,7 +280,8 @@ Public Class frmClient
         GetClient = New Client
 
         If Not GetClient.tagDumper(lvClient.FocusedItem.Text) Then Exit Sub
-
+        GetClient.LoadClient(lvClient.FocusedItem.Text)
+        Log_Report(GetClient.FirstName & " " & GetClient.LastName & " was tagged as dumper by " & POSuser.UserName & "," & POSuser.UserID & ".")
         MsgBox("Successfully tagged", MsgBoxStyle.Information, "Tag")
     End Sub
 End Class

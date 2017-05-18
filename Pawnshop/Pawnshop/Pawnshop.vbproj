@@ -210,7 +210,6 @@
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
-    <Compile Include="Classes\Dumper.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
     <Compile Include="Classes\ItemClass.vb" />

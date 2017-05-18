@@ -78,8 +78,8 @@ Partial Class frmClientInformation
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.btnHistory = New System.Windows.Forms.Button()
         Me.grpDumper = New System.Windows.Forms.GroupBox()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.chkDumper = New System.Windows.Forms.CheckBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
@@ -635,16 +635,6 @@ Partial Class frmClientInformation
         Me.grpDumper.TabIndex = 27
         Me.grpDumper.TabStop = False
         '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(6, 16)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(114, 16)
-        Me.Label21.TabIndex = 34
-        Me.Label21.Text = "Phone Number:"
-        '
         'chkDumper
         '
         Me.chkDumper.AutoSize = True
@@ -655,6 +645,16 @@ Partial Class frmClientInformation
         Me.chkDumper.TabIndex = 35
         Me.chkDumper.Text = "Is Dumper?"
         Me.chkDumper.UseVisualStyleBackColor = True
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(6, 16)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(114, 16)
+        Me.Label21.TabIndex = 34
+        Me.Label21.Text = "Phone Number:"
         '
         'frmClientInformation
         '
