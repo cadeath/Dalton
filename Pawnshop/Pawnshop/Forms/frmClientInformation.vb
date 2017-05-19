@@ -543,4 +543,7 @@ Public Class frmClientInformation
     End Sub
 
 
+    Private Sub btnImportDumper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportDumper.Click
+        frmImportDumper.Show()
+    End Sub
 End Class

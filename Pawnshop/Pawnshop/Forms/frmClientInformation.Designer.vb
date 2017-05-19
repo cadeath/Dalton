@@ -80,6 +80,7 @@ Partial Class frmClientInformation
         Me.grpDumper = New System.Windows.Forms.GroupBox()
         Me.chkDumper = New System.Windows.Forms.CheckBox()
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.btnImportDumper = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
@@ -639,7 +640,7 @@ Partial Class frmClientInformation
         '
         Me.chkDumper.AutoSize = True
         Me.chkDumper.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkDumper.Location = New System.Drawing.Point(125, 15)
+        Me.chkDumper.Location = New System.Drawing.Point(94, 16)
         Me.chkDumper.Name = "chkDumper"
         Me.chkDumper.Size = New System.Drawing.Size(95, 20)
         Me.chkDumper.TabIndex = 35
@@ -652,9 +653,18 @@ Partial Class frmClientInformation
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.Location = New System.Drawing.Point(6, 16)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(114, 16)
+        Me.Label21.Size = New System.Drawing.Size(82, 16)
         Me.Label21.TabIndex = 34
-        Me.Label21.Text = "Phone Number:"
+        Me.Label21.Text = "Is Dumper:"
+        '
+        'btnImportDumper
+        '
+        Me.btnImportDumper.Location = New System.Drawing.Point(868, 326)
+        Me.btnImportDumper.Name = "btnImportDumper"
+        Me.btnImportDumper.Size = New System.Drawing.Size(84, 40)
+        Me.btnImportDumper.TabIndex = 28
+        Me.btnImportDumper.Text = "&Import Client"
+        Me.btnImportDumper.UseVisualStyleBackColor = True
         '
         'frmClientInformation
         '
@@ -662,6 +672,7 @@ Partial Class frmClientInformation
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(964, 428)
+        Me.Controls.Add(Me.btnImportDumper)
         Me.Controls.Add(Me.grpDumper)
         Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.btnSelect)
@@ -745,4 +756,5 @@ Partial Class frmClientInformation
     Friend WithEvents grpDumper As System.Windows.Forms.GroupBox
     Friend WithEvents chkDumper As System.Windows.Forms.CheckBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents btnImportDumper As System.Windows.Forms.Button
 End Class
