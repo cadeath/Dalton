@@ -150,7 +150,7 @@ Partial Class frmDatabseExtractor
         Me.StatusStrip1.AutoSize = False
         Me.StatusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProgressBar1, Me.ToolCount})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 394)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 395)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(609, 25)
         Me.StatusStrip1.TabIndex = 8
@@ -182,7 +182,7 @@ Partial Class frmDatabseExtractor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(609, 419)
+        Me.ClientSize = New System.Drawing.Size(609, 420)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.GroupBox1)
