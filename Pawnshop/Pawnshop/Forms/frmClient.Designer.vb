@@ -39,7 +39,6 @@ Partial Class frmClient
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.webAds = New System.Windows.Forms.WebBrowser()
-        Me.btnDumper = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -183,23 +182,12 @@ Partial Class frmClient
         Me.webAds.Size = New System.Drawing.Size(289, 64)
         Me.webAds.TabIndex = 3
         '
-        'btnDumper
-        '
-        Me.btnDumper.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnDumper.Location = New System.Drawing.Point(89, 337)
-        Me.btnDumper.Name = "btnDumper"
-        Me.btnDumper.Size = New System.Drawing.Size(163, 23)
-        Me.btnDumper.TabIndex = 7
-        Me.btnDumper.Text = "&Tag this client as dumper"
-        Me.btnDumper.UseVisualStyleBackColor = True
-        '
         'frmClient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(762, 367)
-        Me.Controls.Add(Me.btnDumper)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
@@ -231,5 +219,4 @@ Partial Class frmClient
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents imgClient As System.Windows.Forms.ImageList
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
-    Friend WithEvents btnDumper As System.Windows.Forms.Button
 End Class

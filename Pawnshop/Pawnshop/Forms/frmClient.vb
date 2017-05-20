@@ -240,8 +240,8 @@ Public Class frmClient
         GetClient = New Client
         GetClient.LoadClient(idx)
 
-        If GetClient.IsDumper = True Then MsgBox("You are informed that this client belongs to dumper list " & vbCrLf & _
-            "just ask assistance to the Administrator if you don't know about this!", MsgBoxStyle.Exclamation, "Notification")
+        If GetClient.IsDumper = True Then MsgBox("This is to inform you that this person is a " & vbCrLf & _
+            "DUMPER!", MsgBoxStyle.Exclamation, "DUMPER ALERT")
 
         formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
@@ -270,23 +270,5 @@ Public Class frmClient
 
     Private Sub lvClient_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvClient.SelectedIndexChanged
 
-    End Sub
-
-    Private Sub btnDumper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDumper.Click
-        If lvClient.SelectedItems.Count = 0 Then Exit Sub
-        GetClient = New Client
-
-        GetClient.LoadClient(lvClient.FocusedItem.Text)
-        If GetClient.IsDumper = True Then MsgBox("This client already belong to dumper list.", MsgBoxStyle.Information) : Exit Sub
-
-        Dim msg As DialogResult = MsgBox("Do you really want to tag this client as dumper?", MsgBoxStyle.YesNo, "Tag")
-        If msg = vbNo Then Exit Sub
-     
-        If Not GetClient.tagDumper(lvClient.FocusedItem.Text) Then Exit Sub
-        GetClient.LoadClient(lvClient.FocusedItem.Text)
-
-
-        Log_Report(GetClient.FirstName & " " & GetClient.LastName & " was tagged as dumper by " & POSuser.UserName & "," & POSuser.UserID & ".")
-        MsgBox("Successfully tagged", MsgBoxStyle.Information, "Tag")
     End Sub
 End Class

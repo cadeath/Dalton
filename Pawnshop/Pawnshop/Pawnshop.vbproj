@@ -360,12 +360,6 @@
     <Compile Include="Forms\frmChangePassword.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmImportDumper.Designer.vb">
-      <DependentUpon>frmImportDumper.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmImportDumper.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmInterestScheme.Designer.vb">
       <DependentUpon>frmInterestScheme.vb</DependentUpon>
     </Compile>
@@ -966,9 +960,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmImportDumper.resx">
-      <DependentUpon>frmImportDumper.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInterestScheme.resx">
       <DependentUpon>frmInterestScheme.vb</DependentUpon>
