@@ -77,9 +77,14 @@ Partial Class frmClientInformation
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.btnHistory = New System.Windows.Forms.Button()
+        Me.grpDumper = New System.Windows.Forms.GroupBox()
+        Me.chkDumper = New System.Windows.Forms.CheckBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.btnImportDumper = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
+        Me.grpDumper.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -363,7 +368,7 @@ Partial Class frmClientInformation
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 267)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(545, 122)
+        Me.GroupBox2.Size = New System.Drawing.Size(545, 112)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Contact Information"
@@ -444,7 +449,7 @@ Partial Class frmClientInformation
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(868, 344)
+        Me.btnCancel.Location = New System.Drawing.Point(868, 376)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(84, 40)
         Me.btnCancel.TabIndex = 24
@@ -453,7 +458,7 @@ Partial Class frmClientInformation
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(778, 344)
+        Me.btnSave.Location = New System.Drawing.Point(778, 376)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(84, 40)
         Me.btnSave.TabIndex = 22
@@ -595,7 +600,7 @@ Partial Class frmClientInformation
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(688, 344)
+        Me.btnSelect.Location = New System.Drawing.Point(688, 376)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(84, 40)
         Me.btnSelect.TabIndex = 21
@@ -614,19 +619,61 @@ Partial Class frmClientInformation
         '
         'btnHistory
         '
-        Me.btnHistory.Location = New System.Drawing.Point(563, 344)
+        Me.btnHistory.Location = New System.Drawing.Point(563, 376)
         Me.btnHistory.Name = "btnHistory"
         Me.btnHistory.Size = New System.Drawing.Size(84, 40)
         Me.btnHistory.TabIndex = 26
         Me.btnHistory.Text = "&History"
         Me.btnHistory.UseVisualStyleBackColor = True
         '
+        'grpDumper
+        '
+        Me.grpDumper.Controls.Add(Me.chkDumper)
+        Me.grpDumper.Controls.Add(Me.Label21)
+        Me.grpDumper.Location = New System.Drawing.Point(12, 382)
+        Me.grpDumper.Name = "grpDumper"
+        Me.grpDumper.Size = New System.Drawing.Size(545, 40)
+        Me.grpDumper.TabIndex = 27
+        Me.grpDumper.TabStop = False
+        '
+        'chkDumper
+        '
+        Me.chkDumper.AutoSize = True
+        Me.chkDumper.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkDumper.Location = New System.Drawing.Point(94, 16)
+        Me.chkDumper.Name = "chkDumper"
+        Me.chkDumper.Size = New System.Drawing.Size(95, 20)
+        Me.chkDumper.TabIndex = 35
+        Me.chkDumper.Text = "Is Dumper?"
+        Me.chkDumper.UseVisualStyleBackColor = True
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(6, 16)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(82, 16)
+        Me.Label21.TabIndex = 34
+        Me.Label21.Text = "Is Dumper:"
+        '
+        'btnImportDumper
+        '
+        Me.btnImportDumper.Location = New System.Drawing.Point(868, 326)
+        Me.btnImportDumper.Name = "btnImportDumper"
+        Me.btnImportDumper.Size = New System.Drawing.Size(84, 40)
+        Me.btnImportDumper.TabIndex = 28
+        Me.btnImportDumper.Text = "&Import Client"
+        Me.btnImportDumper.UseVisualStyleBackColor = True
+        '
         'frmClientInformation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(964, 396)
+        Me.ClientSize = New System.Drawing.Size(964, 428)
+        Me.Controls.Add(Me.btnImportDumper)
+        Me.Controls.Add(Me.grpDumper)
         Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.grpID)
@@ -647,6 +694,8 @@ Partial Class frmClientInformation
         Me.GroupBox2.PerformLayout()
         Me.grpID.ResumeLayout(False)
         Me.grpID.PerformLayout()
+        Me.grpDumper.ResumeLayout(False)
+        Me.grpDumper.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -704,4 +753,8 @@ Partial Class frmClientInformation
     Friend WithEvents cboProv As System.Windows.Forms.ComboBox
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
     Friend WithEvents btnHistory As System.Windows.Forms.Button
+    Friend WithEvents grpDumper As System.Windows.Forms.GroupBox
+    Friend WithEvents chkDumper As System.Windows.Forms.CheckBox
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents btnImportDumper As System.Windows.Forms.Button
 End Class

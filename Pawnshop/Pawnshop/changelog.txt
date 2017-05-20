@@ -1,4 +1,10 @@
 CHANGELOG
+Version 1.5.0.8
+ - Drop View View_CLient
+ - Create View View_Client
+ - Update Client Module
+ - Add Column isDumper in Client table
+ - Add Notification Dumper alert
 
 Version 1.5.0.7
  - Add Branch Address in Maintenance
