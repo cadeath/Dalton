@@ -94,6 +94,7 @@
     <Compile Include="frmGetDumperClient.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Module\mod_system1.vb" />
     <Compile Include="Module\dir2.vb" />
     <Compile Include="Module\dir1.vb" />
     <Compile Include="Module\database.vb" />
