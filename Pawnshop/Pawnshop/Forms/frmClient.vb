@@ -240,14 +240,11 @@ Public Class frmClient
         GetClient = New Client
         GetClient.LoadClient(idx)
 
-<<<<<<< HEAD
-        'formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
-=======
+
         If GetClient.IsDumper = True Then MsgBox("This is to inform you that this person is a " & vbCrLf & _
             "DUMPER!", MsgBoxStyle.Exclamation, "DUMPER ALERT")
 
-        formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
->>>>>>> refs/remotes/origin/1.6
+        'formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
         Me.Close()
     End Sub
