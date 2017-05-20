@@ -99,8 +99,10 @@ Partial Class frmCustomer_KYC
         Me.txtSuffix = New System.Windows.Forms.TextBox()
         Me.btnHistory = New System.Windows.Forms.Button()
         Me.grpSignature = New System.Windows.Forms.GroupBox()
-        Me.CLientSignature = New System.Windows.Forms.PictureBox()
         Me.btnSignature = New System.Windows.Forms.Button()
+        Me.CLientSignature = New System.Windows.Forms.PictureBox()
+        Me.chkIsDumper = New System.Windows.Forms.CheckBox()
+        Me.Label27 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -190,6 +192,8 @@ Partial Class frmCustomer_KYC
         '
         'tpBasic
         '
+        Me.tpBasic.Controls.Add(Me.Label27)
+        Me.tpBasic.Controls.Add(Me.chkIsDumper)
         Me.tpBasic.Controls.Add(Me.lblAge)
         Me.tpBasic.Controls.Add(Me.txtPhone)
         Me.tpBasic.Controls.Add(Me.lstPhone)
@@ -303,7 +307,7 @@ Partial Class frmCustomer_KYC
         Me.cboGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboGender.FormattingEnabled = True
         Me.cboGender.Items.AddRange(New Object() {"Male", "Female"})
-        Me.cboGender.Location = New System.Drawing.Point(479, 230)
+        Me.cboGender.Location = New System.Drawing.Point(434, 230)
         Me.cboGender.Name = "cboGender"
         Me.cboGender.Size = New System.Drawing.Size(121, 24)
         Me.cboGender.TabIndex = 19
@@ -311,7 +315,7 @@ Partial Class frmCustomer_KYC
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(478, 213)
+        Me.Label25.Location = New System.Drawing.Point(433, 213)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(53, 16)
         Me.Label25.TabIndex = 39
@@ -872,6 +876,16 @@ Partial Class frmCustomer_KYC
         Me.grpSignature.TabStop = False
         Me.grpSignature.Text = "Customer's Signature"
         '
+        'btnSignature
+        '
+        Me.btnSignature.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSignature.Location = New System.Drawing.Point(6, 143)
+        Me.btnSignature.Name = "btnSignature"
+        Me.btnSignature.Size = New System.Drawing.Size(113, 38)
+        Me.btnSignature.TabIndex = 0
+        Me.btnSignature.Text = "Open Camera"
+        Me.btnSignature.UseVisualStyleBackColor = True
+        '
         'CLientSignature
         '
         Me.CLientSignature.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -883,15 +897,24 @@ Partial Class frmCustomer_KYC
         Me.CLientSignature.TabIndex = 11
         Me.CLientSignature.TabStop = False
         '
-        'btnSignature
+        'chkIsDumper
         '
-        Me.btnSignature.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSignature.Location = New System.Drawing.Point(6, 143)
-        Me.btnSignature.Name = "btnSignature"
-        Me.btnSignature.Size = New System.Drawing.Size(113, 38)
-        Me.btnSignature.TabIndex = 0
-        Me.btnSignature.Text = "Open Camera"
-        Me.btnSignature.UseVisualStyleBackColor = True
+        Me.chkIsDumper.AutoSize = True
+        Me.chkIsDumper.Location = New System.Drawing.Point(590, 234)
+        Me.chkIsDumper.Name = "chkIsDumper"
+        Me.chkIsDumper.Size = New System.Drawing.Size(88, 20)
+        Me.chkIsDumper.TabIndex = 43
+        Me.chkIsDumper.Text = "Is Dumper"
+        Me.chkIsDumper.UseVisualStyleBackColor = True
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(589, 213)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(69, 16)
+        Me.Label27.TabIndex = 44
+        Me.Label27.Text = "Is Dumper"
         '
         'frmCustomer_KYC
         '
@@ -1009,5 +1032,7 @@ Partial Class frmCustomer_KYC
     Friend WithEvents grpSignature As System.Windows.Forms.GroupBox
     Friend WithEvents CLientSignature As System.Windows.Forms.PictureBox
     Friend WithEvents btnSignature As System.Windows.Forms.Button
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents chkIsDumper As System.Windows.Forms.CheckBox
 
 End Class

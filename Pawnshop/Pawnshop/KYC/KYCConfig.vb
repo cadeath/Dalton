@@ -109,7 +109,8 @@
         mySql &= vbCrLf & "  SRCFUND VARCHAR(50),"
         mySql &= vbCrLf & "  RANK SMALLINT DEFAULT '0' NOT NULL,"
         mySql &= vbCrLf & "  CLIENT_IMG VARCHAR(75),"
-        mySql &= vbCrLf & "  CLIENT_SIGNATURE VARCHAR(75));"
+        mySql &= vbCrLf & "  CLIENT_SIGNATURE VARCHAR(75),"
+        mySql &= vbCrLf & "  IsDumper VARCHAR(1));"
         primaryKey = "ALTER TABLE " & CUSTOMER_TABLE & " ADD PRIMARY KEY (ID);"
 
         Console.WriteLine("Start creating...")
@@ -235,6 +236,16 @@
                     kycIDCustomerGenerator = drID.Item("ID")
                 Next
                 .CustomersIDs = CustomerIDs
+
+                If Not (IsDBNull(clDR.Item("IsDumper"))) Then
+                    If clDR.Item("IsDumper") = "1" Then
+                        .iSDumper = True
+                    Else
+                        .iSDumper = False
+                    End If
+                Else
+                    .iSDumper = False
+                End If
 
                 .Save()
 

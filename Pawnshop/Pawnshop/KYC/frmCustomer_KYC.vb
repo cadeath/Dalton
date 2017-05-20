@@ -116,6 +116,9 @@ Public Class frmCustomer_KYC
             FNameSignature = cus.CSignature.Substring(0, cus.CSignature.IndexOf("|"c))
         End If
 
+        If cus.iSDumper = True Then chkIsDumper.Checked = True
+        If cus.iSDumper = False Then chkIsDumper.Checked = False
+
         SelectedCustomer = cus
 
         ComputeBirthday()
@@ -342,6 +345,8 @@ GnrteRndmSignature:  'For Customer's Signature
                 .CSignature = String.Format("{0}{1}{2}{3}", FNameSignature, Ext, "|", GetFileMD5(SRCSignature & "\" & FNameSignature & Ext))
             End If
 
+            If chkIsDumper.Checked Then .iSDumper = True Else .iSDumper = False
+
             If CustomerPhones.Count >= 1 Then
                 AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
             End If
@@ -447,6 +452,8 @@ continues:
             End If
 
 NextlineTODO:
+            If chkIsDumper.Checked Then .iSDumper = True Else .iSDumper = False
+
             If CustomerPhones.Count >= 1 Then
                 AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
             End If

@@ -291,6 +291,15 @@ Public Class MigrateCustomer
         End Set
     End Property
 
+    Private _iSDumper As Boolean
+    Public Property iSDumper() As Boolean
+        Get
+            Return _iSDumper
+        End Get
+        Set(ByVal value As Boolean)
+            _iSDumper = value
+        End Set
+    End Property
 #End Region
 
 #Region "Procedures"
@@ -316,7 +325,7 @@ Public Class MigrateCustomer
 
             .Item("BIRTHDAY") = _birthday
             .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
-        
+            .Item("IsDumper") = If(_iSDumper, 1, 0)
         End With
         ds.Tables(CUSTOMER_TABLE).Rows.Add(dsNewRowc)
         database.SaveEntry(ds)

@@ -24,11 +24,11 @@ Module autopatch
         db13.PatchUp()
         db131.PatchUp()
 
-        ' FOR KYC
+        ' FOR v1.6
         KYC_Initialization()
 
         'ModifyViews
-        db15.PatchUp()
+        db132.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub

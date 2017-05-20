@@ -311,6 +311,16 @@ Public Class Customer
             _CSignaturePUre = value
         End Set
     End Property
+
+    Private _iSDumper As Boolean
+    Public Property iSDumper() As Boolean
+        Get
+            Return _iSDumper
+        End Get
+        Set(ByVal value As Boolean)
+            _iSDumper = value
+        End Set
+    End Property
 #End Region
 
 #Region "Procedures"
@@ -354,6 +364,8 @@ Public Class Customer
                 .Item("RANK") = _rank
                 .Item("CLIENT_IMG") = _CImage
                 .Item("CLIENT_SIGNATURE") = _CSignature
+                .Item("IsDumper") = If(_iSDumper, 1, 0)
+               
             End With
             ds.Tables(CUSTOMER_TABLE).Rows.Add(dsNewRow)
         Else
@@ -382,6 +394,8 @@ Public Class Customer
                 .Item("RANK") = _rank
                 .Item("CLIENT_IMG") = _CImage
                 .Item("CLIENT_SIGNATURE") = _CSignature
+                .Item("IsDumper") = If(_iSDumper, 1, 0)
+
             End With
         End If
         database.SaveEntry(ds, isNew)
@@ -501,6 +515,12 @@ gOheRE:
             _rank = IIf(IsDBNull(.Item("RANK")), "", .Item("RANK"))
             _CSignature = IIf(IsDBNull(.Item("CLIENT_SIGNATURE")), "", .Item("CLIENT_SIGNATURE"))
             _CImage = IIf(IsDBNull(.Item("CLIENT_IMG")), "", .Item("CLIENT_IMG"))
+
+            If Not IsDBNull(.Item("IsDumper")) Then
+                If .Item("IsDumper") = 1 Then
+                    _iSDumper = True
+                Else : _iSDumper = False : End If
+            Else : _iSDumper = False : End If
 
             If _CImage = "" Then GoTo NEXTLINE
 
