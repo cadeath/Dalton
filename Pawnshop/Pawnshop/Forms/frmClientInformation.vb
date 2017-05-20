@@ -541,5 +541,4 @@ Public Class frmClientInformation
     Private Sub frmClientInformation_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmClient.Enabled = True
     End Sub
-
 End Class

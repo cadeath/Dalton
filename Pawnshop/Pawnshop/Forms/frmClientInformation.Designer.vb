@@ -80,7 +80,6 @@ Partial Class frmClientInformation
         Me.grpDumper = New System.Windows.Forms.GroupBox()
         Me.chkDumper = New System.Windows.Forms.CheckBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.btnImportDumper = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
@@ -657,22 +656,12 @@ Partial Class frmClientInformation
         Me.Label21.TabIndex = 34
         Me.Label21.Text = "Is Dumper:"
         '
-        'btnImportDumper
-        '
-        Me.btnImportDumper.Location = New System.Drawing.Point(868, 326)
-        Me.btnImportDumper.Name = "btnImportDumper"
-        Me.btnImportDumper.Size = New System.Drawing.Size(84, 40)
-        Me.btnImportDumper.TabIndex = 28
-        Me.btnImportDumper.Text = "&Import Client"
-        Me.btnImportDumper.UseVisualStyleBackColor = True
-        '
         'frmClientInformation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(964, 428)
-        Me.Controls.Add(Me.btnImportDumper)
         Me.Controls.Add(Me.grpDumper)
         Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.btnSelect)
@@ -756,5 +745,4 @@ Partial Class frmClientInformation
     Friend WithEvents grpDumper As System.Windows.Forms.GroupBox
     Friend WithEvents chkDumper As System.Windows.Forms.CheckBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents btnImportDumper As System.Windows.Forms.Button
 End Class
