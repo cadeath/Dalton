@@ -63,6 +63,8 @@ Public Class frmClientNew
             Exit For
         Next
 
+        If cus.iSDumper = True Then lv.BackColor = Color.YellowGreen
+
         lv.ImageKey = "imgMale"
         If cus.Sex = 0 Then
             lv.ImageKey = "imgFemale"
@@ -258,6 +260,9 @@ Public Class frmClientNew
                 btnView.PerformClick() : Exit Sub
             End If
         End If
+
+        If GetCustomer.iSDumper = True Then MsgBox("This is to inform you that this person is a " & vbCrLf & _
+          "DUMPER!", MsgBoxStyle.Exclamation, "DUMPER ALERT")
 
         formSwitch.ReloadFormFromSearch(frmOrig, GetCustomer)
 

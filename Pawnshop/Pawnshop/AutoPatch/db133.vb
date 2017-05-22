@@ -1,6 +1,6 @@
-﻿Module db132
-    Const ALLOWABLE_VERSION As String = "1.3.1"
-    Const LATEST_VERSION As String = "1.3.2"
+﻿Module db133
+    Const ALLOWABLE_VERSION As String = "1.3.2"
+    Const LATEST_VERSION As String = "1.3.3"
 
     Private strSql As String
 
@@ -177,7 +177,7 @@
         createExpiryList &= vbCrLf & "	DAYSOVERDUE,DELAYINT,PENALTY,SERVICECHARGE,RENEWDUE,REDEEMDUE,STATUS,PULLOUT,SYSTEMINFO,ENCODERID,ADVINT,	"
         createExpiryList &= vbCrLf & "	CATEGORY,CLIENTID1,MIDDLENAME,ID,FIRSTNAME,MIDNAME,LASTNAME,ADDR_STREET,SUFFIX,STREET1,BRGY1,CITY1,PROVINCE1,	"
         createExpiryList &= vbCrLf & "	ZIP1,STREET2,BRGY2,CITY2,PROVINCE2,ZIP2,BIRTHDAY,BIRTHPLACE,NATUREOFWORK,NATIONALITY,GENDER,SRCFUND,RANK,	"
-        createExpiryList &= vbCrLf & "	CLIENT_SIGNATURE,CLIENT_IMG,CONTACTNUMBER,USERNAME)	"
+        createExpiryList &= vbCrLf & "	CLIENT_SIGNATURE,CLIENT_IMG,IsDumper,CONTACTNUMBER,USERNAME)	"
         createExpiryList &= vbCrLf & "	AS		"
         createExpiryList &= vbCrLf & "	SELECT P.*, CL.CATEGORY, C.*,		"
         createExpiryList &= vbCrLf & "	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	"
@@ -205,7 +205,7 @@
         createCustView = "	CREATE VIEW CUSTOMER_VIEW(	"
         createCustView &= vbCrLf & " ID,FIRSTNAME,MIDNAME,LASTNAME,SUFFIX,STREET1, BRGY1,CITY1,PROVINCE1,ZIP1,STREET2,	"
         createCustView &= vbCrLf & " BRGY2,CITY2,PROVINCE2,ZIP2,BIRTHDAY,BIRTHPLACE,NATUREOFWORK,NATIONALITY,	"
-        createCustView &= vbCrLf & " GENDER,SRCFUND,RANK,CLIENT_SIGNATURE,CLIENT_IMG)	"
+        createCustView &= vbCrLf & " GENDER,SRCFUND,RANK,CLIENT_SIGNATURE,CLIENT_IMG,IsDumper)	"
         createCustView &= vbCrLf & " AS	"
         createCustView &= vbCrLf & " SELECT cl.* FROM KYC_CUSTOMERS cl;	"
 

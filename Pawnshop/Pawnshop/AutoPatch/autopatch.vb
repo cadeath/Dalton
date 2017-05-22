@@ -28,7 +28,7 @@ Module autopatch
         KYC_Initialization()
 
         'ModifyViews
-        db132.PatchUp()
+        db133.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub
