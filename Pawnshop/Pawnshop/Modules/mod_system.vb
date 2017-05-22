@@ -199,7 +199,7 @@ Module mod_system
     ''' </summary>
     ''' <param name="cc">cc is the parameter that hold nonmodifiable value.</param>
     ''' <remarks></remarks>
-    Friend Sub CloseStore(ByVal cc As Double)
+    Friend Sub CloseStore(ByVal cc As Double, ByVal SmartMoneyCnt As Double, ByVal SmartWalletCnt As Double, ByVal EloadCnt As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
@@ -211,6 +211,10 @@ Module mod_system
                 .Item("CashCount") = cc
                 .Item("Status") = 0
                 .Item("Closer") = POSuser.UserID
+
+                .Item("SmartMoneyCnt") = SmartMoneyCnt
+                .Item("SmartWalletCnt") = SmartWalletCnt
+                .Item("EloadCnt") = EloadCnt
             End With
 
             database.SaveEntry(ds, False)
