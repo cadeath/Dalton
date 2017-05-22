@@ -919,34 +919,34 @@ Public Class frmAdminPanel
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If Not isOTPValid() Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
 
-        If rbInventory.Checked = True Then
-            strcode = "OTPInventory"
-            strAppname = "Dalton - Inventory"
+        'If rbInventory.Checked = True Then
+        '    strcode = "OTPInventory"
+        '    strAppname = "Dalton - Inventory"
 
-        ElseIf rbPullout.Checked = True Then
-            strcode = "OTPItemPullOut"
-            strAppname = "Dalton - OTP Item PullOut"
+        'ElseIf rbPullout.Checked = True Then
+        '    strcode = "OTPItemPullOut"
+        '    strAppname = "Dalton - OTP Item PullOut"
 
-        ElseIf rbSettings.Checked Then
-            strcode = "OTPSettings"
-            strAppname = "Dalton - OTP Settings"
+        'ElseIf rbSettings.Checked Then
+        '    strcode = "OTPSettings"
+        '    strAppname = "Dalton - OTP Settings"
 
-        ElseIf rbStockout.Checked = True Then
-            strcode = "OTPStockOut"
-            strAppname = "Dalton - Stock Out"
+        'ElseIf rbStockout.Checked = True Then
+        '    strcode = "OTPStockOut"
+        '    strAppname = "Dalton - Stock Out"
 
-        ElseIf rbUserManagement.Checked = True Then
-            strcode = "OTPUser"
-            strAppname = "Dalton - OTP User Management"
+        'ElseIf rbUserManagement.Checked = True Then
+        '    strcode = "OTPUser"
+        '    strAppname = "Dalton - OTP User Management"
 
-        ElseIf rbVoiding.Checked = True Then
-            strcode = "OTPVoiding"
-            strAppname = "Dalton - OTP Voiding"
+        'ElseIf rbVoiding.Checked = True Then
+        '    strcode = "OTPVoiding"
+        '    strAppname = "Dalton - OTP Voiding"
 
-        ElseIf rbCustomPrice.Checked = True Then
-            strcode = "OTPCustomerPrice"
-            strAppname = "Dalton - Custom Price"
-        End If
+        'ElseIf rbCustomPrice.Checked = True Then
+        '    strcode = "OTPCustomerPrice"
+        '    strAppname = "Dalton - Custom Price"
+        'End If
 
         If strcode = String.Empty OrElse strAppname = String.Empty Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
         SetOTP(txtEmail.Text, strAppname, strcode)

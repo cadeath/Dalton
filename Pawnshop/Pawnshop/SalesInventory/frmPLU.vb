@@ -254,7 +254,7 @@
                     If isStockOut = True Then GoTo NextLineTODO
                     OTPCustomPrice_Initialization()
 
-                    If Not OTPDisable Then
+                    If Not isOTPOn("CustomPrice") Then
                         diagGeneralOTP.GeneralOTP = OtpSettings
                         diagGeneralOTP.TopMost = True
                         diagGeneralOTP.ShowDialog()
@@ -282,7 +282,7 @@ NextLineTODO:
                 Else
                     If isRedeem Then
                         If isStockOut = True Then GoTo NextLineTODO1
-                        If Not OTPDisable Then
+                        If Not isOTPOn("CustomPrice") Then
                             diagGeneralOTP.GeneralOTP = OtpSettings
                             diagGeneralOTP.TopMost = True
                             diagGeneralOTP.ShowDialog()
@@ -314,7 +314,7 @@ NextLineTODO1:
             Dim UnitPrice As Double = 0
             If fromInventory Then
                 If isStockOut = True Then GoTo NextLineTODO2
-                If Not OTPDisable Then
+                If Not isOTPOn("CustomPrice") Then
                     diagGeneralOTP.GeneralOTP = OtpSettings
                     diagGeneralOTP.TopMost = True
                     diagGeneralOTP.ShowDialog()
@@ -337,7 +337,7 @@ NextLineTODO2:
                 frmLayAway.Show()
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True
-                If Not OTPDisable Then
+                If Not isOTPOn("CustomPrice") Then
                     If isCustomPrice Then
                         Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
                                         ", Custom Price:" & selected_Itm.SalePrice)
@@ -358,7 +358,7 @@ NextLineTODO2:
                     frmSales.ClearSearch()
 
                     If isStockOut = True Then GoTo stockout
-                    If Not OTPDisable Then
+                    If Not isOTPOn("CustomPrice") Then
                         If isCustomPrice Then
                             Select Case frmSales.TransactionMode
                                 Case frmSales.TransType.Returns : Modname = "Returns"
@@ -478,7 +478,7 @@ stockout:
         If isStockOut = True Then GoTo NextLineTODO
         OTPCustomPrice_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("CustomPrice") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
@@ -508,7 +508,7 @@ NextLineTODO:
         Dim customPrice As Double = CDbl(tmp)
         selected_Itm.SalePrice = customPrice
 
-        If Not OTPDisable Then
+        If Not isOTPOn("CustomPrice") Then
             Select Case frmSales.TransactionMode
                 Case frmSales.TransType.Returns : Modname = "Returns"
                 Case frmSales.TransType.Cash : Modname = "Cash"
