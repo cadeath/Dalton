@@ -9,6 +9,7 @@
     Private isRedeem As Boolean = False
     Friend isLayAway As Boolean = False
     Friend isCustomPrice As Boolean = False
+    Friend isStockOut As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -250,7 +251,7 @@
                 Next
 
                 If hasSelected = False Then
-                    If frmSales.TransType.StockOut Then GoTo NextLineTODO
+                    If isStockOut = True Then GoTo NextLineTODO
                     OTPCustomPrice_Initialization()
 
                     If Not OTPDisable Then
@@ -280,7 +281,7 @@ NextLineTODO:
                     LayAmount = customPrice
                 Else
                     If isRedeem Then
-                        If frmSales.TransType.StockOut Then GoTo NextLineTODO1
+                        If isStockOut = True Then GoTo NextLineTODO1
                         If Not OTPDisable Then
                             diagGeneralOTP.GeneralOTP = OtpSettings
                             diagGeneralOTP.TopMost = True
@@ -312,7 +313,7 @@ NextLineTODO1:
 
             Dim UnitPrice As Double = 0
             If fromInventory Then
-                If frmSales.TransType.StockOut Then GoTo NextLineTODO2
+                If isStockOut = True Then GoTo NextLineTODO2
                 If Not OTPDisable Then
                     diagGeneralOTP.GeneralOTP = OtpSettings
                     diagGeneralOTP.TopMost = True
@@ -356,7 +357,7 @@ NextLineTODO2:
                     End If
                     frmSales.ClearSearch()
 
-                    If frmSales.TransType.StockOut Then GoTo stockout
+                    If isStockOut = True Then GoTo stockout
                     If Not OTPDisable Then
                         If isCustomPrice Then
                             Select Case frmSales.TransactionMode
@@ -474,7 +475,7 @@ stockout:
     Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
 
-        If frmSales.TransType.StockOut Then GoTo NextLineTODO
+        If Not isStockOut Then GoTo NextLineTODO
         OTPCustomPrice_Initialization()
 
         If Not OTPDisable Then

@@ -243,6 +243,7 @@ Public Class frmSales
 
         IS_AUCTIONREDEEM()
 
+        If TransactionMode = TransType.Auction Then frmPLU.isStockOut = True
         If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
         If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
