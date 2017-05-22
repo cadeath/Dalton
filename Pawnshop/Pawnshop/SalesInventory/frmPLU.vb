@@ -475,7 +475,7 @@ stockout:
     Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
 
-        If Not isStockOut Then GoTo NextLineTODO
+        If isStockOut = True Then GoTo NextLineTODO
         OTPCustomPrice_Initialization()
 
         If Not OTPDisable Then
