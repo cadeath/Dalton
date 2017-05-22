@@ -1,6 +1,6 @@
 ﻿Module db132
-    Const ALLOWABLE_VERSION As String = "1.3.2"
-    Const LATEST_VERSION As String = "1.3.3"
+    Const ALLOWABLE_VERSION As String = "1.3.1"
+    Const LATEST_VERSION As String = "1.3.2"
 
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
