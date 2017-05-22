@@ -22,8 +22,8 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -96,6 +96,9 @@ Partial Class frmAdminPanel
         Me.cboModuleName = New System.Windows.Forms.ComboBox()
         Me.btnExport = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.chbOnOff = New System.Windows.Forms.CheckBox()
+        Me.cboOTPMod = New System.Windows.Forms.ComboBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.btnCopy = New System.Windows.Forms.Button()
         Me.txtQRURL = New System.Windows.Forms.TextBox()
@@ -105,19 +108,13 @@ Partial Class frmAdminPanel
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.rbInventory = New System.Windows.Forms.RadioButton()
-        Me.rbPullout = New System.Windows.Forms.RadioButton()
-        Me.rbStockout = New System.Windows.Forms.RadioButton()
-        Me.rbUserManagement = New System.Windows.Forms.RadioButton()
-        Me.rbVoiding = New System.Windows.Forms.RadioButton()
-        Me.rbSettings = New System.Windows.Forms.RadioButton()
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+
         Me.txtPrintLayout = New Pawnshop.watermark()
         Me.txtDescription = New Pawnshop.watermark()
         Me.txtCategory = New Pawnshop.watermark()
@@ -132,6 +129,8 @@ Partial Class frmAdminPanel
         Me.txtDescription1 = New Pawnshop.watermark()
         Me.txtsearchscheme = New Pawnshop.watermark()
         Me.rbCustomPrice = New System.Windows.Forms.RadioButton()
+        Me.btnSwitch = New System.Windows.Forms.Button()
+
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -146,8 +145,8 @@ Partial Class frmAdminPanel
         Me.lblModname.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -434,8 +433,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -459,8 +458,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -863,14 +862,45 @@ Partial Class frmAdminPanel
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.GroupBox10)
         Me.TabPage4.Controls.Add(Me.GroupBox8)
-        Me.TabPage4.Controls.Add(Me.GroupBox7)
         Me.TabPage4.Location = New System.Drawing.Point(4, 25)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Size = New System.Drawing.Size(1143, 433)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "OTP Generator"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.btnSwitch)
+        Me.GroupBox10.Controls.Add(Me.chbOnOff)
+        Me.GroupBox10.Controls.Add(Me.cboOTPMod)
+        Me.GroupBox10.Location = New System.Drawing.Point(3, 11)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(310, 166)
+        Me.GroupBox10.TabIndex = 13
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "OTP Module"
+        '
+        'chbOnOff
+        '
+        Me.chbOnOff.AutoSize = True
+        Me.chbOnOff.Location = New System.Drawing.Point(225, 26)
+        Me.chbOnOff.Name = "chbOnOff"
+        Me.chbOnOff.Size = New System.Drawing.Size(70, 20)
+        Me.chbOnOff.TabIndex = 19
+        Me.chbOnOff.Text = "On / Off"
+        Me.chbOnOff.UseVisualStyleBackColor = True
+        '
+        'cboOTPMod
+        '
+        Me.cboOTPMod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboOTPMod.FormattingEnabled = True
+        Me.cboOTPMod.Location = New System.Drawing.Point(6, 21)
+        Me.cboOTPMod.Name = "cboOTPMod"
+        Me.cboOTPMod.Size = New System.Drawing.Size(199, 24)
+        Me.cboOTPMod.TabIndex = 0
         '
         'GroupBox8
         '
@@ -882,9 +912,11 @@ Partial Class frmAdminPanel
         Me.GroupBox8.Controls.Add(Me.btnGenerate)
         Me.GroupBox8.Controls.Add(Me.txtEmail)
         Me.GroupBox8.Controls.Add(Me.Label21)
-        Me.GroupBox8.Location = New System.Drawing.Point(193, 3)
+        Me.GroupBox8.Location = New System.Drawing.Point(319, 11)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(477, 186)
+
+        Me.GroupBox8.Size = New System.Drawing.Size(477, 166)
+
         Me.GroupBox8.TabIndex = 12
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "One-Time Password"
@@ -968,6 +1000,7 @@ Partial Class frmAdminPanel
         Me.Label21.TabIndex = 0
         Me.Label21.Text = "Email Address"
         '
+<<<<<<< HEAD
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.rbCustomPrice)
@@ -1097,6 +1130,7 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+<<<<<<< HEAD
         'txtPrintLayout
         '
         Me.txtPrintLayout.BackColor = System.Drawing.Color.White
@@ -1233,6 +1267,16 @@ Partial Class frmAdminPanel
         Me.rbCustomPrice.TabStop = True
         Me.rbCustomPrice.Text = "Custom Price"
         Me.rbCustomPrice.UseVisualStyleBackColor = True
+
+        'btnSwitch
+        '
+        Me.btnSwitch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSwitch.Location = New System.Drawing.Point(222, 64)
+        Me.btnSwitch.Name = "btnSwitch"
+        Me.btnSwitch.Size = New System.Drawing.Size(73, 28)
+        Me.btnSwitch.TabIndex = 8
+        Me.btnSwitch.Text = "S&witch"
+        Me.btnSwitch.UseVisualStyleBackColor = True
         '
         'frmAdminPanel
         '
@@ -1266,10 +1310,10 @@ Partial Class frmAdminPanel
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.ResumeLayout(False)
@@ -1375,13 +1419,6 @@ Partial Class frmAdminPanel
     Friend WithEvents btnsavescheme As System.Windows.Forms.Button
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents rbInventory As System.Windows.Forms.RadioButton
-    Friend WithEvents rbPullout As System.Windows.Forms.RadioButton
-    Friend WithEvents rbStockout As System.Windows.Forms.RadioButton
-    Friend WithEvents rbUserManagement As System.Windows.Forms.RadioButton
-    Friend WithEvents rbVoiding As System.Windows.Forms.RadioButton
-    Friend WithEvents rbSettings As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents txtQRURL As System.Windows.Forms.TextBox
     Friend WithEvents txtManual As System.Windows.Forms.TextBox
@@ -1391,6 +1428,11 @@ Partial Class frmAdminPanel
     Friend WithEvents txtEmail As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents btnCopy As System.Windows.Forms.Button
-    Friend WithEvents rbCustomPrice As System.Windows.Forms.RadioButton
+
+    Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
+    Friend WithEvents chbOnOff As System.Windows.Forms.CheckBox
+    Friend WithEvents cboOTPMod As System.Windows.Forms.ComboBox
+    Friend WithEvents btnSwitch As System.Windows.Forms.Button
+
 
 End Class

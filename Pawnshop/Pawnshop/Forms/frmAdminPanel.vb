@@ -28,7 +28,7 @@ Public Class frmAdminPanel
         txtClassification.Focus()
 
         LoadScheme()
-
+        LoadOTP()
 
         txtSchemeName.Text = ""
         txtDescription.Text = ""
@@ -919,6 +919,7 @@ Public Class frmAdminPanel
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If Not isOTPValid() Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
 
+<<<<<<< HEAD
         If rbInventory.Checked = True Then
             strcode = "OTPInventory"
             strAppname = "Dalton - Inventory"
@@ -947,8 +948,10 @@ Public Class frmAdminPanel
             strcode = "OTPCustomerPrice"
             strAppname = "Dalton - Custom Price"
         End If
+
         If strcode = String.Empty OrElse strAppname = String.Empty Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
         SetOTP(txtEmail.Text, strAppname, strcode)
+
     End Sub
 
     Private Sub SetOTP(ByVal Email As String, ByVal AppName As String, ByVal Code As String)
@@ -972,5 +975,46 @@ Public Class frmAdminPanel
     Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
         If txtQRURL.Text = String.Empty Then Exit Sub
         Clipboard.SetText(txtQRURL.Text)
+    End Sub
+
+    Private Sub LoadOTP()
+        Dim mysql As String = "Select * From OTPControl"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
+
+        For Each dr In ds.Tables(0).Rows
+            cboOTPMod.Items.Add(dr.item("ModName"))
+        Next
+    End Sub
+
+    Private Sub cboOTPMod_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboOTPMod.SelectedIndexChanged
+        Dim mysql As String = "Select * From OTPControl Where Modname = '" & cboOTPMod.Text & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
+
+        If ds.Tables(0).Rows(0).Item("Status") = 1 Then
+            chbOnOff.Checked = True
+        Else
+            chbOnOff.Checked = False
+        End If
+
+        With ds.Tables(0).Rows(0)
+            strAppname = .Item("AppName")
+            strcode = .Item("OTPCode")
+        End With
+       
+    End Sub
+
+    Private Sub btnSwitch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSwitch.Click
+        Dim mysql As String = "Select * From OTPControl Where ModName = '" & cboOTPMod.Text & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
+
+        With ds.Tables(0).Rows(0)
+            If chbOnOff.Checked = True Then
+                .Item("Status") = 1
+            Else
+                .Item("Status") = 0
+            End If
+        End With
+        SaveEntry(ds, False)
+        MsgBox(cboOTPMod.Text & " Switch " & IIf(chbOnOff.Checked = True, "On", "Off"), MsgBoxStyle.Information, "OTP Control")
     End Sub
 End Class
