@@ -919,7 +919,6 @@ Public Class frmAdminPanel
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If Not isOTPValid() Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
 
-<<<<<<< HEAD
         If rbInventory.Checked = True Then
             strcode = "OTPInventory"
             strAppname = "Dalton - Inventory"
