@@ -22,6 +22,7 @@ Module autopatch
 
         ' FOR v1.5
         db13.PatchUp()
+        db131.PatchUp()
 
         'FOR v1.6
         db132.PatchUp()
