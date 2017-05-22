@@ -195,11 +195,13 @@ Public Class frmCustomer_KYC
         If ALLOW_MINORS Then
             If possible_age <= BLOCK_AGE Then
                 Console.WriteLine("TOO YOUNG")
+                MsgBox("Age TOO YOUNG, atleast 7 and above.")
                 TabControl1.SelectedTab = tpBasic
                 Return False
             End If
         Else
             If possible_age < NOT_MINOR Then
+                MsgBox("NO MINOR IS ALLOWED, atleast 18 and above.")
                 Console.WriteLine("NO MINOR IS ALLOWED")
                 TabControl1.SelectedTab = tpBasic
                 Return False
