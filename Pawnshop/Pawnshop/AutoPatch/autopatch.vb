@@ -18,8 +18,11 @@ Module autopatch
 
         ' FOR v1.3
         db1232.PatchUp()
-
         db124.PatchUp()
+
+        ' FOR v1.5
+        db13.PatchUp()
+        db131.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub

@@ -332,7 +332,7 @@ Public Class frmSales
         Dim getLastID As Integer = 0
         Dim Remarks As String = ""
         Dim unsec_Customer As String = lblCustomer.Text
-        Dim prefix As String = "", DocCode As String
+        Dim prefix As String = "", DocCode As String = ""
 
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
@@ -348,10 +348,13 @@ Public Class frmSales
                 OTPStockOut_Initialization()
 
                 diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.TopMost = True
                 diagGeneralOTP.ShowDialog()
-                If Not diagGeneralOTP.isCorrect Then
+                If Not diagGeneralOTP.isValid Then
                     Exit Sub
                 End If
+
+                Dim NewOtp As New ClassOtp("Stockout", diagOTP.txtPIN.Text)
             End If
 
             unsec_Customer = retVal(0) 'Branch

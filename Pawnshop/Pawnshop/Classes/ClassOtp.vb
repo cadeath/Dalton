@@ -62,6 +62,8 @@
                 ds.Tables(fillData).Rows.Add(dsNewRow)
                 database.SaveEntry(ds)
                 Console.WriteLine("Entry saved")
+            Else
+                AddTimelyLogs("OTP PIN", ModName & " DUPLICATE PIN", , False, "PIN# " & PIN, )
             End If
         Else
             Dim dsNewRow As DataRow

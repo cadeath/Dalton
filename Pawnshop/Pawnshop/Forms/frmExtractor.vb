@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
+Imports System.IO
 
 Public Class frmExtractor
     Enum ExtractType As Integer
@@ -24,6 +25,20 @@ Public Class frmExtractor
     Private Sub frmExtractor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load Path
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+
+        Select Case FormType
+            Case ExtractType.Expiry
+                Me.Text &= " - Expiry"
+            Case ExtractType.JournalEntry
+                Me.Text &= " - Journal Entry"
+            Case ExtractType.MoneyTransferBSP
+                Me.Text &= " - BSP Report"
+            Case ExtractType.PTUFile
+                sfdPath.Filter = "PTU File|*.ptu"
+                sfdPath.DefaultExt = "ptu"
+
+                Me.Text &= " - PTU File"
+        End Select
     End Sub
 
     ''' <summary>
@@ -36,18 +51,18 @@ Public Class frmExtractor
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
                 sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Expiry"
+
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
                 sfdPath.FileName = String.Format("JRNL{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
-                Me.Text &= " - Journal Entry"
+
             Case ExtractType.MoneyTransferBSP
                 Console.WriteLine("Money Transfer BSP Activated")
                 sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
-                Me.Text &= " - BSP Report"
+
             Case ExtractType.PTUFile
                 sfdPath.FileName = String.Format("{1}{0}.PTU", selectedDate.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
-                Me.Text &= " - PTU File"
+
         End Select
     End Sub
 
@@ -156,6 +171,7 @@ Public Class frmExtractor
         oXL.Quit()
         oXL = Nothing
 
+        Generate_HotCode(security.GetFileMD5(verified_url), True)
         MsgBox("Sales Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -285,6 +301,14 @@ Public Class frmExtractor
     End Sub
 
     Private Sub ExtractJournalEntry2()
+
+        If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
+            If frmMain.dateSet Then
+                MsgBox("Unable to Generate Journal File yet", MsgBoxStyle.Information, "System")
+                Exit Sub
+            End If
+        End If
+
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String = "SELECT J.JRL_TRANSDATE as TRANSDATE, C.TRANSNAME, C.SAPACCOUNT, J.JRL_DEBIT AS DEBIT, J.JRL_CREDIT AS CREDIT, J.CCNAME, J.STATUS, J.TRANSTYPE " & _
@@ -412,6 +436,8 @@ Public Class frmExtractor
         oWB = Nothing
         oXL.Quit()
         oXL = Nothing
+
+        Generate_HotCode(security.GetFileMD5(verified_url))
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
@@ -609,5 +635,25 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
+
+    Private Sub Generate_HotCode(ByVal Hash As String, Optional ByVal forPTU As Boolean = False)
+        Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+
+        If Not File.Exists(path) Then
+            ' Create a file to write to. 
+            If Not forPTU Then
+                Using sw As StreamWriter = File.CreateText(path & String.Format("\JRNL{0}{1}_HotCode.txt", MonCalendar.SelectionStart.ToString("yyyyMMdd"), BranchCode))
+                    sw.WriteLine("HOT CODE")
+                    sw.WriteLine(Hash)
+
+                End Using
+            Else
+                Using sw As StreamWriter = File.CreateText(path & String.Format("\{1}{0}_HotCode.txt", MonCalendar.SelectionStart.ToString("yyyyMMdd"), BranchCode))
+                    sw.WriteLine("HOT CODE")
+                    sw.WriteLine(Hash)
+                End Using
+            End If
+        End If
+    End Sub
 
 End Class

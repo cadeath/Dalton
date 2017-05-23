@@ -133,13 +133,17 @@
         Dim fillData As String = "tblLayLines"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
 
-        Dim AddAmt As Integer
+        Dim AddAmt As Integer, Encoder As String
         With ds.Tables(0).Rows(0)
             AddAmt = .Item("Amount")
+            Encoder = .Item("PaymentEncoder")
         End With
 
         ds.Tables(0).Rows(0).Item("Status") = "V"
         SaveEntry(ds, False)
+
+        TransactionVoidSave("Layaway Payments", Encoder, POSuser.UserID, "LAYAWAYID# " & _layLinesID)
+        Dim NewOtp As New ClassOtp("Layaway Payments", diagGeneralOTP.txtPIN.Text, "LaylinesID " & _layLinesID)
 
         mysql = "Select * From tblLayAway Where LayID = " & _layID
         fillData = "tblLayAway"

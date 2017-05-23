@@ -640,6 +640,75 @@
           </Border>
         </Style>
       </Image>
+      <Textbox Name="Textbox19">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtCoi.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>#,0;(#,0);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>1.66945in</Top>
+        <Left>4.45107in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.05209in</Width>
+        <ZIndex>17</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Parameters!txtCoi.Value &lt;&gt; 0, false, true)</Hidden>
+        </Visibility>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox20">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Insurance</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>1.68334in</Top>
+        <Left>3.08509in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.05209in</Width>
+        <ZIndex>18</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Parameters!txtCoi.Value &lt;&gt; 0, false, true)</Hidden>
+        </Visibility>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>3.18312in</Height>
     <Style />
@@ -658,6 +727,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="txtReprint">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtCoi">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

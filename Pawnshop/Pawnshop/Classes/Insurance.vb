@@ -192,7 +192,7 @@ Public Class Insurance
         'SaveEntry(ds, False)
         'InventoryController.AddInventory("IND 00001", 1)
 
-        Dim NewOtp As New ClassOtp("VOID INSURANCE", diagOTP.txtPIN.Text, "COI# " & COInumber)
+        Dim NewOtp As New ClassOtp("VOID INSURANCE", diagGeneralOTP.txtPIN.Text, "COI# " & COInumber)
         TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "COI# " & COInumber)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
@@ -207,7 +207,16 @@ Public Class Insurance
         Return ds.Tables(0).Rows(0).Item("INSURANCEID")
     End Function
 
+    Friend Sub UpdateInsurance()
+        Dim mysql As String = "Select * From TBLINSURANCE Where INSURANCEID = " & _id
+        Dim fillData As String = "TBLINSURANCE"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
 
+        With ds.Tables(fillData).Rows(0)
+            .Item("Pawnticket") = _refNum
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 
 End Class

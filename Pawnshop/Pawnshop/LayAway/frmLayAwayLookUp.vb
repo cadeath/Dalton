@@ -70,6 +70,7 @@
             lv.Text = .Item("LayID")
 
             If .Item("BALANCE") = 0 Then lv.BackColor = Color.Red
+            If .Item("Status") = "V" Then lv.BackColor = Color.Gray
         End With
     End Sub
 
@@ -89,14 +90,29 @@
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvLayAway.SelectedItems.Count = 0 Then Exit Sub
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidLayAway
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidLayAway()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidLayAway
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                VoidLayAway()
+            End If
         Else
             VoidLayAway()
         End If
 
-        
+
     End Sub
 
     Friend Sub VoidLayAway()
