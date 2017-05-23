@@ -47,7 +47,7 @@
 #Region "Procedures"
     Friend Sub LoadCharge(ByVal id As Integer)
         Dim mysql As String = "Select * From tblMtCharge Where CHR_ID = " & id
-        Dim ds As DataSet = LoadSQL(mysql, "tblChargeName")
+        Dim ds As DataSet = LoadSQL(mysql, "tblMtCharge")
 
         For Each dr In ds.Tables(0).Rows
             LoadbyDatarow(dr)

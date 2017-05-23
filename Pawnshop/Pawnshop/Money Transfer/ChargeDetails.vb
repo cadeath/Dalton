@@ -75,9 +75,40 @@
 #End Region
 
 #Region "Procedures"
+    Friend Sub SaveChargeDetails()
+        Dim mysql As String = "Select * From tblMtDetails Where ID = " & _id
+        Dim ds As DataSet = LoadSQL(mysql, "tblMtDetails")
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables("tblMTDetails").NewRow
+            With dsNewRow
+                .Item("CHR_ID") = _chrid
+                .Item("AMOUNTFROM") = _amountfrom
+                .Item("AMOUNTTO") = _amountto
+                .Item("CHARGE") = _charge
+                .Item("COMMISION") = _commision
+                .Item("REMARKS") = _remarks
+            End With
+            ds.Tables("tblMTDetails").Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        Else
+            With ds.Tables(0).Rows(0)
+                .Item("CHR_ID") = _chrid
+                .Item("AMOUNTFROM") = _amountfrom
+                .Item("AMOUNTTO") = _amountto
+                .Item("CHARGE") = _charge
+                .Item("COMMISION") = _commision
+                .Item("REMARKS") = _remarks
+            End With
+            database.SaveEntry(ds, False)
+        End If
+
+    End Sub
+
     Friend Sub LoadChargeDetails(ByVal Chr_ID As Integer)
         Dim mysql As String = "Select * From tblMtDetails Where Chr_ID = " & Chr_ID
-        Dim ds As DataSet = LoadSQL(mysql, "tblChargeDetails")
+        Dim ds As DataSet = LoadSQL(mysql, "tblMtDetails")
 
         For Each dr In ds.Tables(0).Rows
             LoadbyDatarow(dr)

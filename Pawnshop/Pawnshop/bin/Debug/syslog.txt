@@ -1,1 +1,2 @@
 [04/06/2017 14:45:17] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.
+[05/23/2017 10:44:36] SYSTEM PATCHED UP FROM 1.3.2 TO 1.3.3
