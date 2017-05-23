@@ -5,7 +5,6 @@ Module AuditConsole_Controller
     Friend AuditOTP As OneTimePassword
 
     Friend Sub AuditModule_Initialization()
-        If OTPDisable Then Exit Sub
 
         AuditOTP = New OneTimePassword
         AuditOTP.AppName = "Dalton - Audit Console"

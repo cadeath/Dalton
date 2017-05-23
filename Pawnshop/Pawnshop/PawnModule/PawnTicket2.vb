@@ -136,12 +136,12 @@ Public Class PawnTicket2
         End Set
     End Property
 
-    Private _pawner As New Client
-    Public Property Pawner() As Client
+    Private _pawner As New Customer
+    Public Property Pawner() As Customer
         Get
             Return _pawner
         End Get
-        Set(ByVal value As Client)
+        Set(ByVal value As Customer)
             _pawner = value
         End Set
     End Property
@@ -336,7 +336,7 @@ Public Class PawnTicket2
             .Item("APPRAISERID") = _appraiserID
             .Item("ENCODERID") = _encoderID
             .Item("CLAIMERID") = _claimerID
-            .Item("CLIENTID") = _pawner.ID
+            .Item("CLIENTID") = _pawner.CustomerID
             .Item("PAWNITEMID") = _pawnItem.ID
             .Item("DESCRIPTION") = DescriptionBuilder()
             .Item("ORDATE") = _ORDate
@@ -377,7 +377,7 @@ Public Class PawnTicket2
             .Item("APPRAISERID") = _appraiserID
             .Item("ENCODERID") = _encoderID
             .Item("CLAIMERID") = _claimerID
-            .Item("CLIENTID") = _pawner.ID
+            .Item("CLIENTID") = _pawner.CustomerID
             .Item("PAWNITEMID") = _pawnItem.ID
             .Item("DESCRIPTION") = _description
             .Item("ORDATE") = _ORDate
@@ -434,7 +434,7 @@ Public Class PawnTicket2
             _appraiserID = .Item("APPRAISERID")
             _encoderID = .Item("ENCODERID")
             _claimerID = .Item("CLAIMERID")
-            _pawner.LoadClient(.Item("CLIENTID"))
+            _pawner.Load_CustomerByID(.Item("CLIENTID"))
             _description = .Item("DESCRIPTION")
             _ORDate = .Item("ORDATE")
             _ORNum = .Item("ORNUM")
@@ -515,7 +515,7 @@ Public Class PawnTicket2
             .Item("SMSDATE") = CurrentDate
             .Item("PAWNID") = _PawnID
             .Item("PAWNTICKET") = _ticket
-            .Item("CLIENTID") = _pawner.ID
+            .Item("CLIENTID") = _pawner.CustomerID
             .Item("SMS_MSG") = msg
             .Item("SENT_BY") = POSuser.UserID
             .Item("REMARKS") = req
