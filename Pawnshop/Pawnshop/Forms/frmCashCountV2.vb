@@ -180,9 +180,13 @@
 
             Me.Close()
         End If
+        Dim tmpSmartMoney As Double, tmpSmartWallet As Double, tmpEload As Double
 
+        tmpSmartMoney = GetSmartInvo("SMT 00056")
+        tmpSmartWallet = GetSmartInvo("SMT 00002")
+        tmpEload = GetSmartInvo("SMT 00071")
         If isClosing Then
-            mod_system.CloseStore(total)
+            mod_system.CloseStore(total, tmpSmartMoney, tmpSmartWallet, tmpEload)
             frmMain.dateSet = False
             frmMain.doSegregate = False
 
@@ -344,5 +348,14 @@
         Dim ds As DataSet = LoadSQL(mySql)
 
         Return ds.Tables(0).Rows(0).Item("DLID")
+    End Function
+
+    Private Function GetSmartInvo(ByVal ItemCode As String)
+        Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & ItemCode & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "ItemMaster")
+
+        If ds.Tables(0).Rows.Count = 0 Then Return 0
+
+        Return ds.Tables(0).Rows(0).Item("Onhand")
     End Function
 End Class

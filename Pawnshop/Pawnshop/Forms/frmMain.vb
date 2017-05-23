@@ -441,7 +441,7 @@ Public Class frmMain
         'End If
 
         OTPItemPullout_Initialization()
-        If Not OTPDisable Then
+        If Not isOTPOn("Pullout") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
@@ -480,7 +480,7 @@ Public Class frmMain
 
         AuditModule_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Audit") Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
             If Not diagOTPv2.isCorrect Then
@@ -620,7 +620,7 @@ Public Class frmMain
 
         OTPInventory_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Inventory") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
