@@ -120,9 +120,24 @@ Public Class frmPrint
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvReceipt.SelectedItems.Count = 0 Then Exit Sub
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidSales
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    Void()
+        'End If
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidSales
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                Void()
+            End If
         Else
             Void()
         End If
@@ -147,14 +162,13 @@ Public Class frmPrint
 
         Dim EncoderID As String = ds.Tables(0).Rows(0).Item("USERID")
         Dim TransactionName As String
-        Dim NewOtp As New ClassOtp("VOID SALES", diagOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+        Dim NewOtp As New ClassOtp("VOID SALES", diagGeneralOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
         If isSales = True Then
             TransactionName = "SALES"
         Else
             TransactionName = "RECALL"
         End If
-            TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
-
+        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
             ds.Clear()
             mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
             ds = LoadSQL(mysql, "Doclines")

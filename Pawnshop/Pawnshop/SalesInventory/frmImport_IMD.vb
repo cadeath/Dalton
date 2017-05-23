@@ -37,9 +37,7 @@ Public Class frmImport_IMD
         Next : checkHeaders(MaxColumn) = oWB.Worksheets(1).name
 
         If Not TemplateIntegrityCheck(checkHeaders) Then
-            ' TODO: JUNMAR
-            ' LOG ANY DATA
-
+            AddTimelyLogs("IMPORT MASTER DATA", "Template was tampered", , False, "IMD Template has been modify", )
             MsgBox("Template was tampered", MsgBoxStyle.Critical)
             GoTo unloadObj
         End If
@@ -61,6 +59,7 @@ Public Class frmImport_IMD
                 If isYesNo(oSheet.Cells(cnt, 9).value) Then .isSaleable = IIf(YesNo(oSheet.Cells(cnt, 9).value) = "Y", 1, 0)
                 If isYesNo(oSheet.Cells(cnt, 10).value) Then .isInventoriable = IIf(YesNo(oSheet.Cells(cnt, 10).value) = "Y", 1, 0)
                 If isYesNo(oSheet.Cells(cnt, 11).value) Then .onHold = IIf(YesNo(oSheet.Cells(cnt, 11).value) = "Y", 1, 0)
+                If isYesNo(oSheet.Cells(cnt, 12).value) Then .IsLayAway = IIf(YesNo(oSheet.Cells(cnt, 12).value) = "Y", 1, 0)
 
             End With
 
@@ -100,6 +99,8 @@ unloadObj:
 
         ht_ImportedItems.Add(import_cnt, Item)
         import_cnt += 1
+
+        Console.WriteLine("Item No. " & import_cnt)
     End Sub
 
     Private Function isYesNo(ByVal str As String) As Boolean
@@ -142,10 +143,7 @@ unloadObj:
         Dim hash = InputBox("HOT CODE", "ENTER HOT CODE")
         If hash = "" Then Exit Sub
         If Not hash = security.GetFileMD5(lblFilename.Text) Then
-            ' TODO: JUNMAR
-            ' RECORD HASH VALUE THAT WAS ENCODED IN THE HOT CODE
-            ' SAVE IN AT DAILYTIMELOG
-
+            AddTimelyLogs("IMPORT MASTER DATA", "INVALID HOT CODE", , False, "HOT CODE: " & hash, )
             MsgBox("Invalid HOT CODE", MsgBoxStyle.Critical, "HOT CODE")
             Exit Sub
         End If

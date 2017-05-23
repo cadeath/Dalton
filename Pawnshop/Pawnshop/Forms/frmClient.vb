@@ -20,7 +20,7 @@ Public Class frmClient
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
+        'Me.TopMost = True
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -54,6 +54,8 @@ Public Class frmClient
         If cl.Sex = 0 Then
             lv.ImageKey = "imgFemale"
         End If
+        If cl.IsDumper = True Then lv.BackColor = Color.YellowGreen
+
     End Sub
     ''' <summary>
     ''' this method will clear the textbox and the listview items.
@@ -237,6 +239,9 @@ Public Class frmClient
         Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
         GetClient = New Client
         GetClient.LoadClient(idx)
+
+        If GetClient.IsDumper = True Then MsgBox("This is to inform you that this person is a " & vbCrLf & _
+            "DUMPER!", MsgBoxStyle.Exclamation, "DUMPER ALERT")
 
         formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 

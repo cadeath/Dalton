@@ -104,10 +104,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Add INS Count\frmAddItemMasterCOI.Designer.vb">
+    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
     </Compile>
-    <Compile Include="Add INS Count\frmAddItemMasterCOI.vb">
+    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CashInBank\update_cashinbank.vb" />
@@ -116,6 +116,12 @@
       <DependentUpon>frmMain2.vb</DependentUpon>
     </Compile>
     <Compile Include="CashInBank\frmMain2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.Designer.vb">
+      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FixDailyTimeModname\frmFixModname.Designer.vb">
@@ -222,8 +228,11 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Add INS Count\frmAddItemMasterCOI.resx">
+    <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.resx">
+      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
-    Private isOTPEnable As Boolean = False
+    Private isOTPEnable As Boolean
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.TopMost = True
@@ -9,6 +9,7 @@
         lblSAP02.Text = "SAP Code 02"
         ClearFields()
         PrinterSettings()
+        isOTPEnable = False
     End Sub
 
     Private Sub PrinterSettings()
@@ -35,6 +36,7 @@
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
         txtCustomerCode.Text = GetOption("CustomerCode")
+        txtBranchAddr.Text = GetOption("Branch Address")
 
         If locked Then
             txtCode.Enabled = False
@@ -51,6 +53,8 @@
         txtMENum.Text = GetOption("MEnumLast")
         txtMRNum.Text = GetOption("MRNumLast")
         txtCashInvoice.Text = GetOption("InvoiceNum")
+        txtReturnNum.Text = GetOption("SalesReturnNum")
+        txtStockOutNum.Text = GetOption("STONum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -71,10 +75,18 @@
         If Not locked Then
             UpdateSetting()
         Else
+            isOTPEnable = True
+            OTPSettings_Initialization()
+
             If Not OTPDisable Then
-                diagOTP.FormType = diagOTP.OTPType.Settings
-                isOTPEnable = True
-                If Not CheckOTP() Then Exit Sub
+                diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.TopMost = True
+                diagGeneralOTP.ShowDialog()
+                If Not diagGeneralOTP.isValid Then
+                    Exit Sub
+                Else
+                    UpdateSetting()
+                End If
             Else
                 UpdateSetting()
             End If
@@ -97,6 +109,7 @@
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
         UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
+        UpdateOptions("Branch Address", txtBranchAddr.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
@@ -106,6 +119,8 @@
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
         UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
+        UpdateOptions("SalesReturnNum", txtReturnNum.Text, isOTPEnable)
+        UpdateOptions("STONum", txtStockOutNum.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
@@ -126,24 +141,44 @@
         ds.Tables(fillData).Rows(0).Item("MaintainBal") = txtBal.Text
         SaveEntry(ds, False)
     End Sub
-    Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBal.KeyPress
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtOR_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtBorrow_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtInsurance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-
+  
     Private Sub frmSettings_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmMain.Enabled = True
+    End Sub
+
+    Private Sub txtPawnTicket_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPawnTicket.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtOR_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOR.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtBorrow_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBorrow.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtInsurance_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInsurance.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtMENum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMENum.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtMRNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMRNum.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtCashInvoice_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCashInvoice.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtReturnNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReturnNum.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtStockOutNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtStockOutNum.KeyPress
+        DigitOnly(e)
     End Sub
 End Class

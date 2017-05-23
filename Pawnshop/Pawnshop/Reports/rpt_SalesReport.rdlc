@@ -732,6 +732,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsSales</DataSetName>
+        <Top>0in</Top>
         <Height>0.5in</Height>
         <Width>9.53125in</Width>
         <Style>
@@ -741,7 +742,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.5in</Height>
+    <Height>0.5625in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -761,7 +762,7 @@
   <Width>9.53125in</Width>
   <Page>
     <PageHeader>
-      <Height>1.1425in</Height>
+      <Height>1.205in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -877,7 +878,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
           <Top>0.86292in</Top>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>1.125in</Width>
           <ZIndex>3</ZIndex>
           <Style>
@@ -919,7 +920,7 @@
           <rd:DefaultName>Textbox32</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>1.125in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>0.97917in</Width>
           <ZIndex>4</ZIndex>
           <Style>
@@ -961,7 +962,7 @@
           <rd:DefaultName>Textbox15</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>2.10417in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>1.71875in</Width>
           <ZIndex>5</ZIndex>
           <Style>
@@ -1003,7 +1004,7 @@
           <rd:DefaultName>Textbox17</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>3.82292in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>1.17708in</Width>
           <ZIndex>6</ZIndex>
           <Style>
@@ -1045,7 +1046,7 @@
           <rd:DefaultName>Textbox22</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>5in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>2.02083in</Width>
           <ZIndex>7</ZIndex>
           <Style>
@@ -1089,7 +1090,7 @@
           <rd:DefaultName>Textbox24</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>7.02083in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>0.51042in</Width>
           <ZIndex>8</ZIndex>
           <Style>
@@ -1131,7 +1132,7 @@
           <rd:DefaultName>Textbox36</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>7.53125in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>1in</Width>
           <ZIndex>9</ZIndex>
           <Style>
@@ -1173,7 +1174,7 @@
           <rd:DefaultName>Textbox26</rd:DefaultName>
           <Top>0.86292in</Top>
           <Left>8.53125in</Left>
-          <Height>0.25in</Height>
+          <Height>0.28125in</Height>
           <Width>1in</Width>
           <ZIndex>10</ZIndex>
           <Style>
