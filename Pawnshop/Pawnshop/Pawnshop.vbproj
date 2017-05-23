@@ -178,6 +178,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db133.vb" />
+    <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
@@ -195,8 +197,6 @@
     <Compile Include="AutoPatch\db1232.vb" />
     <Compile Include="AutoPatch\db13.vb" />
     <Compile Include="AutoPatch\db124.vb" />
-    <Compile Include="AutoPatch\db131.vb" />
-    <Compile Include="AutoPatch\db132.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -301,13 +301,6 @@
     <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Discount\frmMassDiscount.Designer.vb">
-      <DependentUpon>frmMassDiscount.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Discount\frmMassDiscount.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Discount\ListViewColumnSorter.vb" />
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -395,6 +388,48 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="KYC\frmClientNew.Designer.vb">
+      <DependentUpon>frmClientNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\frmClientNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\frmCustomer_KYC.Designer.vb">
+      <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\frmCustomer_KYC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\KYC class\Collections_ID.vb" />
+    <Compile Include="KYC\KYC class\Collections_Phone.vb" />
+    <Compile Include="KYC\KYC class\Customer.vb" />
+    <Compile Include="KYC\KYC class\NewIdentificationCard.vb" />
+    <Compile Include="KYC\KYC class\PhoneNumber.vb" />
+    <Compile Include="KYC\KYC migrate\ColMigrate_Phone.vb" />
+    <Compile Include="KYC\KYC migrate\diag_loading.Designer.vb">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\diag_loading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\frmClientMigrate.Designer.vb">
+      <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\frmClientMigrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\frmCustomerImage.Designer.vb">
+      <DependentUpon>frmCustomerImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\frmCustomerImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\KYC migrate\MigrateCustomer.vb" />
+    <Compile Include="KYC\KYC migrate\MigrateIdentificationCard.vb" />
+    <Compile Include="KYC\KYC migrate\MigratePhoneNumber.vb" />
+    <Compile Include="KYC\KYC migrate\Migrate_ID.vb" />
+    <Compile Include="KYC\KYCConfig.vb" />
+    <Compile Include="KYC\ModCamera.vb" />
     <Compile Include="Layaway\frmAddCustomer.Designer.vb">
       <DependentUpon>frmAddCustomer.vb</DependentUpon>
     </Compile>
@@ -439,6 +474,12 @@
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
     </Compile>
     <Compile Include="OTP\diagGeneralOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\frmSample.Designer.vb">
+      <DependentUpon>frmSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmSample.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OTP\OTPModule.vb" />
@@ -790,12 +831,6 @@
     <Compile Include="SalesInventory\dev_Menu_SalesInventory.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SalesInventory\frmDiscount.Designer.vb">
-      <DependentUpon>frmDiscount.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SalesInventory\frmDiscount.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="SalesInventory\frmIMD.Designer.vb">
       <DependentUpon>frmIMD.vb</DependentUpon>
     </Compile>
@@ -944,9 +979,6 @@
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Discount\frmMassDiscount.resx">
-      <DependentUpon>frmMassDiscount.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -984,6 +1016,21 @@
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="KYC\frmClientNew.resx">
+      <DependentUpon>frmClientNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\frmCustomer_KYC.resx">
+      <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\KYC migrate\diag_loading.resx">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\KYC migrate\frmClientMigrate.resx">
+      <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\frmCustomerImage.resx">
+      <DependentUpon>frmCustomerImage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Layaway\frmAddCustomer.resx">
       <DependentUpon>frmAddCustomer.vb</DependentUpon>
     </EmbeddedResource>
@@ -1001,6 +1048,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmSample.resx">
+      <DependentUpon>frmSample.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
@@ -1311,9 +1361,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\dev_Menu_SalesInventory.resx">
       <DependentUpon>dev_Menu_SalesInventory.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SalesInventory\frmDiscount.resx">
-      <DependentUpon>frmDiscount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmIMD.resx">
       <DependentUpon>frmIMD.vb</DependentUpon>
