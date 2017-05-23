@@ -506,6 +506,7 @@ NextLineTODO:
         End While
 
         Dim customPrice As Double = CDbl(tmp)
+        selected_Itm.SRP = selected_Itm.SalePrice
         selected_Itm.SalePrice = customPrice
 
         If Not isOTPOn("CustomPrice") Then
