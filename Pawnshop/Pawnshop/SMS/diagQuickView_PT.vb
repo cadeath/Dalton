@@ -42,9 +42,18 @@
 
             'Loading Customer Information
             txtCustomer.Text = String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName)
-            txtAddr.Text = String.Format("{0} {1}" & vbCrLf & "{2}", .Pawner.AddressSt, .Pawner.AddressBrgy, .Pawner.AddressCity)
+            txtAddr.Text = String.Format("{0} {1}" & vbCrLf & "{2}", .Pawner.PresentStreet, .Pawner.PresentBarangay, .Pawner.PresentCity)
             txtBday.Text = ddFormat(.Pawner.Birthday)
-            txtNumber.Text = .Pawner.Cellphone1
+
+            For Each phne As PhoneNumber In .Pawner.CustomersPhone
+                If phne.isPrimary > 0 Then
+                    txtNumber.Text = phne.PhoneNumber
+                End If
+            Next
+
+            For Each phne As PhoneNumber In .Pawner.CustomersPhone
+                txtNumber.Text = phne.PhoneNumber : Exit For
+            Next
         End With
 
     End Sub

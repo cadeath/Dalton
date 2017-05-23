@@ -1,19 +1,19 @@
 ﻿Public Class frmAddCustomer
-    Dim Customer As Client
+    Dim Customer As Customer
     Friend retID As Integer = 0
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtCustomer.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.layAwayExist)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.layAwayExist)
+        frmClientNew.Show()
     End Sub
 
-    Friend Sub LoadClient(ByVal cl As Client)
-        txtCustomer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
-       
-        Customer = New Client
-        Customer = cl
+    Friend Sub LoadClient(ByVal cus As Customer)
+        txtCustomer.Text = String.Format("{0} {1}" & IIf(cus.Suffix <> "", "," & cus.Suffix, ""), cus.FirstName, cus.LastName)
+
+        Customer = New Customer
+        Customer = cus
     End Sub
 
     Private Sub txtCustomer_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCustomer.KeyPress
@@ -24,7 +24,7 @@
 
     Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
         If Customer Is Nothing Then Exit Sub
-        frmUploadLay.DisplayValue(Customer.ID, txtCustomer.Text, retID)
+        frmUploadLay.DisplayValue(Customer.CustomerID, txtCustomer.Text, retID)
         Me.Close()
     End Sub
 End Class

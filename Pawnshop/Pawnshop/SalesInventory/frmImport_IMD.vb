@@ -60,6 +60,7 @@ Public Class frmImport_IMD
                 If isYesNo(oSheet.Cells(cnt, 10).value) Then .isInventoriable = IIf(YesNo(oSheet.Cells(cnt, 10).value) = "Y", 1, 0)
                 If isYesNo(oSheet.Cells(cnt, 11).value) Then .onHold = IIf(YesNo(oSheet.Cells(cnt, 11).value) = "Y", 1, 0)
                 If isYesNo(oSheet.Cells(cnt, 12).value) Then .IsLayAway = IIf(YesNo(oSheet.Cells(cnt, 12).value) = "Y", 1, 0)
+                .Discount = oSheet.Cells(cnt, 13).value
 
             End With
 

@@ -247,14 +247,14 @@
 
     Private Sub LayAwayReport()
         Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
-        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mysql &= "C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
         mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FULLNAME AS ENCODER, "
         mysql &= "LY.PAYMENTDATE, LY.CONTROLNUM, LY.AMOUNT, LY.PENALTY, LY.STATUS AS LYSTATUS, "
         mysql &= "USR2.FULLNAME AS PAYMENTENCODER "
         mysql &= "FROM TBLLAYAWAY L "
         mysql &= "INNER JOIN TBLLAYLINES LY ON LY.LAYID = L.LAYID "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN " & CUSTOMER_TABLE & "  C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "INNER JOIN TBL_GAMIT USR ON USR.USERID = L.ENCODER "
         mysql &= "INNER JOIN TBL_GAMIT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
@@ -272,14 +272,14 @@
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionEnd)
         Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
-        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mysql &= "C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
         mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FULLNAME AS ENCODER, "
         mysql &= "LY.PAYMENTDATE, LY.CONTROLNUM, LY.AMOUNT, LY.PENALTY, LY.STATUS AS LYSTATUS, "
         mysql &= "USR2.FULLNAME AS PAYMENTENCODER "
         mysql &= "FROM TBLLAYAWAY L "
         mysql &= "INNER JOIN TBLLAYLINES LY ON LY.LAYID = L.LAYID "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN " & CUSTOMER_TABLE & "  C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "INNER JOIN TBL_GAMIT USR ON USR.USERID = L.ENCODER "
         mysql &= "INNER JOIN TBL_GAMIT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
@@ -296,11 +296,11 @@
 
     Private Sub ForfeitReport()
         Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
-        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mysql &= "C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
         mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, L.BALANCE "
         mysql &= "FROM TBLLAYAWAY L "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE = '" & monCal.SelectionStart.ToShortDateString & "' "
         mysql &= "ORDER BY L.DOCDATE ASC "
@@ -317,11 +317,11 @@
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionEnd)
         Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
-        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mysql &= "C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
         mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, L.BALANCE "
         mysql &= "FROM TBLLAYAWAY L "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "' "
         mysql &= "ORDER BY L.DOCDATE ASC "
@@ -370,12 +370,12 @@
     End Sub
 
     Private Sub LayawayList()
-        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, C.CLIENTID, "
+        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, C.ID, "
         mysql &= "C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
         mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.BALANCE, L.STATUS "
         mysql &= "FROM TBLLAYAWAY L "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN " & CUSTOMER_TABLE & "  C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "WHERE L.STATUS = '1' AND L.BALANCE <> 0 AND L.DOCDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
         mysql &= "ORDER BY L.DOCDATE ASC "

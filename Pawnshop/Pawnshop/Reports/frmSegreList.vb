@@ -60,4 +60,5 @@
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_Segregated.rdlc", rptPara)
         frmReport.Show()
     End Sub
+
 End Class

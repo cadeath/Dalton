@@ -13,11 +13,11 @@
         Dim mysql As String, Name As String
         Dim strWords As String() = Search.Split(New Char() {" "c})
         If Search <> "" Then
-            mysql = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
+            mysql = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
-            mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
+            mysql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
             mysql &= "WHERE LY.STATUS = '1' "
             mysql &= "AND  UPPER(LY.ITEMCODE) LIKE UPPER('%" & Search & "%') OR"
@@ -32,11 +32,11 @@
 
             Next
         Else
-            mysql = "Select First 50 LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
+            mysql = "Select First 50 LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
-            mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
+            mysql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
             mysql &= "WHERE LY.STATUS = '1' AND LY.BALANCE <> 0 "
         End If
@@ -99,7 +99,7 @@
 
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
