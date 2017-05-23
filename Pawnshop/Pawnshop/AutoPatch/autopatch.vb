@@ -25,7 +25,7 @@ Module autopatch
         db131.PatchUp()
 
         'FOR v1.6
-        db132.PatchUp()
+        db133.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub
