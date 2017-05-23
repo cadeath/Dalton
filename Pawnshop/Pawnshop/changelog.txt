@@ -1,4 +1,10 @@
 CHANGELOG
+
+Version 1.6
+ - Add OTP Control Table & Allow to Switch Off / On OTP by Module
+ - Add Discount & Custom Price Function in Sale Module
+ - Smart Product (Smart Money Padala, Load Wallet & Eload) allow to Display in Daily Cash Count
+
 Version 1.5.0.8
  - Drop View View_CLient
  - Create View View_Client
