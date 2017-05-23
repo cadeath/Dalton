@@ -178,7 +178,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
-    <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
@@ -196,6 +195,8 @@
     <Compile Include="AutoPatch\db1232.vb" />
     <Compile Include="AutoPatch\db13.vb" />
     <Compile Include="AutoPatch\db124.vb" />
+    <Compile Include="AutoPatch\db131.vb" />
+    <Compile Include="AutoPatch\db132.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -300,6 +301,13 @@
     <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Discount\frmMassDiscount.Designer.vb">
+      <DependentUpon>frmMassDiscount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Discount\frmMassDiscount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Discount\ListViewColumnSorter.vb" />
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -431,12 +439,6 @@
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
     </Compile>
     <Compile Include="OTP\diagGeneralOTP.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OTP\frmSample.Designer.vb">
-      <DependentUpon>frmSample.vb</DependentUpon>
-    </Compile>
-    <Compile Include="OTP\frmSample.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OTP\OTPModule.vb" />
@@ -788,6 +790,12 @@
     <Compile Include="SalesInventory\dev_Menu_SalesInventory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\frmDiscount.Designer.vb">
+      <DependentUpon>frmDiscount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmDiscount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesInventory\frmIMD.Designer.vb">
       <DependentUpon>frmIMD.vb</DependentUpon>
     </Compile>
@@ -936,6 +944,9 @@
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Discount\frmMassDiscount.resx">
+      <DependentUpon>frmMassDiscount.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -990,9 +1001,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OTP\frmSample.resx">
-      <DependentUpon>frmSample.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
@@ -1303,6 +1311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\dev_Menu_SalesInventory.resx">
       <DependentUpon>dev_Menu_SalesInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmDiscount.resx">
+      <DependentUpon>frmDiscount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmIMD.resx">
       <DependentUpon>frmIMD.vb</DependentUpon>

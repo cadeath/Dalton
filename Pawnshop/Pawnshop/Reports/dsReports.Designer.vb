@@ -3213,6 +3213,12 @@ Partial Public Class dsReports
         
         Private columnRemarks As Global.System.Data.DataColumn
         
+        Private columnSmartMoneyCnt As Global.System.Data.DataColumn
+        
+        Private columnSmartWalletCnt As Global.System.Data.DataColumn
+        
+        Private columnEloadCnt As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -3223,10 +3229,10 @@ Partial Public Class dsReports
             Me.EndInit
         End Sub
         
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
+            MyBase.New()
             Me.TableName = table.TableName
             If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
                 Me.CaseSensitive = table.CaseSensitive
@@ -3289,6 +3295,30 @@ Partial Public Class dsReports
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SmartMoneyCntColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSmartMoneyCnt
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SmartWalletCntColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSmartWalletCnt
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EloadCntColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEloadCnt
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3325,9 +3355,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddDailyRow(ByVal CurrentDate As String, ByVal MaintainBal As String, ByVal InitialBal As String, ByVal CashCount As String, ByVal Remarks As String) As DailyRow
+        Public Overloads Function AddDailyRow(ByVal CurrentDate As String, ByVal MaintainBal As String, ByVal InitialBal As String, ByVal CashCount As String, ByVal Remarks As String, ByVal SmartMoneyCnt As String, ByVal SmartWalletCnt As String, ByVal EloadCnt As String) As DailyRow
             Dim rowDailyRow As DailyRow = CType(Me.NewRow,DailyRow)
-            Dim columnValuesArray() As Object = New Object() {CurrentDate, MaintainBal, InitialBal, CashCount, Remarks}
+            Dim columnValuesArray() As Object = New Object() {CurrentDate, MaintainBal, InitialBal, CashCount, Remarks, SmartMoneyCnt, SmartWalletCnt, EloadCnt}
             rowDailyRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDailyRow)
             Return rowDailyRow
@@ -3355,6 +3385,9 @@ Partial Public Class dsReports
             Me.columnInitialBal = MyBase.Columns("InitialBal")
             Me.columnCashCount = MyBase.Columns("CashCount")
             Me.columnRemarks = MyBase.Columns("Remarks")
+            Me.columnSmartMoneyCnt = MyBase.Columns("SmartMoneyCnt")
+            Me.columnSmartWalletCnt = MyBase.Columns("SmartWalletCnt")
+            Me.columnEloadCnt = MyBase.Columns("EloadCnt")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3370,6 +3403,12 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnCashCount)
             Me.columnRemarks = New Global.System.Data.DataColumn("Remarks", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRemarks)
+            Me.columnSmartMoneyCnt = New Global.System.Data.DataColumn("SmartMoneyCnt", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSmartMoneyCnt)
+            Me.columnSmartWalletCnt = New Global.System.Data.DataColumn("SmartWalletCnt", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSmartWalletCnt)
+            Me.columnEloadCnt = New Global.System.Data.DataColumn("EloadCnt", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEloadCnt)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10062,6 +10101,51 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SmartMoneyCnt() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDaily.SmartMoneyCntColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SmartMoneyCnt' in table 'Daily' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDaily.SmartMoneyCntColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SmartWalletCnt() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDaily.SmartWalletCntColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SmartWalletCnt' in table 'Daily' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDaily.SmartWalletCntColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EloadCnt() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDaily.EloadCntColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'EloadCnt' in table 'Daily' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDaily.EloadCntColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsCurrentDateNull() As Boolean
             Return Me.IsNull(Me.tableDaily.CurrentDateColumn)
         End Function
@@ -10118,6 +10202,42 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetRemarksNull()
             Me(Me.tableDaily.RemarksColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSmartMoneyCntNull() As Boolean
+            Return Me.IsNull(Me.tableDaily.SmartMoneyCntColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSmartMoneyCntNull()
+            Me(Me.tableDaily.SmartMoneyCntColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSmartWalletCntNull() As Boolean
+            Return Me.IsNull(Me.tableDaily.SmartWalletCntColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSmartWalletCntNull()
+            Me(Me.tableDaily.SmartWalletCntColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsEloadCntNull() As Boolean
+            Return Me.IsNull(Me.tableDaily.EloadCntColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetEloadCntNull()
+            Me(Me.tableDaily.EloadCntColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

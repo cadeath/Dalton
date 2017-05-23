@@ -209,6 +209,26 @@
         End Set
     End Property
 
+    Private _discount As Integer
+    Public Property Discount() As Integer
+        Get
+            Return _discount
+        End Get
+        Set(ByVal value As Integer)
+            _discount = value
+        End Set
+    End Property
+
+    Private _srp As Double
+    Public Property SRP() As Double
+        Get
+            Return _srp
+        End Get
+        Set(ByVal value As Double)
+            _srp = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -259,6 +279,7 @@
                 .Item("ONHAND") = _onHand
                 .Item("COMMENTS") = _comments
                 .Item("isLayAway") = If(_isLayAway, 1, 0)
+                .Item("Discount") = _discount
             End With
             ds.Tables(TABLE).Rows.Add(dsNewRow)
             isNew = True
@@ -279,6 +300,7 @@
                 .Item("COMMENTS") = _comments
                 .Item("UPDATE_TIME") = Now()
                 .Item("isLayAway") = If(_isLayAway, 1, 0)
+                .Item("Discount") = _discount
             End With
         End If
 
@@ -305,6 +327,7 @@
             _onHand = .Item("ONHAND")
             _isLayAway = IIf(.Item("isLayAway") = 1, True, False)
             _onLayAway = IIf(.Item("OnLayAway") = 1, True, False)
+            _discount = .Item("Discount")
         End With
     End Sub
 
@@ -330,7 +353,7 @@
         With dr
             _itemID = .Item("ITEMID")
             _itemCode = .Item("ITEMCODE")
-            If _description <> "" Then _description = .Item("DESCRIPTION")
+            If Not IsDBNull(.Item("DESCRIPTION")) Then _description = .Item("DESCRIPTION")
             If Not IsDBNull(.Item("BARCODE")) Then _barCode = .Item("BARCODE")
             _category = .Item("CATEGORIES")
             If Not IsDBNull(.Item("SUBCAT")) Then _subCat = .Item("SUBCAT")
@@ -343,6 +366,7 @@
             _onHand = .Item("ONHAND")
             _isLayAway = IIf(.Item("isLayAway") = 1, True, False)
             _onLayAway = IIf(.Item("OnLayAway") = 1, True, False)
+            _discount = .Item("Discount")
             hasLoaded = True
         End With
     End Sub

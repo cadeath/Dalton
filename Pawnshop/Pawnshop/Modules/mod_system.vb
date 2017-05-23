@@ -31,7 +31,7 @@ Module mod_system
     Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
-    Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -199,7 +199,7 @@ Module mod_system
     ''' </summary>
     ''' <param name="cc">cc is the parameter that hold nonmodifiable value.</param>
     ''' <remarks></remarks>
-    Friend Sub CloseStore(ByVal cc As Double)
+    Friend Sub CloseStore(ByVal cc As Double, ByVal SmartMoneyCnt As Double, ByVal SmartWalletCnt As Double, ByVal EloadCnt As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
@@ -211,6 +211,10 @@ Module mod_system
                 .Item("CashCount") = cc
                 .Item("Status") = 0
                 .Item("Closer") = POSuser.UserID
+
+                .Item("SmartMoneyCnt") = SmartMoneyCnt
+                .Item("SmartWalletCnt") = SmartWalletCnt
+                .Item("EloadCnt") = EloadCnt
             End With
 
             database.SaveEntry(ds, False)
@@ -652,6 +656,16 @@ Module mod_system
             End If
         Next
     End Sub
+
+    Public Function isOTPOn(ByVal Modname As String) As Boolean
+        Dim mysql As String = "Select * From OTPControl Where Modname = '" & Modname & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPCOntrol")
+
+        If ds.Tables(0).Rows(0).Item("Status") = 1 Then Return False
+
+        Return True
+    End Function
+
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
