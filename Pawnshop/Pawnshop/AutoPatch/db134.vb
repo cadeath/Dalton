@@ -1,6 +1,6 @@
-﻿Module db15
-    Const ALLOWABLE_VERSION As String = "1.3"
-    Const LATEST_VERSION As String = "1.3.1"
+﻿Module db134
+    Const ALLOWABLE_VERSION As String = "1.3.3"
+    Const LATEST_VERSION As String = "1.3.4"
 
     Private strSql As String
 
