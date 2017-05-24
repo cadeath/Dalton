@@ -95,7 +95,7 @@
         createMTView &= vbCrLf & "	MT.NETAMOUNT, MT.SENDERNAME, 		"
         createMTView &= vbCrLf & "	C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 AS S_ADDR, "
         createMTView &= vbCrLf & "	MT.RECEIVERNAME, 		"
-        createMTView &= vbCrLf & "	R.ADDR_STREET || ' ' || R.ADDR_BRGY || ' ' || R.ADDR_CITY AS R_ADDR,"
+        createMTView &= vbCrLf & "	R.STREET1 || ' ' || R.BRGY1 || ' ' || R.CITY1 AS R_ADDR,"
         createMTView &= vbCrLf & "	MT.LOCATION	"
         createMTView &= vbCrLf & "	FROM "
         createMTView &= vbCrLf & "	TBLMONEYTRANSFER MT	"
