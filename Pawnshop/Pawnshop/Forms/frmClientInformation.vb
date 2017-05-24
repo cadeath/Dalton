@@ -86,6 +86,7 @@ Public Class frmClientInformation
         txtCP2.Text = cl.Cellphone2
         txtTele.Text = cl.Telephone
         txtOthers.Text = cl.OtherNumber
+        If cl.IsDumper = True Then chkDumper.Checked = True
 
         SelectedClient = cl
 
@@ -135,6 +136,7 @@ Public Class frmClientInformation
         txtRemarks.ReadOnly = st
 
         grpID.Enabled = Not st
+        grpDumper.Enabled = Not st
 
         If st Then
             btnSave.Text = "&Modify"
@@ -300,6 +302,7 @@ Public Class frmClientInformation
             .Cellphone2 = txtCP2.Text
             .Telephone = txtTele.Text
             .OtherNumber = txtOthers.Text
+            If chkDumper.Checked Then .IsDumper = True Else .IsDumper = False
 
             If isNew Then
                 .SaveClient()
@@ -546,4 +549,5 @@ Public Class frmClientInformation
             btnIDModify.Enabled = False
         End If
     End Sub
+
 End Class

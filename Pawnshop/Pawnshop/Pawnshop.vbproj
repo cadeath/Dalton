@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\db15.vb" />
+    <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
