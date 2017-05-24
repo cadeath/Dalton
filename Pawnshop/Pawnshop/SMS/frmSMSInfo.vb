@@ -23,7 +23,7 @@
         mySql &= vbCrLf & "  SMS"
         mySql &= vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C"
         mySql &= vbCrLf & "  ON C.ID = SMS.CLIENTID"
-        mySql &= vbCrLf & "INNER JOIN TBL_GAMIT USR"
+        mySql &= vbCrLf & "INNER JOIN TBL_USER_DEFAULT USR"
         mySql &= vbCrLf & "  ON USR.USERID = SMS.SENT_BY"
         mySql &= vbCrLf & String.Format(" WHERE PAWNTICKET = {0}", pawnTicket)
 
