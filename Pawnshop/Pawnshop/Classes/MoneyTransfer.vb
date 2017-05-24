@@ -10,8 +10,8 @@
     Private _date As Date
     Private _serviceType As String
     Private _transType As Integer = 0
-    Private _client1 As Client 'Sender
-    Private _client2 As Client 'Receiver
+    Private _client1 As Customer 'Sender
+    Private _client2 As Customer 'Receiver
     Private _amount As Double = 0
     Private _location As String
     Private _service As Double = 0
@@ -77,8 +77,8 @@
         End Get
     End Property
 
-    Public Property Sender As Client
-        Set(ByVal value As Client)
+    Public Property Sender As Customer
+        Set(ByVal value As Customer)
             _client1 = value
         End Set
         Get
@@ -86,8 +86,8 @@
         End Get
     End Property
 
-    Public Property Receiver As Client
-        Set(ByVal value As Client)
+    Public Property Receiver As Customer
+        Set(ByVal value As Customer)
             _client2 = value
         End Set
         Get
@@ -189,11 +189,11 @@
             _transID = .Item("TransID")
             _transType = .Item("MoneyTrans")
             _serviceType = .Item("ServiceType")
-            Dim tmpClient As New Client
-            tmpClient.LoadClient(.Item("SenderID"))
+            Dim tmpClient As New Customer
+            tmpClient.Load_CustomerByID(.Item("SenderID"))
             _client1 = tmpClient
-            Dim tmpClient2 As New Client
-            tmpClient2.LoadClient(.Item("ReceiverID"))
+            Dim tmpClient2 As New Customer
+            tmpClient2.Load_CustomerByID(.Item("ReceiverID"))
             _client2 = tmpClient2
             _ref = .Item("RefNum")
             _amount = .Item("Amount")
@@ -218,9 +218,9 @@
             .Item("ServiceType") = _serviceType
             .Item("TransDate") = _date
             .Item("TransID") = _transID
-            .Item("SenderID") = _client1.ID
+            .Item("SenderID") = _client1.CustomerID
             .Item("SenderName") = String.Format("{0} {1}", _client1.FirstName, _client1.LastName)
-            .Item("ReceiverID") = _client2.ID
+            .Item("ReceiverID") = _client2.CustomerID
             .Item("ReceiverName") = String.Format("{0} {1}", _client2.FirstName, _client2.LastName)
             .Item("RefNum") = _ref
             .Item("Amount") = _amount

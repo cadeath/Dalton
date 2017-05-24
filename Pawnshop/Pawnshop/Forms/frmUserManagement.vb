@@ -297,7 +297,7 @@
 
         OTPUser_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("User Management") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

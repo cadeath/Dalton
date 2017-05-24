@@ -37,14 +37,14 @@ Public Class Insurance
         End Set
     End Property
 
-    Private _client As Client
-    Public Property Client() As Client
+    Private _Customer As Customer
+    Public Property Customer() As Customer
         Get
-            Return _client
+            Return _Customer
         End Get
-        Set(ByVal value As Client)
-            _client = value
-            _fullName = String.Format("{0} {1}", _client.FirstName, _client.LastName)
+        Set(ByVal value As Customer)
+            _Customer = value
+            _fullName = String.Format("{0} {1}", _Customer.FirstName, _Customer.LastName)
         End Set
     End Property
 
@@ -129,7 +129,7 @@ Public Class Insurance
         With dsNewRow
             .Item("CoiNo") = _coiNo
             .Item("PawnTicket") = _refNum
-            .Item("ClientID") = _client.ID
+            .Item("ClientID") = _Customer.CustomerID
             .Item("ClientName") = _fullName
             .Item("TransDate") = _transDate
             .Item("Amount") = _amount
@@ -155,10 +155,10 @@ Public Class Insurance
             _id = .Item("InsuranceID")
             _coiNo = .Item("CoiNo")
             _refNum = .Item("PawnTicket")
-            Dim tmpC As New Client
-            tmpC.LoadClient(.Item("ClientID"))
-            _client = tmpC
-            _fullName = String.Format("{0} {1}", _client.FirstName, _client.LastName)
+            Dim tmpC As New Customer
+            tmpC.Load_CustomerByID(.Item("ClientID"))
+            _Customer = tmpC
+            _fullName = String.Format("{0} {1}", _Customer.FirstName, _Customer.LastName)
             _transDate = .Item("TransDate")
             _amount = .Item("Amount")
             _status = .Item("Status")

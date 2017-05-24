@@ -242,10 +242,11 @@ Public Class frmClient
         GetClient = New Client
         GetClient.LoadClient(idx)
 
+
         If GetClient.IsDumper = True Then MsgBox("This is to inform you that this person is a " & vbCrLf & _
             "DUMPER!", MsgBoxStyle.Exclamation, "DUMPER ALERT")
 
-        formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
+        'formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
         Me.Close()
     End Sub
@@ -256,7 +257,7 @@ Public Class frmClient
             Exit Sub
         End If
 
-        formSwitch.ReloadFormFromSearch(frmOrig, cl)
+        'formSwitch.ReloadFormFromSearch(frmOrig, cl)
         Me.Close()
     End Sub
 

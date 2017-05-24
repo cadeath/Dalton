@@ -1,6 +1,6 @@
 ﻿Public Class frmLayAway
 
-    Friend Customer As Client
+    Friend Customer As Customer
     Friend Item As cItemData
     Dim tmpBalance As Double
     Dim tmpLayID As Integer
@@ -55,16 +55,16 @@
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtCustomer.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.layAway)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.layAway)
+        frmClientNew.Show()
     End Sub
 
-    Friend Sub LoadClient(ByVal cl As Client)
-        txtCustomer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
-        txtAddress.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
+    Friend Sub LoadClient(ByVal cus As Customer)
+        txtCustomer.Text = String.Format("{0} {1}" & IIf(cus.Suffix <> "", "," & cus.Suffix, ""), cus.FirstName, cus.LastName)
+        txtAddress.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity)
 
-        Customer = New Client
-        Customer = cl
+        Customer = New Customer
+        Customer = cus
         txtAmount.Focus()
     End Sub
 
@@ -143,8 +143,8 @@
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("ItemCode Not Found!", MsgBoxStyle.Critical, "Error") : Exit Sub
 
         With ds.Tables(0).Rows(0)
-            Customer = New Client
-            Customer.LoadClient(.Item("CUSTOMERID"))
+            Customer = New Customer
+            Customer.Load_CustomerByID(.Item("CUSTOMERID"))
             tmpLayID = .Item("LayID")
             LoadClient(Customer)
 
@@ -278,7 +278,7 @@
             With lay
                 .DocDate = CurrentDate
                 .ForfeitDate = CurrentDate.AddDays(119).ToShortDateString
-                .CustomerID = Customer.ID
+                .CustomerID = Customer.CustomerID
                 .ItemCode = txtItemCode.Text
                 .Price = CDbl(lblCost.Text)
                 .Balance = CDbl(lblBalance.Text)

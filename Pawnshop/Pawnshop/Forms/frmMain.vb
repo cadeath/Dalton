@@ -291,6 +291,7 @@ nextlineTODO:
 
     Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
         If UType = "Admin" Then GoTo nextlineTODO
 
         Select Case AccountRule.HasPrivilege("Client Management")
@@ -305,6 +306,13 @@ nextlineTODO:
 nextlineTODO:
         Console.WriteLine(frmClient.AccessType)
         frmClient.Show()
+
+        If Not (POSuser.isSuperUser Or POSuser.canClientManage) Then
+            MsgBoxAuthoriation("You don't have access to Client Management")
+            Exit Sub
+        End If
+        frmClientNew.Show()
+
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
@@ -589,7 +597,7 @@ NExtLine:
         'End If
 
         OTPItemPullout_Initialization()
-        If Not OTPDisable Then
+        If Not isOTPOn("Pullout") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
@@ -636,7 +644,7 @@ NExtLine:
 
         AuditModule_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Audit") Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
             If Not diagOTPv2.isCorrect Then
@@ -789,7 +797,7 @@ NExtLine:
 
         OTPInventory_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Inventory") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

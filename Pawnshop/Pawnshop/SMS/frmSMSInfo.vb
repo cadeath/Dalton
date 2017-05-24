@@ -21,9 +21,9 @@
         mySql &= vbCrLf & "  SMSDATE, PAWNTICKET, C.FIRSTNAME, C.LASTNAME, SMS_MSG, USERNAME"
         mySql &= vbCrLf & "FROM"
         mySql &= vbCrLf & "  SMS"
-        mySql &= vbCrLf & "INNER JOIN TBLCLIENT C"
-        mySql &= vbCrLf & "  ON C.CLIENTID = SMS.CLIENTID"
-        mySql &= vbCrLf & "INNER JOIN tbl_user_default USR"
+        mySql &= vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C"
+        mySql &= vbCrLf & "  ON C.ID = SMS.CLIENTID"
+        mySql &= vbCrLf & "INNER JOIN TBL_GAMIT USR"
         mySql &= vbCrLf & "  ON USR.USERID = SMS.SENT_BY"
         mySql &= vbCrLf & String.Format(" WHERE PAWNTICKET = {0}", pawnTicket)
 

@@ -109,6 +109,10 @@ Partial Class frmAdminPanel
         Me.cboModuleName = New System.Windows.Forms.ComboBox()
         Me.btnExport = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.btnSwitch = New System.Windows.Forms.Button()
+        Me.chbOnOff = New System.Windows.Forms.CheckBox()
+        Me.cboOTPMod = New System.Windows.Forms.ComboBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.btnCopy = New System.Windows.Forms.Button()
         Me.txtQRURL = New System.Windows.Forms.TextBox()
@@ -118,6 +122,7 @@ Partial Class frmAdminPanel
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
+
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.rbInventory = New System.Windows.Forms.RadioButton()
         Me.rbPullout = New System.Windows.Forms.RadioButton()
@@ -134,6 +139,7 @@ Partial Class frmAdminPanel
         Me.txtFailedAttemp = New Pawnshop.watermark()
         Me.txtPasswordAge = New Pawnshop.watermark()
         Me.txtAddDays = New Pawnshop.watermark()
+
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
@@ -155,10 +161,13 @@ Partial Class frmAdminPanel
         Me.lblModname.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
+
         Me.GroupBox7.SuspendLayout()
         Me.Tabpage5.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
+
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -1001,14 +1010,55 @@ Partial Class frmAdminPanel
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.GroupBox10)
         Me.TabPage4.Controls.Add(Me.GroupBox8)
-        Me.TabPage4.Controls.Add(Me.GroupBox7)
         Me.TabPage4.Location = New System.Drawing.Point(4, 25)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Size = New System.Drawing.Size(1143, 433)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "OTP Generator"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.btnSwitch)
+        Me.GroupBox10.Controls.Add(Me.chbOnOff)
+        Me.GroupBox10.Controls.Add(Me.cboOTPMod)
+        Me.GroupBox10.Location = New System.Drawing.Point(3, 11)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(310, 166)
+        Me.GroupBox10.TabIndex = 13
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "OTP Module"
+        '
+        'btnSwitch
+        '
+        Me.btnSwitch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSwitch.Location = New System.Drawing.Point(222, 64)
+        Me.btnSwitch.Name = "btnSwitch"
+        Me.btnSwitch.Size = New System.Drawing.Size(73, 28)
+        Me.btnSwitch.TabIndex = 8
+        Me.btnSwitch.Text = "S&witch"
+        Me.btnSwitch.UseVisualStyleBackColor = True
+        '
+        'chbOnOff
+        '
+        Me.chbOnOff.AutoSize = True
+        Me.chbOnOff.Location = New System.Drawing.Point(225, 26)
+        Me.chbOnOff.Name = "chbOnOff"
+        Me.chbOnOff.Size = New System.Drawing.Size(70, 20)
+        Me.chbOnOff.TabIndex = 19
+        Me.chbOnOff.Text = "On / Off"
+        Me.chbOnOff.UseVisualStyleBackColor = True
+        '
+        'cboOTPMod
+        '
+        Me.cboOTPMod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboOTPMod.FormattingEnabled = True
+        Me.cboOTPMod.Location = New System.Drawing.Point(6, 21)
+        Me.cboOTPMod.Name = "cboOTPMod"
+        Me.cboOTPMod.Size = New System.Drawing.Size(199, 24)
+        Me.cboOTPMod.TabIndex = 0
         '
         'GroupBox8
         '
@@ -1020,9 +1070,9 @@ Partial Class frmAdminPanel
         Me.GroupBox8.Controls.Add(Me.btnGenerate)
         Me.GroupBox8.Controls.Add(Me.txtEmail)
         Me.GroupBox8.Controls.Add(Me.Label21)
-        Me.GroupBox8.Location = New System.Drawing.Point(193, 3)
+        Me.GroupBox8.Location = New System.Drawing.Point(319, 11)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(477, 167)
+        Me.GroupBox8.Size = New System.Drawing.Size(477, 166)
         Me.GroupBox8.TabIndex = 12
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "One-Time Password"
@@ -1081,7 +1131,7 @@ Partial Class frmAdminPanel
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(389, 111)
+        Me.btnGenerate.Location = New System.Drawing.Point(389, 116)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(82, 44)
         Me.btnGenerate.TabIndex = 2
@@ -1106,6 +1156,7 @@ Partial Class frmAdminPanel
         Me.Label21.TabIndex = 0
         Me.Label21.Text = "Email Address"
         '
+<<<<<<< HEAD
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.rbInventory)
@@ -1281,6 +1332,7 @@ Partial Class frmAdminPanel
         Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
         Me.txtAddDays.WatermarkText = "Enter number of days to Inactive user"
         '
+
         'lblModuleName
         '
         Me.lblModuleName.AutoSize = True
@@ -1370,13 +1422,17 @@ Partial Class frmAdminPanel
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         Me.Tabpage5.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
+
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.ResumeLayout(False)
@@ -1482,13 +1538,6 @@ Partial Class frmAdminPanel
     Friend WithEvents btnsavescheme As System.Windows.Forms.Button
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents rbInventory As System.Windows.Forms.RadioButton
-    Friend WithEvents rbPullout As System.Windows.Forms.RadioButton
-    Friend WithEvents rbStockout As System.Windows.Forms.RadioButton
-    Friend WithEvents rbUserManagement As System.Windows.Forms.RadioButton
-    Friend WithEvents rbVoiding As System.Windows.Forms.RadioButton
-    Friend WithEvents rbSettings As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents txtQRURL As System.Windows.Forms.TextBox
     Friend WithEvents txtManual As System.Windows.Forms.TextBox
@@ -1508,5 +1557,11 @@ Partial Class frmAdminPanel
     Friend WithEvents txtPasswordAge As Pawnshop.watermark
     Friend WithEvents txtAddDays As Pawnshop.watermark
     Friend WithEvents chkResetUserExpiry As System.Windows.Forms.CheckBox
+
+    Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
+    Friend WithEvents chbOnOff As System.Windows.Forms.CheckBox
+    Friend WithEvents cboOTPMod As System.Windows.Forms.ComboBox
+    Friend WithEvents btnSwitch As System.Windows.Forms.Button
+
 
 End Class

@@ -31,7 +31,7 @@
                 .AuctionDate = auction(i)
                 .Status = status(i)
                 .Principal = Principals(i)
-                .Pawner.ID = ClientID(i)
+                .Pawner.CustomerID = ClientID(i)
 
                 .PawnItem.ItemClass.ID = ClassID(i)
                 .PawnItem.ItemClass.ClassName = Item(i)
@@ -41,14 +41,14 @@
             End With
 
         Next
-        Dim tmpClient As New Client
+        Dim tmpClient As New Customer
 
         With tmpClient
             .FirstName = "JUNMAR"
             .MiddleName = "ESPINOSA"
             .LastName = "HONOR"
             .Sex = 1
-            .SaveClient()
+            .Save()
         End With
         Console.WriteLine("Finish")
     End Sub

@@ -209,7 +209,7 @@
         MsgBox("Transaction Posted", MsgBoxStyle.Information)
         Console.WriteLine("CashCount >> Php " & total)
         If isClosing Then
-            mod_system.CloseStore(total)
+            'mod_system.CloseStore(total)
             frmMain.dateSet = False
             frmMain.doSegregate = False
         End If
