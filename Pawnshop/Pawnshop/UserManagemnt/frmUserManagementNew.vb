@@ -231,6 +231,7 @@ Saved:
             If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
+                Dim NewOtp As New ClassOtp("User Management", diagGeneralOTP.txtPIN.Text, "UserID:" & tmpID & " updated by:" & SystemUser.ID)
                 GoTo UpdateS
             End If
         Else

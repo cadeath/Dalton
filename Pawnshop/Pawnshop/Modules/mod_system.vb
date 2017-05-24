@@ -672,7 +672,6 @@ Module mod_system
         Next
     End Sub
 
-
     Function UppercaseFirstLetter(ByVal val As String) As String
         ' Test for nothing or empty.
         If String.IsNullOrEmpty(val) Then

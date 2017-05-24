@@ -1041,7 +1041,7 @@ nextLINETODO:
             database.SaveEntry(ds, False)
         End With
 
-        mySql = String.Format("SELECT * FROM " & subTable & " WHERE USERPASS = '{0}'", Encrypt(newPass))
+        mySql = String.Format("SELECT * FROM " & subTable & " WHERE USERPASS = '{0}' AND USERID = " & UserIDX & "", Encrypt(newPass))
         Dim ds1 As DataSet = LoadSQL(mySql, subTable)
 
         If ds1.Tables(0).Rows.Count > 0 Then
