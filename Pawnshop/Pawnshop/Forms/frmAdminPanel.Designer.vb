@@ -122,14 +122,6 @@ Partial Class frmAdminPanel
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.rbInventory = New System.Windows.Forms.RadioButton()
-        Me.rbPullout = New System.Windows.Forms.RadioButton()
-        Me.rbStockout = New System.Windows.Forms.RadioButton()
-        Me.rbUserManagement = New System.Windows.Forms.RadioButton()
-        Me.rbVoiding = New System.Windows.Forms.RadioButton()
-        Me.rbSettings = New System.Windows.Forms.RadioButton()
         Me.Tabpage5 = New System.Windows.Forms.TabPage()
         Me.btnAcctValidation = New System.Windows.Forms.Button()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
@@ -164,7 +156,6 @@ Partial Class frmAdminPanel
         Me.GroupBox10.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
 
-        Me.GroupBox7.SuspendLayout()
         Me.Tabpage5.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
 
@@ -1156,88 +1147,6 @@ Partial Class frmAdminPanel
         Me.Label21.TabIndex = 0
         Me.Label21.Text = "Email Address"
         '
-<<<<<<< HEAD
-        'GroupBox7
-        '
-        Me.GroupBox7.Controls.Add(Me.rbInventory)
-        Me.GroupBox7.Controls.Add(Me.rbPullout)
-        Me.GroupBox7.Controls.Add(Me.rbStockout)
-        Me.GroupBox7.Controls.Add(Me.rbUserManagement)
-        Me.GroupBox7.Controls.Add(Me.rbVoiding)
-        Me.GroupBox7.Controls.Add(Me.rbSettings)
-        Me.GroupBox7.Location = New System.Drawing.Point(3, 3)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(184, 167)
-        Me.GroupBox7.TabIndex = 11
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "OTP Module"
-        '
-        'rbInventory
-        '
-        Me.rbInventory.AutoSize = True
-        Me.rbInventory.Location = New System.Drawing.Point(6, 134)
-        Me.rbInventory.Name = "rbInventory"
-        Me.rbInventory.Size = New System.Drawing.Size(80, 20)
-        Me.rbInventory.TabIndex = 12
-        Me.rbInventory.TabStop = True
-        Me.rbInventory.Text = "Inventory"
-        Me.rbInventory.UseVisualStyleBackColor = True
-        '
-        'rbPullout
-        '
-        Me.rbPullout.AutoSize = True
-        Me.rbPullout.Location = New System.Drawing.Point(6, 111)
-        Me.rbPullout.Name = "rbPullout"
-        Me.rbPullout.Size = New System.Drawing.Size(66, 20)
-        Me.rbPullout.TabIndex = 11
-        Me.rbPullout.TabStop = True
-        Me.rbPullout.Text = "Pullout"
-        Me.rbPullout.UseVisualStyleBackColor = True
-        '
-        'rbStockout
-        '
-        Me.rbStockout.AutoSize = True
-        Me.rbStockout.Location = New System.Drawing.Point(6, 88)
-        Me.rbStockout.Name = "rbStockout"
-        Me.rbStockout.Size = New System.Drawing.Size(78, 20)
-        Me.rbStockout.TabIndex = 10
-        Me.rbStockout.TabStop = True
-        Me.rbStockout.Text = "Stockout"
-        Me.rbStockout.UseVisualStyleBackColor = True
-        '
-        'rbUserManagement
-        '
-        Me.rbUserManagement.AutoSize = True
-        Me.rbUserManagement.Location = New System.Drawing.Point(6, 19)
-        Me.rbUserManagement.Name = "rbUserManagement"
-        Me.rbUserManagement.Size = New System.Drawing.Size(137, 20)
-        Me.rbUserManagement.TabIndex = 7
-        Me.rbUserManagement.TabStop = True
-        Me.rbUserManagement.Text = "User Management"
-        Me.rbUserManagement.UseVisualStyleBackColor = True
-        '
-        'rbVoiding
-        '
-        Me.rbVoiding.AutoSize = True
-        Me.rbVoiding.Location = New System.Drawing.Point(6, 65)
-        Me.rbVoiding.Name = "rbVoiding"
-        Me.rbVoiding.Size = New System.Drawing.Size(72, 20)
-        Me.rbVoiding.TabIndex = 9
-        Me.rbVoiding.TabStop = True
-        Me.rbVoiding.Text = "Voiding"
-        Me.rbVoiding.UseVisualStyleBackColor = True
-        '
-        'rbSettings
-        '
-        Me.rbSettings.AutoSize = True
-        Me.rbSettings.Location = New System.Drawing.Point(6, 42)
-        Me.rbSettings.Name = "rbSettings"
-        Me.rbSettings.Size = New System.Drawing.Size(74, 20)
-        Me.rbSettings.TabIndex = 8
-        Me.rbSettings.TabStop = True
-        Me.rbSettings.Text = "Settings"
-        Me.rbSettings.UseVisualStyleBackColor = True
-        '
         'Tabpage5
         '
         Me.Tabpage5.Controls.Add(Me.btnAcctValidation)
@@ -1427,8 +1336,6 @@ Partial Class frmAdminPanel
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
 
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
         Me.Tabpage5.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()

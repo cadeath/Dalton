@@ -136,18 +136,18 @@
     Private Sub Save()
         If Not IsValid() Then Exit Sub
         If UType = "Admin" Then GoTo saved
-        If Not OTPDisable Then
-            diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.TopMost = True
-            diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isValid Then
-                Exit Sub
-            Else
-                GoTo Saved
-            End If
-        Else
-            GoTo Saved
-        End If
+        'If Not OTPDisable Then
+        '    diagGeneralOTP.GeneralOTP = OtpSettings
+        '    diagGeneralOTP.TopMost = True
+        '    diagGeneralOTP.ShowDialog()
+        '    If Not diagGeneralOTP.isValid Then
+        '        Exit Sub
+        '    Else
+        '        GoTo Saved
+        '    End If
+        'Else
+        '    GoTo Saved
+        'End If
 
         'Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Saving Account")
         'If result = vbNo Then Exit Sub
@@ -222,18 +222,18 @@ Saved:
     Private Sub update_user()
         If Not IsValid() Then Exit Sub
         If UType = "Admin" Then GoTo UpdateS
-        If Not OTPDisable Then
-            diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.TopMost = True
-            diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isValid Then
-                Exit Sub
-            Else
-                GoTo UpdateS
-            End If
-        Else
-            GoTo UpdateS
-        End If
+        'If Not OTPDisable Then
+        '    diagGeneralOTP.GeneralOTP = OtpSettings
+        '    diagGeneralOTP.TopMost = True
+        '    diagGeneralOTP.ShowDialog()
+        '    If Not diagGeneralOTP.isValid Then
+        '        Exit Sub
+        '    Else
+        '        GoTo UpdateS
+        '    End If
+        'Else
+        '    GoTo UpdateS
+        'End If
         'Dim result As DialogResult = MsgBox("Do you want update this account?", MsgBoxStyle.YesNo, "Updating Account")
         'If result = vbNo Then Exit Sub
 UpdateS:

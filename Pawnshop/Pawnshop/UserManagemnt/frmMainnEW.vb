@@ -359,12 +359,12 @@
         'If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         'qryPullOut.Show()
-        If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.Pullout
-            If Not CheckOTP() Then Exit Sub
-        Else
-            qryPullOut.Show()
-        End If
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.Pullout
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    qryPullOut.Show()
+        'End If
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
@@ -434,16 +434,16 @@
 
         AuditModule_Initialization()
 
-        If Not OTPDisable Then
-            diagOTPv2.GeneralOTP = AuditOTP
-            diagOTPv2.ShowDialog()
-            If Not diagOTPv2.isCorrect Then
-                Exit Sub
-            Else
-                frmAuditConsole.Show()
-            End If
+        'If Not OTPDisable Then
+        '    diagOTPv2.GeneralOTP = AuditOTP
+        '    diagOTPv2.ShowDialog()
+        '    If Not diagOTPv2.isCorrect Then
+        '        Exit Sub
+        '    Else
+        '        frmAuditConsole.Show()
+        '    End If
 
-        End If
+        'End If
 
     End Sub
 
@@ -462,13 +462,13 @@
     End Sub
 
     Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
-        If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.Inventory
-            If Not CheckOTP() Then Exit Sub
-        Else
-            frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
-            frmSalesReport.Show()
-        End If
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.Inventory
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+        '    frmSalesReport.Show()
+        'End If
     End Sub
 
     Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click

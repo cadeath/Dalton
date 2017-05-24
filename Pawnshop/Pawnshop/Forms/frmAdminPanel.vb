@@ -980,7 +980,6 @@ Public Class frmAdminPanel
         Clipboard.SetText(txtQRURL.Text)
     End Sub
 
-<<<<<<< HEAD
     Private Sub verification()
         If AccessType = "Read Only" Then
             btnSave.Enabled = False
@@ -1014,6 +1013,7 @@ Public Class frmAdminPanel
 
         LoadAccntValidation()
         MsgBox("Validation successfully updated.", MsgBoxStyle.Information, "Update")
+    End Sub
 
     Private Sub LoadOTP()
         Dim mysql As String = "Select * From OTPControl"

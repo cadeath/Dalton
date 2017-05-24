@@ -172,11 +172,8 @@ nextLineTODO:
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
 
-            .Client = Holder
-            .EncoderID = SystemUser.ID
             .Customer = Holder
-            .EncoderID = POSuser.UserID
-
+            .EncoderID = SystemUser.ID
 
             .SaveInsurance()
 
