@@ -136,6 +136,12 @@
     <Compile Include="FixDoclineDecimal\frmFixDoclineDecimal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Fixer for Sales Module\frmChangeItemCodeDescription.Designer.vb">
+      <DependentUpon>frmChangeItemCodeDescription.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fixer for Sales Module\frmChangeItemCodeDescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FixInterestHistory\frmFixIntHistory.Designer.vb">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
     </Compile>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FixDoclineDecimal\frmFixDoclineDecimal.resx">
       <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fixer for Sales Module\frmChangeItemCodeDescription.resx">
+      <DependentUpon>frmChangeItemCodeDescription.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixInterestHistory\frmFixIntHistory.resx">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
