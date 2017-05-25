@@ -1001,10 +1001,11 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnAcctValidation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcctValidation.Click
-        If txtAddDays.Text = "" Or txtPasswordAge.Text = "" Or txtFailedAttemp.Text = "" Then Exit Sub
-        UpdateOptions("AccountExpiry", txtAddDays.Text)
-        UpdateOptions("PasswordExpiry", txtPasswordAge.Text)
-        UpdateOptions("FailedAttempt", txtFailedAttemp.Text)
+        If txtAddDays.Text = "" And txtPasswordAge.Text = "" And txtFailedAttemp.Text = "" Then Exit Sub
+
+        If txtAddDays.Text <> "" Then UpdateOptions("AccountExpiry", txtAddDays.Text)
+        If txtPasswordAge.Text <> "" Then UpdateOptions("PasswordExpiry", txtPasswordAge.Text)
+        If txtFailedAttemp.Text <> "" Then UpdateOptions("FailedAttempt", txtFailedAttemp.Text)
 
         Me.Cursor = Cursors.WaitCursor
         If chkResetUserExpiry.Checked Then
@@ -1054,5 +1055,12 @@ Public Class frmAdminPanel
         End With
         SaveEntry(ds, False)
         MsgBox(cboOTPMod.Text & " Switch " & IIf(chbOnOff.Checked = True, "On", "Off"), MsgBoxStyle.Information, "OTP Control")
+    End Sub
+
+  
+    Private Sub btnAddpriv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddpriv.Click
+        frmaddPrivilege.TopLevel = False
+        Panel1.Controls.Add(frmaddPrivilege)
+        frmaddPrivilege.Show()
     End Sub
 End Class

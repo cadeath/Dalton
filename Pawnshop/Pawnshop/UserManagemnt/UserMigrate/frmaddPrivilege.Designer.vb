@@ -90,7 +90,7 @@ Partial Class frmaddPrivilege
         Me.Controls.Add(Me.lvPrivilegeType)
         Me.Controls.Add(Me.txtPrivilegeType)
         Me.Controls.Add(Me.btnAdd)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmaddPrivilege"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add Privilege"
