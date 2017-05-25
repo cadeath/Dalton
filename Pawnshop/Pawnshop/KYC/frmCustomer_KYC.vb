@@ -365,6 +365,8 @@ GnrteRndmSignature:  'For Customer's Signature
         MsgBox("Successfully saved.", MsgBoxStyle.Information, "Save")
         ClearFields() : btnBrowse.Visible = False
 
+        NewCustomer.LoadLastEntry()
+
         NewCustomer.Load_CustomerByID(NewCustomer.CustomerID)
         frmClientNew.AutoSelect(NewCustomer)
         Me.Close()

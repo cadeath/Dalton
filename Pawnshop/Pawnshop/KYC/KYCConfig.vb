@@ -225,15 +225,22 @@
 
                 Dim newID As New MigrateIdentificationCard
                 For Each drID As DataRow In dsID.Tables(0).Rows
+                    If drID.Item("IDTYPE") = "Others" And drID.Item("REFNUM") = "NO ID" Then
+                        Continue For
+                    ElseIf drID.Item("IDTYPE") = "Others" And drID.Item("REFNUM") = "-" Then
+                        Continue For
+                    ElseIf drID.Item("IDTYPE") = "Others" And drID.Item("REFNUM") = "0" Then
+                        Continue For
+                    Else
+                        'newID.ID = drID.Item("ID")
+                        newID.CustomerID = drID.Item("CLIENTID")
+                        newID.IDType = drID.Item("IDTYPE")
+                        newID.IDNumber = drID.Item("REFNUM")
+                        IDCOUNT += 1
 
-                    newID.ID = drID.Item("ID")
-                    newID.CustomerID = drID.Item("CLIENTID")
-                    newID.IDType = drID.Item("IDTYPE")
-                    newID.IDNumber = drID.Item("REFNUM")
-                    IDCOUNT += 1
-
-                    CustomerIDs.Add(newID)
-                    kycIDCustomerGenerator = drID.Item("ID")
+                        CustomerIDs.Add(newID)
+                        kycIDCustomerGenerator = drID.Item("ID")
+                    End If
                 Next
                 .CustomersIDs = CustomerIDs
 
