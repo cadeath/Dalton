@@ -50,6 +50,36 @@
         End Set
     End Property
 
+    Private _isGenerated As Boolean
+    Public Property isGenerated() As Boolean
+        Get
+            Return _isGenerated
+        End Get
+        Set(ByVal value As Boolean)
+            _isGenerated = value
+        End Set
+    End Property
+
+    Private _action_Type As Boolean
+    Public Property Action_Type() As Boolean
+        Get
+            Return _action_Type
+        End Get
+        Set(ByVal value As Boolean)
+            _action_Type = value
+        End Set
+    End Property
+
+    Private _hasPayoutCommission As Boolean
+    Public Property HasPayoutCommission() As Boolean
+        Get
+            Return _hasPayoutCommission
+        End Get
+        Set(ByVal value As Boolean)
+            _hasPayoutCommission = value
+        End Set
+    End Property
+
     Friend Sub New(ByVal Chargename As String, ByVal amt As Integer)
         _chargename = Chargename
         _amt = amt
@@ -63,7 +93,12 @@
         _chargedetail = chr
         _charge = GetItemCharge(0)
         _commission = GetItemCharge(1)
+
+        _isGenerated = chr.isGenerated
+        _action_Type = chr.Action_Type
+        _hasPayoutCommission = chr.HasPayoutCommission
     End Sub
+
     Enum GetChargeType
         getcharge = 0
         getcommision = 1
@@ -77,6 +112,7 @@
                 Case chrdetails.AmountFrom To chrdetails.AmountTo
                     Select Case type
                         Case GetChargeType.getcharge
+                            'If chrdetails.Remarks then ""
                             Return chrdetails.Charge
                         Case GetChargeType.getcommision
                             Return IIf(IsDBNull(chrdetails.Commision), 0, chrdetails.Commision)

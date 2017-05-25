@@ -906,9 +906,10 @@ NExtLineTODO:
         If txtAmount.Text = "" OrElse txtAmount.Text = 0 Then Exit Sub
 
         Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text))
+
         txtCharge.Text = com.Charge
         'txtCommision.Text = com.Commision
-        txtNetAmount.Text = txtAmount.Text - com.Charge
+        txtNetAmount.Text = txtAmount.Text + com.Charge
     End Sub
 
     Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress

@@ -41,6 +41,35 @@
         End Set
     End Property
 
+    Private _isGenerated As Boolean
+    Public Property isGenerated() As Boolean
+        Get
+            Return _isGenerated
+        End Get
+        Set(ByVal value As Boolean)
+            _isGenerated = value
+        End Set
+    End Property
+
+    Private _action_Type As Boolean
+    Public Property Action_Type() As Boolean
+        Get
+            Return _action_Type
+        End Get
+        Set(ByVal value As Boolean)
+            _action_Type = value
+        End Set
+    End Property
+
+    Private _hasPayoutCommission As Boolean
+    Public Property HasPayoutCommission() As Boolean
+        Get
+            Return _hasPayoutCommission
+        End Get
+        Set(ByVal value As Boolean)
+            _hasPayoutCommission = value
+        End Set
+    End Property
 
 #End Region
 
@@ -70,6 +99,9 @@
             _chrid = .Item("CHR_ID")
             _name = .Item("ChargeName")
             _description = .Item("Description")
+            _isGenerated = .Item("isGenerated")
+            _action_Type = .Item("Action_Type")
+            _hasPayoutCommission = .Item("HasPayoutCommission")
         End With
     End Sub
 
