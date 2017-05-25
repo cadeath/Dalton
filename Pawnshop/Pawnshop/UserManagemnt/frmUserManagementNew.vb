@@ -214,6 +214,7 @@ Saved:
             Next
         End With
 
+        Dim NewOtp As New ClassOtp("User Management", diagGeneralOTP.txtPIN.Text, "UserID:" & tmpID & " updated by:" & SystemUser.ID)
         Load_users()
         Load_ALL_users()
         ClearFields("")
