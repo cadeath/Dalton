@@ -10,13 +10,14 @@
     End Sub
 
     Private Sub Compute()
-        If cboType.Text = "" Then Exit Sub
-        If txtAmount.Text = "" OrElse txtAmount.Text = 0 Then Exit Sub
+        'If cboType.Text = "" Then Exit Sub
+        'If txtAmount.Text = "" OrElse txtAmount.Text = 0 Then Exit Sub
 
-        Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text))
-        txtCharge.Text = com.Charge
-        txtCommision.Text = com.Commision
-        txtNetAmount.Text = txtAmount.Text - com.Charge
+        'Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text), IIf(rbSend.Checked, ComputeCharge.Action.Send, ComputeCharge.Action.Receive))
+
+        'txtCharge.Text = com.Charge
+        'txtCommision.Text = com.Commision
+        'txtNetAmount.Text = txtAmount.Text - com.Charge
     End Sub
 
     Private Sub txtAmount_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAmount.KeyUp

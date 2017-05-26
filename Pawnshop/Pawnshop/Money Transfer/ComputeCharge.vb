@@ -90,9 +90,24 @@
         End Set
     End Property
 
-    Friend Sub New(ByVal Chargename As String, ByVal amt As Integer)
+    Private _isSend As Boolean
+    Public Property isSend() As Boolean
+        Get
+            Return _isSend
+        End Get
+        Set(ByVal value As Boolean)
+            _isSend = value
+        End Set
+    End Property
+
+    Enum Action
+        Send = 0
+        Receive = 1
+    End Enum
+    Friend Sub New(ByVal Chargename As String, ByVal amt As Integer, ByVal act As Action)
         _chargename = Chargename
         _amt = amt
+        _isSend = IIf(act = Action.Send, True, False)
 
         Dim mysql As String = "Select * From tblMTCharge Where ChargeName = '" & Chargename & "'"
         Dim ds As DataSet = LoadSQL(mysql, "tblMTCharge")
@@ -128,6 +143,7 @@
 
                         Case GetChargeType.getcharge
                             Dim tmpSrvAmt As Double = 0, Chrge As Double
+                            If isSend = False And HasPayoutCommission = False Then Return 0
                             If HasPayoutCommission = True Then
                                 If tmpRemarks.Split("|").Count > 1 Then
 
@@ -142,6 +158,7 @@
                                     Return Chrge
 
                                 End If
+                                Return chrdetails.Charge
                             Else
                                 If tmpRemarks.Split("|").Count > 1 Then
 

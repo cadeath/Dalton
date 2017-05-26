@@ -905,29 +905,14 @@ NExtLineTODO:
     Private Sub Compute()
         If cboType.Text = "" Then Exit Sub
         If txtAmount.Text = "" OrElse txtAmount.Text = 0 Then Exit Sub
-
-        Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text))
+        Dim act As Integer = IIf(rbSend.Checked, ComputeCharge.Action.Send, ComputeCharge.Action.Receive)
+        Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text), act)
 
         commission = com.Commision
         txtCommission.Text = com.Commision
 
-        'If rbSend.Checked Then
-        '    txtNetAmount.Text = com.NetAmount
-        '    txtCharge.Text = com.Charge
-        'Else
-        '    txtNetAmount.Text = com.NetAmount - com.Charge
-        'End If
-
-        Select Case GetActionType(cboType.Text, MTValues.ActionType)
-            Case "0"
-                txtNetAmount.Text = com.NetAmount
-                txtCharge.Text = com.Charge
-            Case "1"
-                txtNetAmount.Text = com.NetAmount - com.Charge
-            Case Else
-                txtNetAmount.Text = com.NetAmount
-                txtCharge.Text = com.Charge
-        End Select
+        txtNetAmount.Text = com.NetAmount
+        txtCharge.Text = com.Charge
     End Sub
 
     Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress
