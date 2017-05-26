@@ -99,9 +99,10 @@
             _chrid = .Item("CHR_ID")
             _name = .Item("ChargeName")
             _description = .Item("Description")
-            _isGenerated = .Item("isGenerated")
-            _action_Type = .Item("Action_Type")
-            _hasPayoutCommission = .Item("HasPayoutCommission")
+
+            _isGenerated = IIf(.Item("isGenerated") = 1, True, False)
+            If Not IsDBNull(.Item("Action_Type")) Then _action_Type = IIf(.Item("Action_Type") = 1, True, False)
+            _hasPayoutCommission = IIf(.Item("HasPayoutCommission") = 1, True, False)
         End With
     End Sub
 

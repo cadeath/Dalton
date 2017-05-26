@@ -1,21 +1,21 @@
 ﻿Public Class ComputeCharge
 
-    Private _charge As Integer
-    Public Property Charge() As Integer
+    Private _charge As Double
+    Public Property Charge() As Double
         Get
             Return _charge
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _charge = value
         End Set
     End Property
 
-    Private _commission As Integer
-    Public Property Commision() As Integer
+    Private _commission As Double
+    Public Property Commision() As Double
         Get
             Return _commission
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _commission = value
         End Set
     End Property
@@ -30,12 +30,12 @@
         End Set
     End Property
 
-    Private _amt As Integer
-    Public Property Amount() As Integer
+    Private _amt As Double
+    Public Property Amount() As Double
         Get
             Return _amt
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _amt = value
         End Set
     End Property
@@ -90,13 +90,15 @@
         Dim chr As New ChargeName
         chr.LoadCharge(ds.Tables(0).Rows(0).Item("CHR_ID"))
 
-        _chargedetail = chr
-        _charge = GetItemCharge(0)
-        _commission = GetItemCharge(1)
-
         _isGenerated = chr.isGenerated
         _action_Type = chr.Action_Type
         _hasPayoutCommission = chr.HasPayoutCommission
+
+        _chargedetail = chr
+        _charge = GetItemCharge(GetChargeType.getcharge)
+        _commission = GetItemCharge(GetChargeType.getcommision)
+
+       
     End Sub
 
     Enum GetChargeType
@@ -108,14 +110,65 @@
         Chrg = _chargedetail
 
         For Each chrdetails As ChargeDetails In Chrg.ChargeDetail
+            Dim tmpRemarks As String = String.Empty
+            If Not chrdetails.Remarks Is Nothing Then tmpRemarks = chrdetails.Remarks
             Select Case _amt
                 Case chrdetails.AmountFrom To chrdetails.AmountTo
                     Select Case type
+
                         Case GetChargeType.getcharge
-                            'If chrdetails.Remarks then ""
-                            Return chrdetails.Charge
+                            Dim tmpSrvAmt As Double = 0, Chrge As Double
+                            If HasPayoutCommission = True Then
+                                If tmpRemarks.Split("|").Count > 1 Then
+
+                                    Select Case chrdetails.Remarks.Split("|")(1)
+                                        Case "Percent"
+                                            tmpSrvAmt = chrdetails.Charge / 100
+                                            Chrge = _amt * tmpSrvAmt
+                                        Case Else
+                                            MsgBox("Remarks INVALID!" + vbCrLf + "No SERVICE CHARGE", vbCritical, "DEVELOPER Warning")
+                                            Chrge = 0
+                                    End Select
+                                    Return Chrge
+
+                                End If
+                            Else
+                                If tmpRemarks.Split("|").Count > 1 Then
+
+                                    Select Case tmpRemarks.Split("|")(1)
+                                        Case "Percent"
+                                            tmpSrvAmt = chrdetails.Charge / 100
+                                            Chrge = _amt * tmpSrvAmt
+                                        Case Else
+                                            MsgBox("Remarks INVALID!" + vbCrLf + "No SERVICE CHARGE", vbCritical, "DEVELOPER Warning")
+                                            Chrge = 0
+                                    End Select
+                                    Return Chrge
+
+                                End If
+                                Return chrdetails.Charge
+                            End If
+
+
                         Case GetChargeType.getcommision
-                            Return IIf(IsDBNull(chrdetails.Commision), 0, chrdetails.Commision)
+                            Dim tmpSrvAmt As Double = 0, Chrge As Double
+                            If HasPayoutCommission = True Then
+                                Dim tmpcommission As Double
+                                tmpcommission = IIf(IsDBNull(chrdetails.Commision), 0, chrdetails.Commision)
+                                If tmpRemarks.Split("|").Count <= 2 Then Exit For
+                                Select Case tmpRemarks.Split("|")(2)
+                                    Case "SLC" 'ServiceCharge Less Charge
+                                        tmpSrvAmt = chrdetails.Charge / 100
+                                        Chrge = _amt * tmpSrvAmt
+                                        tmpcommission = Chrge - tmpcommission
+                                    Case Else
+                                        MsgBox("Remarks INVALID!" + vbCrLf + "No COMMISSION", vbCritical, "DEVELOPER Warning")
+                                        tmpcommission = 0
+                                End Select
+                                Return tmpcommission
+                            Else
+                                Return IIf(IsDBNull(chrdetails.Commision), 0, chrdetails.Commision)
+                            End If
                     End Select
 
             End Select

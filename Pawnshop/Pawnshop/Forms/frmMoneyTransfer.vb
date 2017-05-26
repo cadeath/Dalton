@@ -796,71 +796,71 @@ NExtLineTODO:
         End If
     End Sub
 
-    'Private Function GetCharge(ByVal amt As Double, Optional ByVal type As String = "perapadala") As Double
-    '    'Version 2
-    '    ' - Include Commission and complicated computations
+    Private Function GetCharge(ByVal amt As Double, Optional ByVal type As String = "perapadala") As Double
+        'Version 2
+        ' - Include Commission and complicated computations
 
-    '    Dim idx As Integer = cboType.SelectedIndex
-    '    If rbReceive.Checked And Not daltonService(idx).hasPayoutCommission Then Return 0
+        Dim idx As Integer = cboType.SelectedIndex
+        'If rbReceive.Checked And Not daltonService(idx).hasPayoutCommission Then Return 0
 
-    '    Dim fillData As String = "tblCharge"
-    '    Dim ds As DataSet, mySql As String
-    '    mySql = "SELECT * FROM " & fillData & String.Format(" WHERE type = '{0}'", type)
-    '    If daltonService(idx).hasPayoutCommission Then
-    '        mySql &= " AND Remarks LIKE '"
-    '        mySql &= IIf(rbSend.Checked, "Send In%'", "Pay Out%'")
-    '    End If
-    '    mySql &= " ORDER BY AMOUNT ASC"
-    '    ds = LoadSQL(mySql)
+        Dim fillData As String = "tblCharge"
+        Dim ds As DataSet, mySql As String
+        mySql = "SELECT * FROM " & fillData & String.Format(" WHERE type = '{0}'", type)
+        'If daltonService(idx).hasPayoutCommission Then
+        '    mySql &= " AND Remarks LIKE '"
+        '    mySql &= IIf(rbSend.Checked, "Send In%'", "Pay Out%'")
+        'End If
+        mySql &= " ORDER BY AMOUNT ASC"
+        ds = LoadSQL(mySql)
 
-    '    Console.WriteLine(mySql)
-    '    Console.WriteLine("Entries >> " & ds.Tables(0).Rows.Count)
-    '    If ds.Tables(0).Rows.Count = 0 Then Console.WriteLine("No charges!!! Charge Code not found.") : Return 0
+        Console.WriteLine(mySql)
+        Console.WriteLine("Entries >> " & ds.Tables(0).Rows.Count)
+        If ds.Tables(0).Rows.Count = 0 Then Console.WriteLine("No charges!!! Charge Code not found.") : Return 0
 
-    '    For Each dr As DataRow In ds.Tables(0).Rows
-    '        If amt <= CDbl(dr.Item("AMOUNT")) Then
-    '            'Including Commission and complicated computations
-    '            Console.WriteLine("Max: " & dr.Item("AMOUNT") & "| Charge: " & dr.Item("Charge"))
+        For Each dr As DataRow In ds.Tables(0).Rows
+            If amt <= CDbl(dr.Item("AMOUNT")) Then
+                'Including Commission and complicated computations
+                Console.WriteLine("Max: " & dr.Item("AMOUNT") & "| Charge: " & dr.Item("Charge"))
 
-    '            Dim ServChrge As Double = 0, remarks As String = ""
-    '            ServChrge = dr.Item("Charge")
-    '            commission = IIf(IsDBNull(dr.Item("Commission")), 0, dr.Item("Commission"))
-    '            remarks = IIf(IsDBNull(dr.Item("Remarks")), "", dr.Item("Remarks"))
+                Dim ServChrge As Double = 0, remarks As String = ""
+                ServChrge = dr.Item("Charge")
+                commission = IIf(IsDBNull(dr.Item("Commission")), 0, dr.Item("Commission"))
+                remarks = IIf(IsDBNull(dr.Item("Remarks")), "", dr.Item("Remarks"))
 
-    '            If remarks.Split("|").Count > 1 Then
-    '                Dim tmpSrvAmt As Double = 0
-    '                'ServiceCharge
-    '                Select Case remarks.Split("|")(1)
-    '                    Case "Percent"
-    '                        tmpSrvAmt = ServChrge / 100
-    '                        ServChrge = amt * tmpSrvAmt
-    '                    Case Else
-    '                        MsgBox("Remarks INVALID!" + vbCrLf + "No SERVICE CHARGE", vbCritical, "DEVELOPER Warning")
-    '                        ServChrge = 0
-    '                End Select
+                If remarks.Split("|").Count > 1 Then
+                    Dim tmpSrvAmt As Double = 0
+                    'ServiceCharge
+                    Select Case remarks.Split("|")(1)
+                        Case "Percent"
+                            tmpSrvAmt = ServChrge / 100
+                            ServChrge = amt * tmpSrvAmt
+                        Case Else
+                            MsgBox("Remarks INVALID!" + vbCrLf + "No SERVICE CHARGE", vbCritical, "DEVELOPER Warning")
+                            ServChrge = 0
+                    End Select
 
-    '                'Commission
-    '                If remarks.Split("|").Count <= 2 Then Exit For
-    '                Select Case remarks.Split("|")(2)
-    '                    Case "SLC" 'ServiceCharge Less Charge
-    '                        commission = ServChrge - commission
-    '                    Case Else
-    '                        MsgBox("Remarks INVALID!" + vbCrLf + "No COMMISSION", vbCritical, "DEVELOPER Warning")
-    '                        commission = 0
-    '                End Select
+                    'Commission
+                    If remarks.Split("|").Count <= 2 Then Exit For
+                    Select Case remarks.Split("|")(2)
+                        Case "SLC" 'ServiceCharge Less Charge
+                            commission = ServChrge - commission
+                        Case Else
+                            MsgBox("Remarks INVALID!" + vbCrLf + "No COMMISSION", vbCritical, "DEVELOPER Warning")
+                            commission = 0
+                    End Select
 
-    '                'If Not (remarks = "Payout" And rbReceive.Checked) Then
-    '                '    ServChrge = 0
-    '                'End If
-    '            End If
+                    'If Not (remarks = "Payout" And rbReceive.Checked) Then
+                    '    ServChrge = 0
+                    'End If
+                End If
 
-    '            Return ServChrge
-    '        End If
-    '    Next
+                Return ServChrge
+            End If
+        Next
 
-    '    Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
-    '    Return amt * 0.015
-    'End Function
+        Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
+        Return amt * 0.015
+    End Function
 
     Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
         'ComputeCharges()
@@ -908,8 +908,15 @@ NExtLineTODO:
         Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text))
 
         txtCharge.Text = com.Charge
-        'txtCommision.Text = com.Commision
-        txtNetAmount.Text = txtAmount.Text + com.Charge
+        commission = com.Commision
+        txtCommission.Text = com.Commision
+
+        If rbSend.Checked Then
+            txtNetAmount.Text = txtAmount.Text + com.Charge
+        Else
+            txtNetAmount.Text = txtAmount.Text - com.Charge
+        End If
+       
     End Sub
 
     Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress

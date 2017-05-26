@@ -63,6 +63,7 @@ Partial Class frmMoneyTransfer
         Me.txtRefNum = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.txtCommission = New System.Windows.Forms.TextBox()
         Me.gbTrans.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -485,12 +486,21 @@ Partial Class frmMoneyTransfer
         Me.btnBrowse.Text = "&Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
         '
+        'txtCommission
+        '
+        Me.txtCommission.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCommission.Location = New System.Drawing.Point(496, 335)
+        Me.txtCommission.Name = "txtCommission"
+        Me.txtCommission.Size = New System.Drawing.Size(253, 22)
+        Me.txtCommission.TabIndex = 16
+        '
         'frmMoneyTransfer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(763, 480)
+        Me.Controls.Add(Me.txtCommission)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -557,4 +567,5 @@ Partial Class frmMoneyTransfer
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents cboLocation As System.Windows.Forms.ComboBox
+    Friend WithEvents txtCommission As System.Windows.Forms.TextBox
 End Class
