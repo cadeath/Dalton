@@ -40,6 +40,16 @@
         End Set
     End Property
 
+    Private _netAmount As Double
+    Public Property NetAmount() As Double
+        Get
+            Return _netAmount
+        End Get
+        Set(ByVal value As Double)
+            _netAmount = value
+        End Set
+    End Property
+
     Private _chargedetail As ChargeName
     Public Property ChargeDetails() As ChargeName
         Get
@@ -97,8 +107,8 @@
         _chargedetail = chr
         _charge = GetItemCharge(GetChargeType.getcharge)
         _commission = GetItemCharge(GetChargeType.getcommision)
+        _netAmount = _amt + _charge
 
-       
     End Sub
 
     Enum GetChargeType

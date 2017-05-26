@@ -248,6 +248,7 @@ Public Class frmMoneyTransfer
         HasPayoutCommission = 3
     End Enum
     Private Function GetActionType(ByVal ChargeName As String, ByVal MT As MTValues)
+        If ChargeName = "" Then Return Nothing
         Dim mysql As String = "Select * From tblMTCharge Where ChargeName = '" & ChargeName & "'"
         Dim ds As DataSet = LoadSQL(mysql, "tblMTCharge")
 
@@ -907,16 +908,26 @@ NExtLineTODO:
 
         Dim com As New ComputeCharge(cboType.Text, CInt(txtAmount.Text))
 
-        txtCharge.Text = com.Charge
         commission = com.Commision
         txtCommission.Text = com.Commision
 
-        If rbSend.Checked Then
-            txtNetAmount.Text = txtAmount.Text + com.Charge
-        Else
-            txtNetAmount.Text = txtAmount.Text - com.Charge
-        End If
-       
+        'If rbSend.Checked Then
+        '    txtNetAmount.Text = com.NetAmount
+        '    txtCharge.Text = com.Charge
+        'Else
+        '    txtNetAmount.Text = com.NetAmount - com.Charge
+        'End If
+
+        Select Case GetActionType(cboType.Text, MTValues.ActionType)
+            Case "0"
+                txtNetAmount.Text = com.NetAmount
+                txtCharge.Text = com.Charge
+            Case "1"
+                txtNetAmount.Text = com.NetAmount - com.Charge
+            Case Else
+                txtNetAmount.Text = com.NetAmount
+                txtCharge.Text = com.Charge
+        End Select
     End Sub
 
     Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress
@@ -952,8 +963,8 @@ NExtLineTODO:
 
         'txtRefNum.ReadOnly = Not st
         'ComputeCharges()
-
-        If GetActionType(cboType.Text, MTValues.isGenerated) = 1 Then
+        Dim GetActionValue As String = GetActionType(cboType.Text, MTValues.isGenerated)
+        If GetActionValue = 1 Then
             If rbSend.Checked Then
                 DisplayNumber(currentMe)
                 st = False
@@ -972,7 +983,7 @@ NExtLineTODO:
 
     Private Sub rbSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbSend.CheckedChanged
         If rbSend.Checked Then lblWhere.Text = "Send To"
-        'CheckTracking()
+        CheckTracking()
     End Sub
 
     Private Sub rbReceive_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbReceive.CheckedChanged
