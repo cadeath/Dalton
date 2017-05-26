@@ -100,6 +100,16 @@
         End Set
     End Property
 
+    Private _bracket As Integer
+    Public Property Bracket() As Integer
+        Get
+            Return _bracket
+        End Get
+        Set(ByVal value As Integer)
+            _bracket = value
+        End Set
+    End Property
+
     Enum Action
         Send = 0
         Receive = 1
@@ -123,12 +133,14 @@
         _charge = GetItemCharge(GetChargeType.getcharge)
         _commission = GetItemCharge(GetChargeType.getcommision)
         _netAmount = _amt + _charge
+        _bracket = GetItemCharge(GetChargeType.getbracket)
 
     End Sub
 
     Enum GetChargeType
         getcharge = 0
         getcommision = 1
+        getbracket = 2
     End Enum
     Private Function GetItemCharge(ByVal type As GetChargeType) As Double
         Dim Chrg As New ChargeName
@@ -196,6 +208,9 @@
                             Else
                                 Return IIf(IsDBNull(chrdetails.Commision), 0, chrdetails.Commision)
                             End If
+
+                        Case GetChargeType.getbracket
+                            Return chrdetails.AmountTo
                     End Select
 
             End Select
