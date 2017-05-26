@@ -205,7 +205,7 @@ Public Class frmMoneyTransfer
     '    daltonService(16) = tmp
 
     '    'Pera Padala
-    '   idME = daltonService(0).GetSendLast
+    '  idME = daltonService(0).GetSendLast
     '    idMR = daltonService(0).GetReceivedLast
 
     '    'Pera Padala - PMFTC
@@ -338,6 +338,9 @@ Public Class frmMoneyTransfer
         lblWhere.Text = "Send To"
         rbSend.Focus()
         Console.WriteLine("Form LOADED successfully")
+
+        idME = currentMe
+        idMR = currentMr
     End Sub
 
 
@@ -704,10 +707,8 @@ Public Class frmMoneyTransfer
 
         If GetActionType(cboType.Text, MTValues.isGenerated) = 1 Then
             If rbSend.Checked Then
-                currentMe += 1
                 UpdateOptions("MEnumLast", currentMe)
             Else
-                currentMr += 1
                 UpdateOptions("MRNumLast", currentMr)
             End If
         End If
