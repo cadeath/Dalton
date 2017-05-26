@@ -482,7 +482,7 @@ UpdateS:
                 txtPasswordAge.Text = 0
             Else
                 chkPasswrdAge.Checked = True
-                txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE)
+                txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE) + 1
             End If
 
             If .ISEXPIRED = 1 Then
@@ -514,7 +514,7 @@ UpdateS:
             End If
 
             'Global variable
-            tmpID = .ID
+            tmpIDx = .ID
             tmpPassword = .USERPASS
 
             dgRulePrivilege.Rows.Clear()

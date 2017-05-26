@@ -266,6 +266,7 @@ NExtLine:
                 frmCashInOut2.AccessType = AccountRule.HasPrivilege("Cash In/Out")
             Case "No Access"
                 MsgBoxAuthoriation("You Don't have access to Cash In/Out.")
+                Exit Sub
         End Select
 
 nextline:
@@ -489,11 +490,11 @@ NExtLine:
     Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
         If UType = "Admin" Then frmAdminPanel.AccessType = "Full Access" : GoTo NExtLine
 
-        Select Case AccountRule.HasPrivilege("Migrate")
+        Select Case AccountRule.HasPrivilege("Console")
             Case "Full Access"
-                frmAdminPanel.AccessType = AccountRule.HasPrivilege("Migrate")
+                frmAdminPanel.AccessType = AccountRule.HasPrivilege("Console")
             Case "Read Only"
-                frmAdminPanel.AccessType = AccountRule.HasPrivilege("Migrate")
+                frmAdminPanel.AccessType = AccountRule.HasPrivilege("Console")
             Case "No Access"
                 MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
         End Select

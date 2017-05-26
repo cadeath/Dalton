@@ -749,7 +749,7 @@ nextLINETODO:
     ''' <param name="ul_ID"></param>
     ''' <remarks></remarks>
     Friend Sub Update_Privilege(ByVal ul_ID As Integer)
-        If ul_ID = 0 Then Exit Sub
+
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = {0}", ul_ID)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
 
@@ -757,7 +757,7 @@ nextLINETODO:
             Dim dsnewrow As DataRow
             dsnewrow = ds.Tables(MAIN_LINE).NewRow
             With dsnewrow
-                .Item("USERID") = tmpID
+                .Item("USERID") = tmpIDx
                 .Item("PRIVILEGE_TYPE") = _PRIVILEGE_TYPE
                 .Item("ACCESS_TYPE") = _ACCESSTYPE
                 .Item("DATE_CREATED_LINE") = Now.ToShortDateString

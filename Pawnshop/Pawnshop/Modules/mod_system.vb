@@ -59,7 +59,7 @@ Module mod_system
 
     Public UserIDX As Integer = SystemUser.ID
     Public AccountRule As New User_Line_RULES
-    Public tmpID As Integer = 0
+    Public tmpIDx As Integer = 0
     Public tmpPassword As String = ""
 #End Region
 
