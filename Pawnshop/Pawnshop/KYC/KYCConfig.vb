@@ -225,11 +225,7 @@
 
                 Dim newID As New MigrateIdentificationCard
                 For Each drID As DataRow In dsID.Tables(0).Rows
-                    If drID.Item("IDTYPE") = "Others" And drID.Item("REFNUM") = "NO ID" Then
-                        Continue For
-                    ElseIf drID.Item("IDTYPE") = "Others" And drID.Item("REFNUM") = "-" Then
-                        Continue For
-                    ElseIf drID.Item("IDTYPE") = "Others" And drID.Item("REFNUM") = "0" Then
+                    If Not isValidID(drID.Item("REFNUM")) Then
                         Continue For
                     Else
                         'newID.ID = drID.Item("ID")
@@ -353,4 +349,19 @@
                                      & CUSTOMER_PHONE & "_PHONEID_GEN TO " _
                                      & phROW : RunCommand(GENPHONE)
     End Sub
+
+
+    Private Function isValidID(ByVal refNum As String) As Boolean
+        Dim listRef As String() = {"NO ID", "NONE", "0", "MO ID", "DF", "D", "1", "S", "nnoe", "SD", "VB", "N" _
+                                  , "-", "NA", "N/A", "M", "N", "V", "no id", "NO IUD"}
+        For Each lst In listRef
+            If refNum = lst Then
+                Return False
+            Else
+                Continue For
+            End If
+        Next
+
+        Return True
+    End Function
 End Module
