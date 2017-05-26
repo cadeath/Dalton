@@ -181,11 +181,11 @@ Public Class frmCustomer_KYC
                 If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
             End If
 
-             If lvID.Items.Count = 0 Or REQUIRED_ID Then
-                TabControl1.SelectedTab = tpID
-                MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
-                Return False
-            End If
+            ' If lvID.Items.Count = 0 Or REQUIRED_ID Then
+            '    TabControl1.SelectedTab = tpID
+            '    MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            '    Return False
+            'End If
 
             Return True
         End If

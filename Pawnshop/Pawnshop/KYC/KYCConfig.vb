@@ -352,7 +352,7 @@
 
 
     Private Function isValidID(ByVal refNum As String) As Boolean
-        Dim listRef As String() = {"NO ID", "NONE", "0", "MO ID", "DF", "D", "1", "S", "nnoe", "SD", "VB", "N" _
+        Dim listRef As String() = {"NO ID", "NO I.D", "NONE", "0", "MO ID", "DF", "D", "1", "S", "nnoe", "SD", "VB", "N" _
                                   , "-", "NA", "N/A", "M", "N", "V", "no id", "NO IUD"}
         For Each lst In listRef
             If refNum = lst Then

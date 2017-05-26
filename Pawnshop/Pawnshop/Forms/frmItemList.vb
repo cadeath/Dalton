@@ -10,7 +10,7 @@
         lvItem.Items.Clear()
     End Sub
 
-    Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
+    Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT FIRST 10 * FROM TBLITEM WHERE ONHOLD = 0")
 
         Dim ds As DataSet = LoadSQL(mySql)
 
