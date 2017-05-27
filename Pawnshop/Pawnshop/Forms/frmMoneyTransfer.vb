@@ -673,6 +673,7 @@ Public Class frmMoneyTransfer
         Next
 
 NExtLineTODO:
+        senderClient = New Customer
         senderClient = cus
         txtReceiver.Focus()
     End Sub
@@ -696,6 +697,7 @@ NExtLineTODO:
         Next
 
 NExtLineTODO:
+        receiverClient = New Customer
         receiverClient = cus
         txtReceiver.Focus()
     End Sub
