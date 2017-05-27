@@ -403,7 +403,7 @@ Public Class Customer
         ' PHASE 2
         ' Saving the IDs and Phones
 
-        If _custIDs.Count <= 0 Then GoTo gOheRE
+        ' If _custIDs.Count <= 0 Then GoTo gOheRE
 
         Dim lastCustomerID As Integer = 0
 
