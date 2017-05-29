@@ -125,6 +125,11 @@
                 AccountCode = "_SYS00000001111"
             Case "SUB"
                 AccountCode = "_SYS00000001122"
+            Case "GAD"
+                AccountCode = "_SYS00000001138"
+            Case "LAM"
+                AccountCode = "_SYS00000001135"
+
             Case Else
                 MsgBox(Branch & " NOT FOUND!", MsgBoxStyle.Critical, "ERROR PLEASE CONTACT MIS") : Application.Exit()
         End Select

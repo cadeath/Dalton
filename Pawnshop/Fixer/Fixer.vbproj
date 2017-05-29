@@ -104,6 +104,18 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CashInBank\frmFixRevolvingFund.Designer.vb">
+      <DependentUpon>frmFixRevolvingFund.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CashInBank\frmFixRevolvingFund.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fix Inventory Stock\frmInvStock.Designer.vb">
+      <DependentUpon>frmInvStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fix Inventory Stock\frmInvStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
     </Compile>
@@ -240,6 +252,12 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CashInBank\frmFixRevolvingFund.resx">
+      <DependentUpon>frmFixRevolvingFund.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fix Inventory Stock\frmInvStock.resx">
+      <DependentUpon>frmInvStock.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
     </EmbeddedResource>
@@ -371,7 +389,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fixer for Maintenance\Cir Reader\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
