@@ -403,7 +403,7 @@ Public Class Customer
         ' PHASE 2
         ' Saving the IDs and Phones
 
-        If _custIDs.Count <= 0 Then GoTo gOheRE
+        ' If _custIDs.Count <= 0 Then GoTo gOheRE
 
         Dim lastCustomerID As Integer = 0
 
@@ -677,6 +677,18 @@ COntinues:
         ds.Tables(0).Rows(0).Item("Isprimary") = 1
         database.SaveEntry(ds, False)
     End Sub
+
+
+    Public Function LoadLastEntry() As Customer
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM " & CUSTOMER_TABLE & " ORDER BY ID ASC"
+        ds = LoadSQL(mySql)
+
+        Dim LastRow As Integer = ds.Tables(0).Rows.Count
+        Load_CustomerByID(ds.Tables(0).Rows(LastRow - 1).Item("ID"))
+
+        Return Me
+    End Function
 #End Region
 
 End Class
