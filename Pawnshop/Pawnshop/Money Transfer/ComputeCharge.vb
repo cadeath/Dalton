@@ -194,7 +194,7 @@
                             If HasPayoutCommission = True Then
                                 Dim tmpcommission As Double
                                 tmpcommission = IIf(IsDBNull(chrdetails.Commision), 0, chrdetails.Commision)
-                                If tmpRemarks.Split("|").Count <= 2 Then Exit For
+                                If tmpRemarks.Split("|").Count <= 2 Then Return tmpcommission
                                 Select Case tmpRemarks.Split("|")(2)
                                     Case "SLC" 'ServiceCharge Less Charge
                                         tmpSrvAmt = chrdetails.Charge / 100

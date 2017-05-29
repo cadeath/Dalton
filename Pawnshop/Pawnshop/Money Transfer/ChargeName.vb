@@ -51,12 +51,12 @@
         End Set
     End Property
 
-    Private _action_Type As Boolean
-    Public Property Action_Type() As Boolean
+    Private _action_Type As Integer
+    Public Property Action_Type() As Integer
         Get
             Return _action_Type
         End Get
-        Set(ByVal value As Boolean)
+        Set(ByVal value As Integer)
             _action_Type = value
         End Set
     End Property
@@ -101,9 +101,46 @@
             _description = .Item("Description")
 
             _isGenerated = IIf(.Item("isGenerated") = 1, True, False)
-            If Not IsDBNull(.Item("Action_Type")) Then _action_Type = IIf(.Item("Action_Type") = 1, True, False)
+            If Not IsDBNull(.Item("Action_Type")) Then _action_Type = .Item("Action_Type")
             _hasPayoutCommission = IIf(.Item("HasPayoutCommission") = 1, True, False)
         End With
+    End Sub
+
+    Friend Sub SaveChargeName()
+        Dim mysql As String = "Select * From tblMTCharge Where ChargeName = '" & _name & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "tblMTCharge")
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("ChargeName") = _name
+                .Item("Description") = _description
+                .Item("isGenerated") = IIf(_isGenerated = True, 1, 0)
+                Select Case _action_Type
+                    Case 1
+                        .Item("Action_Type") = 1
+                    Case 0
+                        .Item("Action_Type") = 0
+                    Case Else
+                        IsDBNull(.Item("Action_Type"))
+                End Select
+                '.Item("Action_Type") = IIf(_action_Type = True, 1, 0)
+                .Item("HasPayoutCommission") = IIf(_hasPayoutCommission = True, 1, 0)
+          
+            End With
+            ds.Tables(0).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        Else
+            With ds.Tables(0).Rows(0)
+                .Item("ChargeName") = _name
+                .Item("Description") = _description
+                .Item("isGenerated") = IIf(_isGenerated = True, 1, 0)
+                .Item("Action_Type") = IIf(_action_Type = True, 1, 0)
+                .Item("HasPayoutCommission") = IIf(_hasPayoutCommission = True, 1, 0)
+            End With
+            database.SaveEntry(ds, False)
+        End If
     End Sub
 
 #End Region
