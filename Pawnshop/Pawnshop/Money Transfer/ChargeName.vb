@@ -93,6 +93,34 @@
             _Chargedetail.Add(tmpDetails)
         Next
     End Sub
+    Enum isSend
+        Send = 0
+        Receice = 1
+    End Enum
+    Friend Sub LoadChargeCompute(ByVal id As Integer, ByVal act As isSend, ByVal isHasPayOut As Boolean)
+        Dim mysql As String = "Select * From tblMtCharge Where CHR_ID = " & id
+        Dim ds As DataSet = LoadSQL(mysql, "tblMtCharge")
+
+        For Each dr In ds.Tables(0).Rows
+            LoadbyDatarow(dr)
+        Next
+
+        mysql = "Select * From tblMTDetails Where Chr_ID = " & ChrID
+        If isHasPayOut = True Then
+            mysql &= " And Remarks Like " & IIf(act = isSend.Send, "'%Send In%'", "'%Pay Out%'")
+        End If
+        mysql &= " Order By ID"
+
+        ds = LoadSQL(mysql, "tblMTDetails")
+
+        _Chargedetail = New Charge_Details
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpDetails As New ChargeDetails
+            tmpDetails.LoadbyDatarow(dr)
+
+            _Chargedetail.Add(tmpDetails)
+        Next
+    End Sub
 
     Private Sub LoadbyDatarow(ByVal dr As DataRow)
         With dr

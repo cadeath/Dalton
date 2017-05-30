@@ -123,7 +123,7 @@
         Dim ds As DataSet = LoadSQL(mysql, "tblMTCharge")
 
         Dim chr As New ChargeName
-        chr.LoadCharge(ds.Tables(0).Rows(0).Item("CHR_ID"))
+        chr.LoadChargeCompute(ds.Tables(0).Rows(0).Item("CHR_ID"), act, GetValue(Chargename))
 
         _isGenerated = chr.isGenerated
         _action_Type = chr.Action_Type
@@ -136,6 +136,19 @@
         _bracket = GetItemCharge(GetChargeType.getbracket)
 
     End Sub
+
+    Private Function GetValue(ByVal tmpChargeName As String)
+        Dim mysql As String = "Select * From tblMTCharge Where ChargeName = '" & tmpChargeName & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "tblMTCharge")
+
+        Select Case ds.Tables(0).Rows(0).Item("HASPAYOUTCOMMISSION")
+            Case 1
+                Return True
+            Case 0
+                Return False
+        End Select
+        Return False
+    End Function
 
     Enum GetChargeType
         getcharge = 0
