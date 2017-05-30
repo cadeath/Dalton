@@ -250,7 +250,6 @@
     
         Dim MoneyTransID As Integer = frmMTlist.lvMoneyTransfer.FocusedItem.Tag
         LoadById(_id)
-        'Dim SrvTyp As String = Me.ServiceType
         Dim SrcStr As String = ""
         Select Case _serviceType
             Case "Pera Padala", "Pera Padala - PMFTC"
@@ -275,61 +274,86 @@
         End Select
 
         Dim strModname1 As String = String.Empty, strModname2 As String = String.Empty
-        Select Case _serviceType + IIf(_transType = 0, "OUT", "IN")
+        Dim tmpService As String = _serviceType + IIf(_transType = 0, " OUT", " IN")
+        Select Case tmpService
             Case "Pera Padala OUT", "Pera Padala - PMFTC OUT"
                 strModname1 = "PERA PADALA OUT"
+                strModname2 = strModname1
             Case "Pera Padala IN", "Pera Padala - PMFTC IN"
                 strModname1 = "PERA PADALA IN"
+                strModname2 = strModname1
 
             Case "Western Union - Local OUT", "Western Union - Intl OUT"
                 strModname1 = "WESTERN UNION OUT"
+                strModname2 = strModname1
             Case "Western Union - Local IN", "Western Union - Intl IN"
                 strModname1 = "WESTERN UNION IN"
+                strModname2 = strModname1
 
             Case "Cebuana Llhuiller OUT"
                 strModname1 = "Cebuana OUT"
+                strModname2 = strModname1
             Case "Cebuana Llhuiller IN"
                 strModname1 = "Cebuana IN"
+                strModname2 = strModname1
 
             Case "GPRS to GPRS OUT"
                 strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to GPRS OUT"
             Case "GPRS to GPRS IN"
                 strModname1 = "GPRS IN"
+                strModname2 = "GPRS to GPRS IN"
+
+            Case "GPRS to Smart Money OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to Smart Money OUT"
+            
+            Case "GPRS to BANK (UCPB/PNB) OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to BANK (UCPB/PNB) OUT"
+
+            Case "GPRS to BANK (BDO/Chinabank) OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to BANK (BDO/Chinabank) OUT"
+
+            Case "GPRS to BANK (DBP) OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to BANK (DBP) OUT"
+
+            Case "GPRS to BANK (MetroBank) OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to BANK (MetroBank) OUT"
+
+            Case "GPRS to BANK (Maybank/LandBank) OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to BANK (Maybank/LandBank) OUT"
+
+            Case "iREMIT to GPRS IN"
+                strModname1 = "GPRS IN"
+                strModname2 = "iREMIT to GPRS IN"
+
+            Case "NYBP/Transfast to GPRS IN"
+                strModname1 = "GPRS IN"
+                strModname2 = "NYBP/Transfast to GPRS IN"
+
+            Case "GPRS to Moneygram OUT"
+                strModname1 = "GPRS OUT"
+                strModname2 = "GPRS to Moneygram OUT"
+
+            Case "Smartmoney To GPRS IN"
+                strModname1 = "GPRS IN"
+                strModname2 = "Smartmoney To GPRS IN"
+
+            Case "Moneygram to GPRS IN"
+                strModname1 = "GPRS IN"
+                strModname2 = "Moneygram to GPRS IN"
+
         End Select
 
-
-        'Select Case frmMTlist.lblModname.Text
-        '    Case "Cebuana Llhuiller OUT"
-        '        strModname1 = "PERA LINK OUT"
-        '    Case "Cebuana Llhuiller IN"
-        '        strModname1 = "PERA LINK IN"
-        '    Case "Pera Padala - PMFTC OUT"
-        '        strModname1 = "Pera Padala OUT"
-        '    Case "Pera Padala - PMFTC IN"
-        '        strModname1 = "Pera Padala IN"
-        '    Case "Western Union - Local OUT", "Western Union - Intl OUT"
-        '        strModname1 = "Western Union OUT"
-        '    Case "Western Union - Local IN", "Western Union - Intl IN"
-        '        strModname1 = "Western Union IN"
-        '    Case "GPRS - GPRS to GPRS OUT", "GPRS - GPRS to Smart Money OUT", "GPRS - GPRS to BANK (UCPB/PNB) OUT", "GPRS - GPRS to BANK (BDO/Chinabank) OUT", _
-        '            "GPRS - GPRS to BANK (DBP) OUT", "GPRS - GPRS to BANK (MetroBank) OUT", "GPRS - GPRS to BANK (Maybank/LandBank) OUT", _
-        '            "GPRS - iREMIT to GPRS OUT", "GPRS - NYBP/Transfast to GPRS OUT", "GPRS - GPRS to Moneygram OUT"
-        '        strModname1 = "GPRS OUT"
-        '    Case "GPRS - GPRS to GPRS IN", "GPRS - GPRS to Smart Money IN", "GPRS - GPRS to BANK (UCPB/PNB) IN", "GPRS - GPRS to BANK (BDO/Chinabank) IN", _
-        '        "GPRS - GPRS to BANK (DBP) IN", "GPRS - GPRS to BANK (MetroBank) IN", "GPRS - GPRS to BANK (Maybank/LandBank) IN", _
-        '        "GPRS - iREMIT to GPRS IN", "GPRS - NYBP/Transfast to GPRS IN", "GPRS - GPRS to Moneygram IN"
-        '        strModname1 = "GPRS IN"
-        '    Case "GPRS - Smartmoney To GPRS IN", "GPRS - Moneygram to GPRS IN"
-        '        strModname1 = "GPRS OUT"
-        '    Case Else
-        '        strModname1 = frmMTlist.lblModname.Text
-        'End Select
-
-
-        Dim NewOtp As New ClassOtp("VOID MONEYTRANSFER", diagGeneralOTP.txtPIN.Text, SrcStr)
+        Dim NewOtp As New ClassOtp("VOID MONEYTRANSFE R", diagGeneralOTP.txtPIN.Text, SrcStr)
         TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, SrcStr & " " & reason)
 
-        RemoveJournal(MoneyTransID, , "")
+        RemoveJournal(MoneyTransID, , strModname2)
         RemoveDailyTimeLog(MoneyTransID, "1", strModname1)
 
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
