@@ -167,18 +167,18 @@
         End If
     End Sub
 
-    Private Sub lvMoneyTransfer_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvMoneyTransfer.MouseClick
-        If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
+    'Private Sub lvMoneyTransfer_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvMoneyTransfer.MouseClick
+    '    If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
 
-        Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
-        Dim tmpMT As New MoneyTransfer
-        Dim strMoneyTrans As String = ""
-        Label2.Text = idx
-        If tmpMT.LoadMoneyTrans = "0" Then
-            strMoneyTrans = "OUT"
-        ElseIf tmpMT.LoadMoneyTrans = "1" Then
-            strMoneyTrans = "IN"
-        End If
-        lblModname.Text = tmpMT.LoadServiceType + " " + strMoneyTrans
-    End Sub
+    '    Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
+    '    Dim tmpMT As New MoneyTransfer
+    '    Dim strMoneyTrans As String = ""
+    '    Label2.Text = idx
+    '    If tmpMT.LoadMoneyTrans = "0" Then
+    '        strMoneyTrans = "OUT"
+    '    ElseIf tmpMT.LoadMoneyTrans = "1" Then
+    '        strMoneyTrans = "IN"
+    '    End If
+    '    lblModname.Text = tmpMT.LoadServiceType + " " + strMoneyTrans
+    'End Sub
 End Class

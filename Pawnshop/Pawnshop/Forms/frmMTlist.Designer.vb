@@ -39,8 +39,6 @@ Partial Class frmMTlist
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblModname = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -170,32 +168,12 @@ Partial Class frmMTlist
         Me.btnNew.UseVisualStyleBackColor = True
         Me.btnNew.Visible = False
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(178, 440)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(89, 13)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "MoneyTransferID"
-        '
-        'lblModname
-        '
-        Me.lblModname.AutoSize = True
-        Me.lblModname.Location = New System.Drawing.Point(273, 440)
-        Me.lblModname.Name = "lblModname"
-        Me.lblModname.Size = New System.Drawing.Size(54, 13)
-        Me.lblModname.TabIndex = 8
-        Me.lblModname.Text = "Modname"
-        '
         'frmMTlist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(725, 467)
-        Me.Controls.Add(Me.lblModname)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
@@ -227,6 +205,4 @@ Partial Class frmMTlist
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents lblModname As System.Windows.Forms.Label
 End Class
