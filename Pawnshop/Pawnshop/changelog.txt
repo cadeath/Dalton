@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.6.1.0
+ - Added New Dynamic Money Transfer Service Type
+ - Added New Money Transfer Computation
+ - Added New Table tblMTCharge & tblMTDetails
 
 Version 1.6.0.0
  - Add kYC Module

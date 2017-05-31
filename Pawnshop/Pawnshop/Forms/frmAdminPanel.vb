@@ -307,12 +307,14 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub ModCharge()
-        fillData = "tblCharge"
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " ORDER BY ID ASC"
+        mySql = "SELECT * FROM tblMTCharge"
+        ds = LoadSQL(mySql, "tblMTCharge")
+        mySql = "SELECT * FROM tblMTDetails"
+        Dim tblIntSchDetails As DataSet = LoadSQL(mySql, "tblMTDetails")
 
-        ds = LoadSQL(mySql, fillData)
-        'dgvPawnshop.DataSource = ds.Tables(fillData)
+        Dim otherTBL As New DataTable
+        otherTBL = tblIntSchDetails.Tables("tblMTDetails")
+        ds.Tables.Add(otherTBL.Copy)
     End Sub
 
     Private Sub ModRate()

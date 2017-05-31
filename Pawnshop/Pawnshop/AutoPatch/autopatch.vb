@@ -31,7 +31,7 @@ Module autopatch
         'ModifyViews
         db132.PatchUp()
         db133.PatchUp()
-      
+        db134.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub
