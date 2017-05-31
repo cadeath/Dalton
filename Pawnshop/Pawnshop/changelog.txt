@@ -26,6 +26,13 @@ Version 1.6.0.0
  - Add OTP Control Table & Allow to Switch Off / On OTP by Module
  - Add Discount & Custom Price Function in Sale Module
  - Smart Product (Smart Money Padala, Load Wallet & Eload) allow to Display in Daily Cash Count
+ - Change load client from 50 to 10 client
+ - Change Insurance browse load to 10
+ - Change itemlist load to 10
+ - Change money transfer browse to 10
+ - Change pawning load to 10
+ - Change cashIN/OUT browse load to 10
+ - Add isvalidID function in client migrate
 
 
 Version 1.5.0.8
