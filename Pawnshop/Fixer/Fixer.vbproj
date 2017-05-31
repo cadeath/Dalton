@@ -65,7 +65,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>bug_fix.ico</ApplicationIcon>
+    <ApplicationIcon>Iconarchive-Red-Orb-Alphabet-Hash.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>C9A1A1F2AFF424A2DDD1A6E600DB49E39F84B9B1</ManifestCertificateThumbprint>
@@ -80,6 +80,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DeathCodez">
+      <HintPath>.\DeathCodez.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -104,26 +107,33 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
-      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="CashInBank\update_cashinbank.vb" />
-    <Compile Include="database.vb" />
+    <Compile Include="Modules\database.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
       <DependentUpon>frmMain2.vb</DependentUpon>
     </Compile>
     <Compile Include="CashInBank\frmMain2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.Designer.vb">
-      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
+    <Compile Include="Extract\Extract.Designer.vb">
+      <DependentUpon>Extract.vb</DependentUpon>
     </Compile>
-    <Compile Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.vb">
+    <Compile Include="Extract\Extract.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Extract\frmReadTableHash.Designer.vb">
+      <DependentUpon>frmReadTableHash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extract\frmReadTableHash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extract\frmSampleExtract.Designer.vb">
+      <DependentUpon>frmSampleExtract.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extract\frmSampleExtract.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extract\security.vb" />
     <Compile Include="FixDailyTimeModname\frmFixModname.Designer.vb">
       <DependentUpon>frmFixModname.vb</DependentUpon>
     </Compile>
@@ -191,6 +201,7 @@
     </Compile>
     <Compile Include="Modules\fix_redeemIntPenalty.vb" />
     <Compile Include="Modules\update_interest.vb" />
+    <Compile Include="Modules\mod_system.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -228,11 +239,14 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
-      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    <EmbeddedResource Include="Extract\Extract.resx">
+      <DependentUpon>Extract.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.resx">
-      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
+    <EmbeddedResource Include="Extract\frmReadTableHash.resx">
+      <DependentUpon>frmReadTableHash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extract\frmSampleExtract.resx">
+      <DependentUpon>frmSampleExtract.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>
@@ -329,6 +343,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bug_fix.ico" />
+    <Content Include="Iconarchive-Red-Orb-Alphabet-Hash.ico" />
     <Content Include="infographic-fix.ico" />
   </ItemGroup>
   <ItemGroup>

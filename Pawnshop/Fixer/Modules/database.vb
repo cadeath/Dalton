@@ -119,7 +119,7 @@ Friend Module database
         Return reader
     End Function
 
-    Friend Function GetOption(ByVal keys As String) As String
+    Friend Function GetOption(ByVal keys As String, Optional ByVal Series As Integer = 0) As String
         Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
         Dim ret As String
         Try
