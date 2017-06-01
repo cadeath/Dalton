@@ -297,23 +297,16 @@ nextlineTODO:
 
         Select Case AccountRule.HasPrivilege("Client Management")
             Case "Full Access"
-                frmClient.AccessType = AccountRule.HasPrivilege("Client Management")
+                frmClientNew.AccessType = AccountRule.HasPrivilege("Client Management")
             Case "Read Only"
-                frmClient.AccessType = AccountRule.HasPrivilege("Client Management")
+                frmClientNew.AccessType = AccountRule.HasPrivilege("Client Management")
             Case "No Access"
                 MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
         End Select
 
 nextlineTODO:
-        Console.WriteLine(frmClient.AccessType)
-        frmClient.Show()
-
-        If Not (POSuser.isSuperUser Or POSuser.canClientManage) Then
-            MsgBoxAuthoriation("You don't have access to Client Management")
-            Exit Sub
-        End If
+        Console.WriteLine(frmClientNew.AccessType)
         frmClientNew.Show()
-
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
@@ -868,30 +861,6 @@ NExtLine:
 
     Private Sub SMSNoticeToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem1.Click
         frmSMSInfo.Show()
-    End Sub
-
-    Private Sub bgwForPasswordExpiry_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwForPasswordExpiry.DoWork
-        If UType = "Admin" Then Exit Sub
-        tmrForPasswordExpiry.Stop()
-        Dim ms As String
-
-        If Not ifTblExist("TBL_USER_DEFAULT") Then
-            Exit Sub
-        End If
-
-        If s_USER.Get_rem_PassExp = 1 Then
-            ms = s_USER.Get_rem_PassExp & " Day Remaining"
-        ElseIf s_USER.Get_rem_PassExp <= 0 Then
-            ms = " Password Has Been Expired"
-        Else
-            ms = s_USER.Get_rem_PassExp & " Days Remaining"
-        End If
-        lblPasswordExpiry.Text = "Password Expiry: " & ms
-    End Sub
-
-    Private Sub tmrForPasswordExpiry_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrForPasswordExpiry.Tick
-        tmrForPasswordExpiry.Stop()
-        bgwForPasswordExpiry.RunWorkerAsync()
     End Sub
 
 End Class

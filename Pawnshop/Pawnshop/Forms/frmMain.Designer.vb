@@ -117,8 +117,6 @@ Partial Class frmMain
         Me.LayawayListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayawayPaymentReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForfeitLayawayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.bgwForPasswordExpiry = New System.ComponentModel.BackgroundWorker()
-        Me.tmrForPasswordExpiry = New System.Windows.Forms.Timer(Me.components)
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -769,12 +767,6 @@ Partial Class frmMain
         Me.ForfeitLayawayReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.ForfeitLayawayReportToolStripMenuItem.Text = "Forfeit Layaway Report"
         '
-        'bgwForPasswordExpiry
-        '
-        '
-        'tmrForPasswordExpiry
-        '
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -907,9 +899,7 @@ Partial Class frmMain
     Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SMSNoticeToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents bgwForPasswordExpiry As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblPasswordExpiry As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents tmrForPasswordExpiry As System.Windows.Forms.Timer
 
 
 

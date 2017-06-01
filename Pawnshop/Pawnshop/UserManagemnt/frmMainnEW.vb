@@ -551,29 +551,6 @@ NExtLine:
         Console.WriteLine("Generating successful.") : tmrForPasswordExpiry.Start()
     End Sub
 
-    Private Sub bgwForPasswordExpiry_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwForPasswordExpiry.DoWork
-        tmrForPasswordExpiry.Stop()
-        Dim ms As String
-
-        If Not ifTblExist("TBL_USER_DEFAULT") Then
-            Exit Sub
-        End If
-
-        If s_USER.Get_rem_PassExp = 1 Then
-            ms = s_USER.Get_rem_PassExp & " Day Remaining"
-        ElseIf s_USER.Get_rem_PassExp <= 0 Then
-            ms = " Password Has Been Expired"
-        Else
-            ms = s_USER.Get_rem_PassExp & " Days Remaining"
-        End If
-        lblPasswordExpiry.Text = "Password Expiry: " & ms
-    End Sub
-
-    Private Sub tmrForPasswordExpiry_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrForPasswordExpiry.Tick
-        tmrForPasswordExpiry.Stop()
-        bgwForPasswordExpiry.RunWorkerAsync()
-    End Sub
-
     Private Sub SettingsToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
         If Not AccountRule.HasPrivilege("Settings") Then
             MsgBoxAuthoriation("You Don't have access to Settings.")

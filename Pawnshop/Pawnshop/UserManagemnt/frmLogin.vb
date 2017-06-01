@@ -97,7 +97,6 @@ nextToline:
         frmMain.Show()
         frmMain.NotYetLogin(False)
         frmMain.CheckStoreStatus()
-        frmMain.tmrForPasswordExpiry.Start()
 
         If user_Login.ChkUserUpdate Then
             frmUserInfor.Show()

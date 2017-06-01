@@ -809,6 +809,15 @@ nextLINETODO:
         frmUserManagementNew.dgRulePrivilege.Rows.Add(_USERLINE_ID, _PRIVILEGE_TYPE, _ACCESSTYPE)
     End Sub
 
+    Friend Sub LoadLastUser()
+        mySql = "SELECT * FROM " & maintable & " ORDER BY USERID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+        Load_user_All_Rows(ds.Tables(0).Rows(0))
+    End Sub
+
     Friend Function GETUSERID() As Integer
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS ='{0}'", tmpPassword)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -1005,7 +1014,7 @@ nextLINETODO:
 
         If ds.Tables(0).Rows.Count = 0 Then Return 0
 
-        Return Date_Calculation(ds.Tables(0).Rows(0).Item("PASSWORD_AGE"))
+        Return Date_Calculation(ds.Tables(0).Rows(0).Item("PASSWORD_AGE")) + 1
     End Function
 
     ''' <summary>

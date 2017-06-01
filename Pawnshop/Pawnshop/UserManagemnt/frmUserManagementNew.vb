@@ -214,10 +214,16 @@ Saved:
             Next
         End With
 
-        Dim NewOtp As New ClassOtp("User Management", diagGeneralOTP.txtPIN.Text, "UserID:" & tmpID & " updated by:" & SystemUser.ID)
+        Save_user.LoadLastUser()
+
+        If Not isOTPOn("User Management") Then
+            Dim NewOtp As New ClassOtp("User Management", diagGeneralOTP.txtPIN.Text, "UserID:" & Save_user.ID & " Added by:" & SystemUser.ID)
+        End If
+
         Load_users()
         Load_ALL_users()
         ClearFields("")
+        LoadAccntValidation()
         MsgBox("Account successfully saved.", MsgBoxStyle.Information, "Saving Account")
     End Sub
 
@@ -319,6 +325,7 @@ UpdateS:
         Load_ALL_users()
         ClearFields("")
         AccountRule.LOAD_USER_RULES()
+        LoadAccntValidation()
         MsgBox("Account successfully updated.", MsgBoxStyle.Information, "Updating Account")
     End Sub
 

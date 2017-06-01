@@ -185,7 +185,10 @@
 
             MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), _
                                  user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
-
+            MsgBox(user_Login.Get_rem_PassExp)
+            If user_Login.Get_rem_PassExp <= 7 Then
+                MsgBox(user_Login.Get_rem_PassExp & " days remaining password expiration...", MsgBoxStyle.Exclamation, "Validation")
+            End If
 
             If Not user_Login.Chk_Account_EXPIRY_COUNTDOWN(uName, pName) Then 'Minimum days expiration.
                 user_Login.LOCK_USER(uName) : GoTo nextToline 'Inactive the user account. 
@@ -221,7 +224,7 @@ nextToline:
         frmMain.Show()
         frmMain.NotYetLogin(False)
         frmMain.CheckStoreStatus()
-        frmMain.tmrForPasswordExpiry.Start()
+        ' frmMain.tmrForPasswordExpiry.Start()
 
         If user_Login.ChkUserUpdate Then
             frmUserInfor.Show()
