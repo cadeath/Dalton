@@ -28,7 +28,7 @@ Partial Class frmCIReader
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(682, 262)
+        Me.ClientSize = New System.Drawing.Size(851, 380)
         Me.Name = "frmCIReader"
         Me.Text = "CIR Reader"
         Me.ResumeLayout(False)

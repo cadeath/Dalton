@@ -108,7 +108,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CashInBank\update_cashinbank.vb" />
-    <Compile Include="Modules\database.vb" />
+    <Compile Include="Fix Inventory Stock\frmInvStock.Designer.vb">
+      <DependentUpon>frmInvStock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fix Inventory Stock\frmInvStock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\Cir Reader\frmCIReader.Designer.vb">
+      <DependentUpon>frmCIReader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\Cir Reader\frmCIReader.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fixer for Sales Module\frmChangeItemCodeDescription.Designer.vb">
+      <DependentUpon>frmChangeItemCodeDescription.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fixer for Sales Module\frmChangeItemCodeDescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="For Sap Accounts\frmCostofSaleGadget.Designer.vb">
+      <DependentUpon>frmCostofSaleGadget.vb</DependentUpon>
+    </Compile>
+    <Compile Include="For Sap Accounts\frmCostofSaleGadget.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="For Sap Accounts\frmLayawayCashOffsetting.Designer.vb">
+      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="For Sap Accounts\frmLayawayCashOffsetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\Modules\database.vb" />
+    <Compile Include="Migrate\Modules\Fixing_Mlang.vb" />
+    <Compile Include="Migrate\Modules\fix_mechanism.vb" />
+    <Compile Include="Migrate\Modules\fix_redeemIntPenalty.vb" />
+    <Compile Include="Migrate\Modules\mod_system.vb" />
+    <Compile Include="Migrate\Modules\pg_incomplete_desc.vb" />
+    <Compile Include="Migrate\Modules\revolving_fund.vb" />
+    <Compile Include="Migrate\Modules\update_interest.vb" />
+    <Compile Include="Migrate\Modules\update_tblCharges.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
       <DependentUpon>frmMain2.vb</DependentUpon>
     </Compile>
@@ -190,8 +234,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Migrate\updateRate.vb" />
-    <Compile Include="Modules\Fixing_Mlang.vb" />
-    <Compile Include="Modules\fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -199,9 +241,6 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\fix_redeemIntPenalty.vb" />
-    <Compile Include="Modules\update_interest.vb" />
-    <Compile Include="Modules\mod_system.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -217,9 +256,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Modules\pg_incomplete_desc.vb" />
-    <Compile Include="Modules\revolving_fund.vb" />
-    <Compile Include="Modules\update_tblCharges.vb" />
     <Compile Include="RateFixer\EmptyRate.vb" />
     <Compile Include="RateFixer\frmRateEmpty.Designer.vb">
       <DependentUpon>frmRateEmpty.vb</DependentUpon>
@@ -248,11 +284,23 @@
     <EmbeddedResource Include="Extract\frmSampleExtract.resx">
       <DependentUpon>frmSampleExtract.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Fix Inventory Stock\frmInvStock.resx">
+      <DependentUpon>frmInvStock.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixDoclineDecimal\frmFixDoclineDecimal.resx">
       <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fixer for Maintenance\Cir Reader\frmCIReader.resx">
+      <DependentUpon>frmCIReader.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fixer for Sales Module\frmChangeItemCodeDescription.resx">
+      <DependentUpon>frmChangeItemCodeDescription.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixInterestHistory\frmFixIntHistory.resx">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
@@ -262,6 +310,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FixPawnlistView\frmFixView.resx">
       <DependentUpon>frmFixView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="For Sap Accounts\frmCostofSaleGadget.resx">
+      <DependentUpon>frmCostofSaleGadget.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="For Sap Accounts\frmLayawayCashOffsetting.resx">
+      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
