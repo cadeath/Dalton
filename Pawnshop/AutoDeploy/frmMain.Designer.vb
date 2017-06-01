@@ -26,6 +26,7 @@ Partial Class frmMain
         Me.btnStart = New System.Windows.Forms.Button()
         Me.pbUpdate = New System.Windows.Forms.ProgressBar()
         Me.lblUpdate = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnStart
@@ -58,6 +59,15 @@ Partial Class frmMain
         Me.lblUpdate.Text = "IDLE"
         Me.lblUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(430, 110)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -65,6 +75,7 @@ Partial Class frmMain
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(800, 460)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblUpdate)
         Me.Controls.Add(Me.pbUpdate)
         Me.Controls.Add(Me.btnStart)
@@ -80,5 +91,6 @@ Partial Class frmMain
     Friend WithEvents btnStart As System.Windows.Forms.Button
     Friend WithEvents pbUpdate As System.Windows.Forms.ProgressBar
     Friend WithEvents lblUpdate As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class

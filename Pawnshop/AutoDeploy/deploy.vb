@@ -12,6 +12,7 @@ Module deploy
     Friend EXEFILE As String = "/pawnshop.exe"
     Const SYSLOG As String = "syslog.txt"
     Const BACKUPBAT As String = "backup.bat"
+    Const tmpCIR As String = "CIR file"
 
     Friend pbDownload As ProgressBar                ' Progress bar for effects
     Friend lblStatus As Label                       ' Display the status
@@ -261,6 +262,8 @@ Module deploy
 
         waitingToFinish_download()
 
+
+
         If updateProcedure = Procedure.Installer Then
             ChDir(TMP)
             runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), installPath, "INSTALL.log")
@@ -268,7 +271,23 @@ Module deploy
         End If
     End Sub
 
-    Private Sub download_File(src As String, Optional dst As String = "")
+    Friend Function getCIRFiles() As Boolean
+        If Not System.IO.Directory.Exists(tmpCIR) Then
+            Return False
+        End If
+
+        Dim di As New DirectoryInfo(Application.StartupPath & "\" & tmpCIR)
+        Dim fiArr As FileInfo() = di.GetFiles()
+
+        Dim fri As FileInfo
+        For Each fri In fiArr
+            Console.WriteLine(fri.Name)
+        Next fri
+
+        Return True
+    End Function
+
+    Private Sub download_File(ByVal src As String, Optional ByVal dst As String = "")
         If onDownload Then Exit Sub
 
         If Not System.IO.Directory.Exists(TMP) Then _
@@ -299,7 +318,7 @@ Module deploy
         End Try
     End Sub
 
-    Private Sub dlFile_DownloadProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs)
+    Private Sub dlFile_DownloadProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
         If pbDownload Is Nothing Then Exit Sub
 
         Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString)
@@ -309,7 +328,7 @@ Module deploy
         pbDownload.Value = CInt(Math.Truncate(percentage).ToString)
     End Sub
 
-    Private Sub dlFile_DownloadFileCompleted(sender As Object, e As ComponentModel.AsyncCompletedEventArgs)
+    Private Sub dlFile_DownloadFileCompleted(ByVal sender As Object, ByVal e As ComponentModel.AsyncCompletedEventArgs)
         onDownload = False
 
         If e.Error Is Nothing Then
@@ -341,7 +360,7 @@ Module deploy
     End Sub
 
     Private Delegate Sub do_waiting_callback()
-    Private Sub do_waiting(ins As Boolean)
+    Private Sub do_waiting(ByVal ins As Boolean)
         Dim LOGFILE As String
         Dim CURDIR As String
 
@@ -374,8 +393,8 @@ Module deploy
         _isReady = True
     End Sub
 
-    Private Function waitWhenDone(Optional isInstall As Boolean = True) As Boolean
-        
+    Private Function waitWhenDone(Optional ByVal isInstall As Boolean = True) As Boolean
+
         Dim th As Threading.Thread
         th = New Threading.Thread(Sub() do_waiting(isInstall))
         th.Start()
