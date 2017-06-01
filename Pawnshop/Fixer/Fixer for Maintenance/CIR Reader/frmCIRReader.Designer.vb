@@ -23,8 +23,8 @@ Partial Class frmCIRReader
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.txtPath = New System.Windows.Forms.TextBox()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lvCIR = New System.Windows.Forms.ListView()
         Me.ofdUpdate = New System.Windows.Forms.OpenFileDialog()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -43,6 +43,14 @@ Partial Class frmCIRReader
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Path"
         '
+        'txtPath
+        '
+        Me.txtPath.Location = New System.Drawing.Point(6, 19)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.ReadOnly = True
+        Me.txtPath.Size = New System.Drawing.Size(175, 20)
+        Me.txtPath.TabIndex = 1
+        '
         'btnBrowse
         '
         Me.btnBrowse.Location = New System.Drawing.Point(187, 19)
@@ -52,24 +60,15 @@ Partial Class frmCIRReader
         Me.btnBrowse.Text = "..."
         Me.btnBrowse.UseVisualStyleBackColor = True
         '
-        'txtPath
-        '
-        Me.txtPath.Location = New System.Drawing.Point(6, 19)
-        Me.txtPath.Name = "txtPath"
-        Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(175, 20)
-        Me.txtPath.TabIndex = 1
-        '
         'lvCIR
         '
-        Me.lvCIR.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lvCIR.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvCIR.FullRowSelect = True
         Me.lvCIR.GridLines = True
         Me.lvCIR.Location = New System.Drawing.Point(12, 74)
         Me.lvCIR.Name = "lvCIR"
-        Me.lvCIR.Size = New System.Drawing.Size(699, 214)
+        Me.lvCIR.Size = New System.Drawing.Size(699, 253)
         Me.lvCIR.TabIndex = 1
         Me.lvCIR.UseCompatibleStateImageBehavior = False
         Me.lvCIR.View = System.Windows.Forms.View.Details
@@ -99,7 +98,7 @@ Partial Class frmCIRReader
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(723, 300)
+        Me.ClientSize = New System.Drawing.Size(723, 490)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.lvCIR)
