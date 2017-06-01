@@ -105,7 +105,7 @@ Public Class frmClientNew
 
             Me.Enabled = False
 
-            Dim mySql As String = String.Format("SELECT FIRST 100 * FROM {0} ORDER BY LastName ASC, FirstName ASC", CUSTOMER_TABLE)
+            Dim mySql As String = String.Format("SELECT FIRST 10 * FROM {0} ORDER BY LastName ASC, FirstName ASC", CUSTOMER_TABLE)
             Dim ds As DataSet = LoadSQL(mySql, CUSTOMER_TABLE)
 
             lvCustomer.Items.Clear()

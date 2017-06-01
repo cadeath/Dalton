@@ -1,8 +1,8 @@
 ﻿Imports System.Data.Odbc
 Public Class frmMoneyTransfer
 
-    Dim senderClient As Customer
-    Dim receiverClient As Customer
+    Dim senderClient As New Customer
+    Dim receiverClient As New Customer
     Private currentMe As Integer = GetOption("MEnumLast")
     Private currentMr As Integer = GetOption("MRNumLast")
     Dim moneytransferIDNumber As MoneyTransfer

@@ -125,7 +125,7 @@
         If isMoreThan100 Then Exit Sub
 
         Dim i As Integer = 0
-        Dim mySql As String = "SELECT FIRST 100 * FROM PAWN_LIST "
+        Dim mySql As String = "SELECT FIRST 10 * FROM PAWN_LIST "
         mySql &= String.Format("WHERE LOANDATE <= '{0}' ", CurrentDate.ToShortDateString)
         mySql &= "AND (STATUS = 'L' OR STATUS = 'R') "
         mySql &= "ORDER BY PAWNTICKET ASC"

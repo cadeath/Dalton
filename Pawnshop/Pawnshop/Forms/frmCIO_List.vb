@@ -35,7 +35,7 @@
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub LoadActive()
-        Dim mySql As String = "SELECT FIRST 50 * FROM " & fillData
+        Dim mySql As String = "SELECT FIRST 10 * FROM " & fillData
         mySql &= " WHERE Status = 1 ORDER BY TransID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 

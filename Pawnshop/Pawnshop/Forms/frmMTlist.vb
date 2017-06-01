@@ -25,7 +25,7 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT FIRST 50 * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
+        Dim mySql As String = "SELECT FIRST 10 * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 

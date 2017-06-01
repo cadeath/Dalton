@@ -341,7 +341,7 @@ Public Class MigrateCustomer
 
             dsNewRow = ds.Tables(CUSTOMER_ID).NewRow
             With dsNewRow
-                .Item("ID") = id.ID
+                ' .Item("ID") = id.ID
                 .Item("CUSTID") = id.CustomerID
                 .Item("ID_TYPE") = id.IDType
                 .Item("ID_NUMBER") = id.IDNumber
