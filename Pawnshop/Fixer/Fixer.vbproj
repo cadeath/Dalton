@@ -120,10 +120,10 @@
     <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fixer for Maintenance\Cir Reader\frmCIReader.Designer.vb">
-      <DependentUpon>frmCIReader.vb</DependentUpon>
+    <Compile Include="Fixer for Maintenance\CIR Reader\frmCIRReader.Designer.vb">
+      <DependentUpon>frmCIRReader.vb</DependentUpon>
     </Compile>
-    <Compile Include="Fixer for Maintenance\Cir Reader\frmCIReader.vb">
+    <Compile Include="Fixer for Maintenance\CIR Reader\frmCIRReader.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Fixer for Sales Module\frmChangeItemCodeDescription.Designer.vb">
@@ -296,8 +296,8 @@
     <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fixer for Maintenance\Cir Reader\frmCIReader.resx">
-      <DependentUpon>frmCIReader.vb</DependentUpon>
+    <EmbeddedResource Include="Fixer for Maintenance\CIR Reader\frmCIRReader.resx">
+      <DependentUpon>frmCIRReader.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fixer for Sales Module\frmChangeItemCodeDescription.resx">
       <DependentUpon>frmChangeItemCodeDescription.vb</DependentUpon>
