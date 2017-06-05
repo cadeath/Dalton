@@ -327,8 +327,10 @@
 
         If txtUsername.Text = "" Then txtUsername.Focus() : Return False
         If txtFirstname.Text = "" Then txtFirstname.Focus() : Return False
-        If txtLastname.Text = "" Then txtLastname.Focus() : Return False
 
+        If lblUserType.Text <> "User Type: Admin" Or lblUserType.Text = "" Then
+            If txtLastname.Text = "" Then txtLastname.Focus() : Return False
+        End If
 
         If btnCreateAccount.Text <> "&Create Account" Then
 
@@ -378,7 +380,7 @@
             If row.Cells(2).Value = "" Then tbControl.SelectedTab = TabPage2 : Return False
         Next
 
-        If lblUserType.Text <> "Admin" Or lblUserType.Text = "" Then
+        If lblUserType.Text <> "User Type: Admin" Or lblUserType.Text = "" Then
             If txtAddDays.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtAddDays.Focus() : Return False
             If txtPasswordAge.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtPasswordAge.Focus() : Return False
             If txtFailedAttemp.Text = 0 Then tbControl.SelectedTab = TabPage3 : txtFailedAttemp.Focus() : Return False

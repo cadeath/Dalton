@@ -23,16 +23,16 @@ Partial Class frmUserInfor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.rbFemale = New System.Windows.Forms.RadioButton()
         Me.rbMale = New System.Windows.Forms.RadioButton()
         Me.txtBirthday = New System.Windows.Forms.DateTimePicker()
+        Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.txtContactnumber = New Pawnshop.watermark()
         Me.txtEmailaddress = New Pawnshop.watermark()
         Me.txtLastname = New Pawnshop.watermark()
         Me.txtMiddlename = New Pawnshop.watermark()
         Me.txtFirstname = New Pawnshop.watermark()
-        Me.btnCreateAccount = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,6 +55,15 @@ Partial Class frmUserInfor
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Fill up "
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(16, 214)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(74, 22)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "Gender"
         '
         'rbFemale
         '
@@ -85,6 +94,18 @@ Partial Class frmUserInfor
         Me.txtBirthday.Name = "txtBirthday"
         Me.txtBirthday.Size = New System.Drawing.Size(422, 29)
         Me.txtBirthday.TabIndex = 8
+        '
+        'btnCreateAccount
+        '
+        Me.btnCreateAccount.BackColor = System.Drawing.Color.White
+        Me.btnCreateAccount.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreateAccount.Location = New System.Drawing.Point(292, 281)
+        Me.btnCreateAccount.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnCreateAccount.Name = "btnCreateAccount"
+        Me.btnCreateAccount.Size = New System.Drawing.Size(156, 43)
+        Me.btnCreateAccount.TabIndex = 10
+        Me.btnCreateAccount.Text = "&Update Account"
+        Me.btnCreateAccount.UseVisualStyleBackColor = False
         '
         'txtContactnumber
         '
@@ -132,35 +153,15 @@ Partial Class frmUserInfor
         Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
         Me.txtFirstname.WatermarkText = "Firstname"
         '
-        'btnCreateAccount
-        '
-        Me.btnCreateAccount.BackColor = System.Drawing.Color.White
-        Me.btnCreateAccount.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreateAccount.Location = New System.Drawing.Point(463, 75)
-        Me.btnCreateAccount.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnCreateAccount.Name = "btnCreateAccount"
-        Me.btnCreateAccount.Size = New System.Drawing.Size(156, 71)
-        Me.btnCreateAccount.TabIndex = 10
-        Me.btnCreateAccount.Text = "&Update Account"
-        Me.btnCreateAccount.UseVisualStyleBackColor = False
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(16, 214)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 22)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Gender"
-        '
         'frmUserInfor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.ActiveBorder
-        Me.ClientSize = New System.Drawing.Size(642, 282)
+        Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ClientSize = New System.Drawing.Size(455, 326)
         Me.Controls.Add(Me.btnCreateAccount)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmUserInfor"
         Me.Text = "Profile"
         Me.GroupBox1.ResumeLayout(False)

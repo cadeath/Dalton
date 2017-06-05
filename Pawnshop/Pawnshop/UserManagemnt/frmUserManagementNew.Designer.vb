@@ -503,9 +503,11 @@ Partial Class frmUserManagementNew
         '
         'lblUserType
         '
+        Me.lblUserType.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblUserType.Name = "lblUserType"
         Me.lblUserType.Size = New System.Drawing.Size(59, 17)
         Me.lblUserType.Text = "User Type"
+        Me.lblUserType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'frmUserManagementNew
         '

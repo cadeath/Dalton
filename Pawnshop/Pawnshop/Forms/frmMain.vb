@@ -49,7 +49,7 @@ Public Class frmMain
         If st Then
             tsUser.Text = "No User yet"
         Else
-            tsUser.Text = "Greetings " & POSuser.FullName
+            tsUser.Text = "Greetings " & FullName
         End If
 
         'Reports

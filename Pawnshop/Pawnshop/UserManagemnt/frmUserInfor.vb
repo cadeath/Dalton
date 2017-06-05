@@ -46,4 +46,13 @@
         End Try
         Return True
     End Function
+
+    Private Sub txtContactnumber_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtContactnumber.KeyPress
+        DigitOnly(e)
+        PhoneSeparator(txtContactnumber, e)
+    End Sub
+
+    Private Sub rbMale_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles rbMale.KeyPress
+        If isEnter(e) Then btnCreateAccount.PerformClick()
+    End Sub
 End Class

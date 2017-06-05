@@ -920,6 +920,12 @@
     </Compile>
     <Compile Include="UserManagemnt\Module\mod_sys.vb" />
     <Compile Include="UserManagemnt\UserMigrate\Create_Tables.vb" />
+    <Compile Include="UserManagemnt\UserMigrate\frmaddPrivilege.Designer.vb">
+      <DependentUpon>frmaddPrivilege.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\UserMigrate\frmaddPrivilege.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserManagemnt\UserMigrate\PLoading.Designer.vb">
       <DependentUpon>PLoading.vb</DependentUpon>
     </Compile>
@@ -1404,6 +1410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagemnt\frmUserManagementNew.resx">
       <DependentUpon>frmUserManagementNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\UserMigrate\frmaddPrivilege.resx">
+      <DependentUpon>frmaddPrivilege.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagemnt\UserMigrate\PLoading.resx">
       <DependentUpon>PLoading.vb</DependentUpon>
