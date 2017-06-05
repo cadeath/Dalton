@@ -18,7 +18,7 @@
 
         Dim pawnTicket As Integer = txtPT.Text
         Dim mySql As String = "SELECT"
-        mySql &= vbCrLf & "  SMSDATE, PAWNTICKET, C.FIRSTNAME, C.LASTNAME, SMS_MSG, USERNAME"
+        mySql &= vbCrLf & "  SMSDATE, PAWNTICKET, C.FIRSTNAME, C.LASTNAME, SMS_MSG, USR.USERNAME"
         mySql &= vbCrLf & "FROM"
         mySql &= vbCrLf & "  SMS"
         mySql &= vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C"

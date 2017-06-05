@@ -16,6 +16,11 @@ Public Class frmPrint
         Next
     End Sub
     Private Sub frmPrint_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
         LoadReceipt()
     End Sub
 

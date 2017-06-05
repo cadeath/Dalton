@@ -94,7 +94,6 @@ Public Class frmPawningItemNew
 
         Appraisers_ht = New Hashtable
         cboAppraiser.Items.Clear()
-
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim u As New Sys_user
             u.Load_user_All_Rows(dr)
@@ -108,8 +107,11 @@ Public Class frmPawningItemNew
             ' REMOVE ON FINAL
             ' Appraiser have canAppraise
 
-            cboAppraiser.Items.Add(u.USERNAME)
-            Appraisers_ht.Add(u.ID, u.USERNAME)
+            If AccountRule.CanAppraise(u.ID) Then
+                cboAppraiser.Items.Add(u.USERNAME)
+                Appraisers_ht.Add(u.ID, u.USERNAME)
+            End If
+
         Next
     End Sub
 
@@ -900,9 +902,11 @@ nextlineTODO:
 
     Private Sub Authorization()
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
     End Sub
 
     Private Function CheckAuth() As Boolean
@@ -1150,7 +1154,7 @@ nextlineTODO:
         cboAppraiser.Enabled = Not st
         btnRenew.Enabled = Not st
         btnRedeem.Enabled = Not st
-        If POSuser.canVoid Then btnVoid.Enabled = Not st
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
         lvSpec.Enabled = Not st
         btnAddCoi.Enabled = Not st

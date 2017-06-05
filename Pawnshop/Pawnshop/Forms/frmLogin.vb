@@ -9,9 +9,9 @@
     'Dim mousex As Integer
     'Dim mousey As Integer
 
-    'Private Sub pbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    End
-    'End Sub
+    ''Private Sub pbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    ''    End
+    ''End Sub
     ' ''' <summary>
     ' ''' This mouseDown will make the mouse cursor to fit in the textfield.
     ' ''' </summary>
@@ -42,7 +42,7 @@
     ' ''' <summary>
     ' ''' Exit the applicatio.
     ' ''' </summary>
-    ' ''' <param name="sender"></param>
+    ' ''' <param name="sender"></param
     ' ''' <param name="e"></param>
     ' ''' <remarks></remarks>
     'Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -185,9 +185,10 @@
 
             MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), _
                                  user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
-            MsgBox(user_Login.Get_rem_PassExp)
-            If user_Login.Get_rem_PassExp <= 7 Then
-                MsgBox(user_Login.Get_rem_PassExp & " days remaining password expiration...", MsgBoxStyle.Exclamation, "Validation")
+
+            If user_Login.Get_rem_PassExp <= 7 And user_Login.Get_rem_PassExp = 1 Then
+                MsgBox(user_Login.Get_rem_PassExp & IIf(user_Login.Get_rem_PassExp = 1, "day", "days") _
+                       & " remaining password expiration...", MsgBoxStyle.Exclamation, "Validation")
             End If
 
             If Not user_Login.Chk_Account_EXPIRY_COUNTDOWN(uName, pName) Then 'Minimum days expiration.
@@ -224,7 +225,6 @@ nextToline:
         frmMain.Show()
         frmMain.NotYetLogin(False)
         frmMain.CheckStoreStatus()
-        ' frmMain.tmrForPasswordExpiry.Start()
 
         If user_Login.ChkUserUpdate Then
             frmUserInfor.Show()

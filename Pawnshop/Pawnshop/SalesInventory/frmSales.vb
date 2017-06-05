@@ -598,6 +598,7 @@ Public Class frmSales
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
         If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Return") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Return")
             Case "Full Access"
@@ -675,6 +676,7 @@ nextlineTODO:
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
         If UType = "Admin" Then GoTo NextLineTODO
+        If AccountRule.HasPrivilege("StockOut") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("StockOut")
             Case "Full Access"

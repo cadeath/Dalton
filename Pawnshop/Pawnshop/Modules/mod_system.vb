@@ -513,6 +513,7 @@ Module mod_system
         InsertArrayElement(headers, 0, "BRANCHCODE")
 
         ' HEADERS
+        Dim checkDa As String = ""
         Dim cnt As Integer = 0
         For Each hr In headers
             cnt += 1 : oSheet.Cells(1, cnt).value = hr
@@ -526,7 +527,14 @@ Module mod_system
                 If colCnt = 0 Then
                     oSheet.Cells(rowCnt, colCnt + 1).value = BranchCode
                 Else
-                    oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
+
+                    checkDa = IIf(Not IsDBNull(dr(colCnt - 1)), dr(colCnt - 1), "")
+                    If checkDa.Contains("Not define") Then
+                        checkDa = checkDa.Replace("Not define", "")
+                    End If
+
+                    oSheet.Cells(rowCnt, colCnt + 1).value = checkDa
+                    'dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
                 End If
             Next
             rowCnt += 1

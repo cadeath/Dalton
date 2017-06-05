@@ -148,6 +148,8 @@ Public Class frmMain
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
         If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Settings") = "" Then Exit Sub
+
         Select Case AccountRule.HasPrivilege("Settings")
             Case "Full Access"
                 frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
@@ -165,6 +167,7 @@ NExtLine:
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
         If UType = "Admin" Then frmUserManagementNew.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("User Management") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("User Management")
             Case "Full Access"
@@ -182,6 +185,7 @@ NExtLine:
 
     Private Sub ExpiryGeneratorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryGeneratorToolStripMenuItem.Click
         If UType = "Admin" Then frmExtractor.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Expiry List") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Expiry List")
             Case "Full Access"
@@ -200,6 +204,7 @@ NExtLine:
 
     Private Sub JournalEntriesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles JournalEntriesToolStripMenuItem.Click
         If UType = "Admin" Then frmExtractor.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Journal Entries") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Journal Entries")
             Case "Full Access"
@@ -220,6 +225,7 @@ NExtLine:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then frmMoneyTransfer.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Money Transfer") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Money Transfer")
             Case "Full Access"
@@ -239,6 +245,7 @@ NExtLine:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then frmmoneyexchange.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Dollar Buying") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Dollar Buying")
             Case "Full Access"
@@ -258,6 +265,7 @@ NExtLine:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then frmCashInOut2.AccessType = "Full Access" : GoTo Nextline
+        If AccountRule.HasPrivilege("Cash In/Out") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Cash In/Out")
             Case "Full Access"
@@ -275,6 +283,7 @@ nextline:
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
         If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Open Store") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Open Store")
             Case "Full Access"
@@ -294,6 +303,7 @@ nextlineTODO:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Client Management") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Client Management")
             Case "Full Access"
@@ -313,6 +323,7 @@ nextlineTODO:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Pawning") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Pawning")
             Case "Full Access"
@@ -344,6 +355,7 @@ nextlineTODO:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Borrowings") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Borrowings")
             Case "Full Access"
@@ -376,7 +388,6 @@ nextlineTODO:
             For Each currentFormName As String In formNames
                 Application.OpenForms(currentFormName).Close()
             Next
-            lblPasswordExpiry.Text = "Password Expiry"
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
             frmLogin1.Show()
@@ -391,6 +402,7 @@ nextlineTODO:
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then frmInsurance.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Insurance") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Insurance")
             Case "Full Access"
@@ -408,7 +420,9 @@ NExtLine:
 
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
         If UType = "Admin" Then dev_Pawning2.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Lay away") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Lay away")
             Case "Full Access"
@@ -418,13 +432,14 @@ NExtLine:
         End Select
 
 NExtLine:
-         If DEV_MODE Then dev_Pawning2.Show()
+        If DEV_MODE Then dev_Pawning2.Show()
     End Sub
 
     Private Sub btnPOS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If UType = "Admin" Then frmSales.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("POS") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("POS")
             Case "Full Access"
@@ -442,6 +457,7 @@ NExtLine:
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
         If UType = "Admin" Then frmCashCount.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Cash Count") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Cash Count")
             Case "Full Access"
@@ -459,6 +475,7 @@ NExtLine:
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click
         If UType = "Admin" Then frmBackUpDataSettings.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Backup") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Backup")
             Case "Full Access"
@@ -482,6 +499,7 @@ NExtLine:
 
     Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
         If UType = "Admin" Then frmAdminPanel.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Console") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Console")
             Case "Full Access"
@@ -499,6 +517,7 @@ NExtLine:
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
         If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Open Store") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Open Store")
             Case "Full Access"
@@ -532,6 +551,7 @@ NExtLine:
 
     Private Sub RateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RateToolStripMenuItem.Click
         If UType = "Admin" Then frmRate2.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Update Rates") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Update Rates")
             Case "Full Access"
@@ -608,6 +628,7 @@ NExtLine:
 
     Private Sub BSPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSPReportToolStripMenuItem.Click
         If UType = "Admin" Then frmExtractor.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Journal Entries") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Journal Entries")
             Case "Full Access"
@@ -671,6 +692,7 @@ NExtLine:
 
     Private Sub ExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem.Click
         If UType = "Admin" Then frmSMSnotice.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Expiry List") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Expiry List")
             Case "Full Access"

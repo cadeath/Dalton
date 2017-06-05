@@ -779,7 +779,7 @@ Partial Class frmMainnEW
     Friend WithEvents pInfo As System.Windows.Forms.Panel
     Friend WithEvents lblMessage As System.Windows.Forms.Label
     Friend WithEvents lblTitle As System.Windows.Forms.Label
+    Friend WithEvents lblPasswordExpiry As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents bgwForPasswordExpiry As System.ComponentModel.BackgroundWorker
     Friend WithEvents tmrForPasswordExpiry As System.Windows.Forms.Timer
-    Friend WithEvents lblPasswordExpiry As System.Windows.Forms.ToolStripStatusLabel
 End Class

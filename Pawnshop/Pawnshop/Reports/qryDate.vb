@@ -613,10 +613,10 @@
 
         Dim mySql As String, dsName As String = "dsVoid"
 
-        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FULLNAME AS ENCODER, G2.FULLNAME AS VOIDED_BY "
+        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODER, G2.FIRSTNAME || ' ' || G2.LASTNAME AS VOIDED_BY "
         mySql &= "FROM TBLVOID V "
-        mySql &= "INNER JOIN TBL_GAMIT G ON G.USERID = V.ENCODER "
-        mySql &= "INNER JOIN TBL_GAMIT G2 ON G2.USERID=V.VOIDED_BY "
+        mySql &= "INNER JOIN TBL_USER_DEFAULT G ON G.USERID = V.ENCODER "
+        mySql &= "INNER JOIN TBL_USER_DEFAULT G2 ON G2.USERID=V.VOIDED_BY "
         mySql &= "WHERE V.TRANSDATE = '" & cur & "'"
 
         Dim addParameters As New Dictionary(Of String, String)
@@ -634,10 +634,10 @@
 
         Dim mySql As String, dsName As String = "dsVoid"
 
-        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FULLNAME AS ENCODER, G2.FULLNAME AS VOIDED_BY "
+        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS,  G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODER,  G2.FIRSTNAME || ' ' || G2.LASTNAME AS VOIDED_BY "
         mySql &= "FROM TBLVOID V "
-        mySql &= "INNER JOIN TBL_GAMIT G ON G.USERID = V.ENCODER "
-        mySql &= "INNER JOIN TBL_GAMIT G2 ON G2.USERID=V.VOIDED_BY "
+        mySql &= "INNER JOIN TBL_USER_DEFAULT G ON G.USERID = V.ENCODER "
+        mySql &= "INNER JOIN TBL_USER_DEFAULT G2 ON G2.USERID=V.VOIDED_BY "
         mySql &= "WHERE V.TRANSDATE BETWEEN '" & st & "' AND '" & en & "'"
 
         Dim addParameters As New Dictionary(Of String, String)

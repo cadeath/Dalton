@@ -110,7 +110,6 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssOthers = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.lblPasswordExpiry = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
@@ -691,7 +690,7 @@ Partial Class frmMain
         '
         'statusStrip
         '
-        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers, Me.lblPasswordExpiry})
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
         Me.statusStrip.Size = New System.Drawing.Size(1063, 22)
@@ -715,12 +714,6 @@ Partial Class frmMain
         '
         Me.tssOthers.Name = "tssOthers"
         Me.tssOthers.Size = New System.Drawing.Size(0, 17)
-        '
-        'lblPasswordExpiry
-        '
-        Me.lblPasswordExpiry.Name = "lblPasswordExpiry"
-        Me.lblPasswordExpiry.Size = New System.Drawing.Size(91, 17)
-        Me.lblPasswordExpiry.Text = "Password Expiry"
         '
         'tmrCurrent
         '
@@ -899,7 +892,6 @@ Partial Class frmMain
     Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SMSNoticeToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents lblPasswordExpiry As System.Windows.Forms.ToolStripStatusLabel
 
 
 

@@ -2,6 +2,7 @@
 Public Class User_Line_RULES
     Private fillData As String = "tbl_userline"
     Private mySql As String = String.Empty
+    Dim IUDX As Integer = UserIDX
 
 #Region "Properties"
     Private _USERLINE_ID As Integer
@@ -86,22 +87,23 @@ Public Class User_Line_RULES
         If UType = "Admin" Then Exit Sub
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("Unable to load user privilege.", MsgBoxStyle.Critical, "Error") : Exit Sub
 
-            _UsersRules = New UserRuleCol
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim getUserRule As New User_Line_RULES
-                With getUserRule
-                    .USERLINE_ID = dr.Item("Userline_ID")
-                    .USERID = dr.Item("UserID")
-                    .PRIVILEGE_TYPE = dr.Item("Privilege_Type")
-                    .ACCESS_TYPE = dr.Item("Access_type")
-                    .DATE_UPDATED_LINE = dr.Item("Date_Updated_line")
-                    .DATE_CREATED_LINE = dr.Item("Date_Created_line")
-                End With
-                _UsersRules.Add(getUserRule)
+        _UsersRules = New UserRuleCol
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim getUserRule As New User_Line_RULES
+            With getUserRule
+                .USERLINE_ID = dr.Item("Userline_ID")
+                .USERID = dr.Item("UserID")
+                .PRIVILEGE_TYPE = dr.Item("Privilege_Type")
+                .ACCESS_TYPE = dr.Item("Access_type")
+                .DATE_UPDATED_LINE = dr.Item("Date_Updated_line")
+                .DATE_CREATED_LINE = dr.Item("Date_Created_line")
+            End With
+            _UsersRules.Add(getUserRule)
 
-                Load_userline(dr)
-            Next
+            Load_userline(dr)
+        Next
     End Sub
+
 
     Public Sub Load_userline(ByVal dr As DataRow)
         With dr
@@ -132,6 +134,16 @@ Public Class User_Line_RULES
         End Try
 
         Return ""
+    End Function
+
+    Friend Function CanAppraise(ByVal UID As Integer) As Boolean
+        mySql = String.Format("SELECT * FROM " & fillData & _
+                              " WHERE USERID = {0} AND ACCESS_TYPE ='{1}' AND PRIVILEGE_TYPE ='{2}'", _
+                              UID, "Full Access", "Appraiser")
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        Return True
     End Function
 #End Region
 End Class

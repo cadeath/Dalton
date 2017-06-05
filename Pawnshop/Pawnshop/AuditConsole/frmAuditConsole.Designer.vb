@@ -47,12 +47,12 @@ Partial Class frmAuditConsole
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkZeroOut = New System.Windows.Forms.CheckBox()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
-        Me.chkZeroOut = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -317,6 +317,16 @@ Partial Class frmAuditConsole
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         '
+        'chkZeroOut
+        '
+        Me.chkZeroOut.AutoSize = True
+        Me.chkZeroOut.Location = New System.Drawing.Point(42, 52)
+        Me.chkZeroOut.Name = "chkZeroOut"
+        Me.chkZeroOut.Size = New System.Drawing.Size(115, 17)
+        Me.chkZeroOut.TabIndex = 4
+        Me.chkZeroOut.Text = "Inventory Zero Out"
+        Me.chkZeroOut.UseVisualStyleBackColor = True
+        '
         'btnImport
         '
         Me.btnImport.Location = New System.Drawing.Point(408, 48)
@@ -356,16 +366,6 @@ Partial Class frmAuditConsole
         'ofdINV_AD
         '
         Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
-        '
-        'chkZeroOut
-        '
-        Me.chkZeroOut.AutoSize = True
-        Me.chkZeroOut.Location = New System.Drawing.Point(42, 52)
-        Me.chkZeroOut.Name = "chkZeroOut"
-        Me.chkZeroOut.Size = New System.Drawing.Size(115, 17)
-        Me.chkZeroOut.TabIndex = 4
-        Me.chkZeroOut.Text = "Inventory Zero Out"
-        Me.chkZeroOut.UseVisualStyleBackColor = True
         '
         'frmAuditConsole
         '

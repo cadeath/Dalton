@@ -8,8 +8,12 @@ Public Class frmChangePasswordNew
     Private Sub btnChange_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChange.Click
         If Not isvalid() Then Exit Sub
         If Not chngePass.ChangePassword(txtNewPassword.Text) Then Exit Sub
-        MsgBox(SystemUser.USERNAME & "Updated", MsgBoxStyle.Information)
-        AddTimelyLogs("User Management", "User " & SystemUser.USERNAME & " Change Password", , , "By: " & SystemUser.USERNAME)
+        MsgBox(SystemUser.USERNAME & " Updated ", MsgBoxStyle.Information)
+        Clear()
+
+        AddTimelyLogs("CHANGE PASSWORD", "Change Password from: " & Encrypt(txtOldPassword.Text) & " to: " & _
+                      Encrypt(txtNewPassword.Text), , False, "By: " & SystemUser.USERNAME, 0)
+
     End Sub
 
     Private Function isvalid() As Boolean
@@ -30,4 +34,10 @@ Public Class frmChangePasswordNew
 
         Return True
     End Function
+
+    Private Sub Clear()
+        txtOldPassword.Text = ""
+        txtConfirmPassword.Text = ""
+        txtNewPassword.Text = ""
+    End Sub
 End Class

@@ -14,9 +14,15 @@
         LoadActive()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If frmCashInOut2.AccessType = "Full Acess" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
+
+        'With POSuser
+        '    btnVoid.Enabled = .canVoid
+        'End With
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

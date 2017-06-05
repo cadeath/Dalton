@@ -888,7 +888,7 @@ nextLINETODO:
 
             If Now.ToShortDateString > .Item("PASSWORD_AGE") Then
                 MsgBox("You reached the MAXIMUM DAYS account expiration," & vbCrLf & _
-                       "Please Contact SYSYTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
+                       "Please Contact SYSTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
                 Return False
             End If
         End With

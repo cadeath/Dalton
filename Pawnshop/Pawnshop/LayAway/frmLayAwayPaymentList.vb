@@ -29,6 +29,11 @@
     End Sub
 
     Private Sub frmLayAwayPaymentList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
         lvPayment.Items.Clear()
         lblDesc.Text = ""
     End Sub
@@ -60,7 +65,7 @@
     End Sub
 
     Friend Sub VoidLayPayments()
-        If POSuser.canVoid Then
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then
 
         End If
         Dim idx As Integer = lvPayment.FocusedItem.Tag

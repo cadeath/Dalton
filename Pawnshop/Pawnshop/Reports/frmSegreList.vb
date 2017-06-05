@@ -17,7 +17,7 @@
 
     Private Sub DailySegre()
         Dim dsName As String = "dsSegre", mySql As String
-        If Not POSuser.canSegregatedReport Then
+        If AccountRule.HasPrivilege("Segregated Reports(Advanced)") = "No Access" Then
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE  (STATUS = 'S' OR STATUS = 'W') AND "
@@ -41,7 +41,7 @@
         Dim st As Date = GetFirstDate(monCalendar.SelectionStart)
         Dim en As Date = GetLastDate(monCalendar.SelectionEnd)
         Dim dsName As String = "dsSegre", mySql As String
-        If Not POSuser.canSegregatedReport Then
+        If AccountRule.HasPrivilege("Segregated Reports(Advanced)") = "No Access" Then
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE  (STATUS = 'S' OR STATUS = 'W') AND "
