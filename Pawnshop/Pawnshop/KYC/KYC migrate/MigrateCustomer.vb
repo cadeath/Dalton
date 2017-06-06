@@ -373,6 +373,8 @@ NEXTLINE:
             database.SaveEntry(ds)
         Next
 
+        KYCConfig.phneCOUNT = 0
+
     End Sub
 #End Region
 
