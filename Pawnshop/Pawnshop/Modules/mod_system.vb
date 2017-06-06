@@ -666,7 +666,6 @@ Module mod_system
         Return True
     End Function
 
-
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
