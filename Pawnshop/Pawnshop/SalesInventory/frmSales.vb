@@ -308,7 +308,11 @@ Public Class frmSales
                 itm.ItemCode = lvSale.Items(idx).Text
                 itm.Load_Item()
 
-                DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                If itm.ItemCode = "SMT 00071" Then
+                    DOC_TOTAL -= GetEloadPrice(CDbl(lvSale.Items(idx).SubItems(2).Text)) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                Else
+                    DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                End If
                 ht_BroughtItems.Remove(itm.ItemCode)
                 lvSale.Items(idx).Remove()
 
