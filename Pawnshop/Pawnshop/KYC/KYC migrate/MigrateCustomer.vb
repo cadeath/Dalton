@@ -372,6 +372,7 @@ NEXTLINE:
 
             database.SaveEntry(ds)
         Next
+
     End Sub
 #End Region
 

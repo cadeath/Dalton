@@ -80,7 +80,6 @@
         createView &= vbCrLf & "	ON ITM.PAWNITEMID = P.PAWNITEMID INNER JOIN TBLITEM CLASS 	"
         createView &= vbCrLf & "	ON CLASS.ITEMID = ITM.ITEMID LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID;	"
 
-
         RunCommand(dropView)
         RunCommand(createView)
 

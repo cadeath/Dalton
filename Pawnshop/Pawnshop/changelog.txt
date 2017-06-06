@@ -34,6 +34,9 @@ Version 1.6.0.1
  - Update CashCount Module
  - Update Item Pullout Module
  - Add PulloutCount in maintenance
+ - Drop Pawnlist (Create pawnList)
+ - Drop Loan Register (Create Loan Register)
+ - Drop Expiry List (Create Expiry List)
 
 Version 1.6.0.0
  - Add kYC Module
