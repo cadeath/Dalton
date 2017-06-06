@@ -130,6 +130,12 @@
     <Compile Include="CashInBank\frmMain2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="For Ace Fix Layaway\frmFixAceLayaway.Designer.vb">
+      <DependentUpon>frmFixAceLayaway.vb</DependentUpon>
+    </Compile>
+    <Compile Include="For Ace Fix Layaway\frmFixAceLayaway.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="For Sap Accounts\frmCostofSaleGadget.Designer.vb">
       <DependentUpon>frmCostofSaleGadget.vb</DependentUpon>
     </Compile>
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="For Ace Fix Layaway\frmFixAceLayaway.resx">
+      <DependentUpon>frmFixAceLayaway.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="For Sap Accounts\frmCostofSaleGadget.resx">
       <DependentUpon>frmCostofSaleGadget.vb</DependentUpon>
