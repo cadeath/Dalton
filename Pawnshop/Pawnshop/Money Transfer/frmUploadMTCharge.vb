@@ -37,8 +37,9 @@ Public Class frmUploadMTCharge
         For cnt = 2 To MaxEntries
             Dim tmpChargeDetails As New ChargeDetails
             With tmpChargeDetails
+
                 .ChrID = oSheet.Cells(cnt, 1).Value
-                .ID = oSheet.Cells(cnt, 2).Value
+                '.ID = oSheet.Cells(cnt, 2).Value
                 .AmountFrom = oSheet.Cells(cnt, 4).Value
                 .AmountTo = oSheet.Cells(cnt, 5).Value
                 .Charge = oSheet.Cells(cnt, 6).Value
