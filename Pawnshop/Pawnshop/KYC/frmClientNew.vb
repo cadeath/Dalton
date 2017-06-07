@@ -41,7 +41,10 @@ Public Class frmClientNew
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         End If
+
+        verification()
     End Sub
+
     ''' <summary>
     ''' this method will set listview columns
     ''' </summary>

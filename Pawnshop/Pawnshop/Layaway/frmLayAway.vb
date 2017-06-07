@@ -29,6 +29,11 @@
 
 
     Private Sub frmLayAway_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If AccountRule.HasPrivilege("Lay away") = "Full Access" Then
+            btnOK.Enabled = True
+        Else
+            btnOK.Enabled = False
+        End If
         ClearText()
     End Sub
 

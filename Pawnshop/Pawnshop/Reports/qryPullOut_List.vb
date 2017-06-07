@@ -89,7 +89,7 @@
     Private Sub Outstanding_Loans()
         Dim dsName As String = "dsOutstanding"
 
-        If AccountRule.HasPrivilege("Outstanding Reports(Advanced)") = "No Access" Then
+        If AccountRule.HasPrivilege("Outstanding Reports(Advanced)") = "No Access" Or AccountRule.HasPrivilege("Outstanding Reports(Advanced)") = "Read Only" Then
             mySql = "SELECT * "
             mySql &= "FROM "
             mySql &= "( "

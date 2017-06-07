@@ -602,7 +602,9 @@ Public Class frmSales
 
         Select Case AccountRule.HasPrivilege("Return")
             Case "Full Access"
+                btnPost.Enabled = True
             Case "Read Only"
+                btnPost.Enabled = False
             Case "No Access"
                 MsgBox("You don't have access to the Return", MsgBoxStyle.Critical, "Authorization Invalid") : Exit Sub
         End Select
@@ -680,7 +682,9 @@ nextlineTODO:
 
         Select Case AccountRule.HasPrivilege("StockOut")
             Case "Full Access"
+                btnPost.Enabled = True
             Case "Read Only"
+                btnPost.Enabled = False
             Case "No Access"
                 MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid") : Exit Sub
         End Select
