@@ -136,6 +136,12 @@
     <Compile Include="For Ace Fix Layaway\frmFixAceLayaway.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="For ItemMaster\frmAddLayDiscount.Designer.vb">
+      <DependentUpon>frmAddLayDiscount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="For ItemMaster\frmAddLayDiscount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="For Sap Accounts\frmCostofSaleGadget.Designer.vb">
       <DependentUpon>frmCostofSaleGadget.vb</DependentUpon>
     </Compile>
@@ -269,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="For Ace Fix Layaway\frmFixAceLayaway.resx">
       <DependentUpon>frmFixAceLayaway.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="For ItemMaster\frmAddLayDiscount.resx">
+      <DependentUpon>frmAddLayDiscount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="For Sap Accounts\frmCostofSaleGadget.resx">
       <DependentUpon>frmCostofSaleGadget.vb</DependentUpon>
