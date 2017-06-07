@@ -1,11 +1,11 @@
 ﻿Public Class frmLayAwayPaymentList
 
     Friend Sub LoadListPayment(ByVal Item As String)
-        Dim mysql As String = "Select LY.LAYID, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+        Dim mysql As String = "Select LY.LAYID, C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
         mysql &= "LY.ITEMCODE , ITM.DESCRIPTION, LY.PRICE, LY.STATUS, LYL.PAYMENTDATE, LYL.AMOUNT, "
         mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY, LYL.CONTROLNUM, LYL.LINESID "
         mysql &= "From TBLLAYAWAY LY "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
+        mysql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = LY.CUSTOMERID "
         mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
         mysql &= "WHERE LYL.STATUS = '1' AND UPPER(LY.ITEMCODE) = UPPER('" & Item & "')"
@@ -44,7 +44,7 @@
 
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

@@ -25,7 +25,6 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
-
     'Friend LayCustomer As Integer
     'Friend LayItemCode As String
     'Friend LayCost As Integer
@@ -148,6 +147,7 @@ Public Class frmSales
             lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
             ItemAmount = (itm.SalePrice * itm.Quantity)
             lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
+            lv.SubItems.Add(itm.SRP.ToString("#,##0.00"))
             lv.SubItems.Add(itm.Discount)
         End If
 
@@ -243,6 +243,7 @@ Public Class frmSales
 
         IS_AUCTIONREDEEM()
 
+        If TransactionMode = TransType.StockOut Then frmPLU.isStockOut = True
         If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
         If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
@@ -345,7 +346,7 @@ Public Class frmSales
                 Exit Sub
             End If
 
-            If Not OTPDisable Then
+            If Not isOTPOn("Stockout") Then
                 OTPStockOut_Initialization()
 
                 diagGeneralOTP.GeneralOTP = OtpSettings
@@ -432,9 +433,9 @@ Public Class frmSales
                 .Item("UOM") = itm.UnitofMeasure
 
                 If itm.Discount = 0 Then
-                    .Item("Remarks") = ""
+                    .Item("Remarks") = Nothing
                 Else
-                    .Item("Remarks") = "Discount " & itm.Discount & "%"
+                    .Item("Remarks") = "Price " & itm.SRP & " Discounted " & itm.Discount & "%"
                 End If
 
 
@@ -779,4 +780,5 @@ Public Class frmSales
     '        MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
     '    End Try
     'End Sub
+
 End Class

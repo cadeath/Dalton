@@ -2,11 +2,14 @@
 
     Private qtyItm As Double = 1
     Private queued_IMD As New CollectionItemData
+    Private Modname As String = ""
 
     Private fromSales As Boolean = True
     Private fromInventory As Boolean = False
     Private isRedeem As Boolean = False
     Friend isLayAway As Boolean = False
+    Friend isCustomPrice As Boolean = False
+    Friend isStockOut As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -31,8 +34,8 @@
         ClearField()
         If isLayAway = True Then
             btnStock.Text = "Payments"
-            btnDiscount.Visible = False
-            btnCustom.Visible = False
+            'btnDiscount.Visible = False
+            'btnCustom.Visible = False
         End If
     End Sub
 
@@ -103,8 +106,6 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         ElseIf isLayAway Then
-            btnDiscount.Visible = False
-            btnCustom.Visible = False
 
             mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
             If src <> "" Then
@@ -237,7 +238,6 @@
         Dim hasSelected As Boolean = False
 
         If selected_Itm.OnLayAway = False Then
-
             If selected_Itm.SalePrice = 0 Or isRedeem Then
 
                 For Each AddedItems As ListViewItem In frmSales.lvSale.Items
@@ -249,6 +249,24 @@
                 Next
 
                 If hasSelected = False Then
+                    If isStockOut = True Then GoTo NextLineTODO
+                    OTPCustomPrice_Initialization()
+
+                    If Not isOTPOn("CustomPrice") Then
+                        diagGeneralOTP.GeneralOTP = OtpSettings
+                        diagGeneralOTP.TopMost = True
+                        diagGeneralOTP.ShowDialog()
+                        If Not diagGeneralOTP.isValid Then
+                            Exit Sub
+                        Else
+                            isCustomPrice = True
+                            GoTo NextLineTODO
+                        End If
+                    Else
+                        isCustomPrice = True
+                        GoTo NextLineTODO
+                    End If
+NextLineTODO:
                     Dim tmp As String = String.Empty
                     'InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                     While Not IsNumeric(tmp)
@@ -261,6 +279,22 @@
                     LayAmount = customPrice
                 Else
                     If isRedeem Then
+                        If isStockOut = True Then GoTo NextLineTODO1
+                        If Not isOTPOn("CustomPrice") Then
+                            diagGeneralOTP.GeneralOTP = OtpSettings
+                            diagGeneralOTP.TopMost = True
+                            diagGeneralOTP.ShowDialog()
+                            If Not diagGeneralOTP.isValid Then
+                                Exit Sub
+                            Else
+                                isCustomPrice = True
+                                GoTo NextLineTODO1
+                            End If
+                        Else
+                            isCustomPrice = True
+                            GoTo NextLineTODO1
+                        End If
+NextLineTODO1:
                         Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                         While Not IsNumeric(tmp)
                             tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
@@ -277,6 +311,23 @@
 
             Dim UnitPrice As Double = 0
             If fromInventory Then
+                If isStockOut = True Then GoTo NextLineTODO2
+                If Not isOTPOn("CustomPrice") Then
+                    diagGeneralOTP.GeneralOTP = OtpSettings
+                    diagGeneralOTP.TopMost = True
+                    diagGeneralOTP.ShowDialog()
+                    If Not diagGeneralOTP.isValid Then
+                        Exit Sub
+                    Else
+                        isCustomPrice = True
+                        GoTo NextLineTODO2
+                    End If
+                Else
+                    isCustomPrice = True
+                    GoTo NextLineTODO2
+                End If
+NextLineTODO2:
+
                 UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
             End If
 
@@ -284,10 +335,18 @@
                 frmLayAway.Show()
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True
+                If Not isOTPOn("CustomPrice") Then
+                    If isCustomPrice Then
+                        Dim NewOtp As New ClassOtp("Lay Away Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                        ", Custom Price:" & selected_Itm.SalePrice)
+                    End If
+                End If
             Else
                 If fromSales Then
                     If isRedeem Then qtyItm = 1
                     selected_Itm.Quantity = qtyItm
+                    selected_Itm.SRP = selected_Itm.SalePrice
+                    selected_Itm.Discount = 0
 
                     If isRedeem = True Then
                         frmSales.AddItem(selected_Itm, True)
@@ -295,6 +354,21 @@
                         frmSales.AddItem(selected_Itm)
                     End If
                     frmSales.ClearSearch()
+
+                    If isStockOut = True Then GoTo stockout
+                    If Not isOTPOn("CustomPrice") Then
+                        If isCustomPrice Then
+                            Select Case frmSales.TransactionMode
+                                Case frmSales.TransType.Returns : Modname = "Returns"
+                                Case frmSales.TransType.Cash : Modname = "Cash"
+                                Case frmSales.TransType.Check : Modname = "Check"
+                                Case frmSales.TransType.Auction : Modname = "Auction"
+                            End Select
+                            Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                          ", Custom Price:" & selected_Itm.SalePrice)
+                        End If
+                    End If
+stockout:
                 End If
             End If
         Else
@@ -352,31 +426,37 @@
 
     Private Sub btnDiscount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDiscount.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
-        OTPDiscount_Initialization()
+
         Dim idx As Integer = lvItem.SelectedItems(0).Index
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
 
-        If selected_Itm.SalePrice = 0 Then MsgBox("Item " & selected_Itm.ItemCode, MsgBoxStyle.Critical, "No Price") : Exit Sub
+        If selected_Itm.OnLayAway = True Then MsgBox("ItemCode " & selected_Itm.ItemCode & " Already on Layaway", MsgBoxStyle.Critical, "Error") : Exit Sub
+        If selected_Itm.SalePrice = 0 Then MsgBox("ItemCode " & selected_Itm.ItemCode & " No Price", MsgBoxStyle.Critical, "Error") : Exit Sub
+        Dim price As Double = selected_Itm.SalePrice
+        Dim discount As Integer = selected_Itm.Discount
+        Dim i As Double, subTotal As Double
+
+        If selected_Itm.Discount <> 0 Then
+            i = (Val(discount) / 100)
+            subTotal = Val(price) * i
+            selected_Itm.SalePrice = Val(price) - subTotal
+        End If
+
         selected_Itm.Quantity = qtyItm
+        selected_Itm.SRP = price
 
-        If Not OTPDisable Then
-            diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.TopMost = True
-            diagGeneralOTP.ShowDialog()
-
-            If Not diagGeneralOTP.isValid Then
-                Exit Sub
-            Else
-                frmDiscount.LoadItem(selected_Itm)
-            End If
+        If isLayAway = False Then
+           
+            frmSales.AddItem(selected_Itm)
+            frmSales.Show()
         Else
-            frmDiscount.LoadItem(selected_Itm)
+            frmLayAway.Show()
+            frmLayAway.LoadItemEncode(selected_Itm)
+            frmLayAway.isNewLayAway = True
         End If
        
-        frmDiscount.Show()
         Me.Close()
-
     End Sub
 
     Private Sub btnCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCustom.Click
@@ -387,8 +467,27 @@
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
 
-        selected_Itm.Quantity = qtyItm
+        If selected_Itm.OnLayAway = True Then MsgBox("ItemCode " & selected_Itm.ItemCode & " Already on Layaway", MsgBoxStyle.Critical, "Error") : Exit Sub
 
+        If isStockOut = True Then GoTo NextLineTODO
+        OTPCustomPrice_Initialization()
+
+        If Not isOTPOn("CustomPrice") Then
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                GoTo NextLineTODO
+            End If
+        Else
+            GoTo NextLineTODO
+        End If
+
+NextLineTODO:
+       
+        selected_Itm.Quantity = qtyItm
         Dim tmp As String = String.Empty '= InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
         While Not IsNumeric(tmp)
             tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
@@ -396,10 +495,46 @@
         End While
 
         Dim customPrice As Double = CDbl(tmp)
+        selected_Itm.SRP = selected_Itm.SalePrice
         selected_Itm.SalePrice = customPrice
 
-        frmSales.AddItem(selected_Itm)
-        frmSales.ClearSearch()
+        'If Not isOTPOn("CustomPrice") Then
+        Select Case frmSales.TransactionMode
+            Case frmSales.TransType.Returns : Modname = "Returns"
+            Case frmSales.TransType.Cash : Modname = "Cash"
+            Case frmSales.TransType.Check : Modname = "Check"
+            Case frmSales.TransType.Auction : Modname = "Auction"
+        End Select
+        Dim NewOtp As New ClassOtp(Modname & " Custom Price", diagGeneralOTP.txtPIN.Text, "ItemCode: " & selected_Itm.ItemCode & _
+                                   ", Custom Price:" & selected_Itm.SalePrice)
+        'End If
+        If isLayAway = False Then
+            frmSales.AddItem(selected_Itm)
+            frmSales.ClearSearch()
+        Else
+            frmLayAway.Show()
+            frmLayAway.LoadItemEncode(selected_Itm)
+            frmLayAway.isNewLayAway = True
+        End If
+
         Me.Close()
+    End Sub
+
+    Private Sub lvItem_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvItem.MouseClick
+        If lvItem.SelectedItems.Count = 0 Then Exit Sub
+        Dim idx As Integer = lvItem.SelectedItems(0).Index
+
+        Dim selected_Itm As New cItemData
+        selected_Itm = queued_IMD.Item(idx)
+
+        If isLayAway = True Then
+            If selected_Itm.OnLayAway = True Then
+                btnDiscount.Visible = False
+                btnCustom.Visible = False
+            Else
+                btnDiscount.Visible = True
+                btnCustom.Visible = True
+            End If
+        End If
     End Sub
 End Class

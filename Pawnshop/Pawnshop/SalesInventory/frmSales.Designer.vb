@@ -30,6 +30,7 @@ Partial Class frmSales
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.lblSearch = New System.Windows.Forms.Label()
@@ -57,7 +58,7 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,7 +67,7 @@ Partial Class frmSales
         Me.lvSale.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvSale.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvSale.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvSale.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSale.FullRowSelect = True
         Me.lvSale.GridLines = True
@@ -86,12 +87,12 @@ Partial Class frmSales
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 174
+        Me.ColumnHeader2.Width = 130
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Qty"
-        Me.ColumnHeader3.Width = 44
+        Me.ColumnHeader3.Width = 39
         '
         'ColumnHeader4
         '
@@ -102,6 +103,11 @@ Partial Class frmSales
         '
         Me.ColumnHeader5.Text = "Total"
         Me.ColumnHeader5.Width = 90
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "SRP"
+        Me.ColumnHeader6.Width = 74
         '
         'Label1
         '
@@ -342,10 +348,10 @@ Partial Class frmSales
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
         '
-        'ColumnHeader6
+        'ColumnHeader7
         '
-        Me.ColumnHeader6.Text = "Discount %"
-        Me.ColumnHeader6.Width = 93
+        Me.ColumnHeader7.Text = "% Discount"
+        Me.ColumnHeader7.Width = 79
         '
         'frmSales
         '
@@ -409,4 +415,5 @@ Partial Class frmSales
     Friend WithEvents tsbtnOut As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbtnLay As System.Windows.Forms.ToolStripButton
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class

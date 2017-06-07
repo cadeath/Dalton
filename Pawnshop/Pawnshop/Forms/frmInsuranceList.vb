@@ -30,7 +30,7 @@
     ''' <remarks></remarks>
     Private Sub LoadInsurance()
 
-        Dim mySql As String = "SELECT FIRST 50 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
+        Dim mySql As String = "SELECT FIRST 10 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
 
         Dim ds As DataSet = LoadSQL(mySql)
 

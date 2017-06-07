@@ -22,7 +22,7 @@ Partial Class frmPLU
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"CEL 00003", "SAMSUNG J1", "CELLPHONE", "5"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"CEL 00003", "SAMSUNG J1", "CELLPHONE", "5"}, -1)
         Me.txtCode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lvItem = New System.Windows.Forms.ListView()
@@ -71,7 +71,7 @@ Partial Class frmPLU
         Me.lvItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvItem.FullRowSelect = True
         Me.lvItem.GridLines = True
-        Me.lvItem.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvItem.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvItem.Location = New System.Drawing.Point(12, 46)
         Me.lvItem.MultiSelect = False
         Me.lvItem.Name = "lvItem"
