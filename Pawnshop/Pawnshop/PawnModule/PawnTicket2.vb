@@ -639,10 +639,10 @@ Public Class PawnTicket2
                     .Item("DAYSOVERDUE") = 0
                     .Item("DelayInterest") = 0
                     .Item("Penalty") = 0
-                    .Item("ServiceCharge") = 0
+                    '.Item("ServiceCharge") = 0
                     .Item("RenewDue") = 0
                     .Item("RedeemDue") = 0
-                    .Item("AdvInt") = 0
+                    '.Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
                 Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
