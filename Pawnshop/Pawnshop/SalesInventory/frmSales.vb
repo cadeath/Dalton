@@ -320,6 +320,8 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCash.Click
+        verification()
+
         If ShiftMode() Then
             Load_asCash()
         End If
@@ -644,6 +646,7 @@ nextlineTODO:
     End Sub
 
     Private Sub tsbtnAuction_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnAuction.Click
+        verification()
 
         If ShiftMode() Then
             If TransactionMode <> TransType.Auction Then

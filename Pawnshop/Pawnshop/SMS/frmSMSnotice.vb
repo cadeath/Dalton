@@ -167,6 +167,7 @@
     Private Sub verification()
         If AccessType = "Read Only" Then
             btnSend.Enabled = False
+            btnChange.Enabled = False
         End If
     End Sub
     Private Sub lvExpiry_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvExpiry.SelectedIndexChanged
