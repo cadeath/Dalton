@@ -660,7 +660,7 @@ Public Class PawnTicket2
                     .Item("OrDate") = New Date
                     .Item("RenewDue") = 0
                     .Item("RedeemDue") = 0
-                    .Item("AdvInt") = 0
+                    ' .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
 
