@@ -38,6 +38,11 @@ Version 1.6.0.1
  - Drop Loan Register (Create Loan Register)
  - Drop Expiry List (Create Expiry List)
 
+Version 1.6.0.1
+ - Add Class (CIR update)
+ - Auto patch cir files in DIS
+ - Create CIR files folder in DIS
+
 Version 1.6.0.0
  - Add kYC Module
  - Add IsKYCRequired in Maintenance(default "NO")
