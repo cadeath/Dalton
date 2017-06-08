@@ -107,7 +107,7 @@
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         ElseIf isLayAway Then
 
-            mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
+            mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 And Onhand <> 0"
             If src <> "" Then
                 mySql = "Select * From ItemMaster Where isLayAway <> 0 "
                 mySql &= "AND (Upper(ItemCode) LIKE Upper('%" & src & "%') OR UPPER(DESCRIPTION) LIKE UPPER('%" & src & "%')) "
@@ -435,19 +435,27 @@ stockout:
         If selected_Itm.SalePrice = 0 Then MsgBox("ItemCode " & selected_Itm.ItemCode & " No Price", MsgBoxStyle.Critical, "Error") : Exit Sub
         Dim price As Double = selected_Itm.SalePrice
         Dim discount As Integer = selected_Itm.Discount
+        Dim layDiscount As Integer = selected_Itm.LayDiscount
         Dim i As Double, subTotal As Double
 
-        If selected_Itm.Discount <> 0 Then
-            i = (Val(discount) / 100)
-            subTotal = Val(price) * i
-            selected_Itm.SalePrice = Val(price) - subTotal
+        If isLayAway = True Then
+            If selected_Itm.LayDiscount <> 0 Then
+                i = (Val(layDiscount) / 100)
+                subTotal = Val(price) * i
+                selected_Itm.SalePrice = Val(price) - subTotal
+            End If
+        Else
+            If selected_Itm.Discount <> 0 Then
+                i = (Val(discount) / 100)
+                subTotal = Val(price) * i
+                selected_Itm.SalePrice = Val(price) - subTotal
+            End If
         End If
 
         selected_Itm.Quantity = qtyItm
         selected_Itm.SRP = price
 
         If isLayAway = False Then
-           
             frmSales.AddItem(selected_Itm)
             frmSales.Show()
         Else
