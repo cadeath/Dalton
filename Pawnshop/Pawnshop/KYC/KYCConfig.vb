@@ -200,6 +200,7 @@
                 Dim i As Integer = 0
                 Dim newPhone As New MigratePhoneNumber
                 For Each phne In PhoneCol
+                    phne = phne.Replace(" ", "")
                     If phne = "" Then
                         On Error Resume Next
                     Else
