@@ -25,10 +25,6 @@
         CREDITS &= vbCrLf & "DATABASE VERSION: " & DBVERSION
     End Sub
 
-    Private Sub OKButton_Click(sender As System.Object, e As System.EventArgs) Handles OKButton.Click
-        Me.Close()
-    End Sub
-
     Private Sub ab2_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         FullCredits()
         ' Set the title of the form.
@@ -47,5 +43,9 @@
         Me.LabelCopyright.Text = My.Application.Info.Copyright
         Me.LabelCompanyName.Text = My.Application.Info.CompanyName
         Me.TextBoxDescription.Text = My.Application.Info.Description & CREDITS
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 End Class
