@@ -1073,5 +1073,29 @@ nextLINETODO:
         End If
         Return True
     End Function
+
+    Friend Sub AutoAddPrivilege(ByVal privType As String)
+        Dim mysql As String = "SELECT USERID FROM TBL_USER_DEFAULT WHERE USERTYPE <> 'Admin' AND STATUS = 1"
+        Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
+
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            mysql = "SELECT * FROM " & MAIN_LINE & " WHERE USERID = " & dr.Item(0)
+            Dim dsPriv As DataSet = LoadSQL(mysql, MAIN_LINE)
+
+            Dim dsNewrow As DataRow
+            dsNewrow = dsPriv.Tables(0).NewRow
+            With dsNewrow
+                .Item("USERID") = dr.Item(0)
+                .Item("PRIVILEGE_TYPE") = privType
+                .Item("ACCESS_TYPE") = "No Access"
+                .Item("DATE_CREATED_LINE") = Now.ToShortDateString
+                .Item("DATE_UPDATED_LINE") = Now.ToShortDateString
+            End With
+            dsPriv.Tables(0).Rows.Add(dsNewrow)
+            database.SaveEntry(dsPriv)
+        Next
+    End Sub
 #End Region
 End Class

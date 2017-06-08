@@ -12,6 +12,10 @@
         Load_Money()
         Load_Denomination()
         lblCurrent.Text = CurrentDate.ToLongDateString
+
+        If AccountRule.HasPrivilege("Open Store") = "Read Only" Then
+            btnPost.Enabled = False
+        End If
     End Sub
 
     Private Sub Load_Denomination()

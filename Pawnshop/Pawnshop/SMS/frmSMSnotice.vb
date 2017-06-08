@@ -5,7 +5,6 @@
 
     Private Sub frmSMSnotice_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Load_Expiry()
-        verification()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -164,8 +163,8 @@
         diagQuickView_PT.ShowDialog()
     End Sub
 
-    Private Sub verification()
-        If AccessType = "Read Only" Then
+    Friend Sub verification()
+        If AccountRule.HasPrivilege("Expiry List") = "Read Only" Then
             btnSend.Enabled = False
             btnChange.Enabled = False
         End If

@@ -1,5 +1,6 @@
 ﻿Public Class frmaddPrivilege
     Dim uRule As New User_rule
+    Dim Priv As Sys_user
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If txtPrivilegeType.Text = "" Then Exit Sub
@@ -21,6 +22,9 @@
         For Each privilege As ListViewItem In lvPrivilegeType.Items
             uRule.Privilege_Type = privilege.Text
             uRule.adpri_Save(privilege.Text)
+
+            Priv = New Sys_user
+            Priv.AutoAddPrivilege(privilege.Text)
         Next
 
         MsgBox("Successfully saved.", MsgBoxStyle.Information, "Save")
