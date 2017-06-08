@@ -229,6 +229,16 @@
         End Set
     End Property
 
+    Private _layDiscount As Integer
+    Public Property LayDiscount() As String
+        Get
+            Return _layDiscount
+        End Get
+        Set(ByVal value As String)
+            _layDiscount = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -280,6 +290,7 @@
                 .Item("COMMENTS") = _comments
                 .Item("isLayAway") = If(_isLayAway, 1, 0)
                 .Item("Discount") = _discount
+                .Item("LayDiscount") = _layDiscount
             End With
             ds.Tables(TABLE).Rows.Add(dsNewRow)
             isNew = True
@@ -301,6 +312,7 @@
                 .Item("UPDATE_TIME") = Now()
                 .Item("isLayAway") = If(_isLayAway, 1, 0)
                 .Item("Discount") = _discount
+                .Item("LayDiscount") = _layDiscount
             End With
         End If
 
@@ -328,6 +340,7 @@
             _isLayAway = IIf(.Item("isLayAway") = 1, True, False)
             _onLayAway = IIf(.Item("OnLayAway") = 1, True, False)
             _discount = .Item("Discount")
+            _layDiscount = .Item("LayDiscount")
         End With
     End Sub
 
@@ -367,6 +380,7 @@
             _isLayAway = IIf(.Item("isLayAway") = 1, True, False)
             _onLayAway = IIf(.Item("OnLayAway") = 1, True, False)
             _discount = .Item("Discount")
+            _layDiscount = .Item("LayDiscount")
             hasLoaded = True
         End With
     End Sub
