@@ -276,12 +276,19 @@
         Dim strModname1 As String = String.Empty, strModname2 As String = String.Empty
         Dim tmpService As String = _serviceType + IIf(_transType = 0, " OUT", " IN")
         Select Case tmpService
-            Case "Pera Padala OUT", "Pera Padala - PMFTC OUT"
+            Case "Pera Padala OUT"
                 strModname1 = "PERA PADALA OUT"
                 strModname2 = strModname1
-            Case "Pera Padala IN", "Pera Padala - PMFTC IN"
+            Case "Pera Padala IN"
                 strModname1 = "PERA PADALA IN"
                 strModname2 = strModname1
+
+            Case "Pera Padala - PMFTC OUT"
+                strModname1 = "PERA PADALA OUT"
+                strModname2 = "Pera Padala - PMFTC OUT"
+            Case "Pera Padala - PMFTC IN"
+                strModname1 = "PERA PADALA IN"
+                strModname2 = "Pera Padala - PMFTC IN"
 
             Case "Western Union - Local OUT", "Western Union - Intl OUT"
                 strModname1 = "WESTERN UNION OUT"
