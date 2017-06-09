@@ -1074,7 +1074,7 @@ nextLINETODO:
         Return True
     End Function
 
-    Friend Sub AutoAddPrivilege(ByVal privType As String)
+    Friend Sub AutoAddPrivilege(ByVal privType As String, ByVal ACTyep As String)
         Dim mysql As String = "SELECT USERID FROM TBL_USER_DEFAULT WHERE USERTYPE <> 'Admin' AND STATUS = 1"
         Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
 
@@ -1089,7 +1089,7 @@ nextLINETODO:
             With dsNewrow
                 .Item("USERID") = dr.Item(0)
                 .Item("PRIVILEGE_TYPE") = privType
-                .Item("ACCESS_TYPE") = "No Access"
+                .Item("ACCESS_TYPE") = ACTyep
                 .Item("DATE_CREATED_LINE") = Now.ToShortDateString
                 .Item("DATE_UPDATED_LINE") = Now.ToShortDateString
             End With

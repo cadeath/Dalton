@@ -28,6 +28,10 @@ Partial Class frmaddPrivilege
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cboAccessType = New System.Windows.Forms.ComboBox()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'btnAdd
@@ -41,18 +45,18 @@ Partial Class frmaddPrivilege
         '
         'txtPrivilegeType
         '
-        Me.txtPrivilegeType.Location = New System.Drawing.Point(12, 12)
+        Me.txtPrivilegeType.Location = New System.Drawing.Point(86, 13)
         Me.txtPrivilegeType.Name = "txtPrivilegeType"
-        Me.txtPrivilegeType.Size = New System.Drawing.Size(246, 20)
+        Me.txtPrivilegeType.Size = New System.Drawing.Size(172, 20)
         Me.txtPrivilegeType.TabIndex = 0
         '
         'lvPrivilegeType
         '
-        Me.lvPrivilegeType.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
+        Me.lvPrivilegeType.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.lvPrivilegeType.FullRowSelect = True
-        Me.lvPrivilegeType.Location = New System.Drawing.Point(12, 38)
+        Me.lvPrivilegeType.Location = New System.Drawing.Point(12, 75)
         Me.lvPrivilegeType.Name = "lvPrivilegeType"
-        Me.lvPrivilegeType.Size = New System.Drawing.Size(246, 232)
+        Me.lvPrivilegeType.Size = New System.Drawing.Size(246, 195)
         Me.lvPrivilegeType.TabIndex = 4
         Me.lvPrivilegeType.UseCompatibleStateImageBehavior = False
         Me.lvPrivilegeType.View = System.Windows.Forms.View.Details
@@ -60,11 +64,11 @@ Partial Class frmaddPrivilege
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Privilege Type"
-        Me.ColumnHeader1.Width = 241
+        Me.ColumnHeader1.Width = 140
         '
         'btnRemove
         '
-        Me.btnRemove.Location = New System.Drawing.Point(264, 41)
+        Me.btnRemove.Location = New System.Drawing.Point(264, 77)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(67, 23)
         Me.btnRemove.TabIndex = 2
@@ -80,11 +84,47 @@ Partial Class frmaddPrivilege
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(9, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(71, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "PrivilegeType"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(9, 46)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(66, 13)
+        Me.Label2.TabIndex = 6
+        Me.Label2.Text = "AccessType"
+        '
+        'cboAccessType
+        '
+        Me.cboAccessType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAccessType.FormattingEnabled = True
+        Me.cboAccessType.Items.AddRange(New Object() {"Full Access", "Read Only", "No Access"})
+        Me.cboAccessType.Location = New System.Drawing.Point(86, 43)
+        Me.cboAccessType.Name = "cboAccessType"
+        Me.cboAccessType.Size = New System.Drawing.Size(172, 21)
+        Me.cboAccessType.TabIndex = 7
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "AccessType"
+        Me.ColumnHeader2.Width = 101
+        '
         'frmaddPrivilege
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(337, 279)
+        Me.Controls.Add(Me.cboAccessType)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.lvPrivilegeType)
@@ -104,4 +144,8 @@ Partial Class frmaddPrivilege
     Friend WithEvents btnRemove As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cboAccessType As System.Windows.Forms.ComboBox
 End Class

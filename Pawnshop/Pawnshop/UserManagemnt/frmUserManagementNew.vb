@@ -574,6 +574,7 @@ UpdateS:
             Exit Sub
         End If
         ClearFields("")
+        LoadAccntValidation()
     End Sub
 
 
