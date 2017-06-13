@@ -43,18 +43,18 @@ Partial Class frmAuditConsole
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
-        Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.lvItem = New System.Windows.Forms.ListView()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.lvItem = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -269,10 +269,6 @@ Partial Class frmAuditConsole
         Me.btnBrowse.Text = ". . ."
         Me.btnBrowse.UseVisualStyleBackColor = True
         '
-        'ofdINV_AD
-        '
-        Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
-        '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.GroupBox3)
@@ -283,6 +279,32 @@ Partial Class frmAuditConsole
         Me.TabPage2.TabIndex = 3
         Me.TabPage2.Text = "Audit Tracker"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.txtSearch)
+        Me.GroupBox3.Controls.Add(Me.btnSearch)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(483, 49)
+        Me.GroupBox3.TabIndex = 1
+        Me.GroupBox3.TabStop = False
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(6, 18)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(390, 20)
+        Me.txtSearch.TabIndex = 1
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(402, 16)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 0
+        Me.btnSearch.Text = "S&earch"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'lvItem
         '
@@ -296,32 +318,6 @@ Partial Class frmAuditConsole
         Me.lvItem.UseCompatibleStateImageBehavior = False
         Me.lvItem.View = System.Windows.Forms.View.Details
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.txtSearch)
-        Me.GroupBox3.Controls.Add(Me.btnSearch)
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(483, 49)
-        Me.GroupBox3.TabIndex = 1
-        Me.GroupBox3.TabStop = False
-        '
-        'btnSearch
-        '
-        Me.btnSearch.Location = New System.Drawing.Point(402, 16)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch.TabIndex = 0
-        Me.btnSearch.Text = "S&earch"
-        Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(6, 18)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(390, 20)
-        Me.txtSearch.TabIndex = 1
-        '
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "ItemCode"
@@ -330,7 +326,7 @@ Partial Class frmAuditConsole
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 138
+        Me.ColumnHeader2.Width = 178
         '
         'ColumnHeader3
         '
@@ -350,6 +346,10 @@ Partial Class frmAuditConsole
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "Remarks"
+        '
+        'ofdINV_AD
+        '
+        Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
         '
         'frmAuditConsole
         '
