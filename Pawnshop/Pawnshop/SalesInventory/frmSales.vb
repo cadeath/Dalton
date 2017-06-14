@@ -339,7 +339,10 @@ Public Class frmSales
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
 
-        If TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then Remarks = InputBox("Enter CI # ", "Remarks")
+        If TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
+            Remarks = InputBox("Enter CI # ", "Remarks")
+            Remarks = "CI " & Remarks
+        End If
 
         ' INVENTORY STOCK OUT
         If TransactionMode = TransType.StockOut Then
