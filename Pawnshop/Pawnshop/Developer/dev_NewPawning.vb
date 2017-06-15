@@ -135,7 +135,7 @@
             'AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
             AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount, , , .LoadLastIDNumberPawn)
 
-            HitManagement.do_PawningHit(PawnItem.Pawner, PawnItem.PawnTicket)
+            '  HitManagement.do_PawningHit(PawnItem.Pawner, PawnItem.PawnTicket)
         End With
     End Sub
     Private Function GetAppraiserID(ByVal name As String) As Integer

@@ -37,6 +37,7 @@
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
         txtCustomerCode.Text = GetOption("CustomerCode")
         txtBranchAddr.Text = GetOption("Branch Address")
+        cboKYC.Text = GetOption("KYCRequired")
 
         If locked Then
             txtCode.Enabled = False
@@ -78,7 +79,7 @@
             isOTPEnable = True
             OTPSettings_Initialization()
 
-            If Not OTPDisable Then
+            If Not isOTPOn("Settings") Then
                 diagGeneralOTP.GeneralOTP = OtpSettings
                 diagGeneralOTP.TopMost = True
                 diagGeneralOTP.ShowDialog()
@@ -121,6 +122,7 @@
         UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
         UpdateOptions("SalesReturnNum", txtReturnNum.Text, isOTPEnable)
         UpdateOptions("STONum", txtStockOutNum.Text, isOTPEnable)
+        UpdateOptions("KYCRequired", cboKYC.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)

@@ -22,7 +22,7 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT FIRST 50 * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
+        Dim mySql As String = "SELECT FIRST 10 * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -116,7 +116,7 @@
 
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

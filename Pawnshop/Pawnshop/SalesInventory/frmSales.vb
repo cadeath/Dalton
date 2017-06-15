@@ -25,7 +25,6 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
-
     'Friend LayCustomer As Integer
     'Friend LayItemCode As String
     'Friend LayCost As Integer
@@ -148,6 +147,8 @@ Public Class frmSales
             lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
             ItemAmount = (itm.SalePrice * itm.Quantity)
             lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
+            lv.SubItems.Add(itm.SRP.ToString("#,##0.00"))
+            lv.SubItems.Add(itm.Discount)
         End If
 
         Dim src_idx As String = IIf(TransactionMode = TransType.Auction, itm.Tags, itm.ItemCode)
@@ -242,6 +243,7 @@ Public Class frmSales
 
         IS_AUCTIONREDEEM()
 
+        If TransactionMode = TransType.StockOut Then frmPLU.isStockOut = True
         If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
         If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
@@ -344,7 +346,7 @@ Public Class frmSales
                 Exit Sub
             End If
 
-            If Not OTPDisable Then
+            If Not isOTPOn("Stockout") Then
                 OTPStockOut_Initialization()
 
                 diagGeneralOTP.GeneralOTP = OtpSettings
@@ -429,6 +431,14 @@ Public Class frmSales
                 .Item("SALEPRICE") = itm.SalePrice
                 .Item("ROWTOTAL") = itm.SalePrice * itm.Quantity
                 .Item("UOM") = itm.UnitofMeasure
+
+                If itm.Discount = 0 Then
+                    .Item("Remarks") = Nothing
+                Else
+                    .Item("Remarks") = "Price " & itm.SRP & " Discounted " & itm.Discount & "%"
+                End If
+
+
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
 
@@ -450,22 +460,24 @@ Public Class frmSales
 
             ' JOURNAL ENTRY
             getLastID = GetDocLines_LastID()
-            If TransactionMode = TransType.Returns Then
-                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
-                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
-            Else
-                If TransactionMode <> TransType.Auction Then
-                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                    AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+            If TransactionMode <> TransType.StockOut Then
+                If TransactionMode = TransType.Returns Then
+                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
+                    AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
                 Else
-                    ' JE FOR AUCTION REDEEM
+                    If TransactionMode <> TransType.Auction Then
+                        AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                        AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                    Else
+                        ' JE FOR AUCTION REDEEM
 
-                    ' SELLING PRICE
-                    AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
-                    AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
-                    ' PRINCIPAL
-                    AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
-                    AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                        ' SELLING PRICE
+                        AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
+                        AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
+                        ' PRINCIPAL
+                        AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                        AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                    End If
                 End If
             End If
         Next
@@ -770,4 +782,5 @@ Public Class frmSales
     '        MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
     '    End Try
     'End Sub
+
 End Class
