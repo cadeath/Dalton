@@ -166,7 +166,7 @@
             lblForfeitDate.Text = .Item("ForfeitDate").ToShortDateString
 
             Dim PenaltyDate As Date = .Item("DocDate").AddDays(89).ToShortDateString
-            If CurrentDate >= PenaltyDate Then
+            If CurrentDate.ToShortDateString > PenaltyDate Then
                 tmpBalance = Math.Round(.Item("Balance") + (.Item("Balance") * 0.02), 2, MidpointRounding.AwayFromZero)
                 lblBalance.Text = tmpBalance
                 lblPenalty.Text = Math.Round(.Item("Balance") * 0.02, 2, MidpointRounding.AwayFromZero)
