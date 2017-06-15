@@ -24,7 +24,7 @@ Namespace My
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
-            Me.IsSingleInstance = true
+            Me.IsSingleInstance = false
             Me.EnableVisualStyles = true
             Me.SaveMySettingsOnExit = true
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Pawnshop.frmMainV2
+            Me.MainForm = Global.GUI.Form1
         End Sub
     End Class
 End Namespace

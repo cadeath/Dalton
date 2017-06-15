@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmMain
+Partial Class frmMainV2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,19 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainV2))
+        Me.btnLayAway = New System.Windows.Forms.Button()
+        Me.btnInsurance = New System.Windows.Forms.Button()
+        Me.btnDollarBuying = New System.Windows.Forms.Button()
+        Me.btnMoneyTransfer = New System.Windows.Forms.Button()
+        Me.btnBranch = New System.Windows.Forms.Button()
+        Me.btnClient = New System.Windows.Forms.Button()
+        Me.btnPOS = New System.Windows.Forms.Button()
+        Me.btnPawning = New System.Windows.Forms.Button()
+        Me.btnCash = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseOpenStore = New System.Windows.Forms.ToolStripMenuItem()
@@ -91,46 +103,169 @@ Partial Class frmMain
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExtractToExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.pbLogo = New System.Windows.Forms.PictureBox()
-        Me.pInfo = New System.Windows.Forms.Panel()
-        Me.lblMessage = New System.Windows.Forms.Label()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.pButton = New System.Windows.Forms.Panel()
-        Me.btnCash = New System.Windows.Forms.Button()
-        Me.btnPOS = New System.Windows.Forms.Button()
-        Me.btnBranch = New System.Windows.Forms.Button()
-        Me.btnDollarBuying = New System.Windows.Forms.Button()
-        Me.btnLayAway = New System.Windows.Forms.Button()
-        Me.btnInsurance = New System.Windows.Forms.Button()
-        Me.btnMoneyTransfer = New System.Windows.Forms.Button()
-        Me.btnClient = New System.Windows.Forms.Button()
-        Me.btnPawning = New System.Windows.Forms.Button()
+        Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.statusStrip = New System.Windows.Forms.StatusStrip()
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssOthers = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
-        Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.LayawayListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LayawayPaymentReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ForfeitLayawayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.msMenu.SuspendLayout()
-        CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pInfo.SuspendLayout()
-        Me.pButton.SuspendLayout()
         Me.statusStrip.SuspendLayout()
-        CType(Me.bannerSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'btnLayAway
+        '
+        Me.btnLayAway.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLayAway.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnLayAway.Location = New System.Drawing.Point(19, 257)
+        Me.btnLayAway.Name = "btnLayAway"
+        Me.btnLayAway.Size = New System.Drawing.Size(161, 47)
+        Me.btnLayAway.TabIndex = 31
+        Me.btnLayAway.Text = "Lay Away"
+        Me.btnLayAway.UseVisualStyleBackColor = True
+        '
+        'btnInsurance
+        '
+        Me.btnInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInsurance.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnInsurance.Location = New System.Drawing.Point(19, 204)
+        Me.btnInsurance.Name = "btnInsurance"
+        Me.btnInsurance.Size = New System.Drawing.Size(161, 47)
+        Me.btnInsurance.TabIndex = 30
+        Me.btnInsurance.Text = "Insurance"
+        Me.btnInsurance.UseVisualStyleBackColor = True
+        '
+        'btnDollarBuying
+        '
+        Me.btnDollarBuying.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDollarBuying.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnDollarBuying.Location = New System.Drawing.Point(19, 310)
+        Me.btnDollarBuying.Name = "btnDollarBuying"
+        Me.btnDollarBuying.Size = New System.Drawing.Size(161, 47)
+        Me.btnDollarBuying.TabIndex = 32
+        Me.btnDollarBuying.Text = "Foreign Exchange"
+        Me.btnDollarBuying.UseVisualStyleBackColor = True
+        '
+        'btnMoneyTransfer
+        '
+        Me.btnMoneyTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoneyTransfer.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnMoneyTransfer.Location = New System.Drawing.Point(19, 151)
+        Me.btnMoneyTransfer.Name = "btnMoneyTransfer"
+        Me.btnMoneyTransfer.Size = New System.Drawing.Size(161, 47)
+        Me.btnMoneyTransfer.TabIndex = 29
+        Me.btnMoneyTransfer.Text = "Money Transfer"
+        Me.btnMoneyTransfer.UseVisualStyleBackColor = True
+        '
+        'btnBranch
+        '
+        Me.btnBranch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBranch.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnBranch.Location = New System.Drawing.Point(19, 363)
+        Me.btnBranch.Name = "btnBranch"
+        Me.btnBranch.Size = New System.Drawing.Size(161, 47)
+        Me.btnBranch.TabIndex = 33
+        Me.btnBranch.Text = "Borrowing"
+        Me.btnBranch.UseVisualStyleBackColor = True
+        '
+        'btnClient
+        '
+        Me.btnClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClient.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnClient.Location = New System.Drawing.Point(19, 98)
+        Me.btnClient.Name = "btnClient"
+        Me.btnClient.Size = New System.Drawing.Size(161, 47)
+        Me.btnClient.TabIndex = 28
+        Me.btnClient.Text = "Client"
+        Me.btnClient.UseVisualStyleBackColor = True
+        '
+        'btnPOS
+        '
+        Me.btnPOS.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPOS.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnPOS.Location = New System.Drawing.Point(19, 416)
+        Me.btnPOS.Name = "btnPOS"
+        Me.btnPOS.Size = New System.Drawing.Size(161, 47)
+        Me.btnPOS.TabIndex = 34
+        Me.btnPOS.Text = "Inventory System"
+        Me.btnPOS.UseVisualStyleBackColor = True
+        '
+        'btnPawning
+        '
+        Me.btnPawning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPawning.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnPawning.Location = New System.Drawing.Point(19, 45)
+        Me.btnPawning.Name = "btnPawning"
+        Me.btnPawning.Size = New System.Drawing.Size(161, 47)
+        Me.btnPawning.TabIndex = 27
+        Me.btnPawning.Text = "Pawning"
+        Me.btnPawning.UseVisualStyleBackColor = True
+        '
+        'btnCash
+        '
+        Me.btnCash.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCash.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.btnCash.Location = New System.Drawing.Point(19, 469)
+        Me.btnCash.Name = "btnCash"
+        Me.btnCash.Size = New System.Drawing.Size(161, 47)
+        Me.btnCash.TabIndex = 35
+        Me.btnCash.Text = "Cash In/Out"
+        Me.btnCash.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox1.InitialImage = Nothing
+        Me.PictureBox1.Location = New System.Drawing.Point(-2, 25)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(1166, 69)
+        Me.PictureBox1.TabIndex = 40
+        Me.PictureBox1.TabStop = False
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
+        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel1.Controls.Add(Me.btnPawning)
+        Me.Panel1.Controls.Add(Me.btnDollarBuying)
+        Me.Panel1.Controls.Add(Me.btnCash)
+        Me.Panel1.Controls.Add(Me.btnMoneyTransfer)
+        Me.Panel1.Controls.Add(Me.btnInsurance)
+        Me.Panel1.Controls.Add(Me.btnBranch)
+        Me.Panel1.Controls.Add(Me.btnPOS)
+        Me.Panel1.Controls.Add(Me.btnLayAway)
+        Me.Panel1.Controls.Add(Me.btnClient)
+        Me.Panel1.Location = New System.Drawing.Point(4, 94)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(200, 585)
+        Me.Panel1.TabIndex = 41
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BackgroundImage = CType(resources.GetObject("Panel2.BackgroundImage"), System.Drawing.Image)
+        Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel2.Location = New System.Drawing.Point(204, 93)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(959, 585)
+        Me.Panel2.TabIndex = 42
         '
         'msMenu
         '
         Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.msMenu.Location = New System.Drawing.Point(0, 0)
         Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(1063, 24)
-        Me.msMenu.TabIndex = 0
+        Me.msMenu.Size = New System.Drawing.Size(1166, 24)
+        Me.msMenu.TabIndex = 43
         Me.msMenu.Text = "msMenu"
         '
         'FileToolStripMenuItem
@@ -532,169 +667,17 @@ Partial Class frmMain
         Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
-        'ExtractToExcelToolStripMenuItem
+        'tmrCurrent
         '
-        Me.ExtractToExcelToolStripMenuItem.Name = "ExtractToExcelToolStripMenuItem"
-        Me.ExtractToExcelToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.ExtractToExcelToolStripMenuItem.Text = "Accounting Extract"
-        '
-        'pbLogo
-        '
-        Me.pbLogo.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pbLogo.Image = CType(resources.GetObject("pbLogo.Image"), System.Drawing.Image)
-        Me.pbLogo.Location = New System.Drawing.Point(0, 24)
-        Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(1063, 120)
-        Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pbLogo.TabIndex = 1
-        Me.pbLogo.TabStop = False
-        '
-        'pInfo
-        '
-        Me.pInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pInfo.Controls.Add(Me.lblMessage)
-        Me.pInfo.Controls.Add(Me.lblTitle)
-        Me.pInfo.Location = New System.Drawing.Point(12, 161)
-        Me.pInfo.Name = "pInfo"
-        Me.pInfo.Size = New System.Drawing.Size(365, 417)
-        Me.pInfo.TabIndex = 5
-        Me.pInfo.Visible = False
-        '
-        'lblMessage
-        '
-        Me.lblMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblMessage.Location = New System.Drawing.Point(15, 41)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(310, 366)
-        Me.lblMessage.TabIndex = 5
-        Me.lblMessage.Text = resources.GetString("lblMessage.Text")
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitle.ForeColor = System.Drawing.Color.Yellow
-        Me.lblTitle.Location = New System.Drawing.Point(15, 16)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(209, 20)
-        Me.lblTitle.TabIndex = 4
-        Me.lblTitle.Text = "Pellentesque a libero nisl"
-        '
-        'pButton
-        '
-        Me.pButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.pButton.Controls.Add(Me.btnCash)
-        Me.pButton.Controls.Add(Me.btnPOS)
-        Me.pButton.Controls.Add(Me.btnBranch)
-        Me.pButton.Controls.Add(Me.btnDollarBuying)
-        Me.pButton.Controls.Add(Me.btnLayAway)
-        Me.pButton.Controls.Add(Me.btnInsurance)
-        Me.pButton.Controls.Add(Me.btnMoneyTransfer)
-        Me.pButton.Controls.Add(Me.btnClient)
-        Me.pButton.Controls.Add(Me.btnPawning)
-        Me.pButton.Location = New System.Drawing.Point(543, 161)
-        Me.pButton.Name = "pButton"
-        Me.pButton.Size = New System.Drawing.Size(503, 334)
-        Me.pButton.TabIndex = 0
-        '
-        'btnCash
-        '
-        Me.btnCash.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCash.Location = New System.Drawing.Point(349, 231)
-        Me.btnCash.Name = "btnCash"
-        Me.btnCash.Size = New System.Drawing.Size(137, 90)
-        Me.btnCash.TabIndex = 26
-        Me.btnCash.Text = "Cash In/Out"
-        Me.btnCash.UseVisualStyleBackColor = True
-        '
-        'btnPOS
-        '
-        Me.btnPOS.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnPOS.Location = New System.Drawing.Point(185, 231)
-        Me.btnPOS.Name = "btnPOS"
-        Me.btnPOS.Size = New System.Drawing.Size(137, 90)
-        Me.btnPOS.TabIndex = 25
-        Me.btnPOS.Text = "Inventory System"
-        Me.btnPOS.UseVisualStyleBackColor = True
-        '
-        'btnBranch
-        '
-        Me.btnBranch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnBranch.Location = New System.Drawing.Point(22, 231)
-        Me.btnBranch.Name = "btnBranch"
-        Me.btnBranch.Size = New System.Drawing.Size(137, 90)
-        Me.btnBranch.TabIndex = 24
-        Me.btnBranch.Text = "Branch2Branch"
-        Me.btnBranch.UseVisualStyleBackColor = True
-        '
-        'btnDollarBuying
-        '
-        Me.btnDollarBuying.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.btnDollarBuying.Location = New System.Drawing.Point(349, 120)
-        Me.btnDollarBuying.Name = "btnDollarBuying"
-        Me.btnDollarBuying.Size = New System.Drawing.Size(137, 90)
-        Me.btnDollarBuying.TabIndex = 23
-        Me.btnDollarBuying.Text = "Foreign Exchange"
-        Me.btnDollarBuying.UseVisualStyleBackColor = True
-        '
-        'btnLayAway
-        '
-        Me.btnLayAway.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.btnLayAway.Location = New System.Drawing.Point(185, 120)
-        Me.btnLayAway.Name = "btnLayAway"
-        Me.btnLayAway.Size = New System.Drawing.Size(137, 90)
-        Me.btnLayAway.TabIndex = 22
-        Me.btnLayAway.Text = "Lay Away"
-        Me.btnLayAway.UseVisualStyleBackColor = True
-        '
-        'btnInsurance
-        '
-        Me.btnInsurance.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.btnInsurance.Location = New System.Drawing.Point(22, 120)
-        Me.btnInsurance.Name = "btnInsurance"
-        Me.btnInsurance.Size = New System.Drawing.Size(137, 90)
-        Me.btnInsurance.TabIndex = 21
-        Me.btnInsurance.Text = "Insurance"
-        Me.btnInsurance.UseVisualStyleBackColor = True
-        '
-        'btnMoneyTransfer
-        '
-        Me.btnMoneyTransfer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMoneyTransfer.Location = New System.Drawing.Point(349, 17)
-        Me.btnMoneyTransfer.Name = "btnMoneyTransfer"
-        Me.btnMoneyTransfer.Size = New System.Drawing.Size(137, 90)
-        Me.btnMoneyTransfer.TabIndex = 20
-        Me.btnMoneyTransfer.Text = "Money Transfer"
-        Me.btnMoneyTransfer.UseVisualStyleBackColor = True
-        '
-        'btnClient
-        '
-        Me.btnClient.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnClient.Location = New System.Drawing.Point(185, 17)
-        Me.btnClient.Name = "btnClient"
-        Me.btnClient.Size = New System.Drawing.Size(137, 90)
-        Me.btnClient.TabIndex = 19
-        Me.btnClient.Text = "Client"
-        Me.btnClient.UseVisualStyleBackColor = True
-        '
-        'btnPawning
-        '
-        Me.btnPawning.Location = New System.Drawing.Point(22, 17)
-        Me.btnPawning.Name = "btnPawning"
-        Me.btnPawning.Size = New System.Drawing.Size(137, 90)
-        Me.btnPawning.TabIndex = 18
-        Me.btnPawning.Text = "Pawning"
-        Me.btnPawning.UseVisualStyleBackColor = True
+        Me.tmrCurrent.Enabled = True
         '
         'statusStrip
         '
         Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers})
-        Me.statusStrip.Location = New System.Drawing.Point(0, 581)
+        Me.statusStrip.Location = New System.Drawing.Point(0, 656)
         Me.statusStrip.Name = "statusStrip"
-        Me.statusStrip.Size = New System.Drawing.Size(1063, 22)
-        Me.statusStrip.TabIndex = 6
+        Me.statusStrip.Size = New System.Drawing.Size(1166, 22)
+        Me.statusStrip.TabIndex = 44
         Me.statusStrip.Text = "ss"
         '
         'tsCurrentDate
@@ -715,159 +698,95 @@ Partial Class frmMain
         Me.tssOthers.Name = "tssOthers"
         Me.tssOthers.Size = New System.Drawing.Size(0, 17)
         '
-        'tmrCurrent
-        '
-        Me.tmrCurrent.Enabled = True
-        '
         'webAds
         '
         Me.webAds.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.webAds.Location = New System.Drawing.Point(15, 520)
+        Me.webAds.Location = New System.Drawing.Point(953, 45)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
-        Me.webAds.Size = New System.Drawing.Size(322, 56)
-        Me.webAds.TabIndex = 7
+        Me.webAds.Size = New System.Drawing.Size(145, 30)
+        Me.webAds.TabIndex = 36
         Me.webAds.Visible = False
         '
-        'bannerSize
-        '
-        Me.bannerSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.bannerSize.Image = CType(resources.GetObject("bannerSize.Image"), System.Drawing.Image)
-        Me.bannerSize.Location = New System.Drawing.Point(0, 522)
-        Me.bannerSize.Name = "bannerSize"
-        Me.bannerSize.Size = New System.Drawing.Size(322, 56)
-        Me.bannerSize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.bannerSize.TabIndex = 9
-        Me.bannerSize.TabStop = False
-        Me.bannerSize.Visible = False
-        '
-        'LayawayListToolStripMenuItem
-        '
-        Me.LayawayListToolStripMenuItem.Name = "LayawayListToolStripMenuItem"
-        Me.LayawayListToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
-        Me.LayawayListToolStripMenuItem.Text = "Layaway List"
-        '
-        'LayawayPaymentReportToolStripMenuItem
-        '
-        Me.LayawayPaymentReportToolStripMenuItem.Name = "LayawayPaymentReportToolStripMenuItem"
-        Me.LayawayPaymentReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
-        Me.LayawayPaymentReportToolStripMenuItem.Text = "Layaway Payment Report"
-        '
-        'ForfeitLayawayReportToolStripMenuItem
-        '
-        Me.ForfeitLayawayReportToolStripMenuItem.Name = "ForfeitLayawayReportToolStripMenuItem"
-        Me.ForfeitLayawayReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
-        Me.ForfeitLayawayReportToolStripMenuItem.Text = "Forfeit Layaway Report"
-        '
-        'frmMain
+        'frmMainV2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1063, 603)
-        Me.Controls.Add(Me.bannerSize)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientSize = New System.Drawing.Size(1166, 678)
         Me.Controls.Add(Me.statusStrip)
-        Me.Controls.Add(Me.pButton)
-        Me.Controls.Add(Me.pbLogo)
         Me.Controls.Add(Me.msMenu)
-        Me.Controls.Add(Me.pInfo)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.webAds)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MainMenuStrip = Me.msMenu
-        Me.Name = "frmMain"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Dalton Integrated System"
+        Me.Controls.Add(Me.Panel1)
+        Me.IsMdiContainer = True
+        Me.Name = "frmMainV2"
+        Me.Text = "Main"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         Me.msMenu.ResumeLayout(False)
         Me.msMenu.PerformLayout()
-        CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pInfo.ResumeLayout(False)
-        Me.pInfo.PerformLayout()
-        Me.pButton.ResumeLayout(False)
         Me.statusStrip.ResumeLayout(False)
         Me.statusStrip.PerformLayout()
-        CType(Me.bannerSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents msMenu As System.Windows.Forms.MenuStrip
-    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents pbLogo As System.Windows.Forms.PictureBox
-    Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UpdateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UserManagementToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ExpiryGeneratorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents JournalEntriesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents BackupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TutorialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents pInfo As System.Windows.Forms.Panel
-    Friend WithEvents lblMessage As System.Windows.Forms.Label
-    Friend WithEvents lblTitle As System.Windows.Forms.Label
-    Friend WithEvents pButton As System.Windows.Forms.Panel
-    Friend WithEvents btnCash As System.Windows.Forms.Button
-    Friend WithEvents btnPOS As System.Windows.Forms.Button
-    Friend WithEvents btnBranch As System.Windows.Forms.Button
-    Friend WithEvents btnDollarBuying As System.Windows.Forms.Button
     Friend WithEvents btnLayAway As System.Windows.Forms.Button
     Friend WithEvents btnInsurance As System.Windows.Forms.Button
+    Friend WithEvents btnDollarBuying As System.Windows.Forms.Button
     Friend WithEvents btnMoneyTransfer As System.Windows.Forms.Button
+    Friend WithEvents btnBranch As System.Windows.Forms.Button
     Friend WithEvents btnClient As System.Windows.Forms.Button
+    Friend WithEvents btnPOS As System.Windows.Forms.Button
     Friend WithEvents btnPawning As System.Windows.Forms.Button
-    Friend WithEvents AboutUsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCash As System.Windows.Forms.Button
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents msMenu As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CloseOpenStore As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents statusStrip As System.Windows.Forms.StatusStrip
-    Friend WithEvents tsCurrentDate As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents tmrCurrent As System.Windows.Forms.Timer
-    Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ClosingStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ItemPulloutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents RateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
-    Friend WithEvents bannerSize As System.Windows.Forms.PictureBox
-    Friend WithEvents ORManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ChangelogToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
-
-
-    Friend WithEvents ExtractToExcelToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents UserManagementToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangePasswordToolStrip As System.Windows.Forms.ToolStripMenuItem
-
-
-    Friend WithEvents AuditConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UpdateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExpiryGeneratorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents JournalEntriesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ItemPulloutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ORManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AccountingExtractToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents SalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents StockInToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ItemMasterDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tssOthers As System.Windows.Forms.ToolStripStatusLabel
-
-    Friend WithEvents LayawayPaymentReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LayawayListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ForfeitLayawayReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
-
+    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents BackupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AuditConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ReportsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SequenceToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CashInOutSummaryToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AuctionMonthlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlySegrregatedListToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyInventoryReportsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OutstandingToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AuditReportToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LoanRegisterToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
@@ -885,15 +804,20 @@ Partial Class frmMain
     Friend WithEvents LayawayPaymentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LayawayListToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ForfeitedLayawayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents HourlyReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HourlySummaryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DailyCashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SMSNoticeToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-
-
-
-
+    Friend WithEvents DailyCashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TutorialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ChangelogToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AboutUsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tmrCurrent As System.Windows.Forms.Timer
+    Friend WithEvents statusStrip As System.Windows.Forms.StatusStrip
+    Friend WithEvents tsCurrentDate As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tssOthers As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class
