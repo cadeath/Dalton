@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.6.0.2
+ - Fix Bug in Layaway Penalty (Item Charge Penalty in 90 Days)
+ - Add ItemMaster Remarks CI# every Transact of Retail
 
 Version 1.6.0.0
  - Add kYC Module
