@@ -13,7 +13,7 @@ Module CIRUpdate
         Dim counter = My.Computer.FileSystem.GetFiles(path)
         If CStr(counter.Count) = 0 Then Return False
 
-        frmMain.Cursor = Cursors.WaitCursor
+        frmMainV2.Cursor = Cursors.WaitCursor
         For Each pth In Directory.GetFiles(path)
             If Not pth.Contains(".cir") Then Continue For
             Console.WriteLine(pth)
@@ -24,7 +24,7 @@ Module CIRUpdate
 
               My.Computer.FileSystem.DeleteFile(pth)
         Next
-        frmMain.Cursor = Cursors.Default
+        frmMainV2.Cursor = Cursors.Default
 
         Return True
     End Function

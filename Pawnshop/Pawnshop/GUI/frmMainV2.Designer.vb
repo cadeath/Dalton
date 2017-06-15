@@ -34,7 +34,6 @@ Partial Class frmMainV2
         Me.btnPawning = New System.Windows.Forms.Button()
         Me.btnCash = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -109,17 +108,19 @@ Partial Class frmMainV2
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssOthers = New System.Windows.Forms.ToolStripStatusLabel()
         Me.webAds = New System.Windows.Forms.WebBrowser()
+        Me.pButton = New System.Windows.Forms.Panel()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
         Me.msMenu.SuspendLayout()
         Me.statusStrip.SuspendLayout()
+        Me.pButton.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnLayAway
         '
-        Me.btnLayAway.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLayAway.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnLayAway.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLayAway.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnLayAway.Location = New System.Drawing.Point(19, 257)
+        Me.btnLayAway.Location = New System.Drawing.Point(24, 238)
         Me.btnLayAway.Name = "btnLayAway"
         Me.btnLayAway.Size = New System.Drawing.Size(161, 47)
         Me.btnLayAway.TabIndex = 31
@@ -128,9 +129,10 @@ Partial Class frmMainV2
         '
         'btnInsurance
         '
-        Me.btnInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInsurance.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInsurance.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnInsurance.Location = New System.Drawing.Point(19, 204)
+        Me.btnInsurance.Location = New System.Drawing.Point(24, 185)
         Me.btnInsurance.Name = "btnInsurance"
         Me.btnInsurance.Size = New System.Drawing.Size(161, 47)
         Me.btnInsurance.TabIndex = 30
@@ -139,9 +141,10 @@ Partial Class frmMainV2
         '
         'btnDollarBuying
         '
-        Me.btnDollarBuying.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDollarBuying.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDollarBuying.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDollarBuying.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnDollarBuying.Location = New System.Drawing.Point(19, 310)
+        Me.btnDollarBuying.Location = New System.Drawing.Point(24, 291)
         Me.btnDollarBuying.Name = "btnDollarBuying"
         Me.btnDollarBuying.Size = New System.Drawing.Size(161, 47)
         Me.btnDollarBuying.TabIndex = 32
@@ -150,9 +153,10 @@ Partial Class frmMainV2
         '
         'btnMoneyTransfer
         '
-        Me.btnMoneyTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoneyTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnMoneyTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMoneyTransfer.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnMoneyTransfer.Location = New System.Drawing.Point(19, 151)
+        Me.btnMoneyTransfer.Location = New System.Drawing.Point(24, 132)
         Me.btnMoneyTransfer.Name = "btnMoneyTransfer"
         Me.btnMoneyTransfer.Size = New System.Drawing.Size(161, 47)
         Me.btnMoneyTransfer.TabIndex = 29
@@ -161,9 +165,10 @@ Partial Class frmMainV2
         '
         'btnBranch
         '
-        Me.btnBranch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBranch.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnBranch.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBranch.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnBranch.Location = New System.Drawing.Point(19, 363)
+        Me.btnBranch.Location = New System.Drawing.Point(24, 344)
         Me.btnBranch.Name = "btnBranch"
         Me.btnBranch.Size = New System.Drawing.Size(161, 47)
         Me.btnBranch.TabIndex = 33
@@ -172,9 +177,10 @@ Partial Class frmMainV2
         '
         'btnClient
         '
-        Me.btnClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClient.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClient.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnClient.Location = New System.Drawing.Point(19, 98)
+        Me.btnClient.Location = New System.Drawing.Point(24, 79)
         Me.btnClient.Name = "btnClient"
         Me.btnClient.Size = New System.Drawing.Size(161, 47)
         Me.btnClient.TabIndex = 28
@@ -183,9 +189,10 @@ Partial Class frmMainV2
         '
         'btnPOS
         '
-        Me.btnPOS.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPOS.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPOS.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPOS.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnPOS.Location = New System.Drawing.Point(19, 416)
+        Me.btnPOS.Location = New System.Drawing.Point(24, 397)
         Me.btnPOS.Name = "btnPOS"
         Me.btnPOS.Size = New System.Drawing.Size(161, 47)
         Me.btnPOS.TabIndex = 34
@@ -194,9 +201,10 @@ Partial Class frmMainV2
         '
         'btnPawning
         '
-        Me.btnPawning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPawning.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPawning.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPawning.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnPawning.Location = New System.Drawing.Point(19, 45)
+        Me.btnPawning.Location = New System.Drawing.Point(24, 26)
         Me.btnPawning.Name = "btnPawning"
         Me.btnPawning.Size = New System.Drawing.Size(161, 47)
         Me.btnPawning.TabIndex = 27
@@ -205,9 +213,10 @@ Partial Class frmMainV2
         '
         'btnCash
         '
-        Me.btnCash.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCash.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCash.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCash.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnCash.Location = New System.Drawing.Point(19, 469)
+        Me.btnCash.Location = New System.Drawing.Point(24, 450)
         Me.btnCash.Name = "btnCash"
         Me.btnCash.Size = New System.Drawing.Size(161, 47)
         Me.btnCash.TabIndex = 35
@@ -227,26 +236,6 @@ Partial Class frmMainV2
         Me.PictureBox1.TabIndex = 40
         Me.PictureBox1.TabStop = False
         '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
-        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel1.Controls.Add(Me.btnPawning)
-        Me.Panel1.Controls.Add(Me.btnDollarBuying)
-        Me.Panel1.Controls.Add(Me.btnCash)
-        Me.Panel1.Controls.Add(Me.btnMoneyTransfer)
-        Me.Panel1.Controls.Add(Me.btnInsurance)
-        Me.Panel1.Controls.Add(Me.btnBranch)
-        Me.Panel1.Controls.Add(Me.btnPOS)
-        Me.Panel1.Controls.Add(Me.btnLayAway)
-        Me.Panel1.Controls.Add(Me.btnClient)
-        Me.Panel1.Location = New System.Drawing.Point(4, 94)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(200, 585)
-        Me.Panel1.TabIndex = 41
-        '
         'Panel2
         '
         Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -256,7 +245,7 @@ Partial Class frmMainV2
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Panel2.Location = New System.Drawing.Point(204, 93)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(959, 585)
+        Me.Panel2.Size = New System.Drawing.Size(959, 560)
         Me.Panel2.TabIndex = 42
         '
         'msMenu
@@ -709,6 +698,26 @@ Partial Class frmMainV2
         Me.webAds.TabIndex = 36
         Me.webAds.Visible = False
         '
+        'pButton
+        '
+        Me.pButton.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.pButton.BackgroundImage = CType(resources.GetObject("pButton.BackgroundImage"), System.Drawing.Image)
+        Me.pButton.Controls.Add(Me.btnPawning)
+        Me.pButton.Controls.Add(Me.btnDollarBuying)
+        Me.pButton.Controls.Add(Me.btnClient)
+        Me.pButton.Controls.Add(Me.btnCash)
+        Me.pButton.Controls.Add(Me.btnLayAway)
+        Me.pButton.Controls.Add(Me.btnMoneyTransfer)
+        Me.pButton.Controls.Add(Me.btnPOS)
+        Me.pButton.Controls.Add(Me.btnInsurance)
+        Me.pButton.Controls.Add(Me.btnBranch)
+        Me.pButton.Location = New System.Drawing.Point(-2, 93)
+        Me.pButton.Name = "pButton"
+        Me.pButton.Size = New System.Drawing.Size(211, 560)
+        Me.pButton.TabIndex = 1
+        '
         'frmMainV2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -720,17 +729,17 @@ Partial Class frmMainV2
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.webAds)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.pButton)
         Me.IsMdiContainer = True
         Me.Name = "frmMainV2"
         Me.Text = "Main"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
         Me.msMenu.ResumeLayout(False)
         Me.msMenu.PerformLayout()
         Me.statusStrip.ResumeLayout(False)
         Me.statusStrip.PerformLayout()
+        Me.pButton.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -745,7 +754,6 @@ Partial Class frmMainV2
     Friend WithEvents btnPawning As System.Windows.Forms.Button
     Friend WithEvents btnCash As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents msMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -820,4 +828,5 @@ Partial Class frmMainV2
     Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tssOthers As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
+    Friend WithEvents pButton As System.Windows.Forms.Panel
 End Class

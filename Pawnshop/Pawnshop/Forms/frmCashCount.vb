@@ -210,8 +210,8 @@
         Console.WriteLine("CashCount >> Php " & total)
         If isClosing Then
             'mod_system.CloseStore(total)
-            frmMain.dateSet = False
-            frmMain.doSegregate = False
+            frmMainV2.dateSet = False
+            frmMainV2.doSegregate = False
         End If
         Me.Close()
     End Sub

@@ -73,7 +73,7 @@ Public Class frmExtractor
         If FormType <> ExtractType.PTUFile Then Exit Sub
 
         If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
-            If frmMain.dateSet Then
+            If frmMainV2.dateSet Then
                 MsgBox("Unable to Generate PTU File yet", MsgBoxStyle.Information, "System")
                 Exit Sub
             End If
@@ -306,7 +306,7 @@ Public Class frmExtractor
     Private Sub ExtractJournalEntry2()
 
         If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
-            If frmMain.dateSet Then
+            If frmMainV2.dateSet Then
                 MsgBox("Unable to Generate Journal File yet", MsgBoxStyle.Information, "System")
                 Exit Sub
             End If

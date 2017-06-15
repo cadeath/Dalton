@@ -137,9 +137,9 @@ Module mod_system
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
             dailyID = ds.Tables(0).Rows(0).Item("ID")
             'InitialBal = ds.Tables(0).Rows(0).Item("INITIALBAL")
-            frmMain.dateSet = True
+            frmMainV2.dateSet = True
         Else
-            frmMain.dateSet = False
+            frmMainV2.dateSet = False
         End If
     End Sub
 

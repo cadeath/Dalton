@@ -191,8 +191,8 @@
         tmpEload = GetSmartInvo("SMT 00071")
         If isClosing Then
             mod_system.CloseStore(total, tmpSmartMoney, tmpSmartWallet, tmpEload)
-            frmMain.dateSet = False
-            frmMain.doSegregate = False
+            frmMainV2.dateSet = False
+            frmMainV2.doSegregate = False
 
             AddTimelyLogs(MOD_NAME, "AMOUNT TODAY IS Php " & total.ToString("#,##0.00"), total, False, , dailyID)
         End If

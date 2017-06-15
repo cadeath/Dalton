@@ -24,7 +24,7 @@ Partial Class frmloginV2
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmloginV2))
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.btnOK = New System.Windows.Forms.Button()
+        Me.btnLogin = New System.Windows.Forms.Button()
         Me.txtUser = New System.Windows.Forms.TextBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
@@ -37,19 +37,19 @@ Partial Class frmloginV2
         Me.btnExit.Location = New System.Drawing.Point(203, 168)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(60, 19)
-        Me.btnExit.TabIndex = 0
+        Me.btnExit.TabIndex = 3
         Me.btnExit.UseVisualStyleBackColor = False
         '
-        'btnOK
+        'btnLogin
         '
-        Me.btnOK.BackColor = System.Drawing.Color.Transparent
-        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnOK.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.btnOK.Location = New System.Drawing.Point(97, 169)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(60, 19)
-        Me.btnOK.TabIndex = 1
-        Me.btnOK.UseVisualStyleBackColor = False
+        Me.btnLogin.BackColor = System.Drawing.Color.Transparent
+        Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLogin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.btnLogin.Location = New System.Drawing.Point(97, 169)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(60, 19)
+        Me.btnLogin.TabIndex = 2
+        Me.btnLogin.UseVisualStyleBackColor = False
         '
         'txtUser
         '
@@ -58,7 +58,7 @@ Partial Class frmloginV2
         Me.txtUser.Location = New System.Drawing.Point(111, 90)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(175, 19)
-        Me.txtUser.TabIndex = 2
+        Me.txtUser.TabIndex = 0
         '
         'txtPassword
         '
@@ -67,7 +67,7 @@ Partial Class frmloginV2
         Me.txtPassword.Location = New System.Drawing.Point(111, 131)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(175, 19)
-        Me.txtPassword.TabIndex = 3
+        Me.txtPassword.TabIndex = 1
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'frmloginV2
@@ -80,7 +80,7 @@ Partial Class frmloginV2
         Me.ControlBox = False
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUser)
-        Me.Controls.Add(Me.btnOK)
+        Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.btnExit)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmloginV2"
@@ -90,7 +90,7 @@ Partial Class frmloginV2
 
     End Sub
     Friend WithEvents btnExit As System.Windows.Forms.Button
-    Friend WithEvents btnOK As System.Windows.Forms.Button
+    Friend WithEvents btnLogin As System.Windows.Forms.Button
     Friend WithEvents txtUser As System.Windows.Forms.TextBox
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
 End Class
