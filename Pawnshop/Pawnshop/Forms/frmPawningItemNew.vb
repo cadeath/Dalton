@@ -200,6 +200,7 @@ Public Class frmPawningItemNew
                 frm_PanelTextbox.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelTextbox.retID = idx
                 frm_PanelTextbox.inputType = tmpSpec.SpecType
+                frm_PanelTextbox.txtSearch.Text = lvSpec.Items(idx).SubItems(1).Text
                 frm_PanelTextbox.ShowDialog()
             Case "Yes/No"
                 frm_PanelYesNo.DisplaySpecs(lvSpec.FocusedItem.Text)
@@ -208,6 +209,7 @@ Public Class frmPawningItemNew
             Case "MultiLine"
                 frm_PanelMultiline.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelMultiline.retID = idx
+                frm_PanelMultiline.txtSearch.Text = lvSpec.Items(idx).SubItems(1).Text
                 frm_PanelMultiline.ShowDialog()
         End Select
     End Sub
@@ -1317,9 +1319,24 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidPawning
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidPawning()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidPawning
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                VoidPawning()
+            End If
         Else
             VoidPawning()
         End If
@@ -1571,6 +1588,7 @@ Public Class frmPawningItemNew
         database.SaveEntry(ds)
     End Sub
 
+
     Private Sub txtPrincipal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.Leave
         ReComputeInterest()
     End Sub
@@ -1592,6 +1610,7 @@ Public Class frmPawningItemNew
         ReComputeInterest()
     End Sub
 
+
     Private Function GetTotalCoi() As Integer
         'Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where TRANSDATE = '" & CurrentDate.ToShortDateString & "' AND PAWNTICKET = '" & Ticket & "'"
         'Dim fillData As String = "tblInsurance"
@@ -1607,9 +1626,8 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnAddCoi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCoi.Click
-        If Not isValid() Then Exit Sub
         frmAddCoi.Show()
-        frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
+        ' frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
         frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)
 
     End Sub
@@ -1626,4 +1644,5 @@ Public Class frmPawningItemNew
             Console.WriteLine("Hashtable Key: " & ht.Key & "Coi#: " & ht.Value)
         Next
     End Sub
+
 End Class

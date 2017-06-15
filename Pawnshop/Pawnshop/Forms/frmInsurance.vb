@@ -36,6 +36,7 @@
         txtSenderID.Text = ""
         txtSenderIDNum.Text = ""
         txtBirthdate.Text = ""
+        txtAmount.Text = ""
 
         dtpDate.Value = CurrentDate
         dtpExpiry.Enabled = False
@@ -107,7 +108,6 @@
     ''' <summary>
     ''' This method will load data into text fields.
     ''' </summary>
-    ''' <param name="id"></param>
     ''' <remarks></remarks>
     Friend Sub LoadInsurance(ByVal Ins As Insurance)
         'Dim getInsurance As New Insurance
@@ -210,9 +210,24 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidInsurance
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidInsurance()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidInsurance
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                VoidInsurance()
+            End If
         Else
             VoidInsurance()
         End If

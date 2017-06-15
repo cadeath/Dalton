@@ -58,7 +58,7 @@ Public Class frmInventory
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         Dim ptuFile As String
-        Dim vText As String, vstring(-1) As String
+        Dim vText As String = "", vstring(-1) As String
         Dim idx As Integer = 1, tmpDocID As Integer = 0
         WhsCode = "" : STODate = Nothing
 
@@ -212,10 +212,7 @@ FAILED_VER:
         Dim hash = InputBox("HOT CODE", "ENTER HOT CODE")
         If hash = "" Then Exit Sub
         If Not hash = security.GetFileMD5(lblFilename.Text) Then
-            ' TODO: JUNMAR
-            ' RECORD HASH VALUE THAT WAS ENCODED IN THE HOT CODE
-            ' SAVE IN AT DAILYTIMELOG
-
+            AddTimelyLogs("IMPORT INVENTORY DATA", "INVALID HOT CODE", , False, "HOT CODE: " & hash, )
             MsgBox("Invalid HOT CODE", MsgBoxStyle.Critical, "HOT CODE")
             Exit Sub
         End If

@@ -20,7 +20,7 @@ Public Class frmClientInformation
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
+        'Me.TopMost = True
         frmClient.Enabled = False
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
@@ -85,6 +85,7 @@ Public Class frmClientInformation
         txtCP2.Text = cl.Cellphone2
         txtTele.Text = cl.Telephone
         txtOthers.Text = cl.OtherNumber
+        If cl.IsDumper = True Then chkDumper.Checked = True
 
         SelectedClient = cl
 
@@ -134,6 +135,7 @@ Public Class frmClientInformation
         txtRemarks.ReadOnly = st
 
         grpID.Enabled = Not st
+        grpDumper.Enabled = Not st
 
         If st Then
             btnSave.Text = "&Modify"
@@ -207,43 +209,7 @@ Public Class frmClientInformation
     Private Sub txtZip_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtZip.KeyPress
         DigitOnly(e)
     End Sub
-    ''' <summary>
-    ''' This method will separate the phone number.
-    ''' </summary>
-    ''' <param name="PhoneField"></param>
-    ''' <param name="e"></param>
-    ''' <param name="isPhone"></param>
-    ''' <remarks></remarks>
-    Private Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
-        Dim charPos() As Integer = {}
-        If PhoneField.Text = Nothing Then Return
 
-        Select Case PhoneField.Text.Substring(0, 1)
-            Case "0"
-                charPos = {4, 8}
-            Case "9"
-                charPos = {3, 7} '922-797-7559
-            Case "+"
-                charPos = {3, 7, 11} '+63-919-797-7559
-            Case "6"
-                charPos = {2, 6, 10} '63-919-797-7559
-        End Select
-        If isPhone Then
-            Select Case PhoneField.Text.Substring(0, 1)
-                Case "0"
-                    charPos = {3, 7}
-                Case Else
-                    charPos = {2, 6}
-            End Select
-        End If
-
-        For Each pos In charPos
-            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
-                PhoneField.Text &= "-"
-                PhoneField.SelectionStart = pos + 1
-            End If
-        Next
-    End Sub
     ''' <summary>
     ''' This keypress is accept digit only and call the phoneSeparator method.
     ''' </summary>
@@ -335,6 +301,7 @@ Public Class frmClientInformation
             .Cellphone2 = txtCP2.Text
             .Telephone = txtTele.Text
             .OtherNumber = txtOthers.Text
+            If chkDumper.Checked Then .IsDumper = True Else .IsDumper = False
 
             If isNew Then
                 .SaveClient()
