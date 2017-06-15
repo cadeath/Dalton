@@ -48,6 +48,19 @@ Module mod_system
     Friend TBLINT_HASH As String = ""
     Friend PAWN_JE As Boolean = False
     Friend DBVERSION As String = ""
+
+
+    Public PASSWORD_AGE_COUNT As Integer = 0
+    Public PASSWORD_EXPIRY_COUNT As Integer = 0
+
+    Public SystemUser As New Sys_user
+    Public UType As String = ""
+    Public FullName As String = ""
+
+    Public UserIDX As Integer = SystemUser.ID
+    Public AccountRule As New User_Line_RULES
+    Public tmpIDx As Integer = 0
+    Public tmpPassword As String = ""
 #End Region
 
 #Region "Store"
@@ -90,7 +103,7 @@ Module mod_system
             '.Item("CashCount")'No CashCount on OPENING
             .Item("Status") = 1
             .Item("SystemInfo") = Now
-            .Item("Openner") = UserID
+            .Item("Openner") = UserIDX
         End With
         ds.Tables(storeDB).Rows.Add(dsNewRow)
 
@@ -210,11 +223,13 @@ Module mod_system
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
                 .Item("Status") = 0
-                .Item("Closer") = POSuser.UserID
+
+                .Item("Closer") = SystemUser.ID
 
                 .Item("SmartMoneyCnt") = SmartMoneyCnt
                 .Item("SmartWalletCnt") = SmartWalletCnt
                 .Item("EloadCnt") = EloadCnt
+
             End With
 
             database.SaveEntry(ds, False)
@@ -498,6 +513,7 @@ Module mod_system
         InsertArrayElement(headers, 0, "BRANCHCODE")
 
         ' HEADERS
+        Dim checkDa As String = ""
         Dim cnt As Integer = 0
         For Each hr In headers
             cnt += 1 : oSheet.Cells(1, cnt).value = hr
@@ -511,7 +527,14 @@ Module mod_system
                 If colCnt = 0 Then
                     oSheet.Cells(rowCnt, colCnt + 1).value = BranchCode
                 Else
-                    oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
+
+                    checkDa = IIf(Not IsDBNull(dr(colCnt - 1)), dr(colCnt - 1), "")
+                    If checkDa.Contains("Not define") Then
+                        checkDa = checkDa.Replace("Not define", "")
+                    End If
+
+                    oSheet.Cells(rowCnt, colCnt + 1).value = checkDa
+                    'dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
                 End If
             Next
             rowCnt += 1
@@ -657,6 +680,32 @@ Module mod_system
         Next
     End Sub
 
+    Function UppercaseFirstLetter(ByVal val As String) As String
+        ' Test for nothing or empty.
+        If String.IsNullOrEmpty(val) Then
+            Return val
+        End If
+
+        ' Convert to character array.
+        Dim array() As Char = val.ToCharArray
+
+        ' Uppercase first character.
+        array(0) = Char.ToUpper(array(0))
+
+        ' Return new string.
+        Return New String(array)
+    End Function
+
+    Function Date_Calculation(ByVal EXPIRATE_DATE As Date) As Integer
+        Dim ValidDate As Date = CDate(EXPIRATE_DATE)
+        Dim date1 As New System.DateTime(ValidDate.Year, ValidDate.Month, ValidDate.Day)
+
+        Dim Diff1 As System.TimeSpan = date1.Subtract(Now)
+
+        Dim TotRemDays = (Int(Diff1.TotalDays))
+        Return TotRemDays
+    End Function
+
     Public Function isOTPOn(ByVal Modname As String) As Boolean
         Dim mysql As String = "Select * From OTPControl Where Modname = '" & Modname & "'"
         Dim ds As DataSet = LoadSQL(mysql, "OTPCOntrol")
@@ -665,7 +714,6 @@ Module mod_system
 
         Return True
     End Function
-
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

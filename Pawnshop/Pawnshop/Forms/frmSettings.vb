@@ -1,6 +1,7 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private isOTPEnable As Boolean
+    Friend AccessType As String = ""
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.TopMost = True
@@ -10,6 +11,7 @@
         ClearFields()
         PrinterSettings()
         isOTPEnable = False
+        verification()
     End Sub
 
     Private Sub PrinterSettings()
@@ -182,5 +184,11 @@
 
     Private Sub txtStockOutNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtStockOutNum.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnUpdate.Enabled = False
+        End If
     End Sub
 End Class

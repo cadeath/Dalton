@@ -36,6 +36,8 @@ Public Class frmCustomer_KYC
             btnCamera.Visible = True
             btnSignature.Visible = True
         End If
+
+        Verification()
         ' ELLIEPOPULATEINFO()
         'Populate()
     End Sub
@@ -1042,5 +1044,12 @@ nextLineTODO:
             notNewSignature = False : FNameSignature = FileName()
             Call ClosePreviewWindow()
         End If
+    End Sub
+
+    Private Sub Verification()
+        If AccountRule.HasPrivilege("Client Management") = "Read Only" Then
+            btnSave.Enabled = False
+        End If
+
     End Sub
 End Class

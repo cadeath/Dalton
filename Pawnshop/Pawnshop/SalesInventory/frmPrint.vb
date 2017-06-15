@@ -16,6 +16,11 @@ Public Class frmPrint
         Next
     End Sub
     Private Sub frmPrint_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
         LoadReceipt()
     End Sub
 
@@ -168,7 +173,7 @@ Public Class frmPrint
         Else
             TransactionName = "RECALL"
         End If
-        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+        TransactionVoidSave(TransactionName, EncoderID, SystemUser.ID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
             ds.Clear()
             mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
             ds = LoadSQL(mysql, "Doclines")
@@ -218,5 +223,4 @@ Public Class frmPrint
             database.SaveEntry(ds, False)
         End If
     End Sub
-
 End Class

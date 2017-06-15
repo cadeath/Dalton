@@ -29,6 +29,11 @@
 
 
     Private Sub frmLayAway_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If AccountRule.HasPrivilege("Lay away") = "Full Access" Then
+            btnOK.Enabled = True
+        Else
+            btnOK.Enabled = False
+        End If
         ClearText()
     End Sub
 
@@ -190,7 +195,7 @@
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
                 If lblPenalty.Text <> "" Then .Penalty = CDbl(Val(lblPenalty.Text))
-                .PaymentEncoder = UserID
+                .PaymentEncoder = UserIDX
                 .SaveLayAwayLines()
             End With
 
@@ -234,7 +239,7 @@
                         .Item("CUSTOMER") = txtCustomer.Text
                         .Item("DOCDATE") = CurrentDate
                         .Item("DOCTOTAL") = lblCost.Text
-                        .Item("USERID") = POSuser.UserID
+                    .Item("USERID") = SystemUser.ID
                     End With
                     ds.Tables(fillData).Rows.Add(dsNewRow)
                     database.SaveEntry(ds)
@@ -283,7 +288,7 @@
                 .Price = CDbl(lblCost.Text)
                 .Balance = CDbl(lblBalance.Text)
                 .Status = 1
-                .Encoder = UserID
+                .Encoder = UserIDX
                 .SaveLayAway()
             End With
 
@@ -292,7 +297,7 @@
                 .PaymentDate = CurrentDate
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = CDbl(txtAmount.Text)
-                .PaymentEncoder = UserID
+                .PaymentEncoder = UserIDX
                 .SaveLayAwayLines()
             End With
 

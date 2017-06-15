@@ -10,6 +10,8 @@ Public Class frmExtractor
         PTUFile = 3
     End Enum
 
+    Friend accessType As String = ""
+
     Friend FormType As ExtractType = ExtractType.Expiry
 
     Private Sub txtPath_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
@@ -39,6 +41,7 @@ Public Class frmExtractor
 
                 Me.Text &= " - PTU File"
         End Select
+        verification()
     End Sub
 
     ''' <summary>
@@ -538,7 +541,7 @@ Public Class frmExtractor
         mySql &= "	WHERE C.ID = PH.CUSTID ORDER BY PH.ISPRIMARY DESC ROWS 1),		"
         mySql &= "U.USERNAME FROM OPT P "
         mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C on P.clientid = C.ID "
-        mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
+        mySql &= "INNER JOIN TBL_USER_DEFAULT U on U.USERID = P.ENCODERID "
         mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
         mySql &= "WHERE "
@@ -660,4 +663,9 @@ Public Class frmExtractor
         End If
     End Sub
 
+    Private Sub verification()
+        If accessType = "Read Only" Then
+            btnExtract.Enabled = False
+        End If
+    End Sub
 End Class

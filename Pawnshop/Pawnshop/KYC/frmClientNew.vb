@@ -9,7 +9,7 @@
 ' - Auto Search Form
 
 Public Class frmClientNew
-
+    Friend AccessType As String = ""
     Private IsKYCRequired As Boolean = IIf(GetOption("KYCRequired") = "Yes", True, False)
 
     Dim fromOtherForm As Boolean = False
@@ -41,7 +41,10 @@ Public Class frmClientNew
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         End If
+
+        verification()
     End Sub
+
     ''' <summary>
     ''' this method will set listview columns
     ''' </summary>
@@ -291,5 +294,11 @@ Public Class frmClientNew
 
     Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvCustomer.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub verification()
+        If AccountRule.HasPrivilege("Client Management") = "Read Only" Then
+            btnAdd.Enabled = False
+        End If
     End Sub
 End Class

@@ -18,9 +18,11 @@
         txtSearch.Focus()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If frmmoneyexchange.AccessType <> "Full Access" Then
+            btnVoid.Enabled = False
+        Else
+            btnVoid.Enabled = True
+        End If
     End Sub
     ''' <summary>
     ''' clear the text field and listview
@@ -123,7 +125,7 @@
         tmpEncoderID = ds.Tables(0).Rows(0).Item("UserId")
 
         Dim NewOtp As New ClassOtp("VOID DOLLAR", diagGeneralOTP.txtPIN.Text, "DollarID# " & id)
-        TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, POSuser.UserID, "DollarID# " & id & " " & ans)
+        TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, SystemUser.ID, "DollarID# " & id & " " & ans)
         tmpLoad.VoidTransaction(ans)
 
         Dim amt As Double = tmpLoad.NetAmount

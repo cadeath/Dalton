@@ -4,11 +4,13 @@
     Dim currentBornum As Integer = GetOption("BorrowingLastNum")
     Dim branchcode As String = GetOption("BranchCode")
     Dim newborrow = String.Format("{1}{0:000000}", currentBornum, BranchCode)
+    Friend AccessType As String = ""
 
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadLastRefNum()
         LoadBranches()
+        verification()
     End Sub
 
     Private Sub LoadLastRefNum()
@@ -82,7 +84,7 @@
             .Amount = txtAmount.Text
             .Remarks = txtParticulars.Text
             .Status = "C" 'Credit
-            .EncoderID = UserID
+            .EncoderID = UserIDX
 
             .SaveBorrowings()
             AddRefNum()
@@ -197,7 +199,7 @@
             .Amount = Amount
             .Remarks = Remarks
             .Status = "D"
-            .EncoderID = UserID
+            .EncoderID = UserIDX
 
             .SaveBorrowings()
 
@@ -212,4 +214,10 @@
         frmBorrowBrowse.Show()
     End Sub
 
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnPost.Enabled = False
+            btnUpload.Enabled = False
+        End If
+    End Sub
 End Class

@@ -349,7 +349,7 @@ Partial Class frmMain
         '
         Me.MonthlySegrregatedListToolStripMenuItem1.Name = "MonthlySegrregatedListToolStripMenuItem1"
         Me.MonthlySegrregatedListToolStripMenuItem1.Size = New System.Drawing.Size(215, 22)
-        Me.MonthlySegrregatedListToolStripMenuItem1.Text = "Monthly Segrregated List"
+        Me.MonthlySegrregatedListToolStripMenuItem1.Text = "Monthly Segregated List"
         '
         'MonthlyInventoryReportsToolStripMenuItem1
         '

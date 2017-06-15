@@ -24,12 +24,8 @@
           <DataField>BIRTHDAY</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PHONE1">
-          <DataField>PHONE1</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="PHONE2">
-          <DataField>PHONE2</DataField>
+        <Field Name="CONTACTNUMBER">
+          <DataField>CONTACTNUMBER</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="PAWNTICKET">
@@ -50,12 +46,10 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsHit</rd:DataSetName>
-        <rd:SchemaPath>D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\HitManagement\dsHit.xsd</rd:SchemaPath>
-        <rd:TableName>hit_list</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
+        <rd:DataSetName>Pawnshop</rd:DataSetName>
+        <rd:TableName>dsHit</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>hit_list</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>Pawnshop.dsHit, HitManagement.dsHit.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -553,14 +547,14 @@
                           <TablixHeader>
                             <Size>1in</Size>
                             <CellContents>
-                              <Textbox Name="PHONE1">
+                              <Textbox Name="CONTACTNUMBER">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>=Fields!PHONE1.Value</Value>
+                                        <Value>=Fields!CONTACTNUMBER.Value</Value>
                                         <Style>
                                           <FontSize>9pt</FontSize>
                                         </Style>
@@ -569,7 +563,7 @@
                                     <Style />
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>PHONE1</rd:DefaultName>
+                                <rd:DefaultName>CONTACTNUMBER</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Style>None</Style>

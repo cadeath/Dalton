@@ -20,7 +20,7 @@ Public Class frmClientInformation
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Me.TopMost = True
+        Me.TopMost = True
         frmClient.Enabled = False
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
@@ -34,6 +34,7 @@ Public Class frmClientInformation
 
         cboCity.Items.AddRange(GetDistinct("Addr_City"))
         cboProv.Items.AddRange(GetDistinct("Addr_Province"))
+        verification()
         'Populate()
     End Sub
     ''' <summary>
@@ -541,4 +542,12 @@ Public Class frmClientInformation
     Private Sub frmClientInformation_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmClient.Enabled = True
     End Sub
+
+    Private Sub verification()
+        If AccountRule.HasPrivilege("Client Management") = "Read Only" Then
+            btnSave.Enabled = False
+            btnIDModify.Enabled = False
+        End If
+    End Sub
+
 End Class

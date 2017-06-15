@@ -105,7 +105,6 @@ Module updateRate
             Dim SetGenerator As String = String.Format("SET GENERATOR {0}_{1}_GEN TO {2}", fillData, ID, dsRate.Tables(fillData).Rows.Count)
             RunCommand(SetGenerator)
             Next
-        MsgBox("System Updated", MsgBoxStyle.Information)
     End Sub
     Private Function ErrCheck(ByVal str As String) As String
         If str.Contains("Table unknown") Then

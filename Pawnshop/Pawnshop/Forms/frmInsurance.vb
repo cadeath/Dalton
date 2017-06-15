@@ -4,6 +4,7 @@
     Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
     Friend isCoi As Boolean = False
+    Friend AccessType As String = ""
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -13,9 +14,12 @@
         ClearFields()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+
+        If AccessType = "Read Only" Then
+            btnVoid.Enabled = False
+        End If
+
+        verification()
     End Sub
     ''' <summary>
     ''' if you press enter it will go client information form.
@@ -167,8 +171,9 @@ nextLineTODO:
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
+
             .Customer = Holder
-            .EncoderID = POSuser.UserID
+            .EncoderID = SystemUser.ID
 
             .SaveInsurance()
 
@@ -264,6 +269,13 @@ nextLineTODO:
         'DigitOnly(e)
         If isEnter(e) Then
             btnSave.PerformClick()
+        End If
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnNew.Enabled = False
+            btnSave.Enabled = False
         End If
     End Sub
 End Class

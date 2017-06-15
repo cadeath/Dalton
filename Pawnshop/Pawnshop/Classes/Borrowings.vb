@@ -156,7 +156,7 @@
         Dim tmpBorrowing As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
 
         Dim NewOtp As New ClassOtp("VOID BORROWING", diagGeneralOTP.txtPIN.Text, "Ref# " & ReferenceNumber)
-        TransactionVoidSave(MoDName, tmpBorrowing, POSuser.UserID, "Ref# " & ReferenceNumber)
+        TransactionVoidSave(MoDName, tmpBorrowing, SystemUser.ID, "Ref# " & ReferenceNumber)
 
         If SrvTypDJournal = "BORROW IN" Then
             RemoveJournal(BORROWINGID, , SrvTypDJournal)

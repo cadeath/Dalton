@@ -2,6 +2,7 @@
 
     Dim fillData As String = "tblCashCount"
     Friend isClosing As Boolean = False
+    Friend AccessType As String = ""
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -10,6 +11,7 @@
     Private Sub frmCashCount_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtCurDate.Text = CurrentDate.ToLongDateString
         ClearFields()
+        verification()
     End Sub
 
     Private Sub ComputeTotal()
@@ -264,7 +266,7 @@
                     .Item("Denomination") = deno
                     .Item("Cnt") = denoCnt
                     .Item("Total") = denoValue
-                    .Item("EncoderID") = UserID
+                    .Item("EncoderID") = UserIDX
                     .Item("SystemTime") = Now
                     .Item("Status") = 1
                     .Item("MoneyType") = denoType
@@ -274,5 +276,11 @@
             End If
         Next
 
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnPost.Enabled = False
+        End If
     End Sub
 End Class

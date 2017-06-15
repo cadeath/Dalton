@@ -32,8 +32,8 @@ Public Class ExtractDataFromDatabase
 
         Dim mySql As String
         mySql = "	SELECT O.PAWNID,PAWNTICKET,OLDTICKET,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,	" & _
-          vbCrLf & "	CL.FIRSTNAME || ' ' || CL.LASTNAME AS CLAIMER,G.FULLNAME AS APPRAISER,	" & _
-          vbCrLf & "	E.FULLNAME AS ENCODER,I.ITEMCLASS,O.APPRAISAL,O.PRINCIPAL,O.NETAMOUNT,	" & _
+          vbCrLf & "	CL.FIRSTNAME || ' ' || CL.LASTNAME AS CLAIMER,G.FIRSTNAME || ' ' || G.LASTNAME AS APPRAISER,	" & _
+          vbCrLf & "	E.FIRSTNAME || ' ' || E.LASTNAME AS ENCODER,I.ITEMCLASS,O.APPRAISAL,O.PRINCIPAL,O.NETAMOUNT,	" & _
           vbCrLf & "	O.DESCRIPTION,O.DAYSOVERDUE,O.DELAYINTEREST,O.ADVINT,O.EARLYREDEEM,O.LOANDATE,	" & _
           vbCrLf & "	O.MATUDATE,O.EXPIRYDATE,O.AUCTIONDATE, " & _
           vbCrLf & "Case " & _
@@ -57,9 +57,9 @@ Public Class ExtractDataFromDatabase
           vbCrLf & "	ON C.ID =O.CLIENTID	" & _
           vbCrLf & "	LEFT JOIN " & CUSTOMER_TABLE & " CL	" & _
           vbCrLf & "	ON CL.ID =O.CLAIMERID	" & _
-          vbCrLf & "	LEFT JOIN TBL_GAMIT G	" & _
+          vbCrLf & "	LEFT JOIN TBL_USER_DEFAULT G	" & _
           vbCrLf & "	ON G.USERID = O.APPRAISERID	" & _
-          vbCrLf & "	LEFT JOIN TBL_GAMIT E	" & _
+          vbCrLf & "	LEFT JOIN TBL_USER_DEFAULT E	" & _
           vbCrLf & "	ON E.USERID = O.ENCODERID	" & _
           vbCrLf & "	INNER JOIN OPI I	" & _
           vbCrLf & "	ON I.PAWNITEMID = O.PAWNITEMID	" & _
@@ -119,7 +119,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
         mySql &= "END AS STATUS,CURRENCY, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
-        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = D.USERID "
+        mySql &= "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = D.USERID "
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -171,14 +171,14 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT B.BRWID,  G.FULLNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
+        mySql = "SELECT B.BRWID,  G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODERNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
         mySql &= "B.REASON,B.REFNUM, B.REMARKS, "
         mySql &= " Case B.STATUS "
         mySql &= "WHEN 'C' THEN 'CASH-OUT' "
         mySql &= "WHEN 'D' THEN 'CASH-IN' "
         mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO "
         mySql &= "FROM TBLBORROW B "
-        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = B.ENCODERID"
+        mySql &= "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = B.ENCODERID"
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -231,11 +231,12 @@ Public Class ExtractDataFromDatabase
 
 
         Dim mySql As String
-        mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE, G.FULLNAME AS ENCODER,I.PAWNTICKET, " & _
+        mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE,G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODER, " & _
+             vbCrLf & "I.PAWNTICKET, " & _
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
             vbCrLf & "I.SYSTEMINFO FROM TBLINSURANCE I" & _
-            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = I.ENCODERID" & _
+            vbCrLf & "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -284,7 +285,7 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER, M.LOCATION," & _
+        mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODER, M.LOCATION," & _
        vbCrLf & "Case M.MONEYTRANS" & _
        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
        vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
@@ -304,7 +305,7 @@ Public Class ExtractDataFromDatabase
        vbCrLf & " M.TRANSID," & _
      vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
+       vbCrLf & "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C ON  M.SENDERID = C.ID " & _
        vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " R ON  M.RECEIVERID = R.ID " & _
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
@@ -355,14 +356,14 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "	SELECT T.TRANSID,T.CASHID,G.FULLNAME AS ENCODERNAME,T.CATEGORY,T.TRANSNAME,T.TYPE,	"
+        mySql = "	SELECT T.TRANSID,T.CASHID,G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODERNAME,T.CATEGORY,T.TRANSNAME,T.TYPE,	"
         mySql &= "	T.AMOUNT,T.TRANSDATE,	"
         mySql &= "	CASE T.STATUS	"
         mySql &= "	WHEN  '1' THEN 'ACTIVE'	"
         mySql &= "	WHEN '0' THEN 'VOID'	"
         mySql &= "	ELSE 'N/A' END AS STATUS,T.REMARKS,T.SYSTEMINFO	"
         mySql &= "	FROM TBLCASHTRANS T	"
-        mySql &= "	LEFT JOIN TBL_GAMIT G	"
+        mySql &= "	LEFT JOIN TBL_USER_DEFAULT G	"
         mySql &= "	ON G.USERID = T.ENCODERID	"
         mySql &= String.Format("WHERE T.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "	ORDER BY TRANSID	"
@@ -412,8 +413,8 @@ Public Class ExtractDataFromDatabase
 
         Dim mySql As String
         mySql = "	SELECT O.PAWNID,PAWNTICKET,OLDTICKET,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,	" & _
-          vbCrLf & "	CL.FIRSTNAME || ' ' || CL.LASTNAME AS CLAIMER,G.FULLNAME AS APPRAISER,	" & _
-          vbCrLf & "	E.FULLNAME AS ENCODER,I.ITEMCLASS,O.APPRAISAL,O.PRINCIPAL,O.NETAMOUNT,	" & _
+          vbCrLf & "	CL.FIRSTNAME || ' ' || CL.LASTNAME AS CLAIMER,G.FIRSTNAME || ' ' || G.LASTNAME AS APPRAISER,	" & _
+          vbCrLf & "	E.FIRSTNAME || ' ' || E.LASTNAME AS ENCODER,I.ITEMCLASS,O.APPRAISAL,O.PRINCIPAL,O.NETAMOUNT,	" & _
           vbCrLf & "	O.DESCRIPTION,O.DAYSOVERDUE,O.DELAYINTEREST,O.ADVINT,O.EARLYREDEEM,O.LOANDATE,	" & _
           vbCrLf & "	O.MATUDATE,O.EXPIRYDATE,O.AUCTIONDATE, " & _
           vbCrLf & "Case " & _
@@ -437,9 +438,9 @@ Public Class ExtractDataFromDatabase
           vbCrLf & "	ON C.ID =O.CLIENTID	" & _
           vbCrLf & "	LEFT JOIN " & CUSTOMER_TABLE & " CL	" & _
           vbCrLf & "	ON CL.ID =O.CLAIMERID	" & _
-          vbCrLf & "	LEFT JOIN TBL_GAMIT G	" & _
+          vbCrLf & "	LEFT JOIN TBL_USER_DEFAULT G	" & _
           vbCrLf & "	ON G.USERID = O.APPRAISERID	" & _
-          vbCrLf & "	LEFT JOIN TBL_GAMIT E	" & _
+          vbCrLf & "	LEFT JOIN TBL_USER_DEFAULT E	" & _
           vbCrLf & "	ON E.USERID = O.ENCODERID	" & _
           vbCrLf & "	INNER JOIN OPI I	" & _
           vbCrLf & "	ON I.PAWNITEMID = O.PAWNITEMID	" & _
@@ -501,7 +502,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
         mySql &= "END AS STATUS,CURRENCY, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
-        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = D.USERID "
+        mySql &= "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = D.USERID "
         mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -551,14 +552,14 @@ Public Class ExtractDataFromDatabase
         
 
         Dim mySql As String
-        mySql = "SELECT B.BRWID,  G.FULLNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
+        mySql = "SELECT B.BRWID,  G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODERNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
         mySql &= "B.REASON,B.REFNUM, B.REMARKS, "
         mySql &= " Case B.STATUS "
         mySql &= "WHEN 'C' THEN 'CASH-OUT' "
         mySql &= "WHEN 'D' THEN 'CASH-IN' "
         mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO "
         mySql &= "FROM TBLBORROW B "
-        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = B.ENCODERID"
+        mySql &= "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = B.ENCODERID"
         mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -608,11 +609,11 @@ Public Class ExtractDataFromDatabase
         
 
         Dim mySql As String
-        mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE, G.FULLNAME AS ENCODER,I.PAWNTICKET, " & _
+        mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE, G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODER,I.PAWNTICKET, " & _
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
             vbCrLf & "I.SYSTEMINFO FROM TBLINSURANCE I" & _
-            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = I.ENCODERID" & _
+            vbCrLf & "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
            vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -660,7 +661,7 @@ Public Class ExtractDataFromDatabase
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
       
         Dim mySql As String
-        mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER, M.LOCATION," & _
+        mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODER, M.LOCATION," & _
        vbCrLf & "Case M.MONEYTRANS" & _
        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
        vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
@@ -680,7 +681,7 @@ Public Class ExtractDataFromDatabase
        vbCrLf & " M.TRANSID," & _
        vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
+       vbCrLf & "LEFT JOIN TBL_USER_DEFAULT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C ON  M.SENDERID = C.ID " & _
        vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " R ON  M.RECEIVERID = R.ID" & _
        vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
@@ -819,14 +820,14 @@ Public Class ExtractDataFromDatabase
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String
-        mySql = "	SELECT T.TRANSID,T.CASHID,G.FULLNAME AS ENCODERNAME,T.CATEGORY,T.TRANSNAME,T.TYPE,	"
+        mySql = "	SELECT T.TRANSID,T.CASHID,G.FIRSTNAME || ' ' || G.LASTNAME AS ENCODERNAME,T.CATEGORY,T.TRANSNAME,T.TYPE,	"
         mySql &= "	T.AMOUNT,T.TRANSDATE,	"
         mySql &= "	CASE T.STATUS	"
         mySql &= "	WHEN  '1' THEN 'ACTIVE'	"
         mySql &= "	WHEN '0' THEN 'VOID'	"
         mySql &= "	ELSE 'N/A' END AS STATUS,T.REMARKS,T.SYSTEMINFO	"
         mySql &= "	FROM TBLCASHTRANS T	"
-        mySql &= "	LEFT JOIN TBL_GAMIT G	"
+        mySql &= "	LEFT JOIN TBL_USER_DEFAULT G	"
         mySql &= "	ON G.USERID = T.ENCODERID	"
         mySql &= String.Format("WHERE T.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "	ORDER BY TRANSID	"

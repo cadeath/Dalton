@@ -196,7 +196,7 @@
                 .Sex = IIf(clDR.Item("SEX") = "M", 1, 0)
 
                 PhoneCol = {clDR.Item("PHONE1"), clDR.Item("PHONE2"), clDR.Item("PHONE3"), clDR.Item("PHONE_OTHERS")}
-
+                
                 Dim i As Integer = 0
                 Dim newPhone As New MigratePhoneNumber
                 For Each phne In PhoneCol

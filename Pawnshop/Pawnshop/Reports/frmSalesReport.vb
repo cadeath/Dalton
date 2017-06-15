@@ -108,7 +108,7 @@
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
-        addParameter.Add("txtUsername", POSuser.UserName)
+        addParameter.Add("txtUsername", SystemUser.USERNAME)
 
         frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()
@@ -139,7 +139,7 @@
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
         addParameter.Add("branchName", branchName)
-        addParameter.Add("txtUsername", POSuser.UserName)
+        addParameter.Add("txtUsername", SystemUser.USERNAME)
 
         frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()
@@ -249,15 +249,15 @@
         Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
         mysql &= "C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
-        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FULLNAME AS ENCODER, "
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FIRSTNAME || ' ' || USR.LASTNAME AS ENCODER, "
         mysql &= "LY.PAYMENTDATE, LY.CONTROLNUM, LY.AMOUNT, LY.PENALTY, LY.STATUS AS LYSTATUS, "
-        mysql &= "USR2.FULLNAME AS PAYMENTENCODER "
+        mysql &= "USR2.FIRSTNAME || ' ' || USR2.LASTNAME AS PAYMENTENCODER "
         mysql &= "FROM TBLLAYAWAY L "
         mysql &= "INNER JOIN TBLLAYLINES LY ON LY.LAYID = L.LAYID "
         mysql &= "INNER JOIN " & CUSTOMER_TABLE & "  C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
-        mysql &= "INNER JOIN TBL_GAMIT USR ON USR.USERID = L.ENCODER "
-        mysql &= "INNER JOIN TBL_GAMIT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
+        mysql &= "INNER JOIN TBL_USER_DEFAULT USR ON USR.USERID = L.ENCODER "
+        mysql &= "INNER JOIN TBL_USER_DEFAULT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
         mysql &= "WHERE L.STATUS = '1' AND LY.STATUS = '1' AND PAYMENTDATE = '" & monCal.SelectionStart.ToShortDateString & "' "
         mysql &= "ORDER BY L.DOCDATE ASC "
         Dim dic As New Dictionary(Of String, String)
@@ -274,15 +274,15 @@
         Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
         mysql &= "C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
-        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FULLNAME AS ENCODER, "
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FIRSTNAME || ' ' || USR.LASTNAME AS ENCODER, "
         mysql &= "LY.PAYMENTDATE, LY.CONTROLNUM, LY.AMOUNT, LY.PENALTY, LY.STATUS AS LYSTATUS, "
-        mysql &= "USR2.FULLNAME AS PAYMENTENCODER "
+        mysql &= "USR2.FIRSTNAME || ' ' || USR2.LASTNAME AS PAYMENTENCODER "
         mysql &= "FROM TBLLAYAWAY L "
         mysql &= "INNER JOIN TBLLAYLINES LY ON LY.LAYID = L.LAYID "
         mysql &= "INNER JOIN " & CUSTOMER_TABLE & "  C ON C.ID = L.CUSTOMERID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
-        mysql &= "INNER JOIN TBL_GAMIT USR ON USR.USERID = L.ENCODER "
-        mysql &= "INNER JOIN TBL_GAMIT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
+        mysql &= "INNER JOIN TBL_USER_DEFAULT USR ON USR.USERID = L.ENCODER "
+        mysql &= "INNER JOIN TBL_USER_DEFAULT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
         mysql &= "WHERE L.STATUS = '1' AND LY.STATUS = '1' AND PAYMENTDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "' "
         mysql &= "ORDER BY L.DOCDATE ASC "
 

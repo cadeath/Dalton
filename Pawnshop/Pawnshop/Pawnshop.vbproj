@@ -178,8 +178,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\CIRUpdate.vb" />
     <Compile Include="AutoPatch\db132.vb" />
     <Compile Include="AutoPatch\db133.vb" />
+    <Compile Include="AutoPatch\db134.vb" />
     <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
@@ -407,6 +409,12 @@
     <Compile Include="KYC\frmClientNew.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="KYC\frmCustomerImage.Designer.vb">
+      <DependentUpon>frmCustomerImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\frmCustomerImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KYC\frmCustomer_KYC.Designer.vb">
       <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
     </Compile>
@@ -429,12 +437,6 @@
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
     </Compile>
     <Compile Include="KYC\KYC migrate\frmClientMigrate.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KYC\frmCustomerImage.Designer.vb">
-      <DependentUpon>frmCustomerImage.vb</DependentUpon>
-    </Compile>
-    <Compile Include="KYC\frmCustomerImage.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KYC\KYC migrate\MigrateCustomer.vb" />
@@ -469,6 +471,7 @@
     </Compile>
     <Compile Include="Layaway\LayAway.vb" />
     <Compile Include="Layaway\LayAwayLines.vb" />
+    <Compile Include="Modules\UsersDateValUpdate.vb" />
     <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
@@ -941,6 +944,53 @@
     </Compile>
     <Compile Include="Modules\IniFileVb.vb" />
     <Compile Include="SMS\smsUtil.vb" />
+    <Compile Include="UserManagemnt\Class\Sys_user.vb" />
+    <Compile Include="UserManagemnt\Class\UserRuleCol.vb" />
+    <Compile Include="UserManagemnt\Class\User_Line_RULES.vb" />
+    <Compile Include="UserManagemnt\Class\User_rule.vb" />
+    <Compile Include="UserManagemnt\frmChangePasswordNew.Designer.vb">
+      <DependentUpon>frmChangePasswordNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmChangePasswordNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmMainnEW.Designer.vb">
+      <DependentUpon>frmMainnEW.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmMainnEW.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserInfor.Designer.vb">
+      <DependentUpon>frmUserInfor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserInfor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserManagementNew.Designer.vb">
+      <DependentUpon>frmUserManagementNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\frmUserManagementNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\UserMigrate\Create_Tables.vb" />
+    <Compile Include="UserManagemnt\UserMigrate\frmaddPrivilege.Designer.vb">
+      <DependentUpon>frmaddPrivilege.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\UserMigrate\frmaddPrivilege.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagemnt\UserMigrate\PLoading.Designer.vb">
+      <DependentUpon>PLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagemnt\UserMigrate\PLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -1032,6 +1082,9 @@
     <EmbeddedResource Include="KYC\frmClientNew.resx">
       <DependentUpon>frmClientNew.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="KYC\frmCustomerImage.resx">
+      <DependentUpon>frmCustomerImage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KYC\frmCustomer_KYC.resx">
       <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
     </EmbeddedResource>
@@ -1040,9 +1093,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KYC\KYC migrate\frmClientMigrate.resx">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KYC\frmCustomerImage.resx">
-      <DependentUpon>frmCustomerImage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layaway\frmAddCustomer.resx">
       <DependentUpon>frmAddCustomer.vb</DependentUpon>
@@ -1426,6 +1476,27 @@
     <EmbeddedResource Include="SMS\frmSMSnotice.resx">
       <DependentUpon>frmSMSnotice.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmChangePasswordNew.resx">
+      <DependentUpon>frmChangePasswordNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmMainnEW.resx">
+      <DependentUpon>frmMainnEW.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmUserInfor.resx">
+      <DependentUpon>frmUserInfor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\frmUserManagementNew.resx">
+      <DependentUpon>frmUserManagementNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\UserMigrate\frmaddPrivilege.resx">
+      <DependentUpon>frmaddPrivilege.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagemnt\UserMigrate\PLoading.resx">
+      <DependentUpon>PLoading.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -1438,6 +1509,7 @@
     <None Include="doc\JournalEntries.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="dsHit.datasource" />
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
     <None Include="HitManagement\dsHit.xsc">

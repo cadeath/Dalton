@@ -193,7 +193,7 @@ Public Class Insurance
         'InventoryController.AddInventory("IND 00001", 1)
 
         Dim NewOtp As New ClassOtp("VOID INSURANCE", diagGeneralOTP.txtPIN.Text, "COI# " & COInumber)
-        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "COI# " & COInumber)
+        TransactionVoidSave(TransactionName, EncoderID, SystemUser.ID, "COI# " & COInumber)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
 

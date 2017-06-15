@@ -4,9 +4,11 @@
     Private newPawnTicket As PawnTicket2
     Private newItem As PawnItem
     Private AutoCompute As PawnCompute
+    Friend AccessType As String = ""
 
     Private Sub dev_Pawning2_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Load_ItemClass()
+        verification()
     End Sub
 
     Private Sub Load_ItemClass()
@@ -76,4 +78,10 @@
         End If
         Return ds.Tables(0).Rows(0).Item("Scheme_ID")
     End Function
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnCompute.Enabled = False
+        End If
+    End Sub
 End Class

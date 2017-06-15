@@ -1,10 +1,12 @@
 ﻿Public Class frmOpenStore
 
     Dim isDisable As Boolean = DEV_MODE
+    Friend AccessType As String = ""
 
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()
 
+        Verification()
         Console.WriteLine("Initial: " & InitialBal)
         Console.WriteLine("Maintain: " & MaintainBal)
     End Sub
@@ -50,7 +52,7 @@
             frmMain.dateSet = True
             dailyID = LoadLastOpening.Tables(0).Rows(0).Item("ID")
 
-            AddTimelyLogs("OPENSTORE", String.Format("TIME IS {0} AND INITIAL IS Php {1:#,##0.00}", Now.ToShortTimeString, InitialBal), InitialBal, False, "OPEN BY " & POSuser.FullName, transid:=dailyID)
+            AddTimelyLogs("OPENSTORE", String.Format("TIME IS {0} AND INITIAL IS Php {1:#,##0.00}", Now.ToShortTimeString, InitialBal), InitialBal, False, "OPEN BY " & SystemUser.FIRSTNAME & " " & SystemUser.LASTNAME, transid:=dailyID)
         Else
             Exit Sub
         End If
@@ -64,5 +66,11 @@
 
         Me.Close()
 
+    End Sub
+
+    Private Sub Verification()
+        If AccessType = "Read Only" Then
+            btnSetup.Enabled = False
+        End If
     End Sub
 End Class

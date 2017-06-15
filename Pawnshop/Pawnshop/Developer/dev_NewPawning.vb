@@ -178,7 +178,7 @@
             .Item("Principal") = txtPrincipal.Text
             .Item("NetAmount") = Net_Amount
             .Item("AppraiserID") = GetAppraiserID(cboAppraiser.Text)
-            .Item("EncoderID") = UserID
+            .Item("EncoderID") = UserIDX
             .Item("pwnItmID") = ""
             .Item("ClientID") = PawnCustomer.ID
             .Item("ClaimBy") = PawnClaimer.ID

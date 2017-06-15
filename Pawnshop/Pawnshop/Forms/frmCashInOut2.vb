@@ -7,6 +7,7 @@
     Dim isCustomInOut As Boolean = False
     Dim transName As String
     Private MOD_NAME As String = "CASH IN/OUT"
+    Friend AccessType As String = ""
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -89,6 +90,7 @@
         ClearFields()
         LoadTables()
         cashInSetup()
+        verification()
     End Sub
     ''' <summary>
     ''' if category change automatically transaction name change
@@ -367,7 +369,7 @@
             .Transaction = transName
             .Amount = txtAmt.Text
             .Particulars = txtParticulars.Text
-            .EncoderID = UserID
+            .EncoderID = UserIDX
             .Status = True
         End With
 
@@ -434,5 +436,11 @@
 
         gpTrans.Enabled = False
         txtAmt.Focus()
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnPost.Enabled = False
+        End If
     End Sub
 End Class

@@ -14,9 +14,15 @@
         LoadActive()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If frmCashInOut2.AccessType = "Full Acess" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
+
+        'With POSuser
+        '    btnVoid.Enabled = .canVoid
+        'End With
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -179,7 +185,7 @@
         Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
 
         Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagGeneralOTP.txtPIN.Text, "CashIn/OutID# " & id)
-        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
+        TransactionVoidSave(lblCategory.Text, tmpCIO, SystemUser.ID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)

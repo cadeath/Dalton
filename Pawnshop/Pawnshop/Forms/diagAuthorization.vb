@@ -1,6 +1,6 @@
 ﻿Public Class diagAuthorization
 
-    Dim confirmUser As New ComputerUser
+    Dim confirmUser As New Sys_user
     Friend fromForm As Form
 
     Private Sub diagAuthorization_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -11,8 +11,8 @@
     ''' </summary>
     ''' <param name="pos"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadUser(ByVal pos As ComputerUser)
-        txtUser.Text = pos.UserName
+    Friend Sub LoadUser(ByVal pos As Sys_user)
+        txtUser.Text = pos.USERNAME
         txtUser.ReadOnly = True
     End Sub
     ''' <summary>
@@ -23,7 +23,7 @@
     Private Sub verify()
         Static err As Integer
 
-        If confirmUser.LoginUser(txtUser.Text, txtPassword.Text) Then
+        If confirmUser.LogUser(txtUser.Text, txtPassword.Text) Then
             fromForm.Show()
             mod_system.isAuthorized = True
             err = 0

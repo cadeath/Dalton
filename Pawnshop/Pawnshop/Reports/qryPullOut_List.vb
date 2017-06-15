@@ -63,7 +63,7 @@
 
         Dim dsName As String = "dsPullOut", mySql As String
 
-        If Not POSuser.canItemPulloutReport Then
+        If AccountRule.HasPrivilege("Item Pullout Reports(Advanced)") = "No Access" Or AccountRule.HasPrivilege("Item Pullout Reports(Advanced)") = "Read Only" Then
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE STATUS = 'W' AND "
@@ -72,14 +72,14 @@
             mySql = "SELECT * FROM PAWN_LIST WHERE STATUS = 'W' AND "
             mySql &= String.Format("WITHDRAWDATE = '{0}'", monCalendar.SelectionStart.ToShortDateString)
         End If
-       
+
         If cboClass.Text <> "ALL" Then
             mySql &= String.Format(" AND ITEMCATEGORY = '{0}'", cboClass.Text)
         End If
         Console.WriteLine(mySql)
 
         Dim addParameters As New Dictionary(Of String, String)
-        
+
         addParameters.Add("txtMonthOf", "DATE: " & stDay)
         addParameters.Add("branchName", branchName)
 
@@ -89,7 +89,7 @@
     Private Sub Outstanding_Loans()
         Dim dsName As String = "dsOutstanding"
 
-        If Not POSuser.canOutstandingReport Then
+        If AccountRule.HasPrivilege("Outstanding Reports(Advanced)") = "No Access" Or AccountRule.HasPrivilege("Outstanding Reports(Advanced)") = "Read Only" Then
             mySql = "SELECT * "
             mySql &= "FROM "
             mySql &= "( "

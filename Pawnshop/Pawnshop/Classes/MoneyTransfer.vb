@@ -314,7 +314,7 @@
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
 
         Dim NewOtp As New ClassOtp("VOID MONEYTRANSFER", diagGeneralOTP.txtPIN.Text, SrcStr)
-        TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, SrcStr & " " & reason)
+        TransactionVoidSave(strModname1, tmpMoneyTransfer, SystemUser.ID, SrcStr & " " & reason)
 
         RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
         RemoveDailyTimeLog(MoneyTransID, "1", SrvTypDailyTimelog)

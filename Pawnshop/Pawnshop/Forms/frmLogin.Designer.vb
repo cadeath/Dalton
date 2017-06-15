@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmLogin
+Partial Class frmLogin1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class frmLogin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin1))
         Me.pbClose = New System.Windows.Forms.PictureBox()
         Me.pbHeader = New System.Windows.Forms.PictureBox()
         Me.btnExit = New System.Windows.Forms.Button()
@@ -89,10 +89,11 @@ Partial Class frmLogin
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(209, 24)
         Me.txtPassword.TabIndex = 1
+        Me.txtPassword.UseSystemPasswordChar = True
         Me.txtPassword.WatermarkColor = System.Drawing.Color.Gainsboro
         Me.txtPassword.WatermarkText = "Password"
         '
-        'frmLogin
+        'frmLogin1
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -107,7 +108,7 @@ Partial Class frmLogin
         Me.Controls.Add(Me.pbHeader)
         Me.Controls.Add(Me.pbClose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "frmLogin"
+        Me.Name = "frmLogin1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmLogin"
         CType(Me.pbClose, System.ComponentModel.ISupportInitialize).EndInit()

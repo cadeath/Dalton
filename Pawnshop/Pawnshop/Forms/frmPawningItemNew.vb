@@ -89,15 +89,14 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim mySql As String = "SELECT * FROM tbl_user_default WHERE UserType <> 'Admin'"
         Dim ds As DataSet = LoadSQL(mySql)
 
         Appraisers_ht = New Hashtable
         cboAppraiser.Items.Clear()
-
         For Each dr As DataRow In ds.Tables(0).Rows
-            Dim u As New ComputerUser
-            u.LoadUserByRow(dr)
+            Dim u As New Sys_user
+            u.Load_user_All_Rows(dr)
 
             ' UNCOMMENT ON FINAL
             'If u.canAppraise Then
@@ -108,8 +107,11 @@ Public Class frmPawningItemNew
             ' REMOVE ON FINAL
             ' Appraiser have canAppraise
 
-            cboAppraiser.Items.Add(u.UserName)
-            Appraisers_ht.Add(u.UserID, u.UserName)
+            If AccountRule.CanAppraise(u.ID) Then
+                cboAppraiser.Items.Add(u.USERNAME)
+                Appraisers_ht.Add(u.ID, u.USERNAME)
+            End If
+
         Next
     End Sub
 
@@ -489,7 +491,7 @@ nextlineTODO:
 
             'Personnel
             .AppraiserID = GetIDbyName(cboAppraiser.Text, Appraisers_ht)
-            .EncoderID = POSuser.UserID
+                .EncoderID = SystemUser.ID
 
             .PawnTicket = currentPawnTicket
             .LoanDate = LoanDate
@@ -809,7 +811,7 @@ nextlineTODO:
     End Sub
 
     Private Sub cboAppraiser_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
-        If POSuser.UserName = cboAppraiser.Text Then
+        If SystemUser.USERNAME = cboAppraiser.Text Then
             lblAuth.Text = "Verified"
             mod_system.isAuthorized = True
         Else
@@ -894,13 +896,17 @@ nextlineTODO:
                 LockFields(1)
                 Authorization()
         End Select
+
+        verification()
     End Sub
 
     Private Sub Authorization()
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then
+            btnVoid.Enabled = True
+        Else
+            btnVoid.Enabled = False
+        End If
     End Sub
 
     Private Function CheckAuth() As Boolean
@@ -1148,7 +1154,7 @@ nextlineTODO:
         cboAppraiser.Enabled = Not st
         btnRenew.Enabled = Not st
         btnRedeem.Enabled = Not st
-        If POSuser.canVoid Then btnVoid.Enabled = Not st
+        If AccountRule.HasPrivilege("Void Transactions") = "Full Access" Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
         lvSpec.Enabled = Not st
         btnAddCoi.Enabled = Not st
@@ -1594,7 +1600,7 @@ nextlineTODO:
             End Select
             .Item("TRANSNAME") = transname
             .Item("Reprint_At") = Now
-            .Item("Reprint_By") = POSuser.UserID
+            .Item("Reprint_By") = SystemUser.ID
         End With
         ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -1657,4 +1663,12 @@ nextlineTODO:
         Next
     End Sub
 
+    Private Sub verification()
+        If frmPawning.AccessType = "Read Only" Then
+            btnRenew.Enabled = False
+            btnRedeem.Enabled = False
+            btnPrint.Enabled = False
+            btnSave.Enabled = False
+        End If
+    End Sub
 End Class

@@ -160,4 +160,14 @@ unloadObj:
         MsgBox("ItemData imported", MsgBoxStyle.Information)
         lvIMD.Items.Clear()
     End Sub
+
+    Private Sub verification()
+        If AccountRule.HasPrivilege("POS") = "Read Only" Then
+            btnImport.Enabled = False
+        End If
+    End Sub
+
+    Private Sub frmImport_IMD_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        verification()
+    End Sub
 End Class

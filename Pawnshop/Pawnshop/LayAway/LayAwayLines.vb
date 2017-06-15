@@ -142,7 +142,7 @@
         ds.Tables(0).Rows(0).Item("Status") = "V"
         SaveEntry(ds, False)
 
-        TransactionVoidSave("Layaway Payments", Encoder, POSuser.UserID, "LAYAWAYID# " & _layLinesID)
+        TransactionVoidSave("Layaway Payments", Encoder, SystemUser.ID, "LAYAWAYID# " & _layLinesID)
         Dim NewOtp As New ClassOtp("Layaway Payments", diagGeneralOTP.txtPIN.Text, "LaylinesID " & _layLinesID)
 
         mysql = "Select * From tblLayAway Where LayID = " & _layID

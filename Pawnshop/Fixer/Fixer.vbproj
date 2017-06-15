@@ -104,6 +104,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PulloutCount.vb" />
     <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
     </Compile>

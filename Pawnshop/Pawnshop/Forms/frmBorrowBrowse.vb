@@ -15,9 +15,17 @@
         LoadBorrowings()
 
         'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
+        If frmBorrowing.AccessType = "Full Access" Then
+            btnVoid.Enabled = True
+            btnGenerate.Enabled = True
+        Else
+            btnVoid.Enabled = False
+            btnGenerate.Enabled = False
+        End If
+
+        'With POSuser
+        '    btnVoid.Enabled = .canVoid
+        'End With
     End Sub
    
     Private Sub ClearFields()

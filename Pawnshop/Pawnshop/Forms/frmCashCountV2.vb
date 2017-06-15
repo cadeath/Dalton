@@ -12,6 +12,10 @@
         Load_Money()
         Load_Denomination()
         lblCurrent.Text = CurrentDate.ToLongDateString
+
+        If AccountRule.HasPrivilege("Open Store") = "Read Only" Then
+            btnPost.Enabled = False
+        End If
     End Sub
 
     Private Sub Load_Denomination()
@@ -252,7 +256,7 @@
                     .Item("Denomination") = deno
                     .Item("Cnt") = denoCnt
                     .Item("Total") = denoValue
-                    .Item("EncoderID") = UserID
+                    .Item("EncoderID") = UserIDX
                     .Item("SystemTime") = Now
                     .Item("Status") = CashCountStatus
                     .Item("MoneyType") = denoType.ToUpper
@@ -290,7 +294,7 @@
             .Item("Customer") = "One-Time Customer"
             .Item("DOCDATE") = CurrentDate
             .Item("DOCTOTAL") = TotalVal
-            .Item("USERID") = POSuser.UserID
+            .Item("USERID") = SystemUser.ID
         End With
         ds.Tables("Doc").Rows.Add(dsNewRow)
         SaveEntry(ds)

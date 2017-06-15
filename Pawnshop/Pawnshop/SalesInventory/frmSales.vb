@@ -25,6 +25,9 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
+
+    Friend AccessType As String = ""
+
     'Friend LayCustomer As Integer
     'Friend LayItemCode As String
     'Friend LayCost As Integer
@@ -56,6 +59,8 @@ Public Class frmSales
         End If
 
         CheckOR()
+
+        verification()
 
         'If DEV_MODE Then
         '    dev_Menu_SalesInventory.Show()
@@ -315,6 +320,8 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCash.Click
+        verification()
+
         If ShiftMode() Then
             Load_asCash()
         End If
@@ -393,7 +400,7 @@ Public Class frmSales
             .Item("VATRATE") = VAT
             .Item("VATTOTAL") = DOC_VATTOTAL
             .Item("DOCTOTAL") = DOC_TOTAL
-            .Item("USERID") = POSuser.UserID
+            .Item("USERID") = SystemUser.ID
             If Remarks <> "" Then .Item("REMARKS") = Remarks
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
@@ -498,6 +505,7 @@ Public Class frmSales
         End If
 
         MsgBox("ITEM POSTED", MsgBoxStyle.Information)
+        verification()
         ClearField()
     End Sub
 
@@ -593,11 +601,22 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
-        If Not (POSuser.isSuperUser Or POSuser.canReturn) Then
-            MsgBox("You don't have access to the Return", MsgBoxStyle.Critical, "Authorization Invalid")
-            Exit Sub
-        Else
-            If ShiftMode() Then
+        If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Return") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Return")
+            Case "Full Access"
+                btnPost.Enabled = True
+            Case "Read Only"
+                btnPost.Enabled = False
+            Case "No Access"
+                MsgBox("You don't have access to the Return", MsgBoxStyle.Critical, "Authorization Invalid") : Exit Sub
+        End Select
+
+nextlineTODO:
+        If ShiftMode() Then
+            If AccountRule.HasPrivilege("Return") = "Full Access" Then
+                btnPost.Enabled = True
                 Load_asReturns()
             End If
         End If
@@ -629,6 +648,7 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbtnAuction_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnAuction.Click
+        verification()
 
         If ShiftMode() Then
             If TransactionMode <> TransType.Auction Then
@@ -662,11 +682,21 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
-        If Not (POSuser.isSuperUser Or POSuser.canStockOut) Then
-            MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid")
-            Exit Sub
-        Else
-            If ShiftMode() Then
+        If UType = "Admin" Then GoTo NextLineTODO
+        If AccountRule.HasPrivilege("StockOut") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("StockOut")
+            Case "Full Access"
+                btnPost.Enabled = True
+            Case "Read Only"
+                btnPost.Enabled = False
+            Case "No Access"
+                MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid") : Exit Sub
+        End Select
+nextLineTODO:
+        If ShiftMode() Then
+            If AccountRule.HasPrivilege("StockOut") = "Full Access" Then
+                btnPost.Enabled = True
                 Load_asStockOut()
             End If
         End If
@@ -741,13 +771,27 @@ Public Class frmSales
 #End Region
 
     Private Sub tsbtnLay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnLay.Click
-        If Not (POSuser.isSuperUser Or POSuser.canLayAway) Then
-            MsgBox("You don't have access to the Layaway", MsgBoxStyle.Critical, "Authorization Invalid")
-            Exit Sub
-        Else
-            If ShiftMode() Then
-                Load_asLayAway()
-            End If
+        If UType = "Admin" Then GoTo NExtLine
+
+        Select Case AccountRule.HasPrivilege("Lay away")
+            Case "Full Access"
+            Case "Read Only"
+            Case "No Access"
+                MsgBox("You don't have access to the Layaway", MsgBoxStyle.Critical, "Authorization Invalid") : Exit Sub
+        End Select
+
+NExtLine:
+        If ShiftMode() Then
+            Select Case AccountRule.HasPrivilege("Lay away")
+                Case "Full Access" : btnPost.Enabled = True
+            End Select
+            Load_asLayAway()
+        End If
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnPost.Enabled = False
         End If
     End Sub
 

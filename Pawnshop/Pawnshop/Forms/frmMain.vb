@@ -2,6 +2,8 @@
 
 Public Class frmMain
 
+    Dim s_USER As New Sys_user
+
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
     Friend doExpiry As Boolean = False
@@ -47,7 +49,7 @@ Public Class frmMain
         If st Then
             tsUser.Text = "No User yet"
         Else
-            tsUser.Text = "Greetings " & POSuser.FullName
+            tsUser.Text = "Greetings " & FullName
         End If
 
         'Reports
@@ -94,6 +96,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        pButton.Location = New Point(450, 160)
         'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
@@ -144,43 +147,76 @@ Public Class frmMain
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canSettings) Then
-            MsgBoxAuthoriation("You don't have access to Settings")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Settings") = "" Then Exit Sub
 
-        If CheckFormActive() Then Exit Sub
+        Select Case AccountRule.HasPrivilege("Settings")
+            Case "Full Access"
+                frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
+            Case "Read Only"
+                frmSettings.AccessType = AccountRule.HasPrivilege("Settings")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
 
+NExtLine:
+        Console.WriteLine(frmSettings.AccessType)
         frmSettings.Show()
 
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canUserManage) Then
-            MsgBoxAuthoriation("You don't have access to User Management")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmUserManagementNew.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("User Management") = "" Then Exit Sub
 
-        frmUserManagement.Show()
+        Select Case AccountRule.HasPrivilege("User Management")
+            Case "Full Access"
+                frmUserManagementNew.AccessType = AccountRule.HasPrivilege("User Management")
+            Case "Read Only"
+                frmUserManagementNew.AccessType = AccountRule.HasPrivilege("User Management")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmUserManagementNew.AccessType)
+        frmUserManagementNew.Show()
     End Sub
 
     Private Sub ExpiryGeneratorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryGeneratorToolStripMenuItem.Click
-        If Not POSuser.canExpiryListGenerate Then
-            MsgBoxAuthoriation("You don't have access to Expiry Generator")
-            Exit Sub
-        End If
-        MsgBox("Please be information that this function is obsolete", MsgBoxStyle.Information)
+        If UType = "Admin" Then frmExtractor.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Expiry List") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Expiry List")
+            Case "Full Access"
+                frmExtractor.accessType = AccountRule.HasPrivilege("Expiry List")
+            Case "Read Only"
+                frmExtractor.accessType = AccountRule.HasPrivilege("Expiry List")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmExtractor.accessType)
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub
 
     Private Sub JournalEntriesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles JournalEntriesToolStripMenuItem.Click
-        If Not POSuser.canJournalEntryGenerate Then
-            MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmExtractor.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Journal Entries") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Journal Entries")
+            Case "Full Access"
+                frmExtractor.accessType = AccountRule.HasPrivilege("Journal Entries")
+            Case "Read Only"
+                frmExtractor.accessType = AccountRule.HasPrivilege("Journal Entries")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmExtractor.accessType)
         frmExtractor.FormType = frmExtractor.ExtractType.JournalEntry
         frmExtractor.Show()
     End Sub
@@ -188,62 +224,119 @@ Public Class frmMain
     Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canMoneyTransfer) Then
-            MsgBoxAuthoriation("You don't have access to Money Transfer")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmMoneyTransfer.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Money Transfer") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Money Transfer")
+            Case "Full Access"
+                frmMoneyTransfer.accessType = AccountRule.HasPrivilege("Money Transfer")
+            Case "Read Only"
+                frmMoneyTransfer.accessType = AccountRule.HasPrivilege("Money Transfer")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmMoneyTransfer.accessType)
         frmMoneyTransfer.Show()
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canDollarBuying) Then
-            MsgBoxAuthoriation("You don't have access to Dollar Buying")
-            Exit Sub
-        End If
-        'frmDollorSimple.Show()
+        If UType = "Admin" Then frmmoneyexchange.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Dollar Buying") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Dollar Buying")
+            Case "Full Access"
+                frmmoneyexchange.AccessType = AccountRule.HasPrivilege("Dollar Buying")
+            Case "Read Only"
+                frmmoneyexchange.AccessType = AccountRule.HasPrivilege("Dollar Buying")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmmoneyexchange.AccessType)
         frmmoneyexchange.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canCashInOut) Then
-            MsgBoxAuthoriation("You don't have access to Cash In/Out")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmCashInOut2.AccessType = "Full Access" : GoTo Nextline
+        If AccountRule.HasPrivilege("Cash In/Out") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Cash In/Out")
+            Case "Full Access"
+                frmCashInOut2.AccessType = AccountRule.HasPrivilege("Cash In/Out")
+            Case "Read Only"
+                frmCashInOut2.AccessType = AccountRule.HasPrivilege("Cash In/Out")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access to Cash In/Out.")
+                Exit Sub
+        End Select
+
+nextline:
         frmCashInOut2.Show()
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
-        If Not (POSuser.isSuperUser Or POSuser.canOpenStore) Then
-            MsgBoxAuthoriation("You cannot Open a Store.")
-            Exit Sub
-        End If
+        If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Open Store") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Open Store")
+            Case "Full Access"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Open Store")
+            Case "Read Only"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Open Store")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+nextlineTODO:
+        Console.WriteLine(frmOpenStore.AccessType)
         frmOpenStore.Show()
     End Sub
 
     Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canClientManage) Then
-            MsgBoxAuthoriation("You don't have access to Client Management")
-            Exit Sub
-        End If
+        If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Client Management") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Client Management")
+            Case "Full Access"
+                frmClientNew.AccessType = AccountRule.HasPrivilege("Client Management")
+            Case "Read Only"
+                frmClientNew.AccessType = AccountRule.HasPrivilege("Client Management")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+nextlineTODO:
+        Console.WriteLine(frmClientNew.AccessType)
         frmClientNew.Show()
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canPawn) Then
-            MsgBoxAuthoriation("You don't have access to pawning")
-            Exit Sub
-        End If
-        frmPawning.Show()
+        If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Pawning") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Pawning")
+            Case "Full Access"
+                frmPawning.AccessType = AccountRule.HasPrivilege("Pawning")
+            Case "Read Only"
+                frmPawning.AccessType = AccountRule.HasPrivilege("Pawning")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+nextlineTODO:
+        Console.WriteLine(frmPawning.AccessType)
+        frmPawning.Show()
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
@@ -261,17 +354,26 @@ Public Class frmMain
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canBorrow) Then
-            MsgBoxAuthoriation("You don't have access to Borrowings")
-            Exit Sub
-        End If
+        If UType = "Admin" Then GoTo nextlineTODO
+        If AccountRule.HasPrivilege("Borrowings") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Borrowings")
+            Case "Full Access"
+                frmBorrowing.AccessType = AccountRule.HasPrivilege("Borrowings")
+            Case "Read Only"
+                frmBorrowing.AccessType = AccountRule.HasPrivilege("Borrowings")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+nextlineTODO:
+        Console.WriteLine(frmBorrowing.AccessType)
         frmBorrowing.Show()
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogOutToolStripMenuItem.Click
         If LogOutToolStripMenuItem.Text = "&Login" Then
-            frmLogin.Show()
+            frmLogin1.Show()
         Else
             Dim ans As DialogResult = MsgBox("Do you want to LOGOUT?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Logout")
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -279,7 +381,7 @@ Public Class frmMain
             POSuser = Nothing
             Dim formNames As New List(Of String)
             For Each Form In My.Application.OpenForms
-                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin" Then
+                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin1" Then
                     formNames.Add(Form.Name)
                 End If
             Next
@@ -288,7 +390,7 @@ Public Class frmMain
             Next
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
-            frmLogin.Show()
+            frmLogin1.Show()
         End If
     End Sub
 
@@ -299,53 +401,93 @@ Public Class frmMain
     Private Sub btnInsurance_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsurance.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canInsurance) Then
-            MsgBoxAuthoriation("You don't have access to insurance.")
-            Exit Sub
-        End If
-        'Insurance show form
+        If UType = "Admin" Then frmInsurance.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Insurance") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Insurance")
+            Case "Full Access"
+                frmInsurance.AccessType = AccountRule.HasPrivilege("Insurance")
+            Case "Read Only"
+                frmInsurance.AccessType = AccountRule.HasPrivilege("Insurance")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmInsurance.AccessType)
         frmInsurance.Show()
     End Sub
 
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
+        If UType = "Admin" Then dev_Pawning2.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Lay away") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Lay away")
+            Case "Full Access"
+            Case "Read Only"
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
         If DEV_MODE Then dev_Pawning2.Show()
-        If (POSuser.isSuperUser Or Not POSuser.canLayAway) Then
-            MsgBoxAuthoriation("You don't have access to Lay away.")
-            Exit Sub
-        End If
     End Sub
 
     Private Sub btnPOS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canPOS) Then
-            MsgBoxAuthoriation("You don't have access to POS")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmSales.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("POS") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("POS")
+            Case "Full Access"
+                frmSales.AccessType = AccountRule.HasPrivilege("POS")
+            Case "Read Only"
+                frmSales.AccessType = AccountRule.HasPrivilege("POS")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmSales.AccessType)
         frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If UType = "Admin" Then frmCashCount.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Cash Count") = "" Then Exit Sub
 
-        If Not (POSuser.isSuperUser Or POSuser.canCashCount) Then
-            MsgBoxAuthoriation("You don't have access to Cash Count")
-            Exit Sub
-        End If
+        Select Case AccountRule.HasPrivilege("Cash Count")
+            Case "Full Access"
+                frmCashCount.accessType = AccountRule.HasPrivilege("Cash Count")
+            Case "Read Only"
+                frmCashCount.accessType = AccountRule.HasPrivilege("Cash Count")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
 
+NExtLine:
+        Console.WriteLine(frmCashCount.accessType)
         frmCashCount.Show()
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canBackup) Then
-            MsgBoxAuthoriation("You don't have access to Backup")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmBackUpDataSettings.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Backup") = "" Then Exit Sub
 
-        'frmBackup.Show()
+        Select Case AccountRule.HasPrivilege("Backup")
+            Case "Full Access"
+                frmBackUpDataSettings.AccessType = AccountRule.HasPrivilege("Backup")
+            Case "Read Only"
+                frmBackUpDataSettings.AccessType = AccountRule.HasPrivilege("Backup")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmBackUpDataSettings.AccessType)
         frmBackUpDataSettings.Show()
     End Sub
 
@@ -356,19 +498,38 @@ Public Class frmMain
     End Sub
 
     Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
-        If Not (POSuser.isSuperUser Or POSuser.canMigrate) Then
-            MsgBoxAuthoriation("You don't have access to the Console")
-            Exit Sub
-        End If
-        'frmMIS.Show()
+        If UType = "Admin" Then frmAdminPanel.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Console") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Console")
+            Case "Full Access"
+                frmAdminPanel.AccessType = AccountRule.HasPrivilege("Console")
+            Case "Read Only"
+                frmAdminPanel.AccessType = AccountRule.HasPrivilege("Console")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmAdminPanel.AccessType)
         frmAdminPanel.Show()
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
-        If Not POSuser.canOpenStore Then
-            MsgBoxAuthoriation("You cannot Close a Store.")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmSettings.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Open Store") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Open Store")
+            Case "Full Access"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Open Store")
+            Case "Read Only"
+                frmOpenStore.AccessType = AccountRule.HasPrivilege("Open Store")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmSettings.AccessType)
         frmCashCountV2.Show()
         frmCashCountV2.isClosing = True
     End Sub
@@ -389,11 +550,20 @@ Public Class frmMain
     End Sub
 
     Private Sub RateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RateToolStripMenuItem.Click
-        If Not POSuser.canUpdateRates Then
-            MsgBoxAuthoriation("You cannot update rates.")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmRate2.AccessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Update Rates") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Update Rates")
+            Case "Full Access"
+                frmRate2.accessType = AccountRule.HasPrivilege("Update Rates")
+            Case "Read Only"
+                frmRate2.accessType = AccountRule.HasPrivilege("Update Rates")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmRate2.AccessType)
         frmRate2.Show()
     End Sub
 
@@ -457,11 +627,20 @@ Public Class frmMain
     End Sub
 
     Private Sub BSPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSPReportToolStripMenuItem.Click
-        If Not POSuser.canJournalEntryGenerate Then
-            MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
-            Exit Sub
-        End If
+        If UType = "Admin" Then frmExtractor.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Journal Entries") = "" Then Exit Sub
 
+        Select Case AccountRule.HasPrivilege("Journal Entries")
+            Case "Full Access"
+                frmExtractor.accessType = AccountRule.HasPrivilege("Journal Entries")
+            Case "Read Only"
+                frmExtractor.accessType = AccountRule.HasPrivilege("Journal Entries")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmExtractor.accessType)
         frmExtractor.FormType = frmExtractor.ExtractType.MoneyTransferBSP
         frmExtractor.Show()
     End Sub
@@ -472,7 +651,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ChangePasswordToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangePasswordToolStrip.Click
-        frmChangePassword.Show()
+        frmChangePasswordNew.Show()
     End Sub
 
     Private Sub AuditConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
@@ -512,6 +691,20 @@ Public Class frmMain
     End Sub
 
     Private Sub ExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem.Click
+        If UType = "Admin" Then frmSMSnotice.accessType = "Full Access" : GoTo NExtLine
+        If AccountRule.HasPrivilege("Expiry List") = "" Then Exit Sub
+
+        Select Case AccountRule.HasPrivilege("Expiry List")
+            Case "Full Access"
+                frmSMSnotice.accessType = AccountRule.HasPrivilege("Expiry List")
+            Case "Read Only"
+                frmSMSnotice.accessType = AccountRule.HasPrivilege("Expiry List")
+            Case "No Access"
+                MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
+        End Select
+
+NExtLine:
+        Console.WriteLine(frmSMSnotice.accessType)
         frmSMSnotice.Show()
     End Sub
 
@@ -691,4 +884,6 @@ Public Class frmMain
     Private Sub SMSNoticeToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem1.Click
         frmSMSInfo.Show()
     End Sub
+
+
 End Class

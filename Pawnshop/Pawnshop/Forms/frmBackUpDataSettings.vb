@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Public Class frmBackUpDataSettings
     Const DBPATH As String = "\BackUp.bat"
+    Friend AccessType As String = ""
 
     Private Sub btnBrowseBackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseBackup.Click
         If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
@@ -31,5 +32,15 @@ Public Class frmBackUpDataSettings
         If isEnter(e) Then
             btnBackup.PerformClick()
         End If
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnBackup.Enabled = False
+        End If
+    End Sub
+
+    Private Sub frmBackUpDataSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        verification()
     End Sub
 End Class

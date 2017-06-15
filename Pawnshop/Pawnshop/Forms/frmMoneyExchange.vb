@@ -15,6 +15,7 @@
     Private strRate As String = DollarAllRate
     Private fillData As String = "TBLCURRENCY"
     Private MODULE_NAME As String = "DOLLAR"
+    Friend AccessType As String = ""
 
     Private Sub btnsearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsearch.Click
         Dim secured_str As String = TxtName.Text
@@ -71,6 +72,7 @@
         End If
         txtTotal.Text = "Php 0"
         txtDenomination1.Text = "0"
+        verification()
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
@@ -157,7 +159,7 @@
                 .Customer = dollarClient
                 .Denomination = txtDenomination1.Text
                 .Serial = txtSerial.Text
-                .EncoderID = POSuser.UserID
+                .EncoderID = SystemUser.ID
                 .NetAmount = txtTotal.Text.Substring(4)
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
@@ -285,6 +287,12 @@
     Private Sub txtCurrency1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtCurrency1.KeyPress
         If isEnter(e) Then
             btnSearch1.PerformClick()
+        End If
+    End Sub
+
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnsave.Enabled = False
         End If
     End Sub
 End Class

@@ -22,6 +22,7 @@ Public Class frmAdminPanel
     Dim SchemeModify As New InterestScheme
     Private strcode As String
     Private strAppname As String
+    Friend AccessType As String = ""
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
@@ -38,6 +39,8 @@ Public Class frmAdminPanel
         btnRemove.Enabled = False
         btnUpdateScheme.Enabled = False
         btnEdit.Enabled = False
+        verification()
+        LoadAccntValidation()
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -59,7 +62,7 @@ Public Class frmAdminPanel
         SelectedItem = Item
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
-       
+        verification()
     End Sub
 
     Friend Sub LoadSpec(ByVal ID As Integer)
@@ -799,6 +802,7 @@ Public Class frmAdminPanel
         txtDescription1.Enabled = False
         btnUpdateScheme.Enabled = False
         btnAdd.Enabled = False
+        verification()
     End Sub
 
 
@@ -976,6 +980,42 @@ Public Class frmAdminPanel
         Clipboard.SetText(txtQRURL.Text)
     End Sub
 
+    Private Sub verification()
+        If AccessType = "Read Only" Then
+            btnSave.Enabled = False
+            btnUpdate.Enabled = False
+            btnAdd.Enabled = False
+            btnUpdateScheme.Enabled = False
+            btnsavescheme.Enabled = False
+            btnEdit.Enabled = False
+            btnExport.Enabled = False
+            btnGenerate.Enabled = False
+            btnAcctValidation.Enabled = False
+        End If
+    End Sub
+
+    Private Sub LoadAccntValidation()
+        txtAddDays.Text = GetOption("AccountExpiry")
+        txtPasswordAge.Text = GetOption("PasswordExpiry")
+        txtFailedAttemp.Text = GetOption("FailedAttempt")
+    End Sub
+
+    Private Sub btnAcctValidation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcctValidation.Click
+        If txtAddDays.Text = "" And txtPasswordAge.Text = "" And txtFailedAttemp.Text = "" Then Exit Sub
+
+        If txtAddDays.Text <> "" Then UpdateOptions("AccountExpiry", txtAddDays.Text)
+        If txtPasswordAge.Text <> "" Then UpdateOptions("PasswordExpiry", txtPasswordAge.Text)
+        If txtFailedAttemp.Text <> "" Then UpdateOptions("FailedAttempt", txtFailedAttemp.Text)
+
+        Me.Cursor = Cursors.WaitCursor
+        If chkResetUserExpiry.Checked Then
+            usersDateValUpdate.UserVal(txtAddDays.Text, txtPasswordAge.Text, txtFailedAttemp.Text)
+        End If : Me.Cursor = Cursors.Default : chkResetUserExpiry.Checked = False
+
+        LoadAccntValidation()
+        MsgBox("Validation successfully updated.", MsgBoxStyle.Information, "Update")
+    End Sub
+
     Private Sub LoadOTP()
         Dim mysql As String = "Select * From OTPControl"
         Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
@@ -1015,5 +1055,12 @@ Public Class frmAdminPanel
         End With
         SaveEntry(ds, False)
         MsgBox(cboOTPMod.Text & " Switch " & IIf(chbOnOff.Checked = True, "On", "Off"), MsgBoxStyle.Information, "OTP Control")
+    End Sub
+
+  
+    Private Sub btnAddpriv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddpriv.Click
+        frmaddPrivilege.TopLevel = False
+        Panel1.Controls.Add(frmaddPrivilege)
+        frmaddPrivilege.Show()
     End Sub
 End Class
