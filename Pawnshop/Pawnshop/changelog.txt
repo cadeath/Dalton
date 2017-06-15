@@ -1,4 +1,40 @@
 CHANGELOG
+
+Version 1.6.0.0
+ - Add kYC Module
+ - Add IsKYCRequired in Maintenance(default "NO")
+ - Add Client Migrate Module
+ - Drop Pawn_List, Create Pawn_List
+ - Drop Money_transfer, Create Money_transfer
+ - Drop Print_Pawning, Create Print_Pawning
+ - Drop LoanRegister, Create LoanRegister
+ - Drop ExpiryList, Create ExpiryList
+ - Add CustomerVIEW
+ - Update SMS Module (Client and phone number)
+ - Update Expiry Extractor Module
+ - Update Accounting Extract (Change Client table to KYC_CUSTOMERS table)
+ - Update lay away Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Sequence Report  (Change Client table to KYC_CUSTOMERS table) 
+ - Update Hit Management Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Pawning Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Money Transfer Module (Change Client table to KYC_CUSTOMERS table)
+ - Update Insurance Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Foriegn Exchange  (Change Client table to KYC_CUSTOMERS table)
+ - Update SMS Report (Change Client table to KYC_CUSTOMERS table)
+ - Update Sales Report (Change Client table to KYC_CUSTOMERS table)
+ - Used frmClientNew form
+ - Add OTP Control Table & Allow to Switch Off / On OTP by Module
+ - Add Discount & Custom Price Function in Sale Module
+ - Smart Product (Smart Money Padala, Load Wallet & Eload) allow to Display in Daily Cash Count
+ - Change load client from 50 to 10 client
+ - Change Insurance browse load to 10
+ - Change itemlist load to 10
+ - Change money transfer browse to 10
+ - Change pawning load to 10
+ - Change cashIN/OUT browse load to 10
+ - Add isvalidID function in client migrate
+
+
 Version 1.5.0.8
  - Drop View View_CLient
  - Create View View_Client
