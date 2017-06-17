@@ -339,16 +339,16 @@ Public Class frmSales
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
 
-        If TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
-            Dim tmp As String = String.Empty
-            While Not IsNumeric(tmp)
-                tmp = InputBox("Enter CI # ", "Remarks", 0)
-                If tmp = "" Then Exit While
-            End While
+        'If TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
+        '    Dim tmp As String = String.Empty
+        '    While Not IsNumeric(tmp)
+        '        tmp = InputBox("Enter CI # ", "Remarks", 0)
+        '        If tmp = "" Then Exit While
+        '    End While
 
-            Remarks = IIf(tmp = 0, "", tmp)
-            Remarks = "CI " & Remarks
-        End If
+        '    Remarks = IIf(tmp = 0, "", tmp)
+        '    Remarks = "CI " & Remarks
+        'End If
 
         ' INVENTORY STOCK OUT
         If TransactionMode = TransType.StockOut Then

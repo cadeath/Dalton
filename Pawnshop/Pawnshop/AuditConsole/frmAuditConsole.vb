@@ -260,10 +260,10 @@ unloadObj:
     End Function
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        Dim mysql As String = "Select DL.ItemCode, DL.Description, DL.SalePrice, DL.Qty, D.DocDate, D.Remarks "
+        Dim mysql As String = "Select DL.ItemCode, DL.Description, DL.SalePrice, DL.Qty, D.DocDate, D.Remarks, D.Code "
         mysql &= "From Doclines DL "
         mysql &= "Inner Join Doc D on D.DocID = DL.DocID "
-        mysql &= "Where Upper(DL.ItemCode) = Upper('" & txtSearch.Text & "') OR Upper(D.Remarks) like Upper('%" & txtSearch.Text & "%')"
+        mysql &= "Where Upper(DL.ItemCode) = Upper('" & txtSearch.Text & "') OR Upper(D.Code) like Upper('%" & txtSearch.Text & "%')"
         Dim ds As DataSet = LoadSQL(mysql)
 
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("No " & txtSearch.Text & " Found!", MsgBoxStyle.Critical, "Error") : Exit Sub
@@ -280,6 +280,7 @@ unloadObj:
         lv.SubItems.Add(dr.Item("DocDate"))
         lv.SubItems.Add(dr.Item("SalePrice"))
         lv.SubItems.Add(dr.Item("Qty"))
+        lv.SubItems.Add(dr.Item("Code"))
         If Not IsDBNull(dr.Item("Remarks")) Then lv.SubItems.Add(dr.Item("Remarks"))
     End Sub
 

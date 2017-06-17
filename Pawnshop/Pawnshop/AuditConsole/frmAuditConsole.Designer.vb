@@ -53,8 +53,9 @@ Partial Class frmAuditConsole
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -308,7 +309,7 @@ Partial Class frmAuditConsole
         '
         'lvItem
         '
-        Me.lvItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvItem.FullRowSelect = True
         Me.lvItem.GridLines = True
         Me.lvItem.Location = New System.Drawing.Point(3, 58)
@@ -343,13 +344,17 @@ Partial Class frmAuditConsole
         Me.ColumnHeader5.Text = "Qty"
         Me.ColumnHeader5.Width = 39
         '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Remarks"
-        '
         'ofdINV_AD
         '
         Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "CI #"
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Remarks"
         '
         'frmAuditConsole
         '
@@ -409,4 +414,5 @@ Partial Class frmAuditConsole
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class
