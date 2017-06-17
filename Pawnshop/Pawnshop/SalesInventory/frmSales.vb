@@ -340,7 +340,13 @@ Public Class frmSales
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
 
         If TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
-            Remarks = InputBox("Enter CI # ", "Remarks")
+            Dim tmp As String = String.Empty
+            While Not IsNumeric(tmp)
+                tmp = InputBox("Enter CI # ", "Remarks", 0)
+                If tmp = "" Then Exit While
+            End While
+
+            Remarks = IIf(tmp = 0, "", tmp)
             Remarks = "CI " & Remarks
         End If
 
