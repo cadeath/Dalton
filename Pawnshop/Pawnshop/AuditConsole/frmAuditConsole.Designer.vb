@@ -53,9 +53,9 @@ Partial Class frmAuditConsole
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -327,7 +327,7 @@ Partial Class frmAuditConsole
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 178
+        Me.ColumnHeader2.Width = 153
         '
         'ColumnHeader3
         '
@@ -344,10 +344,6 @@ Partial Class frmAuditConsole
         Me.ColumnHeader5.Text = "Qty"
         Me.ColumnHeader5.Width = 39
         '
-        'ofdINV_AD
-        '
-        Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
-        '
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "CI #"
@@ -355,6 +351,11 @@ Partial Class frmAuditConsole
         'ColumnHeader7
         '
         Me.ColumnHeader7.Text = "Remarks"
+        Me.ColumnHeader7.Width = 80
+        '
+        'ofdINV_AD
+        '
+        Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
         '
         'frmAuditConsole
         '
