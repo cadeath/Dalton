@@ -12,17 +12,14 @@
 
         user_Login = New Sys_user
 
-        If Not user_Login.Check_username(uName) Then 'Check username if already exists.
+        If Not user_Login.Check_username(uName) Then 'Check Username if Locked.
             Clearfield()
-            MsgBox("This account is either not register or locked.", MsgBoxStyle.Critical, "Validate") : Exit Sub
+            MsgBox("This account has been locked. Please contact the Administrator for assistance.", MsgBoxStyle.Critical, "Validate") : Exit Sub
         End If
-
 
         Failed_attemp = user_Login.GET_FAILED_ATTEMP_NUM(uName) 'CHeck if has failed attemp.
 
         If Not user_Login.CheckPass_Age_Expiration(uName, pName) Then Exit Sub 'Maximum days expiration.
-
-        If Not user_Login.Chk_Account_EXPIRY_COUNTDOWN(uName, pName) Then Exit Sub 'Minimum days expiration.
 
         If Not user_Login.LogUser(uName, pName) Then
 
@@ -48,9 +45,18 @@
 
         SYSTEM_USERIDX = user_Login.ID
 
-        user_Login.Back_to_max_if_Login(uName, pName) 'his/her minimum expiration will Back max date 
-
         MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
+
+
+        'If Not user_Login.Chk_Account_EXPIRY_COUNTDOWN(uName, pName) Then
+        '    user_Login.UPDATE_F_ATTMP(uName) 'Inactive the user account.
+        '    MsgBox("You reached the MINIMIM account days expiration" & vbCrLf & _
+        '           "Your account has been locked. Please contact the administrator for assistance.", MsgBoxStyle.Exclamation, "Warning")
+        '    Exit Sub 'Minimum days expiration.
+        'Else
+        '    user_Login.Back_to_max_if_Login(uName, pName) 'his/her minimum expiration will Back max date 
+        'End If
+
         Me.Close()
     End Sub
 
@@ -67,4 +73,5 @@
         txtUsername.Text = ""
         txtPassword.Text = ""
     End Sub
+   
 End Class

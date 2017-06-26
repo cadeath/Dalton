@@ -748,6 +748,7 @@ nextLINETODO:
 
         With ds.Tables(0).Rows(0)
             .Item("STATUS") = "0"
+            .Item("FailedAttempStat") = "Disable"
         End With
         database.SaveEntry(ds, False)
         Return True
