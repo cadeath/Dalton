@@ -178,8 +178,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
-    <Compile Include="AutoPatch\db132.vb" />
+    <Compile Include="AutoPatch\CIRUpdate.vb" />
     <Compile Include="AutoPatch\db133.vb" />
+    <Compile Include="AutoPatch\db132.vb" />
+    <Compile Include="AutoPatch\db134.vb" />
     <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
@@ -270,6 +272,12 @@
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ORview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_Parse.Designer.vb">
+      <DependentUpon>dev_Parse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Parse.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_Pawning.Designer.vb">
@@ -959,6 +967,9 @@
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_Parse.resx">
+      <DependentUpon>dev_Parse.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
@@ -1342,6 +1353,9 @@
     <EmbeddedResource Include="Reports\rpt_StockOutReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_SummaryCount.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -1412,6 +1426,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="backup.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CIR files\sample.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="doc\ExpiryFormat.xls">

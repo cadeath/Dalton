@@ -104,13 +104,13 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
-      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    <Compile Include="CashInBank\update_cashinbank.vb" />
+    <Compile Include="CIR Reader\frmCIRReader.Designer.vb">
+      <DependentUpon>frmCIRReader.vb</DependentUpon>
     </Compile>
-    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.vb">
+    <Compile Include="CIR Reader\frmCIRReader.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CashInBank\update_cashinbank.vb" />
     <Compile Include="database.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
       <DependentUpon>frmMain2.vb</DependentUpon>
@@ -118,10 +118,16 @@
     <Compile Include="CashInBank\frmMain2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.Designer.vb">
-      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
+    <Compile Include="Extract\Extract.Designer.vb">
+      <DependentUpon>Extract.vb</DependentUpon>
     </Compile>
-    <Compile Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.vb">
+    <Compile Include="Extract\Extract.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extract\frmSampleExtract.Designer.vb">
+      <DependentUpon>frmSampleExtract.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extract\frmSampleExtract.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FixDailyTimeModname\frmFixModname.Designer.vb">
@@ -134,6 +140,12 @@
       <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
     </Compile>
     <Compile Include="FixDoclineDecimal\frmFixDoclineDecimal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.Designer.vb">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FixInterestHistory\frmFixIntHistory.Designer.vb">
@@ -159,6 +171,12 @@
       <DependentUpon>frmMainFixer.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMainFixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mal\frmFixMal.Designer.vb">
+      <DependentUpon>frmFixMal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Mal\frmFixMal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Migrate\frmLoading.Designer.vb">
@@ -228,17 +246,23 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
-      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    <EmbeddedResource Include="CIR Reader\frmCIRReader.resx">
+      <DependentUpon>frmCIRReader.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fix Layaway Cash Offsetting\frmLayawayCashOffsetting.resx">
-      <DependentUpon>frmLayawayCashOffsetting.vb</DependentUpon>
+    <EmbeddedResource Include="Extract\Extract.resx">
+      <DependentUpon>Extract.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extract\frmSampleExtract.resx">
+      <DependentUpon>frmSampleExtract.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixDoclineDecimal\frmFixDoclineDecimal.resx">
       <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixInterestHistory\frmFixIntHistory.resx">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
@@ -257,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainFixer.resx">
       <DependentUpon>frmMainFixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mal\frmFixMal.resx">
+      <DependentUpon>frmFixMal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmLoading.resx">
       <DependentUpon>frmLoading.vb</DependentUpon>
@@ -353,7 +380,10 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Fixer for Maintenance\Cir Reader\" />
+    <Folder Include="Fixer for Maintenance\NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
