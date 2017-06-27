@@ -689,6 +689,29 @@ COntinues:
 
         Return Me
     End Function
+
+    Friend Sub AddIDentification(ByVal IDType As String)
+        Dim mysql As String = "SELECT * FROM KYC_IDLIST WHERE IDTYPE = '" & IDType & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "KYC_IDLIST")
+
+        If ds.Tables(0).Rows.Count = 0 Then
+
+            Dim dsNewrow As DataRow
+            dsNewrow = ds.Tables("KYC_IDLIST").NewRow
+
+            With dsNewrow
+                .Item("IDTYPE") = IDType
+            End With
+            ds.Tables("KYC_IDLIST").Rows.Add(dsNewrow)
+            database.SaveEntry(ds)
+        Else
+            With ds.Tables(0).Rows(0)
+                .Item("IDTYPE") = IDType
+            End With
+            database.SaveEntry(ds, False)
+        End If
+       
+    End Sub
 #End Region
 
 End Class
