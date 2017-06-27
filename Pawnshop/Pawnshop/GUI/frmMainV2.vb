@@ -334,8 +334,21 @@ nextlineTODO:
 
 nextlineTODO:
         Console.WriteLine(frmPawning.AccessType)
-        frmPawning.Show()
+        frmloginV2.TopLevel = False
+        Me.Panel2.Controls.Add(frmloginV2)
+        frmloginV2.Location = New Point(120, 120)
+        frmloginV2.Show()
+        'frmPawning.Show()
     End Sub
+
+ 
+    Private Sub MDI(ByVal frm As Form)
+        frm.TopLevel = False
+        frm = New Form
+        Panel2.Controls.Add(frm)
+        frm.Show()
+    End Sub
+
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
         ClosingStoreToolStripMenuItem.Enabled = dateSet
@@ -454,20 +467,20 @@ NExtLine:
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
-        If UType = "Admin" Then frmCashCount.accessType = "Full Access" : GoTo NExtLine
+        If UType = "Admin" Then frmCashCount.AccessType = "Full Access" : GoTo NExtLine
         If AccountRule.HasPrivilege("Cash Count") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Cash Count")
             Case "Full Access"
-                frmCashCount.accessType = AccountRule.HasPrivilege("Cash Count")
+                frmCashCount.AccessType = AccountRule.HasPrivilege("Cash Count")
             Case "Read Only"
-                frmCashCount.accessType = AccountRule.HasPrivilege("Cash Count")
+                frmCashCount.AccessType = AccountRule.HasPrivilege("Cash Count")
             Case "No Access"
                 MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
         End Select
 
 NExtLine:
-        Console.WriteLine(frmCashCount.accessType)
+        Console.WriteLine(frmCashCount.AccessType)
         frmCashCount.Show()
     End Sub
 
@@ -548,7 +561,7 @@ NExtLine:
     End Sub
 
     Private Sub RateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RateToolStripMenuItem.Click
-        If UType = "Admin" Then frmRate2.AccessType = "Full Access" : GoTo NExtLine
+        If UType = "Admin" Then frmRate2.accessType = "Full Access" : GoTo NExtLine
         If AccountRule.HasPrivilege("Update Rates") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Update Rates")
@@ -561,7 +574,7 @@ NExtLine:
         End Select
 
 NExtLine:
-        Console.WriteLine(frmRate2.AccessType)
+        Console.WriteLine(frmRate2.accessType)
         frmRate2.Show()
     End Sub
 
@@ -689,20 +702,20 @@ NExtLine:
     End Sub
 
     Private Sub ExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem.Click
-        If UType = "Admin" Then frmSMSnotice.accessType = "Full Access" : GoTo NExtLine
+        If UType = "Admin" Then frmSMSnotice.AccessType = "Full Access" : GoTo NExtLine
         If AccountRule.HasPrivilege("Expiry List") = "" Then Exit Sub
 
         Select Case AccountRule.HasPrivilege("Expiry List")
             Case "Full Access"
-                frmSMSnotice.accessType = AccountRule.HasPrivilege("Expiry List")
+                frmSMSnotice.AccessType = AccountRule.HasPrivilege("Expiry List")
             Case "Read Only"
-                frmSMSnotice.accessType = AccountRule.HasPrivilege("Expiry List")
+                frmSMSnotice.AccessType = AccountRule.HasPrivilege("Expiry List")
             Case "No Access"
                 MsgBoxAuthoriation("You Don't have access in this module.") : Exit Sub
         End Select
 
 NExtLine:
-        Console.WriteLine(frmSMSnotice.accessType)
+        Console.WriteLine(frmSMSnotice.AccessType)
         frmSMSnotice.Show()
     End Sub
 
@@ -883,5 +896,5 @@ NExtLine:
         frmSMSInfo.Show()
     End Sub
 
- 
+
 End Class

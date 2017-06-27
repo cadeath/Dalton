@@ -121,6 +121,7 @@ nextToline:
     End Sub
 
     Private Sub frmloginV2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
         user_Login = New Sys_user
         user_Login.CreateSuperAdministrator()
     End Sub
