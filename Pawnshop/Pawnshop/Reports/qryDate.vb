@@ -424,7 +424,7 @@
         End If
 
         If monCal.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
-            If frmMain.dateSet Then
+            If frmMainV2.dateSet Then
                 MsgBox("Unable to Generate Cash Count Sheet yet", MsgBoxStyle.Information)
                 Exit Sub
             End If

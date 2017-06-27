@@ -27,7 +27,7 @@
     End Sub
 
     Private Sub btnSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetup.Click
-        If Not isDisable Then If frmMain.dateSet Then MsgBox("Please execute closing", MsgBoxStyle.Critical) : Exit Sub
+        If Not isDisable Then If frmMainV2.dateSet Then MsgBox("Please execute closing", MsgBoxStyle.Critical) : Exit Sub
         Dim ans As DialogResult = _
             MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
         If Not ans = Windows.Forms.DialogResult.Yes Then
@@ -43,13 +43,13 @@
 
         CurrentDate = dtpCurrentDate.Value
         If isDisable Then
-            frmMain.dateSet = True
+            frmMainV2.dateSet = True
             Me.Close()
             Exit Sub
         End If
         
         If mod_system.OpenStore() Then
-            frmMain.dateSet = True
+            frmMainV2.dateSet = True
             dailyID = LoadLastOpening.Tables(0).Rows(0).Item("ID")
 
             AddTimelyLogs("OPENSTORE", String.Format("TIME IS {0} AND INITIAL IS Php {1:#,##0.00}", Now.ToShortTimeString, InitialBal), InitialBal, False, "OPEN BY " & SystemUser.FIRSTNAME & " " & SystemUser.LASTNAME, transid:=dailyID)
@@ -57,7 +57,7 @@
             Exit Sub
         End If
 
-        If Not frmMain.dateSet Then
+        If Not frmMainV2.dateSet Then
             ans = MsgBox("Do you want to execute backup procedure?", MsgBoxStyle.YesNo + MsgBoxStyle.Information, "Daily Backup")
             If ans = Windows.Forms.DialogResult.Yes Then
                 frmBackup.StartupExecute()

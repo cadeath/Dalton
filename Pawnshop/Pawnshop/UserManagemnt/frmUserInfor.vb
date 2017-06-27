@@ -18,7 +18,7 @@
         End With
 
         MsgBox("Profile successfully updated.", MsgBoxStyle.Information, "Update")
-        frmMainnEW.NotYetLogin() : frmLogin1.Show()
+        frmMainV2.NotYetLogin() : frmloginV2.Show()
         Me.Close()
     End Sub
 

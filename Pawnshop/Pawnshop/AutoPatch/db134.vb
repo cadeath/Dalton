@@ -6,7 +6,7 @@
 
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
-        frmMain.Cursor = Cursors.WaitCursor
+        frmMainV2.Cursor = Cursors.WaitCursor
         Try
             UpdateOptions("PolloutCount", "1")
 
@@ -15,7 +15,7 @@
         Catch ex As Exception
             Log_Report(String.Format("[{0}]" & ex.ToString, LATEST_VERSION))
         End Try
-        frmMain.Cursor = Cursors.Default
+        frmMainV2.Cursor = Cursors.Default
     End Sub
 
 End Module

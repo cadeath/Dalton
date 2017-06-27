@@ -1,7 +1,5 @@
 ﻿Imports totp
 Public Class frmMainV2
-
-
     Dim s_USER As New Sys_user
 
     Friend dateSet As Boolean = False

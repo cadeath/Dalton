@@ -333,9 +333,9 @@ nextLoop:
 
 #Region "Migration"
     Private Function canMigrate() As Boolean
-        If frmMain.dateSet Then MsgBox("Please do Close Store before migrating", vbCritical)
+        If frmMainV2.dateSet Then MsgBox("Please do Close Store before migrating", vbCritical)
 
-        Return Not frmMain.dateSet
+        Return Not frmMainV2.dateSet
     End Function
 
     Private Sub tbMIS_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles tbMIS.SelectedIndexChanged
