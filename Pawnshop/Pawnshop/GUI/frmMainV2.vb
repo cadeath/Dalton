@@ -334,21 +334,8 @@ nextlineTODO:
 
 nextlineTODO:
         Console.WriteLine(frmPawning.AccessType)
-        frmloginV2.TopLevel = False
-        Me.Panel2.Controls.Add(frmloginV2)
-        frmloginV2.Location = New Point(120, 120)
-        frmloginV2.Show()
-        'frmPawning.Show()
+       frmPawning.Show()
     End Sub
-
- 
-    Private Sub MDI(ByVal frm As Form)
-        frm.TopLevel = False
-        frm = New Form
-        Panel2.Controls.Add(frm)
-        frm.Show()
-    End Sub
-
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
         ClosingStoreToolStripMenuItem.Enabled = dateSet
