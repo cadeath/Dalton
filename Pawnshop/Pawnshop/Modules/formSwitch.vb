@@ -24,32 +24,55 @@
 
     End Enum
 
-    Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
+    'Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
+    '    Select Case gotoForm
+    '        Case FormName.devForm
+    '            devClient.LoadClientInfo(cl)
+    '        Case FormName.frmMTSend
+    '            frmMoneyTransfer.LoadSenderInfo(cl)
+    '        Case FormName.frmInsurance
+    '            frmInsurance.LoadHolder(cl)
+    '        Case FormName.frmMTReceive
+    '            frmMoneyTransfer.LoadReceiverInfo(cl)
+    '        Case FormName.frmPawnItem
+    '            frmPawnItem.LoadClient(cl)
+    '        Case FormName.frmDollarSimple
+    '            frmDollorSimple.LoadClient(cl)
+    '        Case FormName.frmMoneyExchange
+    '            frmmoneyexchange.LoadClient(cl)
+
+    '        Case FormName.frmPawningV2_Client
+    '            frmPawningItemNew.LoadClient(cl)
+    '        Case FormName.frmPawningV2_Claimer
+    '            frmPawningItemNew.LoadCliamer(cl)
+
+    '        Case FormName.layAway
+    '            frmLayAway.LoadClient(cl)
+    '        Case FormName.layAwayExist
+    '            frmAddCustomer.LoadClient(cl)
+    '    End Select
+    'End Sub
+
+    Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cus As Customer)
         Select Case gotoForm
-            Case FormName.devForm
-                devClient.LoadClientInfo(cl)
             Case FormName.frmMTSend
-                frmMoneyTransfer.LoadSenderInfo(cl)
+                frmMoneyTransfer.LoadSenderInfo(cus)
             Case FormName.frmInsurance
-                frmInsurance.LoadHolder(cl)
+                frmInsurance.LoadHolder(cus)
             Case FormName.frmMTReceive
-                frmMoneyTransfer.LoadReceiverInfo(cl)
-            Case FormName.frmPawnItem
-                frmPawnItem.LoadClient(cl)
-            Case FormName.frmDollarSimple
-                frmDollorSimple.LoadClient(cl)
+                frmMoneyTransfer.LoadReceiverInfo(cus)
             Case FormName.frmMoneyExchange
-                frmmoneyexchange.LoadClient(cl)
+                frmmoneyexchange.LoadCustomer(cus)
 
             Case FormName.frmPawningV2_Client
-                frmPawningItemNew.LoadClient(cl)
+                frmPawningItemNew.LoadClient(cus)
             Case FormName.frmPawningV2_Claimer
-                frmPawningItemNew.LoadCliamer(cl)
+                frmPawningItemNew.LoadCliamer(cus)
 
             Case FormName.layAway
-                frmLayAway.LoadClient(cl)
+                frmLayAway.LoadClient(cus)
             Case FormName.layAwayExist
-                frmAddCustomer.LoadClient(cl)
+                frmAddCustomer.LoadClient(cus)
         End Select
     End Sub
 

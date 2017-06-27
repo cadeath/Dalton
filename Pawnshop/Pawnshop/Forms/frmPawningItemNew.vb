@@ -4,8 +4,8 @@ Public Class frmPawningItemNew
     Friend transactionType As String = "L"
     Friend PT_Entry As New PawnTicket2 'Serve as Pawn Ticket
     Friend PawnedItem As New PawnItem 'Serve as Pawned Item
-    Friend Pawner As Client
-    Friend Pawner_OtherClaimer As New Client
+    Friend Pawner As Customer
+    Friend Pawner_OtherClaimer As New Customer
     Private isOldItem As Boolean = False
     Private isEarlyRedeem As Boolean = False
 
@@ -123,24 +123,36 @@ Public Class frmPawningItemNew
     Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
         Dim secured_str As String = txtClaimer.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmPawningV2_Claimer)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmPawningV2_Claimer)
+        frmClientNew.Show()
     End Sub
 
-    Friend Sub LoadClient(ByVal cl As Client)
-        txtCustomer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
-        txtAddr.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
-        txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
-        txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
+    Friend Sub LoadClient(ByVal cus As Customer)
+        txtCustomer.Text = String.Format("{0} {1}" & IIf(cus.Suffix <> "", "," & cus.Suffix, ""), cus.FirstName, cus.LastName)
+        txtAddr.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity)
+        txtBDay.Text = cus.Birthday.ToString("MMM dd, yyyy")
 
-        Pawner = New Client
-        Pawner = cl
+        For Each phne As PhoneNumber In cus.CustomersPhone
+            If phne.isPrimary Then
+                txtContact.Text = phne.PhoneNumber
+                GoTo nextlineTODO
+            End If
+        Next
+
+        For Each phne As PhoneNumber In cus.CustomersPhone
+            txtContact.Text = phne.PhoneNumber
+            GoTo nextlineTODO
+        Next
+
+nextlineTODO:
+        Pawner = New Customer
+        Pawner = cus
         txtClassification.Focus()
     End Sub
 
-    Friend Sub LoadCliamer(ByVal cl As Client)
-        txtClaimer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
-        Pawner_OtherClaimer = cl
+    Friend Sub LoadCliamer(ByVal cus As Customer)
+        txtClaimer.Text = String.Format("{0} {1}" & IIf(cus.Suffix <> "", "," & cus.Suffix, ""), cus.FirstName, cus.LastName)
+        Pawner_OtherClaimer = cus
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -284,7 +296,7 @@ Public Class frmPawningItemNew
             .Penalty = PawnPenalty
             .ServiceCharge = PawnServiceCharge
             .Status = "X"
-            .ClaimerID = Pawner_OtherClaimer.ID
+            .ClaimerID = Pawner_OtherClaimer.CustomerID
             .RenewDue = 0
             .RedeemDue = RedeemDue
 
@@ -394,7 +406,7 @@ Public Class frmPawningItemNew
             .Status = "R"
             .PawnItem = PT_Entry.PawnItem
             .Pawner = PT_Entry.Pawner
-            .ClaimerID = Pawner_OtherClaimer.ID
+            .ClaimerID = Pawner_OtherClaimer.CustomerID
             'INCLUDE THE CLAIMER HERE
             '?????????????????
 
@@ -502,7 +514,7 @@ Public Class frmPawningItemNew
 
             'AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
             AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount, , , .LoadLastIDNumberPawn)
-            HitManagement.do_PawningHit(PT_Entry.Pawner, PT_Entry.PawnTicket)
+                HitManagement.do_PawningHit(PT_Entry.Pawner, PT_Entry.PawnTicket)
         End With
 
             AddNumber(DocumentClass.Pawnticket)
@@ -749,8 +761,8 @@ Public Class frmPawningItemNew
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtCustomer.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmPawningV2_Client)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmPawningV2_Client)
+        frmClientNew.Show()
     End Sub
 
     Private Sub txtClassification_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtClassification.KeyPress
@@ -1328,7 +1340,7 @@ Public Class frmPawningItemNew
 
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

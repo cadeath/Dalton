@@ -53,10 +53,10 @@ Public Class ExtractDataFromDatabase
           vbCrLf & "	I.RENEWALCNT,	" & _
           vbCrLf & "	O.SERVICECHARGE,O.CREATED_AT,O.UPDATED_AT	" & _
           vbCrLf & "	FROM OPT O	" & _
-          vbCrLf & "	INNER JOIN TBLCLIENT C	" & _
-          vbCrLf & "	ON C.CLIENTID =O.CLIENTID	" & _
-          vbCrLf & "	LEFT JOIN TBLCLIENT CL	" & _
-          vbCrLf & "	ON CL.CLIENTID =O.CLAIMERID	" & _
+          vbCrLf & "	INNER JOIN " & CUSTOMER_TABLE & " C	" & _
+          vbCrLf & "	ON C.ID =O.CLIENTID	" & _
+          vbCrLf & "	LEFT JOIN " & CUSTOMER_TABLE & " CL	" & _
+          vbCrLf & "	ON CL.ID =O.CLAIMERID	" & _
           vbCrLf & "	LEFT JOIN TBL_GAMIT G	" & _
           vbCrLf & "	ON G.USERID = O.APPRAISERID	" & _
           vbCrLf & "	LEFT JOIN TBL_GAMIT E	" & _
@@ -305,8 +305,8 @@ Public Class ExtractDataFromDatabase
      vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
-       vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
-       vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
+       vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C ON  M.SENDERID = C.ID " & _
+       vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " R ON  M.RECEIVERID = R.ID " & _
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
@@ -433,10 +433,10 @@ Public Class ExtractDataFromDatabase
           vbCrLf & "	I.RENEWALCNT,	" & _
           vbCrLf & "	O.SERVICECHARGE,O.CREATED_AT,O.UPDATED_AT	" & _
           vbCrLf & "	FROM OPT O	" & _
-          vbCrLf & "	INNER JOIN TBLCLIENT C	" & _
-          vbCrLf & "	ON C.CLIENTID =O.CLIENTID	" & _
-          vbCrLf & "	LEFT JOIN TBLCLIENT CL	" & _
-          vbCrLf & "	ON CL.CLIENTID =O.CLAIMERID	" & _
+          vbCrLf & "	INNER JOIN " & CUSTOMER_TABLE & " C	" & _
+          vbCrLf & "	ON C.ID =O.CLIENTID	" & _
+          vbCrLf & "	LEFT JOIN " & CUSTOMER_TABLE & " CL	" & _
+          vbCrLf & "	ON CL.ID =O.CLAIMERID	" & _
           vbCrLf & "	LEFT JOIN TBL_GAMIT G	" & _
           vbCrLf & "	ON G.USERID = O.APPRAISERID	" & _
           vbCrLf & "	LEFT JOIN TBL_GAMIT E	" & _
@@ -681,8 +681,8 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
-       vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
-       vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
+       vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C ON  M.SENDERID = C.ID " & _
+       vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " R ON  M.RECEIVERID = R.ID" & _
        vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
        vbCrLf & " ORDER BY M.TRANSDATE;"
 
