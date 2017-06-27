@@ -192,8 +192,8 @@ Module smsUtil
                 msg = msg.Replace(String.Format("%{0}%", colName.ToString), sanitize)
             End If
 
-            If msg.Contains(String.Format("%{0}%", "BRACHNAME")) Then
-                msg = msg.Replace(String.Format("%{0}%", "BRACHNAME"), GetOption("BranchName"))
+            If msg.Contains(String.Format("%{0}%", "BRANCHNAME")) Then
+                msg = msg.Replace(String.Format("%{0}%", "BRANCHNAME"), GetOption("BranchName"))
             End If
         Next
 

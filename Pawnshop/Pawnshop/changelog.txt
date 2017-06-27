@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.6.0.5
+ - Update SMS Message added Branch Name
+
 Vsersion 1.6.0.4
  - Update Pullout count module
  - Add CIRUpdate Module (Auto patch CIR)
