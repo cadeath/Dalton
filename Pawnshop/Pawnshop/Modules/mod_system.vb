@@ -715,6 +715,35 @@ Module mod_system
         Return True
     End Function
 
+
+    Friend Function GetEloadPrice(ByVal Quantity As Double)
+        Select Case Quantity
+            Case 4.77
+                Return 1.048218
+            Case 9.55
+                Return 1.04712
+            Case 14.33
+                Return 1.046755
+            Case 19.11
+                Return 1.046572
+            Case 28.66
+                Return 1.046755
+            Case 47.78
+                Return 1.046462
+            Case 53.33
+                Return 1.12507
+            Case 95.56
+                Return 1.046462
+            Case 143.34
+                Return 1.046462
+            Case 238.9
+                Return 1.046462
+            Case 286.68
+                Return 1.046462
+        End Select
+        Return 0
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

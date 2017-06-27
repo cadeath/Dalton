@@ -125,16 +125,25 @@ Public Class frmSales
             End If
         Next
 
+
         If hasSelected Then
             With lvSale.FindItemWithText(itm.ItemCode)
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = 1
                 Else
+                    Console.WriteLine("Old Qty " & .SubItems(2).Text)
                     .SubItems(2).Text += itm.Quantity
+                    Console.WriteLine("New Qty " & .SubItems(2).Text)
                 End If
 
-                'ItemAmount = (itm.SalePrice * itm.Quantity)
-                ItemAmount = (.SubItems(2).Text * .SubItems(3).Text)
+                If itm.ItemCode = "SMT 00071" Then
+                    Dim tmp As cItemData = ht_BroughtItems.Item(itm.ItemCode)
+                    tmp.SalePrice = itm.SalePrice
+                    ItemAmount = .SubItems(2).Text * itm.SalePrice
+                Else
+                    'ItemAmount = (itm.Quantity * itm.SalePrice)
+                    ItemAmount = (.SubItems(2).Text * .SubItems(3).Text)
+                End If
 
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = ItemAmount
@@ -144,13 +153,16 @@ Public Class frmSales
                 End If
             End With
 
+
         Else
             'If NEW
             Dim lv As ListViewItem = lvSale.Items.Add(itm.ItemCode)
             lv.SubItems.Add(itm.Description)
             lv.SubItems.Add(itm.Quantity)
+
             lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
             ItemAmount = (itm.SalePrice * itm.Quantity)
+
             lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
             lv.SubItems.Add(itm.SRP.ToString("#,##0.00"))
             lv.SubItems.Add(itm.Discount)
@@ -164,9 +176,9 @@ Public Class frmSales
         Else
             ht_BroughtItems.Add(src_idx, itm)
         End If
-            DOC_TOTAL = 0
-            For Each lv As ListViewItem In lvSale.Items
-                DOC_TOTAL += CDbl(lv.SubItems(4).Text)
+        DOC_TOTAL = 0
+        For Each lv As ListViewItem In lvSale.Items
+            DOC_TOTAL += CDbl(lv.SubItems(4).Text)
         Next
 
         Display_Total(DOC_TOTAL)
@@ -301,7 +313,11 @@ Public Class frmSales
                 itm.ItemCode = lvSale.Items(idx).Text
                 itm.Load_Item()
 
-                DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                If itm.ItemCode = "SMT 00071" Then
+                    DOC_TOTAL -= GetEloadPrice(CDbl(lvSale.Items(idx).SubItems(2).Text)) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                Else
+                    DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                End If
                 ht_BroughtItems.Remove(itm.ItemCode)
                 lvSale.Items(idx).Remove()
 

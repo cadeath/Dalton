@@ -18,6 +18,8 @@
         ForfeitMonthly = 10
         LayawayList = 11
 
+        SummaryCount = 12
+
     End Enum
     Friend FormType As SaleReport = SaleReport.SalesMonthly
 
@@ -80,6 +82,9 @@
 
             Case SaleReport.StockInMonthly
                 StockInReportMonthly()
+
+            Case SaleReport.SummaryCount
+                SummaryCount()
 
         End Select
 
@@ -404,8 +409,42 @@
                 Return True
             Case SaleReport.LayawayList
                 Return True
+            Case SaleReport.SummaryCount
+                Return True
         End Select
         Return False
     End Function
 
+    Private Sub SummaryCount()
+        Dim mysql As String = "Select * FROM( "
+        mysql &= "Select "
+        mysql &= "count(*)as TotalCount, "
+        mysql &= "SUM(principal)as TotalAmount, "
+        mysql &= " Case Status "
+        mysql &= "When 'L' then 'New Loan' "
+        mysql &= "When 'R' then 'Renew' "
+        mysql &= "When 'X' then 'Redeem' "
+        mysql &= "end as Status "
+        mysql &= "from opt "
+        mysql &= "Where (Status = 'R' or Status = 'L' or Status = 'X') "
+        mysql &= "and LoanDate = '" & monCal.SelectionStart.ToShortDateString & "' "
+        mysql &= "Group by Status "
+
+        mysql &= "Union "
+
+        mysql &= "Select "
+        mysql &= "COUNT(*)as TotalCount, "
+        mysql &= "SUM(Amount)as TotalAmount, "
+        mysql &= "'Insurance' as Status "
+        mysql &= "From tblInsurance "
+        mysql &= "Where TransDate = '" & monCal.SelectionStart.ToShortDateString & "' "
+        mysql &= ")"
+
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mysql, "dsSumCount", "Reports\rpt_SummaryCount.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
 End Class
