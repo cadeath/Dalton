@@ -1,6 +1,6 @@
-﻿Module db134
-    Const ALLOWABLE_VERSION As String = "1.3.3"
-    Const LATEST_VERSION As String = "1.3.4"
+﻿Module db135
+    Const ALLOWABLE_VERSION As String = "1.3.4"
+    Const LATEST_VERSION As String = "1.3.5"
 
     Private strSql As String
 
@@ -116,7 +116,7 @@
         Dim dropView As String = "DROP VIEW EXPIRY_LIST;"
         Dim createExpiryList As String
 
-       createExpiryList = "	CREATE VIEW EXPIRY_LIST(		"
+        createExpiryList = "	CREATE VIEW EXPIRY_LIST(		"
         createExpiryList &= vbCrLf & "	PAWNID,PAWNTICKET,CLIENTID,LOANDATE,MATUDATE,EXPIRYDATE,AUCTIONDATE,ITEMTYPE,CATID,DESCRIPTION,KARAT,	"
         createExpiryList &= vbCrLf & "	GRAMS,APPRAISAL,PRINCIPAL,INTEREST,NETAMOUNT,EVAT,APPRAISERID,OLDTICKET,ORNUM,ORDATE,LESSPRINCIPAL,	"
         createExpiryList &= vbCrLf & "	DAYSOVERDUE,DELAYINT,PENALTY,SERVICECHARGE,RENEWDUE,REDEEMDUE,STATUS,PULLOUT,SYSTEMINFO,ENCODERID,ADVINT,	"
