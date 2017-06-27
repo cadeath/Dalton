@@ -20,7 +20,7 @@ Public Class frmClientInformation
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
+        'Me.TopMost = True
         frmClient.Enabled = False
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
@@ -85,6 +85,7 @@ Public Class frmClientInformation
         txtCP2.Text = cl.Cellphone2
         txtTele.Text = cl.Telephone
         txtOthers.Text = cl.OtherNumber
+        If cl.IsDumper = True Then chkDumper.Checked = True
 
         SelectedClient = cl
 
@@ -134,6 +135,7 @@ Public Class frmClientInformation
         txtRemarks.ReadOnly = st
 
         grpID.Enabled = Not st
+        grpDumper.Enabled = Not st
 
         If st Then
             btnSave.Text = "&Modify"
@@ -299,6 +301,7 @@ Public Class frmClientInformation
             .Cellphone2 = txtCP2.Text
             .Telephone = txtTele.Text
             .OtherNumber = txtOthers.Text
+            If chkDumper.Checked Then .IsDumper = True Else .IsDumper = False
 
             If isNew Then
                 .SaveClient()
@@ -538,5 +541,4 @@ Public Class frmClientInformation
     Private Sub frmClientInformation_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmClient.Enabled = True
     End Sub
-
 End Class

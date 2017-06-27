@@ -1,23 +1,22 @@
 CHANGELOG
+Version 1.5.0.8
+ - Drop View View_CLient
+ - Create View View_Client
+ - Update Client Module
+ - Add Column isDumper in Client table
+ - Add Notification Dumper alert
+ - Change Database version from 1.3 to 1.3.1
+
 Version 1.5.0.7
  - Add Branch Address in Maintenance
  - Add Menus 1 Date Segrate List
- - Added Journal Entries Block if not close store
+ - Added Journal Entries Block if not close store and release Hot Code in every extract
+ - Added dataset hash in every extract of Journal and Sales
  - Added Daily & Monthly Expiry List
  - Added Monitoring for OPT
  - Added Function for Deleting Wrong Item in Inventory
  - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
  - Added Separated OPT Generator
- - Added Daily & Monthly Expiry List
- - Fix Adjustment Zero Inventory
- - Fix Adjustment Zero Inventory
- - Fix No Segre in Outstanding
- - Fix Segre List
- - Quick View on Pawnticket
- - Layaway Reports Sort by Date
- - Change Inventory Merchandise Sap Account
-
-Version 1.5.0.4
  - Added Icon
  - Added SMS Module for Expiry Items
  - Added TABLE SMS
@@ -28,12 +27,20 @@ Version 1.5.0.4
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
  - Added Layaway List Report (Active layaway)
- - Can ReSend Failed Sending
+ - Added Inventory Adjustment
+ - Fix Pawn_List View Include Barangay in Patch
  - Fix Wrong Journal in Layaway Penalty
  - Fix Different Control # for STO, Inv, Return
- - Added Inventory Adjustment
+ - Fix Adjustment Zero Inventory
+ - Fix No Segre in Outstanding
+ - Fix Segre List
  - Modify Pawn_List VIEW
  - Record Failed SMS Properly
+ - Quick View on Pawnticket
+ - Layaway Reports Sort by Date
+ - Change Inventory Merchandise Sap Account
+ - Can ReSend Failed Sending
+ - fix SMS notification cannot view not enough specs
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES
