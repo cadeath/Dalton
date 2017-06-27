@@ -178,8 +178,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
-    <Compile Include="AutoPatch\db132.vb" />
+    <Compile Include="AutoPatch\CIRUpdate.vb" />
     <Compile Include="AutoPatch\db133.vb" />
+    <Compile Include="AutoPatch\db132.vb" />
+    <Compile Include="AutoPatch\db134.vb" />
     <Compile Include="AutoPatch\db131.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
@@ -1351,6 +1353,9 @@
     <EmbeddedResource Include="Reports\rpt_StockOutReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_SummaryCount.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -1421,6 +1426,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="backup.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CIR files\sample.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="doc\ExpiryFormat.xls">
