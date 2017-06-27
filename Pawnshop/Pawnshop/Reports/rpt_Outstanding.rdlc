@@ -24,10 +24,6 @@
           <DataField>MatuDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="AuctionDate">
-          <DataField>AuctionDate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="ExpiryDate">
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -72,12 +68,12 @@
           <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemClass">
-          <DataField>ItemClass</DataField>
+        <Field Name="ItemType">
+          <DataField>ItemType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemCategory">
-          <DataField>ItemCategory</DataField>
+        <Field Name="Category">
+          <DataField>Category</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Grams">
@@ -100,12 +96,12 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="WithDrawDate">
-          <DataField>WithDrawDate</DataField>
+        <Field Name="PullOut">
+          <DataField>PullOut</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DelayInterest">
-          <DataField>DelayInterest</DataField>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Appraiser">
@@ -120,20 +116,18 @@
           <DataField>NewPT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PawnID">
-          <DataField>PawnID</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <Query>
         <DataSourceName>dsReports</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>Pawnshop</rd:DataSetName>
-        <rd:TableName>dsReports</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>Pawning</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>Pawnshop.dsReports, Reports.dsReports.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>dsReports</rd:DataSetName>
+        <rd:SchemaPath>D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\dsReports.xsd</rd:SchemaPath>
+        <rd:TableName>Pawning</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -437,21 +431,21 @@ Expiry</Value>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ItemCategory1">
+                    <Textbox Name="ItemType">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ItemCategory.Value</Value>
+                              <Value>=Fields!ItemType.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ItemCategory1</rd:DefaultName>
+                      <rd:DefaultName>ItemType</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -853,7 +847,10 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Description.Value</Value>
+                              <Value>=Switch(Fields!ItemType.Value = "JWL",
+Fields!Category.Value &amp; " " &amp; Fields!Grams.Value &amp; "G " &amp; " APPROX " &amp; Code.EncryptKarat(Fields!Karat.Value),
+Fields!ItemType.Value &lt;&gt; "JWL",
+Fields!Description.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -955,13 +952,7 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=switch(Fields!Status.Value = "L", "New Loan",
-Fields!Status.Value = "R","Renew",
-Fields!Status.Value = "0","Renewed",
-Fields!Status.Value = "X","Redeem",
-Fields!Status.Value = "S","Segre",
-Fields!Status.Value = "W","Withdraw",
-Fields!Status.Value = "V","Void")</Value>
+                              <Value>=Fields!Status.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1010,12 +1001,12 @@ Fields!Status.Value = "V","Void")</Value>
                 <TablixMember>
                   <Group Name="Group1">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!ItemCategory.Value</GroupExpression>
+                      <GroupExpression>=Fields!ItemType.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!ItemCategory.Value</Value>
+                      <Value>=Fields!ItemType.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
@@ -1060,7 +1051,7 @@ Fields!Status.Value = "V","Void")</Value>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Item Category</Value>
+                            <Value>Item Type</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
@@ -1351,34 +1342,34 @@ Fields!Status.Value = "V","Void")</Value>
         <TablixRowHierarchy>
           <TablixMembers>
             <TablixMember>
-              <Group Name="ItemCategory">
+              <Group Name="ItemType">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!ItemCategory.Value</GroupExpression>
+                  <GroupExpression>=Fields!ItemType.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!ItemCategory.Value</Value>
+                  <Value>=Fields!ItemType.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
                 <Size>1in</Size>
                 <CellContents>
-                  <Textbox Name="ItemCategory">
+                  <Textbox Name="ItemType1">
                     <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!ItemCategory.Value</Value>
+                            <Value>=Fields!ItemType.Value</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>
                         <Style />
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>ItemCategory</rd:DefaultName>
+                    <rd:DefaultName>ItemType1</rd:DefaultName>
                     <Style>
                       <Border>
                         <Style>None</Style>
