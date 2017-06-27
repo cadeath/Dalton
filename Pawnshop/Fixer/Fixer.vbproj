@@ -130,6 +130,12 @@
     <Compile Include="CashInBank\frmMain2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Fixer for Maintenance\SMS Message\frmSMSMessage.Designer.vb">
+      <DependentUpon>frmSMSMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fixer for Maintenance\SMS Message\frmSMSMessage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="For Ace Fix Layaway\frmFixAceLayaway.Designer.vb">
       <DependentUpon>frmFixAceLayaway.vb</DependentUpon>
     </Compile>
@@ -272,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Fixer for Maintenance\Add INS Count\frmAddItemMasterCOI.resx">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fixer for Maintenance\SMS Message\frmSMSMessage.resx">
+      <DependentUpon>frmSMSMessage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="For Ace Fix Layaway\frmFixAceLayaway.resx">
       <DependentUpon>frmFixAceLayaway.vb</DependentUpon>

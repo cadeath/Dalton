@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Fixer.frmAddLayDiscount
+            Me.MainForm = Global.Fixer.frmSMSMessage
         End Sub
     End Class
 End Namespace
