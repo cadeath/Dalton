@@ -232,7 +232,7 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Client Management")
             Exit Sub
         End If
-        frmClient.Show()
+        frmClientNew.Show()
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
@@ -441,7 +441,7 @@ Public Class frmMain
         'End If
 
         OTPItemPullout_Initialization()
-        If Not OTPDisable Then
+        If Not isOTPOn("Pullout") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
@@ -480,7 +480,7 @@ Public Class frmMain
 
         AuditModule_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Audit") Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
             If Not diagOTPv2.isCorrect Then
@@ -620,7 +620,7 @@ Public Class frmMain
 
         OTPInventory_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Inventory") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
@@ -690,5 +690,10 @@ Public Class frmMain
 
     Private Sub SMSNoticeToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem1.Click
         frmSMSInfo.Show()
+    End Sub
+
+    Private Sub LoanCoiSummaryCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanCoiSummaryCountToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.SummaryCount
+        frmSalesReport.Show()
     End Sub
 End Class

@@ -82,6 +82,7 @@ Partial Class frmMain
         Me.LayawayListToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForfeitedLayawayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExpiryListToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoanCoiSummaryCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -365,7 +366,7 @@ Partial Class frmMain
         '
         'DailyToolStripMenuItem
         '
-        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OutstandingToolStripMenuItem1, Me.AuditReportToolStripMenuItem1, Me.LoanRegisterToolStripMenuItem1, Me.MoneyTransferToolStripMenuItem1, Me.InsuranceToolStripMenuItem1, Me.DollarReportToolStripMenuItem1, Me.CashInOutToolStripMenuItem1, Me.SegregatedListToolStripMenuItem1, Me.ItemPulloutToolStripMenuItem2, Me.VoidReportToolStripMenuItem1, Me.SalesReportToolStripMenuItem1, Me.InventoryReportToolStripMenuItem1, Me.StockoutReportToolStripMenuItem1, Me.StockInReportToolStripMenuItem1, Me.LayawayPaymentToolStripMenuItem, Me.LayawayListToolStripMenuItem1, Me.ForfeitedLayawayToolStripMenuItem, Me.ExpiryListToolStripMenuItem2})
+        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OutstandingToolStripMenuItem1, Me.AuditReportToolStripMenuItem1, Me.LoanRegisterToolStripMenuItem1, Me.MoneyTransferToolStripMenuItem1, Me.InsuranceToolStripMenuItem1, Me.DollarReportToolStripMenuItem1, Me.LayawayListToolStripMenuItem1, Me.CashInOutToolStripMenuItem1, Me.SegregatedListToolStripMenuItem1, Me.ItemPulloutToolStripMenuItem2, Me.VoidReportToolStripMenuItem1, Me.SalesReportToolStripMenuItem1, Me.InventoryReportToolStripMenuItem1, Me.StockoutReportToolStripMenuItem1, Me.StockInReportToolStripMenuItem1, Me.LayawayPaymentToolStripMenuItem, Me.ForfeitedLayawayToolStripMenuItem, Me.ExpiryListToolStripMenuItem2, Me.LoanCoiSummaryCountToolStripMenuItem})
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
         Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.DailyToolStripMenuItem.Text = "Daily"
@@ -373,110 +374,116 @@ Partial Class frmMain
         'OutstandingToolStripMenuItem1
         '
         Me.OutstandingToolStripMenuItem1.Name = "OutstandingToolStripMenuItem1"
-        Me.OutstandingToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.OutstandingToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.OutstandingToolStripMenuItem1.Text = "&Outstanding"
         '
         'AuditReportToolStripMenuItem1
         '
         Me.AuditReportToolStripMenuItem1.Name = "AuditReportToolStripMenuItem1"
-        Me.AuditReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.AuditReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.AuditReportToolStripMenuItem1.Text = "A&udit Report"
         '
         'LoanRegisterToolStripMenuItem1
         '
         Me.LoanRegisterToolStripMenuItem1.Name = "LoanRegisterToolStripMenuItem1"
-        Me.LoanRegisterToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.LoanRegisterToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.LoanRegisterToolStripMenuItem1.Text = "&Loan Register"
         '
         'MoneyTransferToolStripMenuItem1
         '
         Me.MoneyTransferToolStripMenuItem1.Name = "MoneyTransferToolStripMenuItem1"
-        Me.MoneyTransferToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.MoneyTransferToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.MoneyTransferToolStripMenuItem1.Text = "Money Transfer"
         '
         'InsuranceToolStripMenuItem1
         '
         Me.InsuranceToolStripMenuItem1.Name = "InsuranceToolStripMenuItem1"
-        Me.InsuranceToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.InsuranceToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.InsuranceToolStripMenuItem1.Text = "&Insurance"
         '
         'DollarReportToolStripMenuItem1
         '
         Me.DollarReportToolStripMenuItem1.Name = "DollarReportToolStripMenuItem1"
-        Me.DollarReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.DollarReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.DollarReportToolStripMenuItem1.Text = "D&ollar Report"
         '
         'CashInOutToolStripMenuItem1
         '
         Me.CashInOutToolStripMenuItem1.Name = "CashInOutToolStripMenuItem1"
-        Me.CashInOutToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.CashInOutToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.CashInOutToolStripMenuItem1.Text = "Cash I&n/Out"
         '
         'SegregatedListToolStripMenuItem1
         '
         Me.SegregatedListToolStripMenuItem1.Name = "SegregatedListToolStripMenuItem1"
-        Me.SegregatedListToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.SegregatedListToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.SegregatedListToolStripMenuItem1.Text = "Segregated List"
         '
         'ItemPulloutToolStripMenuItem2
         '
         Me.ItemPulloutToolStripMenuItem2.Name = "ItemPulloutToolStripMenuItem2"
-        Me.ItemPulloutToolStripMenuItem2.Size = New System.Drawing.Size(169, 22)
+        Me.ItemPulloutToolStripMenuItem2.Size = New System.Drawing.Size(219, 22)
         Me.ItemPulloutToolStripMenuItem2.Text = "Item &Pullout"
         '
         'VoidReportToolStripMenuItem1
         '
         Me.VoidReportToolStripMenuItem1.Name = "VoidReportToolStripMenuItem1"
-        Me.VoidReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.VoidReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.VoidReportToolStripMenuItem1.Text = "&Void Report"
         '
         'SalesReportToolStripMenuItem1
         '
         Me.SalesReportToolStripMenuItem1.Name = "SalesReportToolStripMenuItem1"
-        Me.SalesReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.SalesReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.SalesReportToolStripMenuItem1.Text = "&Sales Report"
         '
         'InventoryReportToolStripMenuItem1
         '
         Me.InventoryReportToolStripMenuItem1.Name = "InventoryReportToolStripMenuItem1"
-        Me.InventoryReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.InventoryReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.InventoryReportToolStripMenuItem1.Text = "Inventor&y Report"
         '
         'StockoutReportToolStripMenuItem1
         '
         Me.StockoutReportToolStripMenuItem1.Name = "StockoutReportToolStripMenuItem1"
-        Me.StockoutReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.StockoutReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.StockoutReportToolStripMenuItem1.Text = "Sto&ckout Report"
         '
         'StockInReportToolStripMenuItem1
         '
         Me.StockInReportToolStripMenuItem1.Name = "StockInReportToolStripMenuItem1"
-        Me.StockInReportToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.StockInReportToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.StockInReportToolStripMenuItem1.Text = "Stock In Report"
         '
         'LayawayPaymentToolStripMenuItem
         '
         Me.LayawayPaymentToolStripMenuItem.Name = "LayawayPaymentToolStripMenuItem"
-        Me.LayawayPaymentToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.LayawayPaymentToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.LayawayPaymentToolStripMenuItem.Text = "Layaway Payment"
         '
         'LayawayListToolStripMenuItem1
         '
         Me.LayawayListToolStripMenuItem1.Name = "LayawayListToolStripMenuItem1"
-        Me.LayawayListToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.LayawayListToolStripMenuItem1.Size = New System.Drawing.Size(219, 22)
         Me.LayawayListToolStripMenuItem1.Text = "Layaway List"
         '
         'ForfeitedLayawayToolStripMenuItem
         '
         Me.ForfeitedLayawayToolStripMenuItem.Name = "ForfeitedLayawayToolStripMenuItem"
-        Me.ForfeitedLayawayToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.ForfeitedLayawayToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
         Me.ForfeitedLayawayToolStripMenuItem.Text = "Forfeited layaway"
         '
         'ExpiryListToolStripMenuItem2
         '
         Me.ExpiryListToolStripMenuItem2.Name = "ExpiryListToolStripMenuItem2"
-        Me.ExpiryListToolStripMenuItem2.Size = New System.Drawing.Size(169, 22)
+        Me.ExpiryListToolStripMenuItem2.Size = New System.Drawing.Size(219, 22)
         Me.ExpiryListToolStripMenuItem2.Text = "Expiry List"
+        '
+        'LoanCoiSummaryCountToolStripMenuItem
+        '
+        Me.LoanCoiSummaryCountToolStripMenuItem.Name = "LoanCoiSummaryCountToolStripMenuItem"
+        Me.LoanCoiSummaryCountToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.LoanCoiSummaryCountToolStripMenuItem.Text = "Loan / Coi Summary Count"
         '
         'ToolStripSeparator4
         '
@@ -552,7 +559,7 @@ Partial Class frmMain
         'pInfo
         '
         Me.pInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pInfo.Controls.Add(Me.lblMessage)
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
@@ -564,7 +571,7 @@ Partial Class frmMain
         'lblMessage
         '
         Me.lblMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(310, 366)
@@ -892,6 +899,7 @@ Partial Class frmMain
     Friend WithEvents ExpiryListToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SMSNoticeToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoanCoiSummaryCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 

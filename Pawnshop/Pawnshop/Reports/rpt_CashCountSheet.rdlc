@@ -74,6 +74,18 @@
           <DataField>Remarks</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SmartMoneyCnt">
+          <DataField>SmartMoneyCnt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SmartWalletCnt">
+          <DataField>SmartWalletCnt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EloadCnt">
+          <DataField>EloadCnt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>Pawnshop</DataSourceName>
@@ -875,7 +887,7 @@
       <Subreport Name="cashCount">
         <ReportName>rpt_CashCount</ReportName>
         <Top>2.62716in</Top>
-        <Left>0.09662in</Left>
+        <Left>0.10504in</Left>
         <Height>1.875in</Height>
         <Width>6.21354in</Width>
         <ZIndex>15</ZIndex>
@@ -1161,8 +1173,212 @@
           <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox28">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Smart Money Padala</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>5.27437in</Top>
+        <Left>0.39756in</Left>
+        <Height>0.19792in</Height>
+        <Width>2.14583in</Width>
+        <ZIndex>24</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox29">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Load Wallet</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>5.48618in</Top>
+        <Left>0.39756in</Left>
+        <Height>0.19792in</Height>
+        <Width>2.14583in</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox30">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Eload (Retail Load)</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>5.69799in</Top>
+        <Left>0.37848in</Left>
+        <Height>0.19792in</Height>
+        <Width>2.14583in</Width>
+        <ZIndex>26</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtCashOnHand2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!SmartMoneyCnt.Value, "dsDaily")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>5.27785in</Top>
+        <Left>5.00681in</Left>
+        <Height>0.19444in</Height>
+        <Width>1.22396in</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BottomBorder>
+            <Style>Solid</Style>
+          </BottomBorder>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtCashOnHand3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!SmartWalletCnt.Value, "dsDaily")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>5.48618in</Top>
+        <Left>5.00681in</Left>
+        <Height>0.19444in</Height>
+        <Width>1.22396in</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BottomBorder>
+            <Style>Solid</Style>
+          </BottomBorder>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtCashOnHand4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!EloadCnt.Value, "dsDaily")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>5.68062in</Top>
+        <Left>5.00681in</Left>
+        <Height>0.19444in</Height>
+        <Width>1.22396in</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BottomBorder>
+            <Style>Solid</Style>
+          </BottomBorder>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>5.37166in</Height>
+    <Height>6.10083in</Height>
     <Style />
   </Body>
   <ReportParameters>

@@ -31,7 +31,7 @@ Module mod_system
     Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
-    Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -199,7 +199,7 @@ Module mod_system
     ''' </summary>
     ''' <param name="cc">cc is the parameter that hold nonmodifiable value.</param>
     ''' <remarks></remarks>
-    Friend Sub CloseStore(ByVal cc As Double)
+    Friend Sub CloseStore(ByVal cc As Double, ByVal SmartMoneyCnt As Double, ByVal SmartWalletCnt As Double, ByVal EloadCnt As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
@@ -211,6 +211,10 @@ Module mod_system
                 .Item("CashCount") = cc
                 .Item("Status") = 0
                 .Item("Closer") = POSuser.UserID
+
+                .Item("SmartMoneyCnt") = SmartMoneyCnt
+                .Item("SmartWalletCnt") = SmartWalletCnt
+                .Item("EloadCnt") = EloadCnt
             End With
 
             database.SaveEntry(ds, False)
@@ -653,6 +657,42 @@ Module mod_system
         Next
     End Sub
 
+    Public Function isOTPOn(ByVal Modname As String) As Boolean
+        Dim mysql As String = "Select * From OTPControl Where Modname = '" & Modname & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPCOntrol")
+
+        If ds.Tables(0).Rows(0).Item("Status") = 1 Then Return False
+
+        Return True
+    End Function
+
+    Friend Function GetEloadPrice(ByVal Quantity As Double)
+        Select Case Quantity
+            Case 4.77
+                Return 1.048218
+            Case 9.55
+                Return 1.04712
+            Case 14.33
+                Return 1.046755
+            Case 19.11
+                Return 1.046572
+            Case 28.66
+                Return 1.046755
+            Case 47.78
+                Return 1.046462
+            Case 53.33
+                Return 1.12507
+            Case 95.56
+                Return 1.046462
+            Case 143.34
+                Return 1.046462
+            Case 238.9
+                Return 1.046462
+            Case 286.68
+                Return 1.046462
+        End Select
+        Return 0
+    End Function
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

@@ -69,6 +69,8 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.cboKYC = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -329,6 +331,8 @@ Partial Class frmSettings
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.cboKYC)
+        Me.GroupBox2.Controls.Add(Me.Label18)
         Me.GroupBox2.Controls.Add(Me.Label16)
         Me.GroupBox2.Controls.Add(Me.txtBranchAddr)
         Me.GroupBox2.Controls.Add(Me.lblSAP02)
@@ -347,7 +351,7 @@ Partial Class frmSettings
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(275, 338)
+        Me.GroupBox2.Size = New System.Drawing.Size(275, 360)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Branch"
@@ -356,7 +360,7 @@ Partial Class frmSettings
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(6, 283)
+        Me.Label16.Location = New System.Drawing.Point(6, 266)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(104, 16)
         Me.Label16.TabIndex = 24
@@ -365,7 +369,7 @@ Partial Class frmSettings
         'txtBranchAddr
         '
         Me.txtBranchAddr.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBranchAddr.Location = New System.Drawing.Point(5, 302)
+        Me.txtBranchAddr.Location = New System.Drawing.Point(5, 285)
         Me.txtBranchAddr.Name = "txtBranchAddr"
         Me.txtBranchAddr.Size = New System.Drawing.Size(249, 22)
         Me.txtBranchAddr.TabIndex = 23
@@ -375,7 +379,7 @@ Partial Class frmSettings
         '
         Me.lblSAP02.AutoSize = True
         Me.lblSAP02.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSAP02.Location = New System.Drawing.Point(7, 230)
+        Me.lblSAP02.Location = New System.Drawing.Point(7, 220)
         Me.lblSAP02.Name = "lblSAP02"
         Me.lblSAP02.Size = New System.Drawing.Size(101, 16)
         Me.lblSAP02.TabIndex = 22
@@ -384,7 +388,7 @@ Partial Class frmSettings
         'txtCustomerCode
         '
         Me.txtCustomerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCustomerCode.Location = New System.Drawing.Point(6, 249)
+        Me.txtCustomerCode.Location = New System.Drawing.Point(6, 239)
         Me.txtCustomerCode.Name = "txtCustomerCode"
         Me.txtCustomerCode.Size = New System.Drawing.Size(249, 22)
         Me.txtCustomerCode.TabIndex = 21
@@ -393,7 +397,7 @@ Partial Class frmSettings
         'txtCashInBank
         '
         Me.txtCashInBank.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCashInBank.Location = New System.Drawing.Point(6, 199)
+        Me.txtCashInBank.Location = New System.Drawing.Point(6, 190)
         Me.txtCashInBank.Name = "txtCashInBank"
         Me.txtCashInBank.Size = New System.Drawing.Size(252, 22)
         Me.txtCashInBank.TabIndex = 19
@@ -403,7 +407,7 @@ Partial Class frmSettings
         '
         Me.lblSAP01.AutoSize = True
         Me.lblSAP01.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSAP01.Location = New System.Drawing.Point(6, 180)
+        Me.lblSAP01.Location = New System.Drawing.Point(5, 173)
         Me.lblSAP01.Name = "lblSAP01"
         Me.lblSAP01.Size = New System.Drawing.Size(86, 16)
         Me.lblSAP01.TabIndex = 20
@@ -412,7 +416,7 @@ Partial Class frmSettings
         'txtRevolving
         '
         Me.txtRevolving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRevolving.Location = New System.Drawing.Point(6, 151)
+        Me.txtRevolving.Location = New System.Drawing.Point(6, 146)
         Me.txtRevolving.Name = "txtRevolving"
         Me.txtRevolving.Size = New System.Drawing.Size(252, 22)
         Me.txtRevolving.TabIndex = 4
@@ -422,7 +426,7 @@ Partial Class frmSettings
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 132)
+        Me.Label6.Location = New System.Drawing.Point(6, 127)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(102, 16)
         Me.Label6.TabIndex = 18
@@ -565,6 +569,26 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(5, 316)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(34, 16)
+        Me.Label18.TabIndex = 26
+        Me.Label18.Text = "KYC"
+        '
+        'cboKYC
+        '
+        Me.cboKYC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboKYC.FormattingEnabled = True
+        Me.cboKYC.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cboKYC.Location = New System.Drawing.Point(45, 312)
+        Me.cboKYC.Name = "cboKYC"
+        Me.cboKYC.Size = New System.Drawing.Size(210, 21)
+        Me.cboKYC.TabIndex = 27
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -637,4 +661,6 @@ Partial Class frmSettings
     Friend WithEvents printerPT As System.Windows.Forms.ComboBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents cboKYC As System.Windows.Forms.ComboBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
 End Class

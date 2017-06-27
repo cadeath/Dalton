@@ -25,7 +25,7 @@
         mySql &= "C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mySql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS PAWNER "
         mySql &= "From SMS M "
-        mySql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = M.CLIENTID "
+        mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = M.CLIENTID "
         mySql &= "INNER JOIN OPT P ON P.PAWNID = M.PAWNID "
         mySql &= "WHERE M.SMSDATE BETWEEN '" & st & "' AND '" & en & "'"
         mySql &= "ORDER BY M.SMSDATE ASC"
@@ -46,7 +46,7 @@
         mySql &= "C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mySql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS PAWNER "
         mySql &= "From SMS M "
-        mySql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = M.CLIENTID "
+        mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = M.CLIENTID "
         mySql &= "INNER JOIN OPT P ON P.PAWNID = M.PAWNID "
         mySql &= "WHERE M.SMSDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
 

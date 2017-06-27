@@ -1,4 +1,53 @@
 CHANGELOG
+Version 1.6.0.5
+ - Update SMS Message added Branch Name
+
+Vsersion 1.6.0.4
+ - Update Pullout count module
+ - Add CIRUpdate Module (Auto patch CIR)
+ - Add Pullout Count in maintenance
+
+Vsersion 1.6.0.3
+ - Eload Automatic Sale Price (No OPT required)
+Version 1.6.0.2
+ - Fix Bug in Layaway Penalty (Item Charge Penalty in 90 Days)
+ - Add ItemMaster Remarks CI# every Transact of Retail
+
+Version 1.6.0.0
+ - Add kYC Module
+ - Add IsKYCRequired in Maintenance(default "NO")
+ - Add Client Migrate Module
+ - Drop Pawn_List, Create Pawn_List
+ - Drop Money_transfer, Create Money_transfer
+ - Drop Print_Pawning, Create Print_Pawning
+ - Drop LoanRegister, Create LoanRegister
+ - Drop ExpiryList, Create ExpiryList
+ - Add CustomerVIEW
+ - Update SMS Module (Client and phone number)
+ - Update Expiry Extractor Module
+ - Update Accounting Extract (Change Client table to KYC_CUSTOMERS table)
+ - Update lay away Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Sequence Report  (Change Client table to KYC_CUSTOMERS table) 
+ - Update Hit Management Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Pawning Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Money Transfer Module (Change Client table to KYC_CUSTOMERS table)
+ - Update Insurance Module  (Change Client table to KYC_CUSTOMERS table)
+ - Update Foriegn Exchange  (Change Client table to KYC_CUSTOMERS table)
+ - Update SMS Report (Change Client table to KYC_CUSTOMERS table)
+ - Update Sales Report (Change Client table to KYC_CUSTOMERS table)
+ - Used frmClientNew form
+ - Add OTP Control Table & Allow to Switch Off / On OTP by Module
+ - Add Discount & Custom Price Function in Sale Module
+ - Smart Product (Smart Money Padala, Load Wallet & Eload) allow to Display in Daily Cash Count
+ - Change load client from 50 to 10 client
+ - Change Insurance browse load to 10
+ - Change itemlist load to 10
+ - Change money transfer browse to 10
+ - Change pawning load to 10
+ - Change cashIN/OUT browse load to 10
+ - Add isvalidID function in client migrate
+
+
 Version 1.5.0.8
  - Drop View View_CLient
  - Create View View_Client
@@ -7,7 +56,7 @@ Version 1.5.0.8
  - Add Notification Dumper alert
  - Change Database version from 1.3 to 1.3.1
 
-Version 1.5.0.7
+Version 1.5.0.8
  - Add Branch Address in Maintenance
  - Add Menus 1 Date Segrate List
  - Added Journal Entries Block if not close store and release Hot Code in every extract
@@ -17,6 +66,7 @@ Version 1.5.0.7
  - Added Function for Deleting Wrong Item in Inventory
  - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
  - Added Separated OPT Generator
+ - Added OTP Interface & OTP Control
  - Added Icon
  - Added SMS Module for Expiry Items
  - Added TABLE SMS
@@ -41,6 +91,8 @@ Version 1.5.0.7
  - Change Inventory Merchandise Sap Account
  - Can ReSend Failed Sending
  - fix SMS notification cannot view not enough specs
+ - Add Discount Column to ItemMaster Table
+ - Add OTP for custom price
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES

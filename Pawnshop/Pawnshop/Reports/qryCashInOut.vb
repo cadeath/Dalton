@@ -87,7 +87,7 @@
 
         Dim addPara As New Dictionary(Of String, String)
         addPara.Add("txtMonthOf", "AS OF " & cur.ToString("MMMM dd, yyyy"))
-        addPara.Add("branchName", "ROX")
+        addPara.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, rptPath, addPara)
         frmReport.Show()

@@ -9,7 +9,7 @@
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
 
-    Private dollarClient As Client
+    Private dollarClient As Customer
     Private dollarEntry As DollarTransaction
 
     Private strRate As String = DollarAllRate
@@ -19,8 +19,8 @@
     Private Sub btnsearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsearch.Click
         Dim secured_str As String = TxtName.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmMoneyExchange)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmMoneyExchange)
+        frmClientNew.Show()
     End Sub
 
     Private Sub ClearField()
@@ -112,7 +112,7 @@
             txtSerial.Text = .Serial
             txtCurrency1.Text = .CURRENCY
             txtRate.Text = .CurrentRate
-            LoadClient(.Customer)
+            LoadCustomer(.Customer)
         End With
 
         btnBrowse.Enabled = False
@@ -202,10 +202,10 @@
         End If
     End Sub
 
-    Friend Sub LoadClient(ByVal cl As Client)
-        TxtName.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", ", " & cl.Suffix, ""), cl.FirstName, cl.LastName)
+    Friend Sub LoadCustomer(ByVal cus As Customer)
+        TxtName.Text = String.Format("{0} {1}" & IIf(cus.Suffix <> "", ", " & cus.Suffix, ""), cus.FirstName, cus.LastName)
 
-        dollarClient = cl
+        dollarClient = cus
         btnsave.Focus()
     End Sub
 
@@ -256,8 +256,6 @@
             Exit Sub
         End If
     End Sub
-
-
 
     Private Sub btnSearch1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch1.Click
         Dim secured_str As String = txtCurrency.Text
