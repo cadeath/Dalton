@@ -4,10 +4,10 @@
     Dim cstmr As Customer
 
     Private strSql As String
-    Dim IDlist As String() = {"Passport", "Driver's License", "PRC ID", "NBI Clearance", "Police Clearance" & _
-                                "Postal ID", "Voter's ID", "Brgy Certification", "TIN", "GSIS", "SSS", "Senior Citizen Card", "OWWA ID" & _
-                                "OFW ID", "Seaman's Book", "Alien Cretification/Immigrant Certification of Registration" & _
-                               "AFP ID", "HDMF ID", "NCWDP", "DSWD Certification", "Integrated Bar of the Philippines ID", "Company ID under BSP, SEC or IC"}
+    Dim IDlist As String() = {"Passport", "Drivers License", "PRC ID", "NBI Clearance", "Police Clearance" & _
+                                "Postal ID", "Voters ID", "Brgy Certification", "TIN", "GSIS", "SSS", "Senior Citizen Card", "OWWA ID" & _
+                                "OFW ID", "Seamans Book", "Alien Cretification/Immigrant Certification of Registration" & _
+                               "AFP ID", "HDMF ID", "NCWDP", "DSWD Certification", "Integrated Bar of the Philippines ID", "Company ID under BSP", "SEC or IC"}
 
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
@@ -25,8 +25,8 @@
 
             Database_Update(LATEST_VERSION)
 
+            cstmr = New Customer
             For Each IDX In IDlist
-                cstmr = New Customer
                 cstmr.AddIDentification(IDX)
             Next
 
@@ -41,13 +41,16 @@
     End Sub
 
     Private Sub IDGerator()
-
+        'Dim GENPHONE As String = "SET GENERATOR " _
+        '                           & CUSTOMER_PHONE & "_PHONEID_GEN TO " _
+        '                           & phROW : RunCommand(GENPHONE)
         Dim mysql = "SELECT * FROM KYC_IDLIST"
+
         Dim ds As DataSet = LoadSQL(mysql, "KYC_IDLIST")
         Dim phROW As Integer = ds.Tables(0).Rows.Count
 
         Dim GENID As String = "SET GENERATOR " _
-                                     & "KYC_IDLIST" & "_ID_GEN TO " _
+                                     & "KYC_IDLIST_GENID_GEN TO " _
                                      & phROW : RunCommand(GENID)
     End Sub
 

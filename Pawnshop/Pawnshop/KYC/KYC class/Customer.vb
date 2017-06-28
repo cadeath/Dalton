@@ -691,7 +691,7 @@ COntinues:
     End Function
 
     Friend Sub AddIDentification(ByVal IDType As String)
-        Dim mysql As String = "SELECT * FROM KYC_IDLIST WHERE IDTYPE = '" & IDType & "'"
+        Dim mysql As String = "SELECT * FROM KYC_IDLIST WHERE IDTYPE = '" & IDType.ToString & "'"
         Dim ds As DataSet = LoadSQL(mysql, "KYC_IDLIST")
 
         If ds.Tables(0).Rows.Count = 0 Then
