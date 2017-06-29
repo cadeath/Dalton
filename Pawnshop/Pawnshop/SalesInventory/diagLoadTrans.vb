@@ -13,10 +13,10 @@
         Me.Close()
     End Sub
 
-    Public Overloads Function ShowLoadType(ByVal EnteredText() As String) As DialogResult
+    Public Overloads Function ShowLoadType(ByVal EnteredText As String) As DialogResult
         Me.ShowDialog()
 
-        EnteredText(0) = LoadType
+        EnteredText = LoadType
 
         Return Me.DialogResult
     End Function

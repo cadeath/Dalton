@@ -316,6 +316,16 @@ Public Class frmSales
             End If
             Display_Total(DOC_TOTAL)
         End If
+
+        For Each lvi As ListViewItem In lvSale.Items
+            If lvi.Text.Contains("SMT 00002") Then
+                isLoadTrans = True
+            Else
+                isLoadTrans = False
+            End If
+
+        Next
+        If lvSale.Items.Count = 0 Then isLoadTrans = False
     End Sub
 
     Private Sub tsbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCheck.Click
@@ -375,7 +385,13 @@ Public Class frmSales
             Remarks = retVal(1) 'Particulars
         End If
 
-
+        If isLoadTrans = True Then
+            Dim retVal As String = ""
+            If diagLoadTrans.ShowLoadType(retVal) <> Windows.Forms.DialogResult.OK Then
+                Exit Sub
+            End If
+            LoadWalletType = retVal
+        End If
 
         'Creating Document
         mySql = "SELECT * FROM DOC ROWS 1"
@@ -459,11 +475,22 @@ Public Class frmSales
             database.SaveEntry(ds)
 
             If itm.isInventoriable Then
-
-                If TransactionMode <> TransType.Returns Then
-                    InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                If itm.ItemCode = "SMT 00002" Then
+                    Select Case LoadWalletType
+                        Case "LOAD WALLET", "REMOTE RECEIVE"
+                            If TransactionMode <> TransType.Returns Then
+                                InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                            Else
+                                InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                            End If
+                    End Select
                 Else
-                    InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                    If TransactionMode <> TransType.Returns Then
+                        InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                    Else
+                        InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                    End If
+
                 End If
             End If
 
@@ -475,6 +502,16 @@ Public Class frmSales
             ' JOURNAL ENTRY
             getLastID = GetDocLines_LastID()
             If TransactionMode <> TransType.StockOut Then
+                If itm.ItemCode = "SMT 00002" And LoadWalletType = "REMOTE LOAD" Then
+                    If TransactionMode = TransType.Returns Then
+                        AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
+                        AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
+                    ElseIf TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
+                        AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                        AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+
+                    End If
+                End If
                 If TransactionMode = TransType.Returns Then
                     AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
                     AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
