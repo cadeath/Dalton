@@ -317,6 +317,7 @@ Public Class frmSales
             Display_Total(DOC_TOTAL)
         End If
 
+
         For Each lvi As ListViewItem In lvSale.Items
             If lvi.Text.Contains("SMT 00002") Then
                 isLoadTrans = True
@@ -326,6 +327,7 @@ Public Class frmSales
 
         Next
         If lvSale.Items.Count = 0 Then isLoadTrans = False
+
     End Sub
 
     Private Sub tsbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCheck.Click
@@ -475,6 +477,7 @@ Public Class frmSales
             database.SaveEntry(ds)
 
             If itm.isInventoriable Then
+
                 If itm.ItemCode = "SMT 00002" Then
                     Select Case LoadWalletType
                         Case "LOAD WALLET", "REMOTE RECEIVE"
@@ -484,6 +487,7 @@ Public Class frmSales
                                 InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
                             End If
                     End Select
+
                 Else
                     If TransactionMode <> TransType.Returns Then
                         InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
@@ -492,6 +496,7 @@ Public Class frmSales
                     End If
 
                 End If
+
             End If
 
             If TransactionMode = TransType.Auction Then

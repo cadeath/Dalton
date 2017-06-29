@@ -174,7 +174,7 @@ Partial Class frmSales
         Me.lblMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMode.Location = New System.Drawing.Point(592, 38)
+        Me.lblMode.Location = New System.Drawing.Point(592, 69)
         Me.lblMode.Name = "lblMode"
         Me.lblMode.Size = New System.Drawing.Size(286, 43)
         Me.lblMode.TabIndex = 6
@@ -185,7 +185,7 @@ Partial Class frmSales
         '
         Me.lblCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCustomer.Location = New System.Drawing.Point(592, 98)
+        Me.lblCustomer.Location = New System.Drawing.Point(592, 129)
         Me.lblCustomer.Name = "lblCustomer"
         Me.lblCustomer.Size = New System.Drawing.Size(286, 43)
         Me.lblCustomer.TabIndex = 8
