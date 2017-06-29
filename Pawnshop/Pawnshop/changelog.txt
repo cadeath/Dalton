@@ -4,6 +4,8 @@ Version 1.6.0.5
  - Add Gui for Sale Items Receipt
  - Add Audit Item Tracking
  - Loan & Coi Summary Count
+ - Add identification in admin panel module
+ - Add patch 1.3.5
 
 Vsersion 1.6.0.4
  - Update Pullout count module
