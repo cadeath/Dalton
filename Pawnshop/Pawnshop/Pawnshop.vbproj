@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\CIRUpdate.vb" />
+    <Compile Include="AutoPatch\db135.vb" />
     <Compile Include="AutoPatch\db133.vb" />
     <Compile Include="AutoPatch\db132.vb" />
     <Compile Include="AutoPatch\db134.vb" />

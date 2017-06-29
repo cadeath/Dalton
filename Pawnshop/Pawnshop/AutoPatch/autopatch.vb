@@ -32,6 +32,7 @@ Module autopatch
         db132.PatchUp()
         db133.PatchUp()
         db134.PatchUp()
+        db135.PatchUp()
 
         If Not AutoReadCIR() Then Exit Sub
         DBVERSION = GetOption("DBVersion")
