@@ -59,7 +59,6 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.chkRemoteLoad = New System.Windows.Forms.CheckBox()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -354,23 +353,11 @@ Partial Class frmSales
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
         '
-        'chkRemoteLoad
-        '
-        Me.chkRemoteLoad.AutoSize = True
-        Me.chkRemoteLoad.Location = New System.Drawing.Point(598, 38)
-        Me.chkRemoteLoad.Name = "chkRemoteLoad"
-        Me.chkRemoteLoad.Size = New System.Drawing.Size(149, 17)
-        Me.chkRemoteLoad.TabIndex = 13
-        Me.chkRemoteLoad.Text = "Remote Load Transaction"
-        Me.chkRemoteLoad.UseVisualStyleBackColor = True
-        Me.chkRemoteLoad.Visible = False
-        '
         'frmSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(890, 428)
-        Me.Controls.Add(Me.chkRemoteLoad)
         Me.Controls.Add(Me.lblNoVat)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
@@ -429,5 +416,4 @@ Partial Class frmSales
     Friend WithEvents tsbtnLay As System.Windows.Forms.ToolStripButton
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents chkRemoteLoad As System.Windows.Forms.CheckBox
 End Class
