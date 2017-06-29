@@ -20,7 +20,7 @@
             primaryKey = "ALTER TABLE KYC_IDLIST ADD PRIMARY KEY (IDENID);"
 
             Console.WriteLine("Start creating...")
-            RunCommand(createView) : diag_loading.Add_Bar()
+            RunCommand(createView)
             AutoIncrement_ID("KYC_IDLIST", "IDENID")
 
             Database_Update(LATEST_VERSION)
@@ -30,28 +30,14 @@
                 cstmr.AddIDentification(IDX)
             Next
 
-            'Set Generator
-            IDGerator()
-
         Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
         Catch ex As Exception
             Log_Report(String.Format("[{0}]" & ex.ToString, LATEST_VERSION))
         End Try
         frmMain.Cursor = Cursors.Default
+        Console.WriteLine("Patch completed...")
     End Sub
 
-    Private Sub IDGerator()
-        'Dim GENPHONE As String = "SET GENERATOR " _
-        '                           & CUSTOMER_PHONE & "_PHONEID_GEN TO " _
-        '                           & phROW : RunCommand(GENPHONE)
-        Dim mysql = "SELECT * FROM KYC_IDLIST"
-
-        Dim ds As DataSet = LoadSQL(mysql, "KYC_IDLIST")
-        Dim phROW As Integer = ds.Tables(0).Rows.Count
-
-        Dim GENID As String = "SET GENERATOR " _
-                                     & "KYC_IDLIST_GENID_GEN TO " _
-                                     & phROW : RunCommand(GENID)
-    End Sub
+ 
 
 End Module
