@@ -25,13 +25,7 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
-    'Friend LayCustomer As Integer
-    'Friend LayItemCode As String
-    'Friend LayCost As Integer
-    'Friend LayBalance As Integer
-    'Friend LayAmount As Integer
-    'Friend LayID As Integer
-    'Friend LayisOld As Boolean
+    Private isLoadTrans As Boolean = False
 
     Private Sub frmSales_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         If DEV_MODE Then Pawn.Populate()
@@ -110,6 +104,7 @@ Public Class frmSales
     Friend Sub AddItem(ByVal itm As cItemData, Optional ByVal isRedeem As Boolean = False)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
+        If itm.ItemCode = "SMT 00002" Then isLoadTrans = True
 
         For Each AddedItems As ListViewItem In lvSale.Items
             If isRedeem = False Then
@@ -351,20 +346,10 @@ Public Class frmSales
         Dim Remarks As String = ""
         Dim unsec_Customer As String = lblCustomer.Text
         Dim prefix As String = "", DocCode As String = ""
+        Dim LoadWalletType As String = ""
 
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
-
-        'If TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
-        '    Dim tmp As String = String.Empty
-        '    While Not IsNumeric(tmp)
-        '        tmp = InputBox("Enter CI # ", "Remarks", 0)
-        '        If tmp = "" Then Exit While
-        '    End While
-
-        '    Remarks = IIf(tmp = 0, "", tmp)
-        '    Remarks = "CI " & Remarks
-        'End If
 
         ' INVENTORY STOCK OUT
         If TransactionMode = TransType.StockOut Then
@@ -389,6 +374,8 @@ Public Class frmSales
             unsec_Customer = retVal(0) 'Branch
             Remarks = retVal(1) 'Particulars
         End If
+
+
 
         'Creating Document
         mySql = "SELECT * FROM DOC ROWS 1"
