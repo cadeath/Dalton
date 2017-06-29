@@ -1,5 +1,5 @@
 ﻿Public Class diagLoadTrans
-    Protected LoadType As String = ""
+    Private LoadType As String = ""
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Me.DialogResult = Windows.Forms.DialogResult.OK
@@ -13,10 +13,10 @@
         Me.Close()
     End Sub
 
-    Public Overloads Function ShowLoadType(ByVal EnteredText As String) As DialogResult
+    Public Overloads Function ShowLoadType(ByVal EnteredText() As String) As DialogResult
         Me.ShowDialog()
 
-        EnteredText = LoadType
+        EnteredText(0) = LoadType
 
         Return Me.DialogResult
     End Function
