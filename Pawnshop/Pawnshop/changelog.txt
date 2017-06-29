@@ -1,6 +1,9 @@
 CHANGELOG
 Version 1.6.0.5
  - Update SMS Message added Branch Name
+ - Add Gui for Sale Items Receipt
+ - Add Audit Item Tracking
+ - Loan & Coi Summary Count
 
 Vsersion 1.6.0.4
  - Update Pullout count module
