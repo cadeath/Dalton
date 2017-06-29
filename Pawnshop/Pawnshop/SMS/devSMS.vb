@@ -18,10 +18,16 @@ Public Class devSMS
     Private Sub btnSend_Click(sender As System.Object, e As System.EventArgs) Handles btnSend.Click
         Dim config As New Configuration(txtUser.Text, txtPassword.Text)
         smsClient = New OneApi.Client.Impl.SMSClient(config)
+        Dim TextMessage As String = GetOption("SMS_MSG")
+        'Dim dr As DataRow = ExpiryCache.Select("PAWNTICKET = " & txtMsg.Text)(0)
+        Dim mysql As String = "Select * From OPT"
+        Dim ds As DataSet = LoadSQL(mysql, "OPT")
+        Dim dr As DataRow = ds.Tables(0).Rows(0)
+        Dim text_msg As String = MessageBuilder(TextMessage, dr)
 
-
+        Console.WriteLine("Text Message: " & text_msg.Length)
         Dim smsRequest As SMSRequest
-        smsRequest = New SMSRequest(senderAddr, txtMsg.Text, txtNumber.Text)
+        smsRequest = New SMSRequest(senderAddr, text_msg, txtNumber.Text)
         Try
             smsClient.SmsMessagingClient.SendSMS(smsRequest)
             reqID = smsClient.SmsMessagingClient.GetDeliveryReports
@@ -41,9 +47,5 @@ Public Class devSMS
         Dim deliveryStatus As String
         deliveryStatus = deliveryInfoList.DeliveryInfos(0).DeliveryStatus
         Console.WriteLine(deliveryStatus)
-    End Sub
-
-    Private Sub devSMS_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
     End Sub
 End Class

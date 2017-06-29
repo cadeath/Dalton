@@ -133,7 +133,7 @@ Public Class frmPawningItemNew
         txtBDay.Text = cus.Birthday.ToString("MMM dd, yyyy")
 
         For Each phne As PhoneNumber In cus.CustomersPhone
-            If phne.isPrimary > 0 Then
+            If phne.isPrimary Then
                 txtContact.Text = phne.PhoneNumber
                 GoTo nextlineTODO
             End If

@@ -1,4 +1,23 @@
 CHANGELOG
+Version 1.6.0.5
+ - Update SMS Message added Branch Name
+ - Add Gui for Sale Items Receipt
+ - Add Audit Item Tracking
+ - Loan & Coi Summary Count
+ - Add identification in admin panel module
+ - Add patch 1.3.5
+ - Fix Remote Load Transaction
+
+Vsersion 1.6.0.4
+ - Update Pullout count module
+ - Add CIRUpdate Module (Auto patch CIR)
+ - Add Pullout Count in maintenance
+
+Vsersion 1.6.0.3
+ - Eload Automatic Sale Price (No OPT required)
+Version 1.6.0.2
+ - Fix Bug in Layaway Penalty (Item Charge Penalty in 90 Days)
+ - Add ItemMaster Remarks CI# every Transact of Retail
 
 Version 1.6.0.0
  - Add kYC Module

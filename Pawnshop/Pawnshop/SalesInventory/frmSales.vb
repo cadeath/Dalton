@@ -25,13 +25,7 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
-    'Friend LayCustomer As Integer
-    'Friend LayItemCode As String
-    'Friend LayCost As Integer
-    'Friend LayBalance As Integer
-    'Friend LayAmount As Integer
-    'Friend LayID As Integer
-    'Friend LayisOld As Boolean
+    Private isLoadTrans As Boolean = False
 
     Private Sub frmSales_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         If DEV_MODE Then Pawn.Populate()
@@ -110,6 +104,7 @@ Public Class frmSales
     Friend Sub AddItem(ByVal itm As cItemData, Optional ByVal isRedeem As Boolean = False)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
+        If itm.ItemCode = "SMT 00002" Then isLoadTrans = True
 
         For Each AddedItems As ListViewItem In lvSale.Items
             If isRedeem = False Then
@@ -213,6 +208,7 @@ Public Class frmSales
         txtSearch.Text = ""
         lblNoVat.Text = Display_NoVat(0)
         Display_Total(0)
+        isLoadTrans = False
     End Sub
 
     Private Function Display_Total(ByVal tot As Double) As Double
@@ -321,6 +317,18 @@ Public Class frmSales
             End If
             Display_Total(DOC_TOTAL)
         End If
+
+
+        For Each lvi As ListViewItem In lvSale.Items
+            If lvi.Text.Contains("SMT 00002") Then
+                isLoadTrans = True
+            Else
+                isLoadTrans = False
+            End If
+
+        Next
+        If lvSale.Items.Count = 0 Then isLoadTrans = False
+
     End Sub
 
     Private Sub tsbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCheck.Click
@@ -351,6 +359,7 @@ Public Class frmSales
         Dim Remarks As String = ""
         Dim unsec_Customer As String = lblCustomer.Text
         Dim prefix As String = "", DocCode As String = ""
+        Dim LoadWalletType As String = ""
 
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
@@ -377,6 +386,14 @@ Public Class frmSales
 
             unsec_Customer = retVal(0) 'Branch
             Remarks = retVal(1) 'Particulars
+        End If
+
+        If isLoadTrans = True Then
+            Dim LoadRetVal(0) As String
+            If diagLoadTrans.ShowLoadType(LoadRetVal) <> Windows.Forms.DialogResult.OK Then
+                Exit Sub
+            End If
+            LoadWalletType = LoadRetVal(0)
         End If
 
         'Creating Document
@@ -462,11 +479,25 @@ Public Class frmSales
 
             If itm.isInventoriable Then
 
-                If TransactionMode <> TransType.Returns Then
-                    InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                If itm.ItemCode = "SMT 00002" Then
+                    Select Case LoadWalletType
+                        Case "LOAD WALLET", "REMOTE LOAD"
+                            If TransactionMode <> TransType.Returns Then
+                                InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                            Else
+                                InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                            End If
+                    End Select
+
                 Else
-                    InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                    If TransactionMode <> TransType.Returns Then
+                        InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                    Else
+                        InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                    End If
+
                 End If
+
             End If
 
             If TransactionMode = TransType.Auction Then
@@ -476,22 +507,37 @@ Public Class frmSales
 
             ' JOURNAL ENTRY
             getLastID = GetDocLines_LastID()
-            If TransactionMode = TransType.Returns Then
-                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
-                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
-            Else
-                If TransactionMode <> TransType.Auction Then
-                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                    AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+            If TransactionMode <> TransType.StockOut Then
+                If itm.ItemCode = "SMT 00002" Then
+                    Select Case LoadWalletType
+                        Case "REMOTE RECEIVE", "LOAD WALLET"
+                            If TransactionMode = TransType.Returns Then
+                                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
+                                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
+                            ElseIf TransactionMode = TransType.Cash OrElse TransactionMode = TransType.Check Then
+                                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                            End If
+                    End Select
                 Else
-                    ' JE FOR AUCTION REDEEM
+                    If TransactionMode = TransType.Returns Then
+                        AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
+                        AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
+                    Else
+                        If TransactionMode <> TransType.Auction Then
+                            AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                            AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                        Else
+                            ' JE FOR AUCTION REDEEM
 
-                    ' SELLING PRICE
-                    AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
-                    AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
-                    ' PRINCIPAL
-                    AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
-                    AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                            ' SELLING PRICE
+                            AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
+                            AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
+                            ' PRINCIPAL
+                            AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                            AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                        End If
+                    End If
                 End If
             End If
         Next

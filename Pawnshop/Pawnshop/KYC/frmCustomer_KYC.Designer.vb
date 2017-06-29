@@ -33,6 +33,8 @@ Partial Class frmCustomer_KYC
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tpBasic = New System.Windows.Forms.TabPage()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.chkIsDumper = New System.Windows.Forms.CheckBox()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.lstPhone = New System.Windows.Forms.ListBox()
@@ -101,8 +103,6 @@ Partial Class frmCustomer_KYC
         Me.grpSignature = New System.Windows.Forms.GroupBox()
         Me.btnSignature = New System.Windows.Forms.Button()
         Me.CLientSignature = New System.Windows.Forms.PictureBox()
-        Me.chkIsDumper = New System.Windows.Forms.CheckBox()
-        Me.Label27 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -246,6 +246,25 @@ Partial Class frmCustomer_KYC
         Me.tpBasic.TabIndex = 0
         Me.tpBasic.Text = "Basic Information"
         Me.tpBasic.UseVisualStyleBackColor = True
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(589, 213)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(69, 16)
+        Me.Label27.TabIndex = 44
+        Me.Label27.Text = "Is Dumper"
+        '
+        'chkIsDumper
+        '
+        Me.chkIsDumper.AutoSize = True
+        Me.chkIsDumper.Location = New System.Drawing.Point(590, 234)
+        Me.chkIsDumper.Name = "chkIsDumper"
+        Me.chkIsDumper.Size = New System.Drawing.Size(88, 20)
+        Me.chkIsDumper.TabIndex = 43
+        Me.chkIsDumper.Text = "Is Dumper"
+        Me.chkIsDumper.UseVisualStyleBackColor = True
         '
         'lblAge
         '
@@ -756,7 +775,6 @@ Partial Class frmCustomer_KYC
         '
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboType.FormattingEnabled = True
-        Me.cboType.Items.AddRange(New Object() {"Passport", "Driver's License", "PRC ID", "NBI Clearance", "Police Clearance", "Postal ID", "Voter's ID", "Brgy Certification", "GSIS", "SSS", "Senior Citizen Card", "OWWA ID", "OFW ID", "Seaman's Book", "Alien Cretification/Immigrant Certification of Registration", "AFP ID", "HDMF ID", "NCWDP", "DSWD Certification", "Integrated Bar of the Philippines ID", "Company ID under BSP, SEC or IC"})
         Me.cboType.Location = New System.Drawing.Point(88, 13)
         Me.cboType.Name = "cboType"
         Me.cboType.Size = New System.Drawing.Size(503, 24)
@@ -896,25 +914,6 @@ Partial Class frmCustomer_KYC
         Me.CLientSignature.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.CLientSignature.TabIndex = 11
         Me.CLientSignature.TabStop = False
-        '
-        'chkIsDumper
-        '
-        Me.chkIsDumper.AutoSize = True
-        Me.chkIsDumper.Location = New System.Drawing.Point(590, 234)
-        Me.chkIsDumper.Name = "chkIsDumper"
-        Me.chkIsDumper.Size = New System.Drawing.Size(88, 20)
-        Me.chkIsDumper.TabIndex = 43
-        Me.chkIsDumper.Text = "Is Dumper"
-        Me.chkIsDumper.UseVisualStyleBackColor = True
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(589, 213)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(69, 16)
-        Me.Label27.TabIndex = 44
-        Me.Label27.Text = "Is Dumper"
         '
         'frmCustomer_KYC
         '
