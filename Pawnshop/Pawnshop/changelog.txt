@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.6.0.2
+Version 1.6.0.1
  - Unused User Management old Module
  - Add New User Management Module
  - Update Main form
@@ -32,6 +32,8 @@ Version 1.6.0.2
  - Update Audit Console Module
  - Update Class OTP
  - Update CashCount Module
+ - Update Item Pullout Module
+ - Add PulloutCount in maintenance
 
 Version 1.6.0.0
  - Add kYC Module
