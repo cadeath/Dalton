@@ -140,8 +140,10 @@
             Dim pt As New PawnTicket2
             pt.Load_PTid(itm.Tag)
             pt.PullOut(CurrentDate)
+            AddTimelyLogs("ITEM PULLOUT", "PT# " & pt.PawnTicket, pt.Principal, False, GetOption("PolloutCount"), pt.PawnID)
         Next
 
+        UpdateOptions("PolloutCount", GetOption("PolloutCount") + 1)
         MsgBox("Items has been pull out", MsgBoxStyle.Information)
         Me.Close()
     End Sub

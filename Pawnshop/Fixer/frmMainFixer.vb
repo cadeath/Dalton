@@ -17,7 +17,7 @@
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
         Try
         database.dbName = txtDB.Text
-        Fix_ORrenewedItem.Fixing()
+            PulloutCount.Fixing()
             MsgBox("Succesful")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
