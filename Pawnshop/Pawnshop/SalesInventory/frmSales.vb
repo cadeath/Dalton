@@ -390,6 +390,7 @@ Public Class frmSales
 
         If isLoadTrans = True Then
             Dim LoadRetVal(0) As String
+            diagLoadTrans.rbLoadWallet.Checked = True
             If diagLoadTrans.ShowLoadType(LoadRetVal) <> Windows.Forms.DialogResult.OK Then
                 Exit Sub
             End If
@@ -471,6 +472,9 @@ Public Class frmSales
                     .Item("Remarks") = "Price " & itm.SRP & " Discounted " & itm.Discount & "%"
                 End If
 
+                If isLoadTrans = True Then
+                    .Item("Remarks") = LoadWalletType
+                End If
 
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
