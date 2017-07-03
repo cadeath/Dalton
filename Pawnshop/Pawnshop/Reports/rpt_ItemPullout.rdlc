@@ -597,7 +597,7 @@
                             <TextRun>
                               <Value>=Fields!Principal.Value</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+                                <FontSize>11pt</FontSize>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -799,6 +799,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1011,7 +1012,6 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value) or Sum(Fields!Principal.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -1035,7 +1035,6 @@
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
