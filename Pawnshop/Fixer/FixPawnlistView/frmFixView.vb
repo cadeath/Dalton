@@ -17,38 +17,8 @@
 
         Disable(1)
         Try
-            Dim DropPawnView As String = "DROP VIEW PAWN_LIST;"
-            RunCommand(DropPawnView)
 
-            Dim createView As String
-
-            createView = "CREATE VIEW PAWN_LIST("
-            createView &= vbCrLf & "  PAWNID,  PAWNTICKET,  LOANDATE,  MATUDATE,  EXPIRYDATE,  AUCTIONDATE,"
-            createView &= vbCrLf & "  CLIENTID,  CLIENT,  CONTACTNUMBER,  FULLADDRESS,"
-            createView &= vbCrLf & "  ITEMCLASS,  ITEMCATEGORY,  DESCRIPTION,  OLDTICKET,  ORNUM,  ORDATE,"
-            createView &= vbCrLf & "  PRINCIPAL,  DELAYINTEREST,  ADVINT,  SERVICECHARGE,"
-            createView &= vbCrLf & "  NETAMOUNT,  RENEWDUE,  REDEEMDUE,  APPRAISAL,  PENALTY,"
-            createView &= vbCrLf & "  STATUS,  WITHDRAWDATE,  APPRAISER,  SENT_NOTICE )"
-            createView &= vbCrLf & "AS"
-            createView &= vbCrLf & "SELECT "
-            createView &= vbCrLf & "P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
-            createView &= vbCrLf & "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
-            createView &= vbCrLf & "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, C.PHONE1 AS CONTACTNUMBER, "
-            createView &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
-            createView &= vbCrLf & "ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
-            createView &= vbCrLf & "P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
-            createView &= vbCrLf & "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, "
-            createView &= vbCrLf & "P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER, P.SENT_NOTICE "
-            createView &= vbCrLf & "FROM OPT P "
-            createView &= vbCrLf & "INNER JOIN TBLCLIENT C "
-            createView &= vbCrLf & "ON P.CLIENTID = C.CLIENTID "
-            createView &= vbCrLf & "INNER JOIN OPI ITM "
-            createView &= vbCrLf & "ON ITM.PAWNITEMID = P.PAWNITEMID "
-            createView &= vbCrLf & "INNER JOIN TBLITEM CLASS "
-            createView &= vbCrLf & "ON CLASS.ITEMID = ITM.ITEMID "
-            createView &= vbCrLf & "LEFT JOIN TBL_GAMIT USR "
-            createView &= vbCrLf & "ON USR.USERID = P.APPRAISERID;"
-            RunCommand(createView)
+            Modify_View_PawnList()
 
             MsgBox("Successful", MsgBoxStyle.Information, "Fixing . . ")
 
@@ -58,6 +28,67 @@
         Disable(0)
     End Sub
 
+    Private Sub Modify_View_PawnList()
+        Dim dropView As String = "DROP VIEW PAWN_LIST;"
+        Dim createView As String
+
+        createView = "	CREATE VIEW PAWN_LIST(	"
+        createView &= vbCrLf & "	  PAWNID,	"
+        createView &= vbCrLf & "	  PAWNTICKET,	"
+        createView &= vbCrLf & "	  LOANDATE,	"
+        createView &= vbCrLf & "	  MATUDATE,	"
+        createView &= vbCrLf & "	  EXPIRYDATE,	"
+        createView &= vbCrLf & "	  AUCTIONDATE,	"
+        createView &= vbCrLf & "	  ID,	"
+        createView &= vbCrLf & "	  CLIENT,	"
+        createView &= vbCrLf & "	  CONTACTNUMBER,	"
+        createView &= vbCrLf & "	  FULLADDRESS,	"
+        createView &= vbCrLf & "	  ITEMCLASS,	"
+        createView &= vbCrLf & "	  ITEMCATEGORY,	"
+        createView &= vbCrLf & "	  DESCRIPTION,	"
+        createView &= vbCrLf & "	  OLDTICKET,	"
+        createView &= vbCrLf & "	  ORNUM,	"
+        createView &= vbCrLf & "	  ORDATE,	"
+        createView &= vbCrLf & "	  PRINCIPAL,	"
+        createView &= vbCrLf & "	  DELAYINTEREST,	"
+        createView &= vbCrLf & "	  ADVINT,	"
+        createView &= vbCrLf & "	  SERVICECHARGE,	"
+        createView &= vbCrLf & "	  NETAMOUNT,	"
+        createView &= vbCrLf & "	  RENEWDUE,	"
+        createView &= vbCrLf & "	  REDEEMDUE,	"
+        createView &= vbCrLf & "	  APPRAISAL,	"
+        createView &= vbCrLf & "	  PENALTY,	"
+        createView &= vbCrLf & "	  STATUS,	"
+        createView &= vbCrLf & "	  WITHDRAWDATE,	"
+        createView &= vbCrLf & "	  APPRAISER,	"
+        createView &= vbCrLf & "	  SENT_NOTICE)	"
+        createView &= vbCrLf & "	AS	"
+        createView &= vbCrLf & "	SELECT 	"
+        createView &= vbCrLf & "	P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, 	"
+        createView &= vbCrLf & "	C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || 	"
+        createView &= vbCrLf & "	CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, 	"
+        createView &= vbCrLf & "	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	"
+        createView &= vbCrLf & "	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER	"
+        createView &= vbCrLf & "	ELSE PH.PHONENUMBER END)AS CONTACTNUMBER FROM KYC_PHONE PH  	"
+        createView &= vbCrLf & "	 WHERE 	"
+        createView &= vbCrLf & "	    C.ID = PH.CUSTID 	"
+        createView &= vbCrLf & "	    ORDER BY PH.ISPRIMARY DESC ROWS 1),	"
+        createView &= vbCrLf & "	C.STREET1 || ' '||C.BRGY1 ||' '|| C.CITY1 || ' ' || C.PROVINCE1 || ' ' || C.ZIP1 as FULLADDRESS, 	"
+        createView &= vbCrLf & "	ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, 	"
+        createView &= vbCrLf & "	P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, 	"
+        createView &= vbCrLf & "	P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, 	"
+        createView &= vbCrLf & "	P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER, P.SENT_NOTICE 	"
+        createView &= vbCrLf & "	FROM OPT P INNER JOIN KYC_CUSTOMERS C 	"
+        createView &= vbCrLf & "	ON P.CLIENTID = C.ID INNER JOIN OPI ITM 	"
+        createView &= vbCrLf & "	ON ITM.PAWNITEMID = P.PAWNITEMID INNER JOIN TBLITEM CLASS 	"
+        createView &= vbCrLf & "	ON CLASS.ITEMID = ITM.ITEMID LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID;	"
+
+
+        RunCommand(dropView)
+        RunCommand(createView)
+
+        Console.WriteLine("View Modified")
+    End Sub
     Private Sub Disable(ByVal st As Boolean)
         btnFix.Enabled = Not st
     End Sub

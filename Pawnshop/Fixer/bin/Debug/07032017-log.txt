@@ -1,0 +1,58 @@
+[07/03/2017 14:03:42] [	CREATE VIEW PAWN_LIST(	
+	  PAWNID,	
+	  PAWNTICKET,	
+	  LOANDATE,	
+	  MATUDATE,	
+	  EXPIRYDATE,	
+	  AUCTIONDATE,	
+	  ID,	
+	  CLIENT,	
+	  CONTACTNUMBER,	
+	  FULLADDRESS,	
+	  ITEMCLASS,	
+	  ITEMCATEGORY,	
+	  DESCRIPTION,	
+	  OLDTICKET,	
+	  ORNUM,	
+	  ORDATE,	
+	  PRINCIPAL,	
+	  DELAYINTEREST,	
+	  ADVINT,	
+	  SERVICECHARGE,	
+	  NETAMOUNT,	
+	  RENEWDUE,	
+	  REDEEMDUE,	
+	  APPRAISAL,	
+	  PENALTY,	
+	  STATUS,	
+	  WITHDRAWDATE,	
+	  APPRAISER,	
+	  SENT_NOTICE)	
+	AS	
+	SELECT 	
+	P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, 	
+	C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || 	
+	CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, 	
+	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	
+	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER	
+	ELSE PH.PHONENUMBER END)AS CONTACTNUMBER FROM KYC_PHONE PH  	
+	 WHERE 	
+	    C.ID = PH.CUSTID 	
+	    ORDER BY PH.ISPRIMARY DESC ROWS 1),	
+	C.STREET1 || ' '||C.BRGY1' ' || C.CITY1 || ' ' || C.PROVINCE1 || ' ' || C.ZIP1 as FULLADDRESS, 	
+	ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, 	
+	P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, 	
+	P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, 	
+	P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER, P.SENT_NOTICE 	
+	FROM OPT P INNER JOIN KYC_CUSTOMERS C 	
+	ON P.CLIENTID = C.ID INNER JOIN OPI ITM 	
+	ON ITM.PAWNITEMID = P.PAWNITEMID INNER JOIN TBLITEM CLASS 	
+	ON CLASS.ITEMID = ITM.ITEMID LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID;	] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 42, column 27
+' '
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Fixer.database.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\Fixer\database.vb:line 165
