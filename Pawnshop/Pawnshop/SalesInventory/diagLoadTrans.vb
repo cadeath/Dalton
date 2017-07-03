@@ -20,4 +20,8 @@
 
         Return Me.DialogResult
     End Function
+
+    Private Sub diagLoadTrans_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        rbLoadWallet.Focus()
+    End Sub
 End Class

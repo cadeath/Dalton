@@ -23,10 +23,10 @@ Partial Class diagLoadTrans
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnOK = New System.Windows.Forms.Button()
-        Me.rbLoadWallet = New System.Windows.Forms.RadioButton()
-        Me.rbRemoteReceive = New System.Windows.Forms.RadioButton()
         Me.rbRemoteLoad = New System.Windows.Forms.RadioButton()
+        Me.rbRemoteReceive = New System.Windows.Forms.RadioButton()
+        Me.rbLoadWallet = New System.Windows.Forms.RadioButton()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,14 +41,25 @@ Partial Class diagLoadTrans
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
-        'btnOK
+        'rbRemoteLoad
         '
-        Me.btnOK.Location = New System.Drawing.Point(192, 111)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 1
-        Me.btnOK.Text = "&OK"
-        Me.btnOK.UseVisualStyleBackColor = True
+        Me.rbRemoteLoad.AutoSize = True
+        Me.rbRemoteLoad.Location = New System.Drawing.Point(6, 65)
+        Me.rbRemoteLoad.Name = "rbRemoteLoad"
+        Me.rbRemoteLoad.Size = New System.Drawing.Size(149, 17)
+        Me.rbRemoteLoad.TabIndex = 2
+        Me.rbRemoteLoad.Text = "Load Wallet Remote Load"
+        Me.rbRemoteLoad.UseVisualStyleBackColor = True
+        '
+        'rbRemoteReceive
+        '
+        Me.rbRemoteReceive.AutoSize = True
+        Me.rbRemoteReceive.Location = New System.Drawing.Point(6, 42)
+        Me.rbRemoteReceive.Name = "rbRemoteReceive"
+        Me.rbRemoteReceive.Size = New System.Drawing.Size(165, 17)
+        Me.rbRemoteReceive.TabIndex = 1
+        Me.rbRemoteReceive.Text = "Load Wallet Remote Receive"
+        Me.rbRemoteReceive.UseVisualStyleBackColor = True
         '
         'rbLoadWallet
         '
@@ -62,25 +73,14 @@ Partial Class diagLoadTrans
         Me.rbLoadWallet.Text = "Load Wallet"
         Me.rbLoadWallet.UseVisualStyleBackColor = True
         '
-        'rbRemoteReceive
+        'btnOK
         '
-        Me.rbRemoteReceive.AutoSize = True
-        Me.rbRemoteReceive.Location = New System.Drawing.Point(6, 42)
-        Me.rbRemoteReceive.Name = "rbRemoteReceive"
-        Me.rbRemoteReceive.Size = New System.Drawing.Size(165, 17)
-        Me.rbRemoteReceive.TabIndex = 1
-        Me.rbRemoteReceive.Text = "Load Wallet Remote Receive"
-        Me.rbRemoteReceive.UseVisualStyleBackColor = True
-        '
-        'rbRemoteLoad
-        '
-        Me.rbRemoteLoad.AutoSize = True
-        Me.rbRemoteLoad.Location = New System.Drawing.Point(6, 65)
-        Me.rbRemoteLoad.Name = "rbRemoteLoad"
-        Me.rbRemoteLoad.Size = New System.Drawing.Size(149, 17)
-        Me.rbRemoteLoad.TabIndex = 2
-        Me.rbRemoteLoad.Text = "Load Wallet Remote Load"
-        Me.rbRemoteLoad.UseVisualStyleBackColor = True
+        Me.btnOK.Location = New System.Drawing.Point(192, 111)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnOK.TabIndex = 1
+        Me.btnOK.Text = "&OK"
+        Me.btnOK.UseVisualStyleBackColor = True
         '
         'diagLoadTrans
         '
