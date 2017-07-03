@@ -472,8 +472,10 @@ Public Class frmSales
                     .Item("Remarks") = "Price " & itm.SRP & " Discounted " & itm.Discount & "%"
                 End If
 
-                If isLoadTrans = True Then
-                    .Item("Remarks") = LoadWalletType
+                If itm.ItemCode = "SMT 00002" Then
+                    If isLoadTrans = True Then
+                        .Item("Remarks") = LoadWalletType
+                    End If
                 End If
 
             End With
