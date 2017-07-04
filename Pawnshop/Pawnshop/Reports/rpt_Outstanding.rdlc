@@ -615,9 +615,7 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-
                               <Value>=Fields!PawnTicket.Value</Value>
-
                               <Style>
                                 <Format>000000</Format>
                               </Style>
@@ -639,7 +637,6 @@ Expiry</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -847,10 +844,7 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Fields!ItemType.Value = "JWL",
-Fields!Category.Value &amp; " " &amp; Fields!Grams.Value &amp; "G " &amp; " APPROX " &amp; Code.EncryptKarat(Fields!Karat.Value),
-Fields!ItemType.Value &lt;&gt; "JWL",
-Fields!Description.Value)</Value>
+                              <Value>=Fields!Description.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
