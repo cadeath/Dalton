@@ -691,4 +691,9 @@ Public Class frmMain
     Private Sub SMSNoticeToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem1.Click
         frmSMSInfo.Show()
     End Sub
+
+    Private Sub LoanCoiSummaryCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanCoiSummaryCountToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.SummaryCount
+        frmSalesReport.Show()
+    End Sub
 End Class

@@ -14,7 +14,9 @@ Friend Module database
     Friend conStr As String = String.Empty
 
 
-    Private DBversion As String = "1.3.4" 'Database version.
+
+    Private DBversion As String = "1.3.5" 'Database version.
+
     Private language() As String = _
         {"Connection error failed."} 'verification if the database is connected.
     ''' <summary>

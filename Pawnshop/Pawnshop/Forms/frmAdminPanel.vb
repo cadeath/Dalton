@@ -1018,4 +1018,36 @@ Public Class frmAdminPanel
         SaveEntry(ds, False)
         MsgBox(cboOTPMod.Text & " Switch " & IIf(chbOnOff.Checked = True, "On", "Off"), MsgBoxStyle.Information, "OTP Control")
     End Sub
+
+    Private Sub btnIDAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDAdd.Click
+        If txtIDType.Text = "" Then Exit Sub
+
+        lvID.Items.Add(txtIDType.Text)
+        txtIDType.Text = ""
+    End Sub
+
+    Private Sub btnIDRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDRemove.Click
+        If lvID.SelectedItems.Count = 0 Then Exit Sub
+        lvID.Items.RemoveAt(lvID.SelectedIndices(0))
+    End Sub
+
+    Private Sub btnIDsave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDsave.Click
+        If lvID.Items.Count = 0 Then Exit Sub
+        Dim msg As DialogResult = MsgBox("Do you want to save this ID?", MsgBoxStyle.YesNo, "Question")
+        If msg = vbNo Then Exit Sub
+
+        Dim ctmr As New Customer
+        For Each idtype As ListViewItem In lvID.Items
+            With ctmr
+                .AddIDentification(idtype.Text)
+            End With
+        Next
+       
+        lvID.Items.Clear() : txtIDType.Text = ""
+        MsgBox("Successfully saved.", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub txtIDType_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtIDType.KeyPress
+        If isEnter(e) Then btnIDAdd.PerformClick()
+    End Sub
 End Class
