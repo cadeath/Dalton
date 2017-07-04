@@ -161,7 +161,9 @@ Public Class frmSales
                 Dim itm2 As New cItemData
                 itm2.ItemCode = "SMT 00058"
                 itm2.Load_Item()
-                itm2.Quantity = 15
+                Dim SmtCom As SMTCompute
+                SmtCom = New SMTCompute(itm.Quantity)
+                itm2.Quantity = SmtCom.TransferFee
                 Dim lv2 As ListViewItem = lvSale.Items.Add(itm2.ItemCode)
                 lv2.SubItems.Add(itm2.Description)
                 lv2.SubItems.Add(itm2.Quantity)

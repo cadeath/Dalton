@@ -34,6 +34,9 @@ Module autopatch
         db134.PatchUp()
         db135.PatchUp()
 
+        'Smart Money Transaction Fee
+        db136.PatchUp()
+
         If Not AutoReadCIR() Then Exit Sub
         DBVERSION = GetOption("DBVersion")
     End Sub

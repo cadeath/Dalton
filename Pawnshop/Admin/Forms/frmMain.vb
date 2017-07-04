@@ -103,8 +103,9 @@
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        fillData = "OTPControl"
+        fillData = "TBLSMTRANSFERFEE"
         mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY SMT_ID"
 
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
