@@ -104,6 +104,8 @@ Public Class frmSales
     Friend Sub AddItem(ByVal itm As cItemData, Optional ByVal isRedeem As Boolean = False)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
+        Dim SMTAdd As Double = 0
+        Dim isSMTrans As Boolean = False
         If itm.ItemCode = "SMT 00002" Then isLoadTrans = True
 
         For Each AddedItems As ListViewItem In lvSale.Items
@@ -158,12 +160,21 @@ Public Class frmSales
             lv.SubItems.Add(itm.Discount)
 
             If itm.ItemCode = "SMT 00056" Then
+                isSMTrans = True
                 Dim itm2 As New cItemData
                 itm2.ItemCode = "SMT 00058"
                 itm2.Load_Item()
                 Dim SmtCom As SMTCompute
                 SmtCom = New SMTCompute(itm.Quantity)
-                itm2.Quantity = SmtCom.TransferFee
+                itm2.Quantity = SmtCom.Commision
+
+                With lvSale.FindItemWithText("SMT 00056")
+                    .SubItems(2).Text += SmtCom.TransferFee
+                    ItemAmount = (.SubItems(2).Text * .SubItems(3).Text)
+                    .SubItems(4).Text = ItemAmount.ToString("#,##0.00")
+                    SMTAdd = SmtCom.TransferFee
+                End With
+
                 Dim lv2 As ListViewItem = lvSale.Items.Add(itm2.ItemCode)
                 lv2.SubItems.Add(itm2.Description)
                 lv2.SubItems.Add(itm2.Quantity)
@@ -175,7 +186,7 @@ Public Class frmSales
                 lv2.SubItems.Add(itm2.SRP.ToString("#,##0.00"))
                 lv2.SubItems.Add(itm2.Discount)
 
-                ht_BroughtItems.Add(itm2.ItemCode, itm)
+                ht_BroughtItems.Add(itm2.ItemCode, itm2)
             End If
         End If
 
@@ -187,6 +198,15 @@ Public Class frmSales
         Else
             ht_BroughtItems.Add(src_idx, itm)
         End If
+
+        If isSMTrans = True Then
+            If ht_BroughtItems.ContainsKey(src_idx) Then
+                Dim tmp As cItemData = ht_BroughtItems.Item("SMT 00056")
+                tmp.Quantity += SMTAdd
+            End If
+            SMTAdd = 0
+        End If
+
         DOC_TOTAL = 0
         For Each lv As ListViewItem In lvSale.Items
             DOC_TOTAL += CDbl(lv.SubItems(4).Text)
