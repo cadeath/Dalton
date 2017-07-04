@@ -910,6 +910,7 @@
     </Compile>
     <Compile Include="SalesInventory\InventoryController.vb" />
     <Compile Include="SalesInventory\SeedItemData.vb" />
+    <Compile Include="SalesInventory\SmartMoneyTransferFee.vb" />
     <Compile Include="Seed\Client_Seed.vb" />
     <Compile Include="Seed\frmSeed.Designer.vb">
       <DependentUpon>frmSeed.vb</DependentUpon>

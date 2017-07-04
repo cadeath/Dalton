@@ -156,6 +156,25 @@ Public Class frmSales
             lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
             lv.SubItems.Add(itm.SRP.ToString("#,##0.00"))
             lv.SubItems.Add(itm.Discount)
+
+            If itm.ItemCode = "SMT 00056" Then
+                Dim itm2 As New cItemData
+                itm2.ItemCode = "SMT 00058"
+                itm2.Load_Item()
+                itm2.Quantity = 15
+                Dim lv2 As ListViewItem = lvSale.Items.Add(itm2.ItemCode)
+                lv2.SubItems.Add(itm2.Description)
+                lv2.SubItems.Add(itm2.Quantity)
+
+                lv2.SubItems.Add(itm2.SalePrice.ToString("#,##0.00"))
+                ItemAmount = (itm2.SalePrice * itm2.Quantity)
+
+                lv2.SubItems.Add(ItemAmount.ToString("#,##0.00"))
+                lv2.SubItems.Add(itm2.SRP.ToString("#,##0.00"))
+                lv2.SubItems.Add(itm2.Discount)
+
+                ht_BroughtItems.Add(itm2.ItemCode, itm)
+            End If
         End If
 
         Dim src_idx As String = IIf(TransactionMode = TransType.Auction, itm.Tags, itm.ItemCode)
