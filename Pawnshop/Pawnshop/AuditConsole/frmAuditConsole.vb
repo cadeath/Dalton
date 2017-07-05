@@ -28,14 +28,6 @@ Public Class frmAuditConsole
     Private Sub frmAuditConsole_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPrincipal.Text = MEMO_MINIMUM.ToString("0.00")
         Load_ItemType()
-
-        OTP_Init()
-    End Sub
-
-    Private Sub OTP_Init()
-        txtEmail.Text = ""
-        txtQRURL.Text = ""
-        txtManual.Text = ""
     End Sub
 
     Private Sub btnCashCount_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCashCount.Click
@@ -47,15 +39,6 @@ Public Class frmAuditConsole
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.isAuditing = True
         qryDate.Show()
-    End Sub
-
-    Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
-        If txtEmail.Text = "" Then Exit Sub
-        If Not (txtEmail.Text.Contains("@") And txtEmail.Text.Contains(".")) Then Exit Sub
-
-        AuditOTP.Setup(txtEmail.Text)
-        txtManual.Text = AuditOTP.ManualCode
-        txtQRURL.Text = AuditOTP.QRCode_URL
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
@@ -275,4 +258,35 @@ unloadObj:
         If ds.Tables(0).Rows.Count >= 1 Then Return False
         Return True
     End Function
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        Dim mysql As String = "Select DL.ItemCode, DL.Description, DL.SalePrice, DL.Qty, D.DocDate, D.Remarks, D.Code "
+        mysql &= "From Doclines DL "
+        mysql &= "Inner Join Doc D on D.DocID = DL.DocID "
+        mysql &= "Where Upper(DL.ItemCode) = Upper('" & txtSearch.Text & "') OR Upper(D.Code) like Upper('%" & txtSearch.Text & "%')"
+        Dim ds As DataSet = LoadSQL(mysql)
+
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("No " & txtSearch.Text & " Found!", MsgBoxStyle.Critical, "Error") : Exit Sub
+        For Each dr In ds.Tables(0).Rows
+            AddItem(dr)
+        Next
+    End Sub
+
+    Private Sub AddItem(ByVal dr As DataRow)
+        lvItem.Items.Clear()
+        Dim lv As ListViewItem = lvItem.Items.Add(dr.Item("ItemCode"))
+
+        lv.SubItems.Add(dr.Item("Description"))
+        lv.SubItems.Add(dr.Item("DocDate"))
+        lv.SubItems.Add(dr.Item("SalePrice"))
+        lv.SubItems.Add(dr.Item("Qty"))
+        lv.SubItems.Add(dr.Item("Code"))
+        If Not IsDBNull(dr.Item("Remarks")) Then lv.SubItems.Add(dr.Item("Remarks"))
+    End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
 End Class

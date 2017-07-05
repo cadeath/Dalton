@@ -29,6 +29,8 @@ Public Class frmCustomer_KYC
         CACHE_MANAGEMENT() : btnBrowse.Visible = False
         ClearFields()
 
+        cboType.Items.AddRange(GetDistinct("IDTYPE"))
+
         If Not KycRequired Then
             btnCamera.Visible = False
             btnSignature.Visible = False
@@ -41,6 +43,20 @@ Public Class frmCustomer_KYC
         ' ELLIEPOPULATEINFO()
         'Populate()
     End Sub
+
+    Private Function GetDistinct(ByVal col As String) As String()
+        Dim mySql As String = "SELECT DISTINCT " & col & " FROM KYC_IDLIST WHERE " & col & " <> '' ORDER BY IDENID ASC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Dim MaxCount As Integer = ds.Tables(0).Rows.Count
+        Dim str(MaxCount - 1) As String
+        For cnt As Integer = 0 To MaxCount - 1
+            Dim tmpStr As String = ds.Tables(0).Rows(cnt).Item(0)
+            str(cnt) = tmpStr
+        Next
+
+        Return str
+    End Function
 
     Friend Sub LoadClientInForm(ByVal cus As Customer)
         If cus.FirstName = "" Then Exit Sub
@@ -551,7 +567,7 @@ NextlineTODO:
         rbLow.Checked = True
 
         'IDENTIFY
-        cboType.SelectedIndex = 0
+        'cboType.SelectedIndex = 0
         txtIDNum.Text = ""
         lvID.Items.Clear()
 

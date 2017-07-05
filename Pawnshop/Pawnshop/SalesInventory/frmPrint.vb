@@ -223,4 +223,14 @@ Public Class frmPrint
             database.SaveEntry(ds, False)
         End If
     End Sub
+
+
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        If lvReceipt.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As String = lvReceipt.FocusedItem.Tag
+        frmReceiptView.LoadItems(idx)
+        frmReceiptView.Show()
+    End Sub
+
 End Class

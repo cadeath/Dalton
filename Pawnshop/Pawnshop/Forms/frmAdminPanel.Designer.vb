@@ -22,8 +22,8 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -109,15 +109,27 @@ Partial Class frmAdminPanel
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Tabpage5 = New System.Windows.Forms.TabPage()
-        Me.btnAddpriv = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnAcctValidation = New System.Windows.Forms.Button()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.chkResetUserExpiry = New System.Windows.Forms.CheckBox()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
+
+        'Me.Tabpage5 = New System.Windows.Forms.TabPage()
+        'Me.btnAddpriv = New System.Windows.Forms.Button()
+        'Me.Panel1 = New System.Windows.Forms.Panel()
+        'Me.btnAcctValidation = New System.Windows.Forms.Button()
+        'Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+       ' Me.chkResetUserExpiry = New System.Windows.Forms.CheckBox()
+       ' Me.Label24 = New System.Windows.Forms.Label()
+       ' Me.Label23 = New System.Windows.Forms.Label()
+       ' Me.Label22 = New System.Windows.Forms.Label()
+
+       Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.Label22 = New System.Windows.Forms.Label()
+       Me.txtIDType = New System.Windows.Forms.TextBox()
+        Me.btnIDRemove = New System.Windows.Forms.Button()
+        Me.btnIDAdd = New System.Windows.Forms.Button()
+        Me.lvID = New System.Windows.Forms.ListView()
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnIDsave = New System.Windows.Forms.Button()
+
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
@@ -137,9 +149,11 @@ Partial Class frmAdminPanel
         Me.txtSchemeName = New Pawnshop.watermark()
         Me.txtDescription1 = New Pawnshop.watermark()
         Me.txtsearchscheme = New Pawnshop.watermark()
+
         Me.txtFailedAttemp = New Pawnshop.watermark()
         Me.txtPasswordAge = New Pawnshop.watermark()
         Me.txtAddDays = New Pawnshop.watermark()
+
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -156,8 +170,13 @@ Partial Class frmAdminPanel
         Me.TabPage4.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
-        Me.Tabpage5.SuspendLayout()
+
+        'Me.Tabpage5.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
+
+        Me.TabPage5.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -271,7 +290,10 @@ Partial Class frmAdminPanel
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.Tabpage5)
+
+
+        Me.TabControl1.Controls.Add(Me.TabPage5)
+
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
@@ -445,8 +467,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -470,8 +492,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -1020,6 +1042,7 @@ Partial Class frmAdminPanel
         Me.Label21.TabIndex = 0
         Me.Label21.Text = "Email Address"
         '
+
         'Tabpage5
         '
         Me.Tabpage5.Controls.Add(Me.btnAddpriv)
@@ -1104,15 +1127,100 @@ Partial Class frmAdminPanel
         Me.Label23.Size = New System.Drawing.Size(140, 16)
         Me.Label23.TabIndex = 7
         Me.Label23.Text = "Password days expiry"
+
+        'TabPage5
+        '
+        Me.TabPage5.BackColor = System.Drawing.Color.DarkGray
+        Me.TabPage5.Controls.Add(Me.GroupBox7)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(1143, 433)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Add Identification"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.Label22)
+        Me.GroupBox7.Controls.Add(Me.txtIDType)
+        Me.GroupBox7.Controls.Add(Me.btnIDRemove)
+        Me.GroupBox7.Controls.Add(Me.btnIDAdd)
+        Me.GroupBox7.Controls.Add(Me.lvID)
+        Me.GroupBox7.Controls.Add(Me.btnIDsave)
+        Me.GroupBox7.Location = New System.Drawing.Point(14, 20)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(388, 269)
+        Me.GroupBox7.TabIndex = 0
+        Me.GroupBox7.TabStop = False
+
         '
         'Label22
         '
         Me.Label22.AutoSize = True
+
         Me.Label22.Location = New System.Drawing.Point(5, 72)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(128, 16)
         Me.Label22.TabIndex = 6
         Me.Label22.Text = "Account days expiry"
+
+        Me.Label22.Location = New System.Drawing.Point(10, 20)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(56, 16)
+        Me.Label22.TabIndex = 5
+        Me.Label22.Text = "ID Type"
+        '
+        'txtIDType
+        '
+        Me.txtIDType.Location = New System.Drawing.Point(69, 15)
+        Me.txtIDType.Name = "txtIDType"
+        Me.txtIDType.Size = New System.Drawing.Size(231, 22)
+        Me.txtIDType.TabIndex = 0
+        '
+        'btnIDRemove
+        '
+        Me.btnIDRemove.Location = New System.Drawing.Point(306, 83)
+        Me.btnIDRemove.Name = "btnIDRemove"
+        Me.btnIDRemove.Size = New System.Drawing.Size(75, 32)
+        Me.btnIDRemove.TabIndex = 2
+        Me.btnIDRemove.Text = "&Remove"
+        Me.btnIDRemove.UseVisualStyleBackColor = True
+        '
+        'btnIDAdd
+        '
+        Me.btnIDAdd.Location = New System.Drawing.Point(306, 49)
+        Me.btnIDAdd.Name = "btnIDAdd"
+        Me.btnIDAdd.Size = New System.Drawing.Size(75, 32)
+        Me.btnIDAdd.TabIndex = 1
+        Me.btnIDAdd.Text = "&Add"
+        Me.btnIDAdd.UseVisualStyleBackColor = True
+        '
+        'lvID
+        '
+        Me.lvID.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader7})
+        Me.lvID.FullRowSelect = True
+        Me.lvID.GridLines = True
+        Me.lvID.Location = New System.Drawing.Point(6, 42)
+        Me.lvID.Name = "lvID"
+        Me.lvID.Size = New System.Drawing.Size(294, 220)
+        Me.lvID.TabIndex = 1
+        Me.lvID.UseCompatibleStateImageBehavior = False
+        Me.lvID.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "ID Type"
+        Me.ColumnHeader7.Width = 287
+        '
+        'btnIDsave
+        '
+        Me.btnIDsave.Location = New System.Drawing.Point(306, 224)
+        Me.btnIDsave.Name = "btnIDsave"
+        Me.btnIDsave.Size = New System.Drawing.Size(75, 36)
+        Me.btnIDsave.TabIndex = 3
+        Me.btnIDsave.Text = "&Save"
+        Me.btnIDsave.UseVisualStyleBackColor = True
+
         '
         'lblModuleName
         '
@@ -1287,6 +1395,7 @@ Partial Class frmAdminPanel
         Me.txtsearchscheme.WatermarkColor = System.Drawing.Color.Gray
         Me.txtsearchscheme.WatermarkText = "Search . . ."
         '
+
         'txtFailedAttemp
         '
         Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1353,9 +1462,15 @@ Partial Class frmAdminPanel
         Me.GroupBox10.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+
         Me.Tabpage5.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
+
+        Me.TabPage5.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.ResumeLayout(False)
@@ -1485,8 +1600,20 @@ Partial Class frmAdminPanel
     Friend WithEvents chbOnOff As System.Windows.Forms.CheckBox
     Friend WithEvents cboOTPMod As System.Windows.Forms.ComboBox
     Friend WithEvents btnSwitch As System.Windows.Forms.Button
+
     Friend WithEvents btnAddpriv As System.Windows.Forms.Button
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
+
+    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents txtIDType As System.Windows.Forms.TextBox
+    Friend WithEvents btnIDRemove As System.Windows.Forms.Button
+    Friend WithEvents btnIDAdd As System.Windows.Forms.Button
+    Friend WithEvents lvID As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnIDsave As System.Windows.Forms.Button
+
 
 
 End Class

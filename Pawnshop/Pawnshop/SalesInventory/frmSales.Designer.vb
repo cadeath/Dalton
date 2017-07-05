@@ -31,6 +31,7 @@ Partial Class frmSales
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.lblSearch = New System.Windows.Forms.Label()
@@ -58,7 +59,6 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -108,6 +108,11 @@ Partial Class frmSales
         '
         Me.ColumnHeader6.Text = "SRP"
         Me.ColumnHeader6.Width = 74
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "% Discount"
+        Me.ColumnHeader7.Width = 79
         '
         'Label1
         '
@@ -169,7 +174,7 @@ Partial Class frmSales
         Me.lblMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMode.Location = New System.Drawing.Point(592, 38)
+        Me.lblMode.Location = New System.Drawing.Point(592, 69)
         Me.lblMode.Name = "lblMode"
         Me.lblMode.Size = New System.Drawing.Size(286, 43)
         Me.lblMode.TabIndex = 6
@@ -180,7 +185,7 @@ Partial Class frmSales
         '
         Me.lblCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCustomer.Location = New System.Drawing.Point(592, 98)
+        Me.lblCustomer.Location = New System.Drawing.Point(592, 129)
         Me.lblCustomer.Name = "lblCustomer"
         Me.lblCustomer.Size = New System.Drawing.Size(286, 43)
         Me.lblCustomer.TabIndex = 8
@@ -329,7 +334,7 @@ Partial Class frmSales
         '
         Me.btnPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPost.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPost.Location = New System.Drawing.Point(665, 366)
+        Me.btnPost.Location = New System.Drawing.Point(665, 368)
         Me.btnPost.Name = "btnPost"
         Me.btnPost.Size = New System.Drawing.Size(102, 50)
         Me.btnPost.TabIndex = 11
@@ -347,11 +352,6 @@ Partial Class frmSales
         Me.lblNoVat.Size = New System.Drawing.Size(147, 16)
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Text = "% Discount"
-        Me.ColumnHeader7.Width = 79
         '
         'frmSales
         '

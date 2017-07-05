@@ -90,7 +90,7 @@
         txtBirthdate.Text = cus.Birthday.ToString("MMM dd, yyyy")
 
         For Each id As NewIdentificationCard In cus.CustomersIDs
-            If id.isPrimary > 0 Then
+            If id.isPrimary Then
                 txtSenderID.Text = id.IDType
                 txtSenderIDNum.Text = id.IDNumber
                 GoTo nextLineTODO

@@ -144,6 +144,7 @@
         Next
 
         UpdateOptions("PolloutCount", GetOption("PolloutCount") + 1)
+
         MsgBox("Items has been pull out", MsgBoxStyle.Information)
         Me.Close()
     End Sub

@@ -2,6 +2,7 @@
 Imports System.IO
 
 Module CIRUpdate
+
     Private cirStr As String = "CIR files"
     Private path As String = Application.StartupPath & "\" & cirStr
 
@@ -22,11 +23,13 @@ Module CIRUpdate
 
             Log_Report(String.Format("System updated: DB Version:{0}|{1}:|" & pth, DBVERSION, "CIR update"))
 
-              My.Computer.FileSystem.DeleteFile(pth)
+
+            My.Computer.FileSystem.DeleteFile(pth)
         Next
         frmMain.Cursor = Cursors.Default
 
         Return True
     End Function
-  
+
+
 End Module
