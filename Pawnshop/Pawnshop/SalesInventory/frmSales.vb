@@ -120,6 +120,8 @@ Public Class frmSales
 
         If hasSelected Then
             With lvSale.FindItemWithText(itm.ItemCode)
+                If itm.ItemCode = "SMT 00056" Then Exit Sub
+
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = 1
                 Else
@@ -205,6 +207,7 @@ Public Class frmSales
                 tmp.Quantity += SMTAdd
             End If
             SMTAdd = 0
+            isSMTrans = False
         End If
 
         DOC_TOTAL = 0
@@ -250,6 +253,7 @@ Public Class frmSales
         lblNoVat.Text = Display_NoVat(0)
         Display_Total(0)
         isLoadTrans = False
+
     End Sub
 
     Private Function Display_Total(ByVal tot As Double) As Double

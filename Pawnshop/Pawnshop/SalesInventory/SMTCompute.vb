@@ -57,6 +57,8 @@
         Dim mysql As String = "SELECT * FROM TBLSMTRANSFERFEE"
         Dim ds As DataSet = LoadSQL(mysql, "TBLSMTRANSFERFEE")
 
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("Invalid Transfer Fee", MsgBoxStyle.Critical, "Smart Money Padala") : Exit Sub
+
         _SMTCollect = New SMTCollection
         For Each dr In ds.Tables(0).Rows
             Dim SmTransferFee As New SmartMoneyTransferFee
@@ -69,14 +71,14 @@
         _invDeduct = amt + GetSMTFee(amt)
 
 
-        Dim invDeduct As Double = 0
+        Dim tmpinvDeduct As Double = 0
         Select Case amt
             Case 0.01 To 1000
-                invDeduct = 20
+                tmpinvDeduct = 20
             Case Else
-                invDeduct = 20 + (amt * 0.01)
+                tmpinvDeduct = 20 + (amt * 0.01)
         End Select
-        _totalAmount = amt + invDeduct
+        _totalAmount = amt + tmpinvDeduct
         _commission = _totalAmount - _invDeduct
 
         Console.WriteLine("Transfer Fee " & _transferFee)
