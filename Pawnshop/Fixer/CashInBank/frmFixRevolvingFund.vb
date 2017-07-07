@@ -135,6 +135,7 @@
         End Select
 
         InsertSAPCount(AccountCode)
+        UpdateOptions("RevolvingFund", AccountCode)
     End Sub
 
     Private Sub InsertSAPCount(ByVal SAPCode As String)
@@ -146,4 +147,6 @@
 
         Console.WriteLine("Revolving Fund Added")
     End Sub
+
+
 End Class
