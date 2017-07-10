@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Fixer.frmFixView
+            Me.MainForm = Global.Fixer.frmFixMal
         End Sub
     End Class
 End Namespace

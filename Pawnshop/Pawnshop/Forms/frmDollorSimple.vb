@@ -1,6 +1,6 @@
 ﻿Public Class frmDollorSimple
 
-    Private dollarClient As Client
+    Private dollarClient As Customer
     Private dollarEntry As DollarTransaction
     Private strRate As String = DollarRate
     Private fillData As String = "tblDollar"
@@ -13,12 +13,12 @@
     ''' <summary>
     ''' This method will load the client firstname and lastname into single textbox.
     ''' </summary>
-    ''' <param name="cl"></param>
+    ''' <param name="cus"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadClient(ByVal cl As Client)
-        txtName.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", ", " & cl.Suffix, ""), cl.FirstName, cl.LastName)
+    Friend Sub LoadClient(ByVal cus As Customer)
+        txtName.Text = String.Format("{0} {1}" & IIf(cus.Suffix <> "", ", " & cus.Suffix, ""), cus.FirstName, cus.LastName)
 
-        dollarClient = cl
+        dollarClient = cus
         btnSave.Focus()
     End Sub
     ''' <summary>

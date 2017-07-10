@@ -22,7 +22,19 @@ Module autopatch
 
         ' FOR v1.5
         db13.PatchUp()
+        db131.PatchUp()
 
+
+        ' FOR v1.6
+        KYC_Initialization()
+
+        'ModifyViews
+        db132.PatchUp()
+        db133.PatchUp()
+        db134.PatchUp()
+        db135.PatchUp()
+
+        If Not AutoReadCIR() Then Exit Sub
         DBVERSION = GetOption("DBVersion")
     End Sub
 

@@ -34,8 +34,8 @@
             If autoStart Then Me.Hide()
             FormState(False)
             For Each dr As DataRow In ExpiryCache.Rows
-                Dim pawner As New Client
-                pawner.LoadClient(dr("CLIENTID"))
+                Dim pawner As New Customer
+                pawner.Load_CustomerByID(dr("ID"))
                 Dim principal As Double = dr("PRINCIPAL")
 
                 Dim lv As ListViewItem = lvExpiry.Items.Add(dr("PAWNTICKET"))
@@ -65,12 +65,12 @@
             Exit Sub
         End If
 
-        Dim id As Integer = ExpiryCache.Rows(idx).Item("clientID")
-        Dim cl As New Client
-        cl.LoadClient(id)
-        cl.Cellphone1 = updatedNumber(0)
-        cl.ModifyClient()
-        lvExpiry.Items(idx).SubItems(2).Text = cleanup_contact(cl)
+        Dim id As Integer = ExpiryCache.Rows(idx).Item("ID")
+        Dim cl As New Customer
+        cl.Load_CustomerByID(id)
+
+        cl.UpdatePhone(updatedNumber(0))
+        lvExpiry.Items(idx).SubItems(2).Text = Indcleanup_contact(updatedNumber(0))
 
         MsgBox("Number Updated", MsgBoxStyle.Information)
     End Sub
@@ -136,7 +136,12 @@
                     notified.Load_PawnTicket(pawner.Text)
                     notified.ConfirmNotification(text_msg, remarks)
                 Else
-                    Log_Report(String.Format("FAILED TO SEND: PT#{0} - {1}", pawner.Text, remarks))
+                    If remarks.Contains("status=DeliveryImpossible,") Then
+                        Log_Report(String.Format("FAILED TO SEND: PT#{0}", pawner.Text))
+                    Else
+                        Log_Report(String.Format("FAILED TO SEND: PT#{0} - {1}", pawner.Text, remarks))
+                    End If
+
                 End If
 
                 finalCnt -= 1

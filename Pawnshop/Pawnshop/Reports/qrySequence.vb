@@ -56,8 +56,8 @@
         mySql &= vbCrLf & " OPT P "
         mySql &= vbCrLf & "    LEFT JOIN OPT P2"
         mySql &= vbCrLf & "    ON P.PAWNTICKET = P2.OLDTICKET"
-        mySql &= vbCrLf & "    INNER JOIN TBLCLIENT C"
-        mySql &= vbCrLf & "    ON C.CLIENTID = P.CLIENTID "
+        mySql &= vbCrLf & "    INNER JOIN " & CUSTOMER_TABLE & " C"
+        mySql &= vbCrLf & "    ON C.ID = P.CLIENTID "
         mySql &= String.Format("WHERE P.ORDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= " ORDER BY P.ORDATE, P.ORNUM ASC"
 

@@ -28,6 +28,7 @@ Partial Class frmPrint
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.gbReceipt = New System.Windows.Forms.GroupBox()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnReprint = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -69,6 +70,7 @@ Partial Class frmPrint
         '
         'gbReceipt
         '
+        Me.gbReceipt.Controls.Add(Me.btnView)
         Me.gbReceipt.Controls.Add(Me.btnVoid)
         Me.gbReceipt.Controls.Add(Me.btnReprint)
         Me.gbReceipt.Controls.Add(Me.lvReceipt)
@@ -78,6 +80,15 @@ Partial Class frmPrint
         Me.gbReceipt.TabIndex = 6
         Me.gbReceipt.TabStop = False
         Me.gbReceipt.Text = "Receipt List"
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(6, 198)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 8
+        Me.btnView.Text = "V&iew"
+        Me.btnView.UseVisualStyleBackColor = True
         '
         'btnVoid
         '
@@ -151,4 +162,5 @@ Partial Class frmPrint
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents btnVoid As System.Windows.Forms.Button
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

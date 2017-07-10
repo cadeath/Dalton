@@ -1,5 +1,5 @@
 ﻿Public Class frmInsurance
-    Dim Holder As Client
+    Dim Holder As Customer
     Dim curInsurance As New Insurance
     Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
@@ -36,6 +36,7 @@
         txtSenderID.Text = ""
         txtSenderIDNum.Text = ""
         txtBirthdate.Text = ""
+        txtAmount.Text = ""
 
         dtpDate.Value = CurrentDate
         dtpExpiry.Enabled = False
@@ -71,23 +72,36 @@
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtHolder.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmInsurance)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmInsurance)
+        frmClientNew.Show()
     End Sub
     ''' <summary>
     ''' This method will send client information to text fields.
     ''' </summary>
-    ''' <param name="cl"></param>
+    ''' <param name="cus"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadHolder(ByVal cl As Client)
-        txtHolder.Text = String.Format("{0} {1} {2}", cl.FirstName, cl.LastName, cl.Suffix)
-        txtSenderAddr.Text = String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
-        txtBirthdate.Text = cl.Birthday.ToString("MMM dd, yyyy")
+    Friend Sub LoadHolder(ByVal cus As Customer)
+        txtHolder.Text = String.Format("{0} {1} {2}", cus.FirstName, cus.LastName, cus.Suffix)
+        txtSenderAddr.Text = String.Format("{0} {1} {2}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity)
+        txtBirthdate.Text = cus.Birthday.ToString("MMM dd, yyyy")
 
-        txtSenderID.Text = cl.IDType
-        txtSenderIDNum.Text = cl.IDNumber
-        txtBirthdate.Text = cl.Birthday
-        Holder = cl
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            If id.isPrimary Then
+                txtSenderID.Text = id.IDType
+                txtSenderIDNum.Text = id.IDNumber
+                GoTo nextLineTODO
+            End If
+        Next
+
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            txtSenderID.Text = id.IDType
+            txtSenderIDNum.Text = id.IDNumber
+            GoTo nextLineTODO
+        Next
+
+nextLineTODO:
+        txtBirthdate.Text = cus.Birthday
+        Holder = cus
 
         txtPT.Focus()
     End Sub
@@ -112,7 +126,7 @@
         'Dim getInsurance As New Insurance
         'getInsurance.LoadInsurance(id)
 
-        LoadHolder(Ins.Client)
+        LoadHolder(Ins.Customer)
         txtCoi.Text = Ins.COInumber
         dtpDate.Value = Ins.TransactionDate
         dtpExpiry.Value = Ins.ValidDate
@@ -153,7 +167,7 @@
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
-            .Client = Holder
+            .Customer = Holder
             .EncoderID = POSuser.UserID
 
             .SaveInsurance()
@@ -218,7 +232,7 @@
 
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

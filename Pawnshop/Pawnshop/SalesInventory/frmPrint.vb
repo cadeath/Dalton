@@ -129,7 +129,7 @@ Public Class frmPrint
         'End If
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
@@ -219,4 +219,11 @@ Public Class frmPrint
         End If
     End Sub
 
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        If lvReceipt.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As String = lvReceipt.FocusedItem.Tag
+        frmReceiptView.LoadItems(idx)
+        frmReceiptView.Show()
+    End Sub
 End Class

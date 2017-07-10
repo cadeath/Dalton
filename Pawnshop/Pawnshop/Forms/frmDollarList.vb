@@ -35,7 +35,7 @@
     ''' </summary>
     ''' <param name="mySql"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadActive(Optional ByVal mySql As String = "SELECT FIRST 50 * FROM tblDollar WHERE status= 'A' ORDER BY DOLLARID DESC")
+    Friend Sub LoadActive(Optional ByVal mySql As String = "SELECT FIRST 10 * FROM tblDollar WHERE status= 'A' ORDER BY DOLLARID DESC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -91,7 +91,7 @@
 
         OTPVoiding_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Voiding") Then
             diagGeneralOTP.GeneralOTP = OtpSettings
             diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()

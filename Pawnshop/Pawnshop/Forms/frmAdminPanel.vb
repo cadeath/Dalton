@@ -28,7 +28,7 @@ Public Class frmAdminPanel
         txtClassification.Focus()
 
         LoadScheme()
-
+        LoadOTP()
 
         txtSchemeName.Text = ""
         txtDescription.Text = ""
@@ -919,33 +919,38 @@ Public Class frmAdminPanel
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If Not isOTPValid() Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
 
-        If rbInventory.Checked = True Then
-            strcode = "OTPInventory"
-            strAppname = "Dalton - Inventory"
+        'If rbInventory.Checked = True Then
+        '    strcode = "OTPInventory"
+        '    strAppname = "Dalton - Inventory"
 
-        ElseIf rbPullout.Checked = True Then
-            strcode = "OTPItemPullOut"
-            strAppname = "Dalton - OTP Item PullOut"
+        'ElseIf rbPullout.Checked = True Then
+        '    strcode = "OTPItemPullOut"
+        '    strAppname = "Dalton - OTP Item PullOut"
 
-        ElseIf rbSettings.Checked Then
-            strcode = "OTPSettings"
-            strAppname = "Dalton - OTP Settings"
+        'ElseIf rbSettings.Checked Then
+        '    strcode = "OTPSettings"
+        '    strAppname = "Dalton - OTP Settings"
 
-        ElseIf rbStockout.Checked = True Then
-            strcode = "OTPStockOut"
-            strAppname = "Dalton - Stock Out"
+        'ElseIf rbStockout.Checked = True Then
+        '    strcode = "OTPStockOut"
+        '    strAppname = "Dalton - Stock Out"
 
-        ElseIf rbUserManagement.Checked = True Then
-            strcode = "OTPUser"
-            strAppname = "Dalton - OTP User Management"
+        'ElseIf rbUserManagement.Checked = True Then
+        '    strcode = "OTPUser"
+        '    strAppname = "Dalton - OTP User Management"
 
-        ElseIf rbVoiding.Checked = True Then
-            strcode = "OTPVoiding"
-            strAppname = "Dalton - OTP Voiding"
+        'ElseIf rbVoiding.Checked = True Then
+        '    strcode = "OTPVoiding"
+        '    strAppname = "Dalton - OTP Voiding"
 
-        End If
+        'ElseIf rbCustomPrice.Checked = True Then
+        '    strcode = "OTPCustomerPrice"
+        '    strAppname = "Dalton - Custom Price"
+        'End If
+
         If strcode = String.Empty OrElse strAppname = String.Empty Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
         SetOTP(txtEmail.Text, strAppname, strcode)
+
     End Sub
 
     Private Sub SetOTP(ByVal Email As String, ByVal AppName As String, ByVal Code As String)
@@ -969,5 +974,78 @@ Public Class frmAdminPanel
     Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
         If txtQRURL.Text = String.Empty Then Exit Sub
         Clipboard.SetText(txtQRURL.Text)
+    End Sub
+
+    Private Sub LoadOTP()
+        Dim mysql As String = "Select * From OTPControl"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
+
+        For Each dr In ds.Tables(0).Rows
+            cboOTPMod.Items.Add(dr.item("ModName"))
+        Next
+    End Sub
+
+    Private Sub cboOTPMod_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboOTPMod.SelectedIndexChanged
+        Dim mysql As String = "Select * From OTPControl Where Modname = '" & cboOTPMod.Text & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
+
+        If ds.Tables(0).Rows(0).Item("Status") = 1 Then
+            chbOnOff.Checked = True
+        Else
+            chbOnOff.Checked = False
+        End If
+
+        With ds.Tables(0).Rows(0)
+            strAppname = .Item("AppName")
+            strcode = .Item("OTPCode")
+        End With
+       
+    End Sub
+
+    Private Sub btnSwitch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSwitch.Click
+        Dim mysql As String = "Select * From OTPControl Where ModName = '" & cboOTPMod.Text & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPControl")
+
+        With ds.Tables(0).Rows(0)
+            If chbOnOff.Checked = True Then
+                .Item("Status") = 1
+            Else
+                .Item("Status") = 0
+            End If
+        End With
+        SaveEntry(ds, False)
+        MsgBox(cboOTPMod.Text & " Switch " & IIf(chbOnOff.Checked = True, "On", "Off"), MsgBoxStyle.Information, "OTP Control")
+    End Sub
+
+    Private Sub btnIDAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDAdd.Click
+        If txtIDType.Text = "" Then Exit Sub
+
+        lvID.Items.Add(txtIDType.Text)
+        txtIDType.Text = ""
+    End Sub
+
+    Private Sub btnIDRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDRemove.Click
+        If lvID.SelectedItems.Count = 0 Then Exit Sub
+        lvID.Items.RemoveAt(lvID.SelectedIndices(0))
+    End Sub
+
+    Private Sub btnIDsave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDsave.Click
+        If lvID.Items.Count = 0 Then Exit Sub
+        Dim msg As DialogResult = MsgBox("Do you want to save this ID?", MsgBoxStyle.YesNo, "Question")
+        If msg = vbNo Then Exit Sub
+
+        Dim ctmr As New Customer
+        For Each idtype As ListViewItem In lvID.Items
+            With ctmr
+                .AddIDentification(idtype.Text)
+            End With
+        Next
+       
+        lvID.Items.Clear() : txtIDType.Text = ""
+        MsgBox("Successfully saved.", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub txtIDType_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtIDType.KeyPress
+        If isEnter(e) Then btnIDAdd.PerformClick()
     End Sub
 End Class

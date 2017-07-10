@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
+Imports System.IO
 
 Public Class frmExtractor
     Enum ExtractType As Integer
@@ -24,6 +25,20 @@ Public Class frmExtractor
     Private Sub frmExtractor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Load Path
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+
+        Select Case FormType
+            Case ExtractType.Expiry
+                Me.Text &= " - Expiry"
+            Case ExtractType.JournalEntry
+                Me.Text &= " - Journal Entry"
+            Case ExtractType.MoneyTransferBSP
+                Me.Text &= " - BSP Report"
+            Case ExtractType.PTUFile
+                sfdPath.Filter = "PTU File|*.ptu"
+                sfdPath.DefaultExt = "ptu"
+
+                Me.Text &= " - PTU File"
+        End Select
     End Sub
 
     ''' <summary>
@@ -36,18 +51,18 @@ Public Class frmExtractor
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
                 sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Expiry"
+
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
                 sfdPath.FileName = String.Format("JRNL{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
-                Me.Text &= " - Journal Entry"
+
             Case ExtractType.MoneyTransferBSP
                 Console.WriteLine("Money Transfer BSP Activated")
                 sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
-                Me.Text &= " - BSP Report"
+
             Case ExtractType.PTUFile
                 sfdPath.FileName = String.Format("{1}{0}.PTU", selectedDate.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
-                Me.Text &= " - PTU File"
+
         End Select
     End Sub
 
@@ -156,6 +171,7 @@ Public Class frmExtractor
         oXL.Quit()
         oXL = Nothing
 
+        Generate_HotCode(security.GetFileMD5(verified_url), True)
         MsgBox("Sales Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -421,6 +437,8 @@ Public Class frmExtractor
         oXL.Quit()
         oXL = Nothing
 
+        Generate_HotCode(security.GetFileMD5(verified_url))
+
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -513,14 +531,18 @@ Public Class frmExtractor
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
 
-        Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, U.USERNAME FROM OPT P "
-        mySql &= "INNER JOIN tblClient C on P.clientid = C.clientid "
+        Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, "
+         mySql &= "	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1		"
+        mySql &= "	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER		"
+        mySql &= "	ELSE PH.PHONENUMBER END)AS CONTACTNUMBER FROM KYC_PHONE PH		"
+        mySql &= "	WHERE C.ID = PH.CUSTID ORDER BY PH.ISPRIMARY DESC ROWS 1),		"
+        mySql &= "U.USERNAME FROM OPT P "
+        mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C on P.clientid = C.ID "
         mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
         mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
         mySql &= "WHERE "
         mySql &= "(P.Status = 'L' or P.Status = 'R') AND "
-        mySql &= "(CHAR_LENGTH(C.Phone1) = 11 OR CHAR_LENGTH(C.Phone2) = 11) AND "
         mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)
@@ -545,11 +567,11 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 3).value = .Item("LoanDate").ToString 'TransDate
                 oSheet.Cells(rid, 4).value = .Item("FirstName").ToString & _
                     " " & .Item("LastName").ToString 'Pawner
-                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(i).Item("Addr_Street").ToString & _
-                    " " & ds_expiry.Tables(0).Rows(i).Item("Addr_Brgy").ToString 'Addr1
-                oSheet.Cells(rid, 6).value = .Item("Addr_City").ToString 'Addr2
-                oSheet.Cells(rid, 7).value = .Item("Addr_Province").ToString 'Addr3
-                oSheet.Cells(rid, 8).value = .Item("Addr_Zip").ToString 'Zip
+                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(i).Item("STREET1").ToString & _
+                    " " & ds_expiry.Tables(0).Rows(i).Item("BRGY1").ToString 'Addr1
+                oSheet.Cells(rid, 6).value = .Item("CITY1").ToString 'Addr2
+                oSheet.Cells(rid, 7).value = .Item("PROVINCE1").ToString 'Addr3
+                oSheet.Cells(rid, 8).value = .Item("ZIP1").ToString 'Zip
                 oSheet.Cells(rid, 9).value = .Item("ItemCategory").ToString 'ItemCategory
                 oSheet.Cells(rid, 11).value = "1" 'NoPCS
                 oSheet.Cells(rid, 12).value = .Item("Description").ToString 'DESC1
@@ -566,9 +588,9 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 29).value = .Item("Status").ToString 'STATUS
                 oSheet.Cells(rid, 31).value = .Item("OLDTICKET").ToString 'OLD NUM
                 oSheet.Cells(rid, 32).value = .Item("ORNUM").ToString 'RCT NO
-                oSheet.Cells(rid, 39).value = "'" & .Item("PHONE1").ToString 'PHONE_NO
+                oSheet.Cells(rid, 39).value = "'" & .Item("CONTACTNUMBER").ToString 'PHONE_NO
                 oSheet.Cells(rid, 40).value = .Item("BIRTHDAY").ToString 'BIRTHDAY
-                oSheet.Cells(rid, 41).value = .Item("SEX").ToString 'SEX
+                oSheet.Cells(rid, 41).value = .Item("GENDER").ToString 'SEX
                 oSheet.Cells(rid, 45).value = .Item("APPRAISAL").ToString 'APPRAISAL1
                 oSheet.Cells(rid, 48).value = .Item("ITEMCLASS").ToString 'ITEMDESC
             End With
@@ -617,5 +639,25 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
+
+    Private Sub Generate_HotCode(ByVal Hash As String, Optional ByVal forPTU As Boolean = False)
+        Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+
+        If Not File.Exists(path) Then
+            ' Create a file to write to. 
+            If Not forPTU Then
+                Using sw As StreamWriter = File.CreateText(path & String.Format("\JRNL{0}{1}_HotCode.txt", MonCalendar.SelectionStart.ToString("yyyyMMdd"), BranchCode))
+                    sw.WriteLine("HOT CODE")
+                    sw.WriteLine(Hash)
+
+                End Using
+            Else
+                Using sw As StreamWriter = File.CreateText(path & String.Format("\{1}{0}_HotCode.txt", MonCalendar.SelectionStart.ToString("yyyyMMdd"), BranchCode))
+                    sw.WriteLine("HOT CODE")
+                    sw.WriteLine(Hash)
+                End Using
+            End If
+        End If
+    End Sub
 
 End Class

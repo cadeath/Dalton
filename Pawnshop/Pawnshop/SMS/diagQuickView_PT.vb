@@ -12,14 +12,20 @@
 
         'Loading ItemClass Specifications
         txtClass.Text = display_pawnticket.PawnItem.ItemClass.ClassName
-        Dim specCnt As Integer = 0
-        For Each spec As ItemSpecs In display_pawnticket.PawnItem.ItemClass.ItemSpecifications
-            Dim pawnSpecs As PawnItemSpec = display_pawnticket.PawnItem.PawnItemSpecs.Item(specCnt)
+        'Dim specCnt As Integer = 0
+        'For Each spec As ItemSpecs In display_pawnticket.PawnItem.ItemClass.ItemSpecifications
+        '    Dim pawnSpecs As PawnItemSpec = display_pawnticket.PawnItem.PawnItemSpecs.Item(specCnt)
+
+        '    Dim lv As ListViewItem = lvSpecs.Items.Add(spec.SpecName)
+        '    lv.SubItems.Add(pawnSpecs.SpecsValue)
+
+        '    specCnt += 1
+        'Next
+
+        For Each spec As PawnItemSpec In display_pawnticket.PawnItem.PawnItemSpecs
 
             Dim lv As ListViewItem = lvSpecs.Items.Add(spec.SpecName)
-            lv.SubItems.Add(pawnSpecs.SpecsValue)
-
-            specCnt += 1
+            lv.SubItems.Add(spec.SpecsValue)
         Next
 
         With display_pawnticket
@@ -36,9 +42,18 @@
 
             'Loading Customer Information
             txtCustomer.Text = String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName)
-            txtAddr.Text = String.Format("{0} {1}" & vbCrLf & "{2}", .Pawner.AddressSt, .Pawner.AddressBrgy, .Pawner.AddressCity)
+            txtAddr.Text = String.Format("{0} {1}" & vbCrLf & "{2}", .Pawner.PresentStreet, .Pawner.PresentBarangay, .Pawner.PresentCity)
             txtBday.Text = ddFormat(.Pawner.Birthday)
-            txtNumber.Text = .Pawner.Cellphone1
+
+            For Each phne As PhoneNumber In .Pawner.CustomersPhone
+                If phne.isPrimary > 0 Then
+                    txtNumber.Text = phne.PhoneNumber
+                End If
+            Next
+
+            For Each phne As PhoneNumber In .Pawner.CustomersPhone
+                txtNumber.Text = phne.PhoneNumber : Exit For
+            Next
         End With
 
     End Sub

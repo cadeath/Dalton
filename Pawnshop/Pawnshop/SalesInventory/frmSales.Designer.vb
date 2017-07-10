@@ -22,7 +22,7 @@ Partial Class frmSales
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GAD 0120", "SAMPLE GAD ITEMS", "3", "1,000", "3,000"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GAD 0120", "SAMPLE GAD ITEMS", "3", "1,000", "3,000", "65"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSales))
         Me.lvSale = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -30,6 +30,8 @@ Partial Class frmSales
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.lblSearch = New System.Windows.Forms.Label()
@@ -65,7 +67,7 @@ Partial Class frmSales
         Me.lvSale.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvSale.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvSale.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvSale.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSale.FullRowSelect = True
         Me.lvSale.GridLines = True
@@ -85,12 +87,12 @@ Partial Class frmSales
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 174
+        Me.ColumnHeader2.Width = 130
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Qty"
-        Me.ColumnHeader3.Width = 44
+        Me.ColumnHeader3.Width = 39
         '
         'ColumnHeader4
         '
@@ -101,6 +103,16 @@ Partial Class frmSales
         '
         Me.ColumnHeader5.Text = "Total"
         Me.ColumnHeader5.Width = 90
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "SRP"
+        Me.ColumnHeader6.Width = 74
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "% Discount"
+        Me.ColumnHeader7.Width = 79
         '
         'Label1
         '
@@ -162,7 +174,7 @@ Partial Class frmSales
         Me.lblMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMode.Location = New System.Drawing.Point(592, 38)
+        Me.lblMode.Location = New System.Drawing.Point(592, 69)
         Me.lblMode.Name = "lblMode"
         Me.lblMode.Size = New System.Drawing.Size(286, 43)
         Me.lblMode.TabIndex = 6
@@ -173,7 +185,7 @@ Partial Class frmSales
         '
         Me.lblCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCustomer.Location = New System.Drawing.Point(592, 98)
+        Me.lblCustomer.Location = New System.Drawing.Point(592, 129)
         Me.lblCustomer.Name = "lblCustomer"
         Me.lblCustomer.Size = New System.Drawing.Size(286, 43)
         Me.lblCustomer.TabIndex = 8
@@ -322,7 +334,7 @@ Partial Class frmSales
         '
         Me.btnPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPost.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPost.Location = New System.Drawing.Point(665, 366)
+        Me.btnPost.Location = New System.Drawing.Point(665, 368)
         Me.btnPost.Name = "btnPost"
         Me.btnPost.Size = New System.Drawing.Size(102, 50)
         Me.btnPost.TabIndex = 11
@@ -402,4 +414,6 @@ Partial Class frmSales
     Friend WithEvents tsbtnOption As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbtnOut As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbtnLay As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class
