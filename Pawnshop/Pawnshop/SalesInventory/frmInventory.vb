@@ -177,11 +177,13 @@ FAILED_VER:
         lv.SubItems.Add(itm.Description)
         lv.SubItems.Add(itm.Category)
         lv.SubItems.Add(itm.UnitofMeasure)
-        lv.SubItems.Add(itm.Qty.ToString("#,##0"))
+        lv.SubItems.Add(itm.Qty.ToString("#,##0.00"))
         lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
         lv.SubItems.Add(STO.ToString("00000000"))
 
         AddToDataset(lv)
+
+        'MsgBox("Item Qty " & itm.Qty.ToString)
     End Sub
 
     Private Sub Label3_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label3.DoubleClick

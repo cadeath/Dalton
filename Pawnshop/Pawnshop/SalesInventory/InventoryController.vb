@@ -5,7 +5,7 @@ Module InventoryController
 
     Const INTEGRITY_CHECK As String = "9nKFB3fmcquj4CNHjDz7atiD7JOv892aQiKESns50sH/rBAxkxEe3by5N607DFRcORSXzwVcEfviYb5TRjoSck/YScmjycq+lOzWi+Gh01RHM36hXULosrFqk6TajOD5Y85Npq9Xylt5uE0JqZN+im/QmDOWS80Z11sj+YuMGGXII1YQ+Sl0lQ=="
 
-    Friend Sub AddInventory(ByVal itemCode As String, Optional ByVal Qty As Integer = 1)
+    Friend Sub AddInventory(ByVal itemCode As String, Optional ByVal Qty As Double = 1)
         mySql = String.Format("SELECT * FROM ITEMMASTER WHERE ITEMCODE = '{0}'", itemCode)
         ds = LoadSQL(mySql, "ITEMMASTER")
 
@@ -20,7 +20,7 @@ Module InventoryController
         database.SaveEntry(ds)
     End Sub
 
-    Friend Sub DeductInventory(ByVal itemCode As String, Optional ByVal Qty As Integer = 1)
+    Friend Sub DeductInventory(ByVal itemCode As String, Optional ByVal Qty As Double = 1)
         mySql = String.Format("SELECT * FROM ITEMMASTER WHERE ITEMCODE = '{0}'", itemCode)
         ds = LoadSQL(mySql, "ITEMMASTER")
 
